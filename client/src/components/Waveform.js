@@ -2,26 +2,29 @@ import React, { useEffect, useRef, useState } from "react";
 
 import WaveSurfer from "wavesurfer.js";
 
-const formWaveSurferOptions = (ref) => ({
-  container: ref,
-  waveColor: "#eee",
-  progressColor: "OrangeRed",
-  cursorColor: "OrangeRed",
-  barWidth: 3,
-  barRadius: 3,
-  responsive: true,
-  height: 150,
-  // If true, normalize by the maximum peak instead of 1.0.
-  normalize: true,
-  // Use the PeakCache to improve rendering speed of large waveforms.
-  partialRender: true,
-});
+
 
 export default function Waveform({ url, context }) {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [playing, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.5);
+
+  const formWaveSurferOptions = (ref) => ({
+    container: ref,
+    waveColor: "#eee",
+    progressColor: "OrangeRed",
+    cursorColor: "OrangeRed",
+    barWidth: 3,
+    barRadius: 3,
+    responsive: true,
+    height: 150,
+    // If true, normalize by the maximum peak instead of 1.0.
+    normalize: true,
+    // Use the PeakCache to improve rendering speed of large waveforms.
+    partialRender: true,
+    audioContext: context
+  });
 
   // create new WaveSurfer instance
   // On component mount and when url changes
@@ -87,3 +90,10 @@ export default function Waveform({ url, context }) {
     </div>
   );
 }
+
+/* Playback Fuctionality:
+
+1: Play head postions need to be sycronised
+2:
+
+*/
