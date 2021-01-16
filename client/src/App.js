@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 
-import Waveform from "./Waveform";
-import PlayList from "./components/PlayList";
+
+import Player from "./components/Player";
 
 // const url = "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3";
 
@@ -36,16 +36,10 @@ const tracks = [
 export default function App() {
   return (
     <div className="App">
-      {tracks.map((track) => {
-        return (
-          <div>
-            <Waveform url={track.url} />
-            <PlayList track={track} />
-            <br />
-          </div>
-        );
-      })}
-      <p>Wavesurfer.js with React.JS</p>
+
+      <Player tracks={tracks} />
+      <br />
+
     </div>
   );
 }
