@@ -9,7 +9,7 @@ const Player = ({ tracks }) => {
   const [playing, setPlay] = useState(false);
    const handlePlayPause = () => {
     setPlay(!playing);
-    Emitter.emit('click', setPlay(playing));
+    Emitter.emit('clickPlayPause', "");
   };
   return (
     <div className="player">
