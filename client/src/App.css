@@ -20,6 +20,10 @@ button {
   transition: all 0.2s ease;
 }
 
+.mute {
+  background-color: rgb(101, 119, 189);
+}
+
 button:hover {
   background: #d63d05;
 }
