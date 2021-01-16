@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS projects CASCADE;
-CREATE TABLE projects(
-    id SERIAL PRIMARY KEY NOT NULL,
-    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    title VARCHAR(255) NOT NULL,
-    notes TEXT
-);

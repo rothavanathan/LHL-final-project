@@ -1,9 +1,0 @@
-DROP TABLE IF EXISTS stems CASCADE;
-CREATE TABLE stems(
-    id SERIAL PRIMARY KEY NOT NULL,
-    song_id INTEGER REFERENCES songs(id) ON DELETE CASCADE,
-    name VARCHAR(255) NOT NULL,
-    url VARCHAR(255) NOT NULL,
-    icon VARCHAR(255),
-    peaks_array TEXT
-);
