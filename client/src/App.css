@@ -21,7 +21,19 @@ button {
 }
 
 .mute {
-  background-color: rgb(101, 119, 189);
+  background: rgb(101, 119, 189);
+}
+
+.mute:hover {
+  background: rgb(66, 92, 198);
+}
+
+.unmute {
+  background: rgb(228, 156, 214);
+}
+
+.unmute:hover {
+  background: rgb(227, 128, 207);
 }
 
 button:hover {
