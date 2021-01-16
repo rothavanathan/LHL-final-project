@@ -3,9 +3,11 @@ const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const db = require("./db")
+const dbHelpers = require('./helpers/dbHelpers')(db);
 
 const stemsRouter = require("./routes/stems");
-// const usersRouter = require("./routes/users");
+const usersRouter = require("./routes/users");
 
 const app = express();
 
@@ -18,6 +20,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/stems", stemsRouter);
-// app.use("/api/users", usersRouter);
+app.use("/api/users", usersRouter(dbHelpers));
 
 module.exports = app;
