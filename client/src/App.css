@@ -36,6 +36,22 @@ button {
   background: rgb(227, 128, 207);
 }
 
+.solo {
+  background: rgb(101, 119, 189);
+}
+
+.solo:hover {
+  background: rgb(66, 92, 198);
+}
+
+.unsolo {
+  background: rgb(156, 203, 228);
+}
+
+.unsolo:hover {
+  background: rgb(227, 128, 207);
+}
+
 button:hover {
   background: #d63d05;
 }
