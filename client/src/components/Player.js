@@ -7,12 +7,16 @@ const audioCtx = new AudioCtx();
 
 const Player = ({ tracks }) => {
   const [playing, setPlay] = useState(false);
-   const handlePlayPause = () => {
+  const handlePlayPause = () => {
     setPlay(!playing);
-    Emitter.emit('click', setPlay(playing));
+    Emitter.emit('clickPlayPause', "");
+  };
+  const handleRewind = () => {
+    Emitter.emit('clickRewind', setPlay(playing));
   };
   return (
     <div className="player">
+      <button onClick={handleRewind}>Rewind</button>
       <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
       {tracks.map((track, i) => {
         return <Waveform key={i} url={track.url} context={audioCtx} />
