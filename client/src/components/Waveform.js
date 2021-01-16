@@ -77,7 +77,10 @@ export default function Waveform({ url, context }) {
     <div>
       <div id="waveform" ref={waveformRef} />
       <div className="controls">
-      <button onClick={handleMute}>{!muted? "Mute" : "Unmute"}</button>
+      <button
+        className={!muted ? "mute" : "unmute"}
+        onClick={handleMute}>{!muted? "Mute" : "Unmute"}
+      </button>
         <input
           type="range"
           id="volume"

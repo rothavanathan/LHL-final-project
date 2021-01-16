@@ -20,6 +20,22 @@ button {
   transition: all 0.2s ease;
 }
 
+.mute {
+  background: rgb(101, 119, 189);
+}
+
+.mute:hover {
+  background: rgb(66, 92, 198);
+}
+
+.unmute {
+  background: rgb(228, 156, 214);
+}
+
+.unmute:hover {
+  background: rgb(227, 128, 207);
+}
+
 button:hover {
   background: #d63d05;
 }
