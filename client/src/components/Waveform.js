@@ -53,6 +53,26 @@ export default function Waveform({ url, context }) {
 
     });
 
+
+
+    wavesurfer.current.on("seek", function (progress) {
+      // make sure object stillavailable when file loaded
+      //calculate a not so distant future time for all waveforms to call start once they seek to the right time
+      const delayedStart = context.currentTime + 1 / 60;
+
+      //emit seekAll event
+      Emitter.emit('seekAll', wavesurfer.current.getCurrentTime())
+
+    });
+
+    //update other waveforms with progress from clicked
+    Emitter.on('seekAll', (progress) => {
+      if (progress !== wavesurfer.current.getCurrentTime()) {
+        wavesurfer.current.setCurrentTime(progress)
+      }
+
+    })
+
     // Removes events, elements and disconnects Web Audio nodes.
     // when component unmount
     return () => wavesurfer.current.destroy();
@@ -77,10 +97,10 @@ export default function Waveform({ url, context }) {
     <div>
       <div id="waveform" ref={waveformRef} />
       <div className="controls">
-      <button
-        className={!muted ? "mute" : "unmute"}
-        onClick={handleMute}>{!muted? "Mute" : "Unmute"}
-      </button>
+        <button
+          className={!muted ? "mute" : "unmute"}
+          onClick={handleMute}>{!muted ? "Mute" : "Unmute"}
+        </button>
         <input
           type="range"
           id="volume"

@@ -14,6 +14,9 @@ const Player = ({ tracks }) => {
   const handleRewind = () => {
     Emitter.emit('clickRewind', setPlay(playing));
   };
+
+
+
   return (
     <div className="player">
       <button onClick={handleRewind}>Rewind</button>
