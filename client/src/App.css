@@ -1,38 +1,50 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+body {
+  background: #c2aec5;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App {
+  font-family: sans-serif;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  background: OrangeRed;
+  color: white;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  outline: none;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #d63d05;
+}
+
+.playlist {
+  text-align: left;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.playlist-item {
+  color: #444;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  padding: 1em;
+}
+
+.playlist-item.selected {
+  font-weight: bold;
+}
+
+.playlist-item:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.controls {
+  text-align: left;
+  padding: 1em;
 }
