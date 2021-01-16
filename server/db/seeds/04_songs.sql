@@ -1,0 +1,1 @@
+insert into songs (id, project_id, artist, title, album, url_album_artwork, url_full_song_preview, duration ) values (1, 1, 'Wily', 'Burial Ground', 'ALBUM', 'https://robohash.org/5?200x200', 'https://rykabrown.com/wp-content/uploads/2021/01/BURIAL_GROUND_piano.mp3', '470');
