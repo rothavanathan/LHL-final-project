@@ -10,6 +10,7 @@ export default function Waveform({ url, context }) {
   const wavesurfer = useRef(null);
   const [volume, setVolume] = useState(0.5);
   const [muted, setMute] = useState(false);
+  const [wasMuted, setWasMuted] = useState(false);
   const [soloed, setSolo] = useState(false);
 
   const formWaveSurferOptions = (ref) => ({
@@ -75,11 +76,24 @@ export default function Waveform({ url, context }) {
 
   const handleMute = () => {
     setMute(!muted);
+    setWasMuted(!wasMuted)
     wavesurfer.current.toggleMute();
   };
+
   const handleSolo = () => {
-    setSolo(!soloed);
+    setSolo((prev) => {
+      //if the waveform was previously unsoloed
+      if (!prev) {
+        Emitter.emit("solo")
+      }
+      return !soloed
+    });
+
   };
+
+  Emitter.on("solo", () => {
+    console.log(`somone hit the solo button. was i muted?`, wasMuted)
+  })
 
   const onVolumeChange = (e) => {
     const { target } = e;
@@ -97,11 +111,13 @@ export default function Waveform({ url, context }) {
       <div className="controls">
         <button
           className={!muted ? "mute" : "unmute"}
-          onClick={handleMute}>{!muted ? "Mute" : "Unmute"}
+          onClick={handleMute}
+        > Mute
         </button>
         <button
           className={!soloed ? "solo" : "unsolo"}
-          onClick={handleSolo}>{!soloed ? "solo" : "unsolo"}
+          onClick={handleSolo}
+        > Solo
         </button>
         <input
           type="range"

@@ -9,8 +9,8 @@ body {
 }
 
 button {
-  background: OrangeRed;
-  color: white;
+  background: rgb(166, 197, 210);
+  color: black;
   border: none;
   width: 60px;
   height: 60px;
@@ -30,6 +30,7 @@ button {
 
 .unmute {
   background: rgb(228, 156, 214);
+  color: black
 }
 
 .unmute:hover {
@@ -45,7 +46,8 @@ button {
 }
 
 .unsolo {
-  background: rgb(156, 203, 228);
+  background: rgb(255, 232, 102);
+  color: black;
 }
 
 .unsolo:hover {
