@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import WaveSurfer from "wavesurfer.js";
+import Emitter from "../EventEmitter"
 
 
 
 export default function Waveform({ url, context }) {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
-  const [playing, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.5);
 
   const formWaveSurferOptions = (ref) => ({
@@ -29,7 +29,6 @@ export default function Waveform({ url, context }) {
   // create new WaveSurfer instance
   // On component mount and when url changes
   useEffect(() => {
-    setPlay(false);
 
     const options = formWaveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
@@ -46,6 +45,8 @@ export default function Waveform({ url, context }) {
         wavesurfer.current.setVolume(volume);
         setVolume(volume);
       }
+
+      Emitter.on('click', () => wavesurfer.current.playPause());
     });
 
     // Removes events, elements and disconnects Web Audio nodes.
@@ -53,10 +54,10 @@ export default function Waveform({ url, context }) {
     return () => wavesurfer.current.destroy();
   }, [url]);
 
-  const handlePlayPause = () => {
-    setPlay(!playing);
-    wavesurfer.current.playPause();
-  };
+  // const handlePlayPause = () => {
+  //   setPlay(!playing);
+  //   wavesurfer.current.playPause();
+  // };
 
   const onVolumeChange = (e) => {
     const { target } = e;
@@ -72,7 +73,6 @@ export default function Waveform({ url, context }) {
     <div>
       <div id="waveform" ref={waveformRef} />
       <div className="controls">
-        <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
         <input
           type="range"
           id="volume"
