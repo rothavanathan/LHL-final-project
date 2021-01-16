@@ -9,6 +9,7 @@ export default function Waveform({ url, context }) {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [volume, setVolume] = useState(0.5);
+  const [muted, setMute] = useState(false);
 
   const formWaveSurferOptions = (ref) => ({
     container: ref,
@@ -46,7 +47,7 @@ export default function Waveform({ url, context }) {
         setVolume(volume);
       }
 
-      Emitter.on('click', () => wavesurfer.current.playPause());
+      Emitter.on('clickPlayPause', () => wavesurfer.current.playPause());
     });
 
     // Removes events, elements and disconnects Web Audio nodes.
@@ -54,10 +55,10 @@ export default function Waveform({ url, context }) {
     return () => wavesurfer.current.destroy();
   }, [url]);
 
-  // const handlePlayPause = () => {
-  //   setPlay(!playing);
-  //   wavesurfer.current.playPause();
-  // };
+  const handleMute = () => {
+    setMute(!muted);
+    wavesurfer.current.toggleMute();
+  };
 
   const onVolumeChange = (e) => {
     const { target } = e;
@@ -73,6 +74,7 @@ export default function Waveform({ url, context }) {
     <div>
       <div id="waveform" ref={waveformRef} />
       <div className="controls">
+      <button onClick={handleMute}>{!muted? "Mute" : "Unmute"}</button>
         <input
           type="range"
           id="volume"
