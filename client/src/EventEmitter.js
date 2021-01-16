@@ -7,7 +7,9 @@ const Emitter = {
   once: (event, fn) => eventEmitter.once(event, fn),
   off: (event, fn) => eventEmitter.off(event, fn),
   emit: (event, payload) => eventEmitter.emit(event, payload),
-  clickRewind: (event, fn) => eventEmitter.once(event, fn)
+  clickRewind: (event, fn) => eventEmitter.once(event, fn),
+  seekAll: (event, fn) => eventEmitter.once(event, fn),
+  solo: (event, fn) => eventEmitter.once(event, fn),
 }
 
 Object.freeze(Emitter);

@@ -10,6 +10,8 @@ export default function Waveform({ url, context }) {
   const wavesurfer = useRef(null);
   const [volume, setVolume] = useState(0.5);
   const [muted, setMute] = useState(false);
+  const [wasMuted, setWasMuted] = useState(false);
+  const [soloed, setSolo] = useState(false);
 
   const formWaveSurferOptions = (ref) => ({
     container: ref,
@@ -53,6 +55,20 @@ export default function Waveform({ url, context }) {
 
     });
 
+
+
+    wavesurfer.current.on("seek", function (progress) {
+      //emit seekAll event
+      Emitter.emit('seekAll', wavesurfer.current.getCurrentTime())
+
+    });
+
+    //update other waveforms with progress from clicked
+    Emitter.on('seekAll', (progress) => {
+      if (progress !== wavesurfer.current.getCurrentTime()) {
+        wavesurfer.current.setCurrentTime(progress)
+      }
+    })
     // Removes events, elements and disconnects Web Audio nodes.
     // when component unmount
     return () => wavesurfer.current.destroy();
@@ -60,8 +76,24 @@ export default function Waveform({ url, context }) {
 
   const handleMute = () => {
     setMute(!muted);
+    setWasMuted(!wasMuted)
     wavesurfer.current.toggleMute();
   };
+
+  const handleSolo = () => {
+    setSolo((prev) => {
+      //if the waveform was previously unsoloed
+      if (!prev) {
+        Emitter.emit("solo")
+      }
+      return !soloed
+    });
+
+  };
+
+  Emitter.on("solo", () => {
+    console.log(`somone hit the solo button. was i muted?`, wasMuted)
+  })
 
   const onVolumeChange = (e) => {
     const { target } = e;
@@ -77,10 +109,16 @@ export default function Waveform({ url, context }) {
     <div>
       <div id="waveform" ref={waveformRef} />
       <div className="controls">
-      <button
-        className={!muted ? "mute" : "unmute"}
-        onClick={handleMute}>{!muted? "Mute" : "Unmute"}
-      </button>
+        <button
+          className={!muted ? "mute" : "unmute"}
+          onClick={handleMute}
+        > Mute
+        </button>
+        <button
+          className={!soloed ? "solo" : "unsolo"}
+          onClick={handleSolo}
+        > Solo
+        </button>
         <input
           type="range"
           id="volume"
