@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node src//bin/www.js",
+    "start": "node bin/www.js",
     "dev": "npm run dev",
-    "db:reset": "node src/bin/resetdb.js"
+    "db:reset": "node bin/resetdb.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
