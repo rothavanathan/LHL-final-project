@@ -9,32 +9,43 @@ import PlayList from "./components/PlayList";
 const tracks = [
   {
     id: 0,
-    title: "Brahms: St Anthony Chorale - Theme, Two Pianos Op.56b",
+    title: "Guitar",
     url:
-      "https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3"
+      "https://rykabrown.com/wp-content/uploads/2021/01/BURIAL-GROUND_guitar_main.mp3",
   },
   {
     id: 1,
-    title: "Franz Schubert's Ständchen - Voice (Clarinet) & Piano",
+    title: "DRUMS",
     url:
-      "https://www.mfiles.co.uk/mp3-downloads/franz-schubert-standchen-serenade.mp3"
-  }
+      "https://rykabrown.com/wp-content/uploads/2021/01/BURIAL_GROUND_drums.mp3",
+  },
+  {
+    id: 2,
+    title: "LEAD VOCALS",
+    url:
+      "https://rykabrown.com/wp-content/uploads/2021/01/BURIAL-GROUND_lead_vocal.mp3",
+  },
+  {
+    id: 2,
+    title: "BASS",
+    url:
+      "https://rykabrown.com/wp-content/uploads/2021/01/BURIAL_GROUND_bass.mp3",
+  },
 ];
 
 export default function App() {
-  const [selectedTrack, setSelectedTrack] = useState(tracks[0]);
-
   return (
     <div className="App">
-      <Waveform url={selectedTrack.url} />
-      <PlayList
-        tracks={tracks}
-        selectedTrack={selectedTrack}
-        setSelectedTrack={setSelectedTrack}
-      />
-      <br />
+      {tracks.map((track) => {
+        return (
+          <div>
+            <Waveform url={track.url} />
+            <PlayList track={track} />
+            <br />
+          </div>
+        );
+      })}
       <p>Wavesurfer.js with React.JS</p>
     </div>
   );
 }
-

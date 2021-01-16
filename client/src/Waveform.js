@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import WaveSurfer from "wavesurfer.js";
 
-const formWaveSurferOptions = ref => ({
+const formWaveSurferOptions = (ref) => ({
   container: ref,
   waveColor: "#eee",
   progressColor: "OrangeRed",
@@ -14,7 +14,7 @@ const formWaveSurferOptions = ref => ({
   // If true, normalize by the maximum peak instead of 1.0.
   normalize: true,
   // Use the PeakCache to improve rendering speed of large waveforms.
-  partialRender: true
+  partialRender: true,
 });
 
 export default function Waveform({ url }) {
@@ -33,7 +33,7 @@ export default function Waveform({ url }) {
 
     wavesurfer.current.load(url);
 
-    wavesurfer.current.on("ready", function() {
+    wavesurfer.current.on("ready", function () {
       // https://wavesurfer-js.org/docs/methods.html
       // wavesurfer.current.play();
       // setPlay(true);
@@ -55,7 +55,7 @@ export default function Waveform({ url }) {
     wavesurfer.current.playPause();
   };
 
-  const onVolumeChange = e => {
+  const onVolumeChange = (e) => {
     const { target } = e;
     const newVolume = +target.value;
 

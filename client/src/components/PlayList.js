@@ -1,22 +1,11 @@
-
 import React from "react";
 
-const PlayList = ({ tracks, selectedTrack, setSelectedTrack }) => {
+const PlayList = ({ track }) => {
   return (
     <div className="playlist">
-      {tracks.map(track => (
-        <div
-          key={track.id}
-          className={
-            track.id === selectedTrack.id
-              ? "playlist-item selected"
-              : "playlist-item"
-          }
-          onClick={() => setSelectedTrack(track)}
-        >
-          {track.title}
-        </div>
-      ))}
+      <div key={track.id} className="playlist-item selected">
+        {track.title}
+      </div>
     </div>
   );
 };
