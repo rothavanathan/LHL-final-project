@@ -9,7 +9,7 @@ const Player = ({ tracks }) => {
   const [playing, setPlay] = useState(false);
   const handlePlayPause = () => {
     setPlay(!playing);
-    Emitter.emit('click', "");
+    Emitter.emit('clickPlayPause', "");
   };
   const handleRewind = () => {
     Emitter.emit('clickRewind', setPlay(playing));
