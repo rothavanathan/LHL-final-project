@@ -47,7 +47,10 @@ export default function Waveform({ url, context }) {
         setVolume(volume);
       }
 
+
+      Emitter.on('clickRewind', () => wavesurfer.current.seekTo(0));
       Emitter.on('clickPlayPause', () => wavesurfer.current.playPause());
+
     });
 
     // Removes events, elements and disconnects Web Audio nodes.
