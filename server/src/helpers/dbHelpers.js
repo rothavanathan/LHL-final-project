@@ -12,6 +12,18 @@ module.exports = (db) => {
           .then((result) => result.rows)
           .catch((err) => err);
   };
+
+  const getStems = () => {
+    const query = {
+        text: 'SELECT * FROM stems',
+    };
+
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
   // Finds user by email
   const getUserByEmail = email => {
 
@@ -86,6 +98,7 @@ module.exports = (db) => {
       addUser,
       getUsersByProjects,
       getUsersByCollections, 
-      getSongByProject
+      getSongByProject,
+      getStems
   };
 };
