@@ -18,6 +18,27 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/", (req, res) => {
+    const query = {
+        text: `INSERT INTO users (first_name, email, password) VALUES ($1, $2, $3) RETURNING *` ,
+        values: [firstName, email, password]
+    }
+
+    const { firstName, email, password } = req.body;
+
+
+    db.query(query)
+      .then((data) => {
+        const users = data.rows;
+        res.json({ users });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+
+
 //   router.get("/:id", (req, res) => {
 
 //     const query = {
