@@ -55,5 +55,5 @@ export default function App() {
       <br />
 
     </div>
-  );
+  )
 }

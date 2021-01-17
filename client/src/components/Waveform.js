@@ -38,10 +38,6 @@ export default function Waveform({ track, context }) {
     wavesurfer.current.load(track.url);
 
     wavesurfer.current.on("ready", function () {
-      // https://wavesurfer-js.org/docs/methods.html
-      // wavesurfer.current.play();
-      // setPlay(true);
-
       // make sure object stillavailable when file loaded
       if (wavesurfer.current) {
         wavesurfer.current.setVolume(volume);
@@ -70,10 +66,12 @@ export default function Waveform({ track, context }) {
 
     Emitter.on("soloON", () => {
       console.log(`somone turned a solo ON. fire off shouldIPlay`)
+      console.log(`${track.name} is ${muted ? "muted" : "not muted"} and am ${soloed ? "soloed" : "not soloed"}`)
     })
 
     Emitter.on("soloOFF", () => {
       console.log(`somone turned a solo OFF. fire off shouldIPlay`)
+      console.log(`${track.name} is ${muted ? "muted" : "not muted"} and am ${soloed ? "soloed" : "not soloed"}`)
     })
     // Removes events, elements and disconnects Web Audio nodes.
     // when component unmount
@@ -89,18 +87,13 @@ export default function Waveform({ track, context }) {
   };
 
   const handleSolo = () => {
-    setSolo((prev) => {
-      //if the waveform was previously unsoloed
-      if (!prev) {
-        Emitter.emit("soloON")
-      } else {
-        Emitter.emit("soloOFF")
-      }
-      return !soloed
-    });
+    setSolo(!soloed)
 
   };
 
+  useEffect(() => {
+    Emitter.emit(`${soloed ? 'soloON' : 'soloOFF'}`)
+  }, [soloed]);
 
 
   const onVolumeChange = (e) => {

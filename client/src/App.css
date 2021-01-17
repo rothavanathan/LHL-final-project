@@ -37,7 +37,7 @@ button {
 }
 
 .unmute {
-  background: rgb(228, 156, 214);
+  background: var(--primary-color);
   color: black
 }
 
