@@ -5,11 +5,11 @@ import Emitter from "../EventEmitter"
 
 
 
-export default function Waveform({ track, context }) {
+export default function Waveform({ track, context, setSoloCounter, soloCounter }) {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [volume, setVolume] = useState(0.5);
-  const [muted, setMute] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
   const [soloed, setSolo] = useState(false);
 
   const formWaveSurferOptions = (ref) => ({
@@ -34,6 +34,7 @@ export default function Waveform({ track, context }) {
 
     const options = formWaveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
+    wavesurfer.current.solo = false;
 
     wavesurfer.current.load(track.url);
 
@@ -65,13 +66,27 @@ export default function Waveform({ track, context }) {
     })
 
     Emitter.on("soloON", () => {
-      console.log(`somone turned a solo ON. fire off shouldIPlay`)
-      console.log(`${track.name} is ${muted ? "muted" : "not muted"} and am ${soloed ? "soloed" : "not soloed"}`)
+      if (!wavesurfer.current.solo && !wavesurfer.current.getMute()) {
+        wavesurfer.current.setMute(true);
+      } else if (!wavesurfer.current.solo && wavesurfer.current.getMute()) {
+        console.log(`${track.name} is not soloed but is muted`)
+      } else if (wavesurfer.current.solo) {
+        wavesurfer.current.setMute(false)
+      };
     })
 
     Emitter.on("soloOFF", () => {
-      console.log(`somone turned a solo OFF. fire off shouldIPlay`)
-      console.log(`${track.name} is ${muted ? "muted" : "not muted"} and am ${soloed ? "soloed" : "not soloed"}`)
+      console.log(`somone turned a solo OFF.`)
+      //currently checks if it's own solo is off but we need to check if EVERY solo is off
+      wavesurfer.current.solo = false;
+      setSolo(false)
+      if (!wavesurfer.current.wasMuted) {
+        wavesurfer.current.setMute(false);
+        setIsMuted(false)
+      } else {
+        wavesurfer.current.setMute(true);
+        setIsMuted(true)
+      };
     })
     // Removes events, elements and disconnects Web Audio nodes.
     // when component unmount
@@ -82,13 +97,25 @@ export default function Waveform({ track, context }) {
   }, [track.url]);
 
   const handleMute = () => {
-    setMute(!muted);
+    setIsMuted(!isMuted);
     wavesurfer.current.toggleMute();
+    wavesurfer.current.wasMuted = wavesurfer.current.getMute();
   };
 
   const handleSolo = () => {
     setSolo(!soloed)
+    //not soloed and isMuted 
+    if (!wavesurfer.current.solo && isMuted) {
+      wavesurfer.current.toggleMute();
+      wavesurfer.current.solo = true;
+      //not soloed and not isMuted
+    } else if (!wavesurfer.current.solo && !isMuted) {
+      wavesurfer.current.solo = true;
+    } else if (wavesurfer.current.solo) {
+      wavesurfer.current.solo = false;
+    }
 
+    // Emitter.emit(`${soloed ? 'soloON' : 'soloOFF'}`)
   };
 
   useEffect(() => {
@@ -112,7 +139,7 @@ export default function Waveform({ track, context }) {
       <div className="controls">
         <h2>{track.name}</h2>
         <button
-          className={!muted ? "mute" : "unmute"}
+          className={!isMuted ? "mute" : "unmute"}
           onClick={handleMute}
         > Mute
         </button>
@@ -135,6 +162,7 @@ export default function Waveform({ track, context }) {
         />
         <label htmlFor="volume">Volume</label>
       </div>
+      <hr />
     </div>
   );
 }

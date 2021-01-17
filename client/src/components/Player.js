@@ -19,11 +19,14 @@ const Player = ({ tracks }) => {
 
   return (
     <div className="player">
-      <button onClick={handleRewind}>Rewind</button>
-      <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
       {tracks.map((track, i) => {
         return <Waveform key={i} track={track} context={audioCtx} />
       })};
+      <div id="transport">
+
+        <button onClick={handleRewind}>Rewind</button>
+        <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
+      </div>
     </div>
   );
 };
