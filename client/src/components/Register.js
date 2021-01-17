@@ -21,7 +21,7 @@ export default function Register(props) {
   const saveUser = () => {
 
     axios
-      .put(`http://localhost:8000/api/users`, {
+      .put(`http://localhost:8000/api/users/register`, {
         first_name: nameData,
         email: emailData,
         password: passwordData
