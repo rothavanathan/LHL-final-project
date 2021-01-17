@@ -4,7 +4,10 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function Register(props) {
-  const [formData, setFormData] = useState("");
+  const [nameData, setNameData] = useState("");
+  const [emailData, setEmailData] = useState("");
+  const [passwordData, setPasswordData] = useState("");
+
   const [user, setUser] = useState({
     first_name: "",
     email: "",
@@ -32,8 +35,16 @@ export default function Register(props) {
     saveUser() // Save games when form is submitted
   }
 
-  const handleChange = (event) => {
-    setFormData(event.target.value)
+  const handleName = (event) => {
+    setNameData(event.target.value)
+  }
+
+  const handleEmail = (event) => {
+    setEmailData(event.target.value)
+  }
+
+  const handlePassword = (event) => {
+    setPasswordData(event.target.value)
   }
 
   return (
@@ -41,17 +52,17 @@ export default function Register(props) {
       <h1>I AM Register</h1>
       <form onSubmit={handleSubmit}>
         <input
-          onChange={handleChange}
+          onChange={handleName}
           type="first_name"
-          value={formData}
+          value={nameData}
           name="first_name"
           placeholder="Gary"
           aria-label="first_name"
         ></input>
 
         <input
-          value={formData}
-          onChange={handleChange}
+          value={emailData}
+          onChange={handleEmail}
           type="email"
           name="email"
           placeholder="example@gmail.com"
@@ -59,8 +70,8 @@ export default function Register(props) {
         ></input>
 
         <input
-          value={formData}
-          onChange={handleChange}
+          value={passwordData}
+          onChange={handlePassword}
           type="password"
           name="password"
           placeholder="your password here"
