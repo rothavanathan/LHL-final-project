@@ -7,7 +7,8 @@
 }
 
 body {
-  background: #c2aec5;
+  /* background: rgb(34, 33, 34); */
+  background: #270206;
   color: white;
 }
 
@@ -17,7 +18,7 @@ body {
 }
 
 button {
-  background: rgb(166, 197, 210);
+  background: white;
   color: black;
   border: none;
   width: 60px;
@@ -29,7 +30,7 @@ button {
 }
 
 .mute {
-  background: var(--secondary-color);
+  background: rgb(245, 103, 93);
 }
 
 .mute:hover {
@@ -37,16 +38,16 @@ button {
 }
 
 .unmute {
-  background: var(--primary-color);
-  color: black
+  background: white;
+  color: black;
 }
 
 .unmute:hover {
-  background: rgb(227, 128, 207);
+  background: white;
 }
 
 .solo {
-  background: rgb(101, 119, 189);
+  background: rgb(245, 103, 93);
 }
 
 .solo:hover {
@@ -54,7 +55,7 @@ button {
 }
 
 .unsolo {
-  background: rgb(249, 230, 128);
+  background: white;
   color: black;
 }
 
@@ -97,14 +98,14 @@ hr {
 }
 
 #transport {
-  display: block;
+  /* display: flex; */
   z-index: 10;
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
+  right: 20px;
+  top: 80px;
+  color: black;
 }
 
 Waveform {
-  z-index:1;
+  z-index: 1;
 }
