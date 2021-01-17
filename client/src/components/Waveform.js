@@ -5,7 +5,7 @@ import Emitter from "../EventEmitter"
 
 
 
-export default function Waveform({ track, context }) {
+export default function Waveform({ track, context, setSoloCounter, soloCounter }) {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [volume, setVolume] = useState(0.5);
@@ -66,7 +66,6 @@ export default function Waveform({ track, context }) {
     })
 
     Emitter.on("soloON", () => {
-
       if (!wavesurfer.current.solo && !wavesurfer.current.getMute()) {
         wavesurfer.current.setMute(true);
       } else if (!wavesurfer.current.solo && wavesurfer.current.getMute()) {
@@ -78,13 +77,15 @@ export default function Waveform({ track, context }) {
 
     Emitter.on("soloOFF", () => {
       console.log(`somone turned a solo OFF.`)
-
-      if (!wavesurfer.current.solo && !wavesurfer.current.wasMuted) {
+      //currently checks if it's own solo is off but we need to check if EVERY solo is off
+      wavesurfer.current.solo = false;
+      setSolo(false)
+      if (!wavesurfer.current.wasMuted) {
         wavesurfer.current.setMute(false);
         setIsMuted(false)
-      } else if (!wavesurfer.current.solo && wavesurfer.current.getMute()) {
-        console.log(`${track.name} should be isMuted`)
+      } else {
         wavesurfer.current.setMute(true);
+        setIsMuted(true)
       };
     })
     // Removes events, elements and disconnects Web Audio nodes.
