@@ -26,6 +26,8 @@ module.exports = (db) => {
 
     const { firstName, email, password } = req.body;
 
+    console.log(firstName, email, password)
+
 
     db.query(query)
       .then((data) => {
