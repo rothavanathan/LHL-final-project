@@ -14,9 +14,9 @@ export default function Register(props) {
     password: ""
   });
   
-    useEffect(() => {
-      saveUser()
-    }, []);
+    // useEffect(() => {
+    //   saveUser()
+    // }, []);
 
   const saveUser = () => {
 
@@ -27,15 +27,16 @@ export default function Register(props) {
         password: passwordData
       })
       .then((res) => {
-        console.log(`from get request`, res.data.users)
-        setUser(res.data.users);
+        setUser(res.rows);
+        console.log(`from put request`, res.rows)
       })
       .catch((err) => console.log(err));
 
   }
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
+
     saveUser() // Save games when form is submitted
   }
 
