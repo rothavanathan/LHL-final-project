@@ -2,9 +2,14 @@
 
 module.exports = (db) => {
   // Gets all users
-  const getUsers = () => {
+  const getUserByEmail = (id) => {
       const query = {
-          text: 'SELECT * FROM users',
+          text:
+          `
+            SELECT * FROM users
+            WHERE email = $1
+          `,
+          values: [id]
       };
 
       return db
@@ -13,9 +18,65 @@ module.exports = (db) => {
           .catch((err) => err);
   };
 
-  const getStems = () => {
+  // Gets users by collections, unsure about functionality rn - not working
+  const getCollectionsByUser = (id) => {
     const query = {
-        text: 'SELECT * FROM stems',
+        text: `
+        SELECT * FROM collections
+        WHERE user_id = $1;
+        `,
+        values: [id]
+    }
+
+    return db.query(query)
+        .then(result => result.rows)
+        .catch(err => err);
+
+  }
+
+    // Gets users by projects, unsure about functionality rn - not working
+  const getProjectsByUser = (id) => {
+    const query = {
+        text: `
+          SELECT *
+          FROM projects
+          WHERE user_id = $1
+        `,
+        values: [id]
+    }
+
+    return db.query(query)
+        .then(result => result.rows)
+        .catch(err => err);
+
+  }
+
+  const getProjectsByCollection = (id) => {
+    const query = {
+        text: `
+          SELECT *
+          FROM projects
+          JOIN users on projects.user_id = users.id
+          WHERE users.id = $1;
+        `,
+        values: [id]
+    }
+
+    return db.query(query)
+        .then(result => result.rows)
+        .catch(err => err);
+
+  }
+
+  const getSongByProject = (id) => {
+    const query = {
+        text:
+        `
+          SELECT *
+          FROM songs
+          WHERE project_id = $1;
+        `,
+        values: [id]
     };
 
     return db
@@ -24,23 +85,31 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
-  // Finds user by email
-  const getUserByEmail = email => {
+  const getStemsBySong = (id) => {
+    const query = {
+        text:
+        `
+          SELECT *
+          FROM stems
+          WHERE song_id = $1;
+        `,
+        values: [id]
+    };
 
-      const query = {
-          text: `SELECT * FROM users WHERE email = $1` ,
-          values: [email]
-      }
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
 
-      return db
-          .query(query)
-          .then(result => result.rows[0])
-          .catch((err) => err);
-  }
   // Adds user to db
   const addUser = (firstName, email, password) => {
       const query = {
-          text: `INSERT INTO users (first_name, email, password) VALUES ($1, $2, $3) RETURNING *` ,
+          text: `
+            INSERT INTO users (first_name, email, password)
+            VALUES ($1, $2, $3)
+            RETURNING *;
+          `,
           values: [firstName, email, password]
       }
 
@@ -48,57 +117,64 @@ module.exports = (db) => {
           .then(result => result.rows[0])
           .catch(err => err);
   }
-  // Gets users by projects, unsure about functionality rn - not working
-  const getUsersByProjects = () => {
-      const query = {
-          text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
-      FROM users
-      INNER JOIN posts
-      ON users.id = posts.user_id`
-      }
 
-      return db.query(query)
-          .then(result => result.rows)
-          .catch(err => err);
-
-  }
-
-  // Gets users by collections, unsure about functionality rn - not working
-  const getUsersByCollections = () => {
+  const addProject = (notes, title, userId, collectionsId) => {
     const query = {
-        text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
-    FROM users
-    INNER JOIN posts
-    ON users.id = posts.user_id`
+        text: `
+          INSERT INTO projects (notes, title, user_id, collections_id)
+          VALUES ($1, $2, $3, 4)
+          RETURNING *;
+          `,
+        values: [notes, title, userId, collectionsId]
     }
 
     return db.query(query)
-        .then(result => result.rows)
+        .then(result => result.rows[0])
         .catch(err => err);
-
   }
-  // 
-  const getSongByProject = () => {
+
+  const addCollection = (name, thumbnail, userId) => {
     const query = {
-        text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
-    FROM users
-    INNER JOIN posts
-    ON users.id = posts.user_id`
+        text: `
+          INSERT INTO collections (name, thumbnail, user_id)
+          VALUES ($1, $2, $3)
+          RETURNING *;
+          `,
+        values: [name, thumbnail, userId]
     }
 
     return db.query(query)
-        .then(result => result.rows)
+        .then(result => result.rows[0])
         .catch(err => err);
-
   }
+
+  const addExistingProjectToCollection = (collectionId, projectId) => {
+    const query = {
+        text: `
+          UPDATE projects
+          SET collection.id = $1
+          WHERE id = $2;
+          `,
+        values: [collectionId, projectId]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+  }
+
+
 
   return {
-      getUsers,
       getUserByEmail,
-      addUser,
-      getUsersByProjects,
-      getUsersByCollections, 
+      getCollectionsByUser,
+      getProjectsByUser,
+      getProjectsByCollection,
       getSongByProject,
-      getStems
+      getStemsBySong,
+      addUser,
+      addProject,
+      addCollection,
+      addExistingProjectToCollection
   };
 };
