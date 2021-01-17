@@ -34,6 +34,7 @@ export default function Waveform({ track, context }) {
 
     const options = formWaveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
+    wavesurfer.current.solo = false;
 
     wavesurfer.current.load(track.url);
 
@@ -65,8 +66,13 @@ export default function Waveform({ track, context }) {
     })
 
     Emitter.on("soloON", () => {
-      console.log(`somone turned a solo ON. fire off shouldIPlay`)
-      console.log(`${track.name} is ${muted ? "muted" : "not muted"} and am ${soloed ? "soloed" : "not soloed"}`)
+      // console.log(`somone turned a solo ON. fire off shouldIPlay`)
+      // console.log(`${track.name} is ${muted ? "muted" : "not muted"} and am ${soloed ? "soloed" : "not soloed"}`)
+      if (!wavesurfer.current.solo && !wavesurfer.current.getMute()) {
+        wavesurfer.current.toggleMute();
+      } else {
+        console.log(`${track.name} SHOULD HIT HERE`)
+      };
     })
 
     Emitter.on("soloOFF", () => {
@@ -88,7 +94,16 @@ export default function Waveform({ track, context }) {
 
   const handleSolo = () => {
     setSolo(!soloed)
+    if (!wavesurfer.current.solo && muted) {
+      wavesurfer.current.toggleMute();
+      wavesurfer.current.solo = true;
+    } else if (!wavesurfer.current.solo && !muted) {
+      wavesurfer.current.solo = true;
+    } else if (wavesurfer.current.solo) {
+      wavesurfer.current.solo = false;
+    }
 
+    // Emitter.emit(`${soloed ? 'soloON' : 'soloOFF'}`)
   };
 
   useEffect(() => {
