@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 
-
-import Player from "./components/Player";
+import Project from "./components/Project";
+import Entry from "./components/Entry";
+import Login from "./components/Login";
+import Gear from "./components/Gear";
+import Search from "./components/Search";
+import Register from "./components/Register";
+import Library from "./components/Library";
+import Home from "./components/Home";
+import Collection from "./components/Collection";
 
 // hardcoded track data
 // const oldtracks = [
@@ -33,27 +41,52 @@ import Player from "./components/Player";
 //   },
 // ];
 
-
-
 export default function App() {
-  const [tracks, setTracks] = useState([])
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/stems`)
       .then((res) => {
         // console.log(`from get request`, res.data.stems)
-        setTracks(res.data.stems)
+        setTracks(res.data.stems);
       })
-      .catch(err => console.log(err))
-  }, [])
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
-    <div className="App">
-
-      <Player tracks={tracks} />
-      <br />
-
-    </div>
-  )
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/gear">
+            <Gear />
+          </Route>
+          <Route path="/library">
+            <Library />
+          </Route>
+          <Route path="/collection">
+            <Collection />
+          </Route>
+          <Route path="/search">
+            <Search />
+          </Route>
+          <Route path="/project">
+            <Project tracks={tracks} />
+          </Route>
+          <Route path="/">
+            <Entry />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
 }

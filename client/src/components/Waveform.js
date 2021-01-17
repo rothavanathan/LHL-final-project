@@ -17,7 +17,7 @@ export default function Waveform({
 
   const formWaveSurferOptions = (ref) => ({
     container: ref,
-    waveColor: "#eee",
+    waveColor: "#F5F5DC",
     progressColor: "rgb(245, 103, 93)",
     cursorColor: "rgb(245, 103, 93)",
     barWidth: 3,
@@ -138,11 +138,11 @@ export default function Waveform({
         <h2>{track.name}</h2>
         <button className={!isMuted ? "mute" : "unmute"} onClick={handleMute}>
           {" "}
-          Mute
+          M
         </button>
         <button className={!soloed ? "solo" : "unsolo"} onClick={handleSolo}>
           {" "}
-          Solo
+          S
         </button>
         <input
           type="range"
