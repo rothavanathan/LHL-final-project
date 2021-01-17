@@ -13,7 +13,7 @@ export default function Register(props) {
     email: "",
     password: ""
   });
-  
+
     // useEffect(() => {
     //   saveUser()
     // }, []);
@@ -21,7 +21,7 @@ export default function Register(props) {
   const saveUser = () => {
 
     axios
-      .put(`http://localhost:8000/api/users/register`, {
+      .post("/users", {
         first_name: nameData,
         email: emailData,
         password: passwordData
@@ -84,7 +84,7 @@ export default function Register(props) {
         ></input>
 
         <button type="submit">
-          <Link to="/home">Register</Link>
+          Register
         </button>
       </form>
     </div>
