@@ -5,12 +5,11 @@ import Emitter from "../EventEmitter"
 
 
 
-export default function Waveform({ url, context }) {
+export default function Waveform({ track, context }) {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [volume, setVolume] = useState(0.5);
   const [muted, setMute] = useState(false);
-  const [wasMuted, setWasMuted] = useState(false);
   const [soloed, setSolo] = useState(false);
 
   const formWaveSurferOptions = (ref) => ({
@@ -36,7 +35,7 @@ export default function Waveform({ url, context }) {
     const options = formWaveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
 
-    wavesurfer.current.load(url);
+    wavesurfer.current.load(track.url);
 
     wavesurfer.current.on("ready", function () {
       // https://wavesurfer-js.org/docs/methods.html
@@ -56,11 +55,10 @@ export default function Waveform({ url, context }) {
     });
 
 
-
+    //one for all - when one wavefrom performs a seekTo emit event with currentTime as argument
     wavesurfer.current.on("seek", function (progress) {
       //emit seekAll event
       Emitter.emit('seekAll', wavesurfer.current.getCurrentTime())
-
     });
 
     //update other waveforms with progress from clicked
@@ -69,14 +67,24 @@ export default function Waveform({ url, context }) {
         wavesurfer.current.setCurrentTime(progress)
       }
     })
+
+    Emitter.on("soloON", () => {
+      console.log(`somone turned a solo ON. fire off shouldIPlay`)
+    })
+
+    Emitter.on("soloOFF", () => {
+      console.log(`somone turned a solo OFF. fire off shouldIPlay`)
+    })
     // Removes events, elements and disconnects Web Audio nodes.
     // when component unmount
-    return () => wavesurfer.current.destroy();
-  }, [url]);
+    return () => {
+      wavesurfer.current.unAll();
+      wavesurfer.current.destroy();
+    };
+  }, [track.url]);
 
   const handleMute = () => {
     setMute(!muted);
-    setWasMuted(!wasMuted)
     wavesurfer.current.toggleMute();
   };
 
@@ -84,16 +92,16 @@ export default function Waveform({ url, context }) {
     setSolo((prev) => {
       //if the waveform was previously unsoloed
       if (!prev) {
-        Emitter.emit("solo")
+        Emitter.emit("soloON")
+      } else {
+        Emitter.emit("soloOFF")
       }
       return !soloed
     });
 
   };
 
-  Emitter.on("solo", () => {
-    console.log(`somone hit the solo button. was i muted?`, wasMuted)
-  })
+
 
   const onVolumeChange = (e) => {
     const { target } = e;
@@ -109,6 +117,7 @@ export default function Waveform({ url, context }) {
     <div>
       <div id="waveform" ref={waveformRef} />
       <div className="controls">
+        <h2>{track.name}</h2>
         <button
           className={!muted ? "mute" : "unmute"}
           onClick={handleMute}
@@ -136,10 +145,3 @@ export default function Waveform({ url, context }) {
     </div>
   );
 }
-
-/* Playback Fuctionality:
-
-1: Play head postions need to be sycronised
-2:
-
-*/
