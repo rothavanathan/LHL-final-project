@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import WaveSurfer from "wavesurfer.js";
-import Emitter from "../EventEmitter"
+import Emitter from "../EventEmitter";
 
-
-
-export default function Waveform({ track, context, setSoloCounter, soloCounter }) {
+export default function Waveform({
+  track,
+  context,
+  setSoloCounter,
+  soloCounter,
+}) {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [volume, setVolume] = useState(0.5);
@@ -15,8 +18,8 @@ export default function Waveform({ track, context, setSoloCounter, soloCounter }
   const formWaveSurferOptions = (ref) => ({
     container: ref,
     waveColor: "#eee",
-    progressColor: "OrangeRed",
-    cursorColor: "OrangeRed",
+    progressColor: "rgb(245, 103, 93)",
+    cursorColor: "rgb(245, 103, 93)",
     barWidth: 3,
     barRadius: 3,
     responsive: true,
@@ -25,13 +28,12 @@ export default function Waveform({ track, context, setSoloCounter, soloCounter }
     normalize: true,
     // Use the PeakCache to improve rendering speed of large waveforms.
     partialRender: true,
-    audioContext: context
+    audioContext: context,
   });
 
   // create new WaveSurfer instance
   // On component mount and when url changes
   useEffect(() => {
-
     const options = formWaveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
     wavesurfer.current.solo = false;
@@ -45,49 +47,46 @@ export default function Waveform({ track, context, setSoloCounter, soloCounter }
         setVolume(volume);
       }
 
-
-      Emitter.on('clickRewind', () => wavesurfer.current.seekTo(0));
-      Emitter.on('clickPlayPause', () => wavesurfer.current.playPause());
-
+      Emitter.on("clickRewind", () => wavesurfer.current.seekTo(0));
+      Emitter.on("clickPlayPause", () => wavesurfer.current.playPause());
     });
-
 
     //one for all - when one wavefrom performs a seekTo emit event with currentTime as argument
     wavesurfer.current.on("seek", function (progress) {
       //emit seekAll event
-      Emitter.emit('seekAll', wavesurfer.current.getCurrentTime())
+      Emitter.emit("seekAll", wavesurfer.current.getCurrentTime());
     });
 
     //update other waveforms with progress from clicked
-    Emitter.on('seekAll', (progress) => {
+    Emitter.on("seekAll", (progress) => {
       if (progress !== wavesurfer.current.getCurrentTime()) {
-        wavesurfer.current.setCurrentTime(progress)
+        wavesurfer.current.setCurrentTime(progress);
       }
-    })
+    });
 
     Emitter.on("soloON", () => {
       if (!wavesurfer.current.solo && !wavesurfer.current.getMute()) {
         wavesurfer.current.setMute(true);
       } else if (!wavesurfer.current.solo && wavesurfer.current.getMute()) {
-        console.log(`${track.name} is not soloed but is muted`)
+        console.log(`${track.name} is not soloed but is muted`);
       } else if (wavesurfer.current.solo) {
-        wavesurfer.current.setMute(false)
-      };
-    })
+        wavesurfer.current.setMute(false);
+      }
+    });
 
     Emitter.on("soloOFF", () => {
-      console.log(`somone turned a solo OFF.`)
+      console.log(`somone turned a solo OFF.`);
       //currently checks if it's own solo is off but we need to check if EVERY solo is off
       wavesurfer.current.solo = false;
-      setSolo(false)
+      setSolo(false);
       if (!wavesurfer.current.wasMuted) {
         wavesurfer.current.setMute(false);
-        setIsMuted(false)
+        setIsMuted(false);
       } else {
         wavesurfer.current.setMute(true);
-        setIsMuted(true)
-      };
-    })
+        setIsMuted(true);
+      }
+    });
     // Removes events, elements and disconnects Web Audio nodes.
     // when component unmount
     return () => {
@@ -103,8 +102,8 @@ export default function Waveform({ track, context, setSoloCounter, soloCounter }
   };
 
   const handleSolo = () => {
-    setSolo(!soloed)
-    //not soloed and isMuted 
+    setSolo(!soloed);
+    //not soloed and isMuted
     if (!wavesurfer.current.solo && isMuted) {
       wavesurfer.current.toggleMute();
       wavesurfer.current.solo = true;
@@ -119,9 +118,8 @@ export default function Waveform({ track, context, setSoloCounter, soloCounter }
   };
 
   useEffect(() => {
-    Emitter.emit(`${soloed ? 'soloON' : 'soloOFF'}`)
+    Emitter.emit(`${soloed ? "soloON" : "soloOFF"}`);
   }, [soloed]);
-
 
   const onVolumeChange = (e) => {
     const { target } = e;
@@ -138,15 +136,13 @@ export default function Waveform({ track, context, setSoloCounter, soloCounter }
       <div id="waveform" ref={waveformRef} />
       <div className="controls">
         <h2>{track.name}</h2>
-        <button
-          className={!isMuted ? "mute" : "unmute"}
-          onClick={handleMute}
-        > Mute
+        <button className={!isMuted ? "mute" : "unmute"} onClick={handleMute}>
+          {" "}
+          Mute
         </button>
-        <button
-          className={!soloed ? "solo" : "unsolo"}
-          onClick={handleSolo}
-        > Solo
+        <button className={!soloed ? "solo" : "unsolo"} onClick={handleSolo}>
+          {" "}
+          Solo
         </button>
         <input
           type="range"
