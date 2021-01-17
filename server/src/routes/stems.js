@@ -4,17 +4,17 @@
 // const { getStems } = require('../helpers/dbHelpers')
 
 // module.exports = (db) => {
-    // router.get("/", (req, res) => {
-    //   db.query(`SELECT * FROM stems;`)
-    //     .then((data) => {
-    //       const users = data.rows;
-    //       res.json({ users });
-    //     })
-    //     .catch((err) => {
-    //       res.status(500).json({ error: err.message });
-    //     });
-    // });
-    // return router;
+// router.get("/", (req, res) => {
+//   db.query(`SELECT * FROM stems;`)
+//     .then((data) => {
+//       const users = data.rows;
+//       res.json({ users });
+//     })
+//     .catch((err) => {
+//       res.status(500).json({ error: err.message });
+//     });
+// });
+// return router;
 //   };
 
 /* GET stem info from db */
@@ -39,16 +39,16 @@ const router = express.Router();
 
 
 module.exports = (db) => {
-    /* GET users listing. */
-    router.get("/", (req, res) => {
-        db.query(`SELECT * FROM stems;`)
-          .then((data) => {
-            const users = data.rows;
-            res.json({ users });
-          })
-          .catch((err) => {
-            res.status(500).json({ error: err.message });
-          });
+  /* GET users listing. */
+  router.get("/", (req, res) => {
+    db.query(`SELECT * FROM stems;`)
+      .then((data) => {
+        const stems = data.rows;
+        res.json({ stems });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
       });
-      return router;
+  });
+  return router;
 };

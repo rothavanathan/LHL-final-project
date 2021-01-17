@@ -1,3 +1,11 @@
+:root {
+  --black: black;
+  --white: rgb(244, 240, 234);
+  --primary-color: rgb(166, 197, 210);
+  --main-color: black;
+  --secondary-color: rgb(228, 156, 214);
+}
+
 body {
   background: #c2aec5;
   color: white;
@@ -21,15 +29,15 @@ button {
 }
 
 .mute {
-  background: rgb(101, 119, 189);
+  background: var(--secondary-color);
 }
 
 .mute:hover {
-  background: rgb(66, 92, 198);
+  background: var(--white);
 }
 
 .unmute {
-  background: rgb(228, 156, 214);
+  background: var(--primary-color);
   color: black
 }
 
@@ -42,20 +50,20 @@ button {
 }
 
 .solo:hover {
-  background: rgb(66, 92, 198);
+  background: var(--white);
 }
 
 .unsolo {
-  background: rgb(255, 232, 102);
+  background: rgb(249, 230, 128);
   color: black;
 }
 
 .unsolo:hover {
-  background: rgb(227, 128, 207);
+  background: var(--white);
 }
 
 button:hover {
-  background: #d63d05;
+  background: var(--white);
 }
 
 .playlist {
