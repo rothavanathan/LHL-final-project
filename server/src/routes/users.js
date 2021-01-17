@@ -18,7 +18,7 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/", (req, res) => {
+  router.post("/register", (req, res) => {
     const query = {
         text: `INSERT INTO users (first_name, email, password) VALUES ($1, $2, $3) RETURNING *` ,
         values: [firstName, email, password]
