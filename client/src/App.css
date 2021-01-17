@@ -98,7 +98,7 @@ hr {
 
 #transport {
   display: block;
-  z-index: 1;
+  z-index: 10;
   position: fixed;
   left: 0;
   top: 0;
@@ -106,5 +106,5 @@ hr {
 }
 
 Waveform {
-  z-index:10;
+  z-index:1;
 }
