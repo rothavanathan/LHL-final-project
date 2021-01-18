@@ -1,7 +1,10 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { Fragment } from "react";
 
-export default function Gear() {
+export default function Gear(props) {
+  const { isLoggedIn, setUser } = props;
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`in handleSubmit. event is `, event);
@@ -13,11 +16,12 @@ export default function Gear() {
       .get("/api/users/logout")
       .then((res) => {
         console.log(`user is logged out. check cookies to confirm!`);
+        setUser(null);
       })
       .catch((err) => console.log(err));
   };
 
-  return (
+  return isLoggedIn ? (
     <div>
       <Link to="/home">Home</Link>
       <h1>I AM Gear/ Settings</h1>
@@ -25,5 +29,7 @@ export default function Gear() {
         <button type="submit">LOGOUT</button>
       </form>
     </div>
+  ) : (
+    <Redirect to="/" />
   );
 }
