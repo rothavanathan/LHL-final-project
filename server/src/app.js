@@ -8,7 +8,7 @@ const cookieSession = require("cookie-session");
 
 // const dbHelpers = require('./helpers/dbHelpers')(db);
 
-const stemsRouter = require("./routes/stems");
+const projectRouter = require("./routes/project");
 const usersRouter = require("./routes/users");
 const contentRouter = require("./routes/content");
 
@@ -52,7 +52,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/api/stems", stemsRouter(db));
+app.use("/api/project", projectRouter(db));
 app.use("/api/users", usersRouter(db));
 app.use("/api/content", contentRouter(db));
 
