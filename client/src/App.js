@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useState, useEffect} from "react";
+import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
+// import UserInfo from '../UserInfo';
 import axios from "axios";
 import "./App.css";
 
@@ -45,15 +46,15 @@ export default function App() {
   const [tracks, setTracks] = useState([]);
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/stems`)
-      .then((res) => {
-        // console.log(`from get request`, res.data.stems)
-        setTracks(res.data.stems);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:8000/api/stems`)
+  //     .then((res) => {
+  //       // console.log(`from get request`, res.data.stems)
+  //       setTracks(res.data.stems);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   return (
     <Router>
@@ -74,8 +75,8 @@ export default function App() {
           <Route path="/search">
             <Search isLoggedIn={user} />
           </Route>
-          <Route path="/project">
-            <Project isLoggedIn={user} tracks={tracks} />
+          <Route path="/project/:id">
+            <Project isLoggedIn={user}/>
           </Route>
           <Route path="/register">
             <Register />
