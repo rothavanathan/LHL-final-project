@@ -1,6 +1,5 @@
 //for development -> click through to test userflows
-import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 
 export default function Register(props) {
@@ -14,14 +13,14 @@ export default function Register(props) {
     password: ""
   });
 
-    // useEffect(() => {
-    //   saveUser()
-    // }, []);
+  // useEffect(() => {
+  //   saveUser()
+  // }, []);
 
   const saveUser = () => {
 
     axios
-      .post("/users", {
+      .post("/api/users", {
         first_name: nameData,
         email: emailData,
         password: passwordData
@@ -35,8 +34,8 @@ export default function Register(props) {
   }
 
   const handleSubmit = (event) => {
-    // event.preventDefault()
-
+    event.preventDefault()
+    console.log(`in handleSubmit. event is `, event)
     saveUser() // Save games when form is submitted
   }
 
