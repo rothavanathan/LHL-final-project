@@ -43,6 +43,7 @@ import Collection from "./components/Collection";
 
 export default function App() {
   const [tracks, setTracks] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     axios
@@ -58,29 +59,29 @@ export default function App() {
     <Router>
       <div className="App">
         <Switch>
+          <Route path="/home">
+            <Home isLoggedIn={user} />
+          </Route>
+          <Route path="/gear">
+            <Gear isLoggedIn={user} setUser={setUser} />
+          </Route>
+          <Route path="/library">
+            <Library isLoggedIn={user} />
+          </Route>
+          <Route path="/collection">
+            <Collection isLoggedIn={user} />
+          </Route>
+          <Route path="/search">
+            <Search isLoggedIn={user} />
+          </Route>
+          <Route path="/project">
+            <Project isLoggedIn={user} tracks={tracks} />
+          </Route>
           <Route path="/register">
             <Register />
           </Route>
           <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/gear">
-            <Gear />
-          </Route>
-          <Route path="/library">
-            <Library />
-          </Route>
-          <Route path="/collection">
-            <Collection />
-          </Route>
-          <Route path="/search">
-            <Search />
-          </Route>
-          <Route path="/project">
-            <Project tracks={tracks} />
+            <Login setUser={setUser} />
           </Route>
           <Route path="/">
             <Entry />
