@@ -10,6 +10,8 @@ const cookieSession = require("cookie-session");
 
 const stemsRouter = require("./routes/stems");
 const usersRouter = require("./routes/users");
+const contentRouter = require("./routes/content");
+
 // Will need all relevant routes setup here
 
 const app = express();
@@ -52,6 +54,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/stems", stemsRouter(db));
 app.use("/api/users", usersRouter(db));
+app.use("/api/content", contentRouter(db));
+
 // Other relevant api routes will come here
 
 module.exports = app;
