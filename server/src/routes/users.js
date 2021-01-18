@@ -19,6 +19,33 @@ module.exports = (db) => {
       });
   });
 
+  const getUserWithEmail = (email, database) => {
+    return database
+      .query(
+        `
+      SELECT users.* FROM users
+      WHERE users.email = $1
+      `,
+        [email]
+      )
+      .then((res) => {
+        return res.rows.length > 0
+          ? Promise.resolve(res.rows)
+          : Promise.reject(`no user with that email`);
+      });
+  };
+
+  const login = (email, passwordInput, database) => {
+    return getUserWithEmail(email, database).then((rows) => {
+      if (bcrypt.compareSync(passwordInput, rows[0].password)) {
+        return Promise.resolve(rows);
+      } else {
+        return Promise.reject(null);
+      }
+    });
+  };
+
+  // REGISTER ROUTE
   router.post("/", (req, res) => {
     const query = `INSERT INTO users (first_name, email, password) VALUES ($1, $2, $3) RETURNING *`;
 
@@ -41,22 +68,23 @@ module.exports = (db) => {
       });
   });
 
-  //   router.get("/:id", (req, res) => {
+  //LOGIN POST ROUTE
+  router.post("/login", (req, res) => {
+    const { email, password } = req.body;
 
-  //     const query = {
-  //         text: `SELECT * FROM users WHERE email = $1` ,
-  //         values: [email]
-  //     }
-
-  //     db.query(query)
-  //       .then((data) => {
-  //         const users = data.rows;
-  //         res.json({ users });
-  //       })
-  //       .catch((err) => {
-  //         res.status(500).json({ error: err.message });
-  //       });
-  //   });
+    return login(email, password, db)
+      .then((userInfo) => {
+        if (!userInfo) {
+          res.sendStatus(404);
+        }
+        req.session.userId = userInfo[0].id;
+        console.log(userInfo);
+        res.send({ userInfo });
+      })
+      .catch((err) => {
+        res.sendStatus(401);
+      });
+  });
 
   return router;
 };
