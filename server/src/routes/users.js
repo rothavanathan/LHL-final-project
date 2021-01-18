@@ -2,8 +2,9 @@
 
 // addUser, getby email, get by collection
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 module.exports = (db) => {
   /* GET all users*/
@@ -23,23 +24,22 @@ module.exports = (db) => {
 
     const { first_name, email, password } = req.body;
 
-    console.log(first_name, email, password)
-
+    console.log(first_name, email, password);
+    const hashedPassword = bcrypt.hashSync(password, 12);
+    console.log("HASHED: ", hashedPassword);
 
     return db
-      .query(query, [first_name, email, password])
+      .query(query, [first_name, email, hashedPassword])
       .then((data) => {
-        console.log(`insert completed!`, data)
+        console.log(`insert completed!`, data);
         const users = data.rows;
         res.json({ users });
       })
       .catch((err) => {
-        console.log(`ruh roh`, err)
+        console.log(`ruh roh`, err);
         res.status(500).json({ error: err.message });
       });
   });
-
-
 
   //   router.get("/:id", (req, res) => {
 

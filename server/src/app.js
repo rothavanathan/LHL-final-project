@@ -3,7 +3,9 @@ const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cookieSession = require("cookie-session");
 // const db = require("../db")
+
 // const dbHelpers = require('./helpers/dbHelpers')(db);
 
 const stemsRouter = require("./routes/stems");
@@ -12,15 +14,23 @@ const usersRouter = require("./routes/users");
 
 const app = express();
 
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+  })
+);
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 // const dbParams = require("../lib/db.js");
-const db = new Pool({    
+const db = new Pool({
   host: "localhost",
   port: 5432,
   user: "labber",
   password: "labber",
-  database: "stem"});
+  database: "stem",
+});
 db.connect();
 // const db = new Pool(dbParams);
 
