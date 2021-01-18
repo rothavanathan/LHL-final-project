@@ -1,16 +1,12 @@
 //for development -> click through to test userflows
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function Login(props) {
+  const { setUser } = props;
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPasswordData] = useState("");
-
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
 
   const loginUser = () => {
     axios
@@ -19,8 +15,8 @@ export default function Login(props) {
         password: passwordData,
       })
       .then((res) => {
-        setUser(res);
-        console.log(`from put request`, res);
+        setUser(res.data.userEmail);
+        // console.log(`from put request`, res);
       })
       .catch((err) => console.log(err));
   };
@@ -41,6 +37,7 @@ export default function Login(props) {
 
   return (
     <div>
+      <Link to="/home">Home</Link>
       <h1>I AM Login</h1>
       <form onSubmit={handleSubmit}>
         <input
