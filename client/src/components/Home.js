@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Nav from "./Nav";
 
 export default function Home(props) {
-  return (
+  const { isLoggedIn } = props;
+  return isLoggedIn ? (
     <div>
       <Link to="/gear">Gear</Link>
       <h1>I AM Home</h1>
@@ -28,5 +29,7 @@ export default function Home(props) {
       </section>
       <Nav />
     </div>
+  ) : (
+    <Redirect to="/" />
   );
 }
