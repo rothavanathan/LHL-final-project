@@ -19,8 +19,8 @@ export default function Login(props) {
         password: passwordData,
       })
       .then((res) => {
-        setUser(res.rows);
-        console.log(`from put request`, res.rows);
+        setUser(res);
+        console.log(`from put request`, res);
       })
       .catch((err) => console.log(err));
   };

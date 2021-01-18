@@ -86,5 +86,10 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/logout", (req, res) => {
+    req.session = null;
+    res.send(`logout route`);
+  });
+
   return router;
 };
