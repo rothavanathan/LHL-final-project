@@ -78,8 +78,8 @@ module.exports = (db) => {
           res.sendStatus(404);
         }
         req.session.userId = userInfo[0].id;
-        console.log(userInfo);
-        res.send({ userInfo });
+        const userEmail = userInfo[0].email;
+        res.send({ userEmail });
       })
       .catch((err) => {
         res.sendStatus(401);
