@@ -1,5 +1,5 @@
-insert into users (id, first_name, email, password) values (1, 'Jemima', 'jmaunder0@japanpost.jp', 'fK9R9I7WyC');
-insert into users (id, first_name, email, password) values (2, 'Marya', 'mjaggi1@ed.gov', 'cV1hqhq3np7');
-insert into users (id, first_name, email, password) values (3, 'Marji', 'mjoinson2@istockphoto.com', 'AWKP8Pj');
-insert into users (id, first_name, email, password) values (4, 'Bradney', 'bcogar3@oracle.com', 'FnqA33');
-insert into users (id, first_name, email, password) values (5, 'Corby', 'cteenan4@diigo.com', 'aGJl4v4lsc');
+insert into users (first_name, email, password) values ('Jemima', 'jmaunder0@japanpost.jp', 'fK9R9I7WyC');
+insert into users (first_name, email, password) values ('Marya', 'mjaggi1@ed.gov', 'cV1hqhq3np7');
+insert into users (first_name, email, password) values ('Marji', 'mjoinson2@istockphoto.com', 'AWKP8Pj');
+insert into users (first_name, email, password) values ('Bradney', 'bcogar3@oracle.com', 'FnqA33');
+insert into users (first_name, email, password) values ('Corby', 'cteenan4@diigo.com', 'aGJl4v4lsc');

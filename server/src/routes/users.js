@@ -19,42 +19,44 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    const query = {
-        text: `INSERT INTO users (first_name, email, password) VALUES ($1, $2, $3) RETURNING *` ,
-        values: [firstName, email, password]
-    }
+    const query = `INSERT INTO users (first_name, email, password) VALUES ($1, $2, $3) RETURNING *`;
 
-    const { firstName, email, password } = req.body;
+    const { first_name, email, password } = req.body;
+
+    console.log(first_name, email, password)
 
 
-    db.query(query)
+    return db
+      .query(query, [first_name, email, password])
       .then((data) => {
+        console.log(`insert completed!`, data)
         const users = data.rows;
         res.json({ users });
       })
       .catch((err) => {
+        console.log(`ruh roh`, err)
         res.status(500).json({ error: err.message });
       });
   });
 
 
 
-//   router.get("/:id", (req, res) => {
+  //   router.get("/:id", (req, res) => {
 
-//     const query = {
-//         text: `SELECT * FROM users WHERE email = $1` ,
-//         values: [email]
-//     }
+  //     const query = {
+  //         text: `SELECT * FROM users WHERE email = $1` ,
+  //         values: [email]
+  //     }
 
-//     db.query(query)
-//       .then((data) => {
-//         const users = data.rows;
-//         res.json({ users });
-//       })
-//       .catch((err) => {
-//         res.status(500).json({ error: err.message });
-//       });
-//   });
+  //     db.query(query)
+  //       .then((data) => {
+  //         const users = data.rows;
+  //         res.json({ users });
+  //       })
+  //       .catch((err) => {
+  //         res.status(500).json({ error: err.message });
+  //       });
+  //   });
 
   return router;
 };
