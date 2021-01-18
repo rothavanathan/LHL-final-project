@@ -14,12 +14,11 @@ export default function Home(props) {
       axios
       .get('/api/content')
       .then(data => {
-
         setCollections(data.data.collections);
         setProjects(data.data.projects);
       })
     }
-  }, [collections, projects]);
+  }, []);
 
   return isLoggedIn ? (
     <div>
@@ -39,10 +38,10 @@ export default function Home(props) {
         <ul>
           <li>+ Project</li>
           {projects.map((project, i) =>
-            <li key={i}>{project.title}</li>)}
-          <li>
-            <Link to="/project">Burial Ground - guitar part</Link>
-          </li>
+            <li key={i}>
+              <Link to={`/project/${project.id}`}>{project.title}</Link>
+            </li>
+          )}
         </ul>
       </section>
       <Nav />
