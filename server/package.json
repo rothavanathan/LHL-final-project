@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node bin/www.js",
     "dev": "npm run dev",
-    "db:reset": "node bin/resetdb.js"
+    "db:reset": "node bin/resetdb.js",
+    "nodemon": "./node_modules/.bin/nodemon -L bin/www.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
