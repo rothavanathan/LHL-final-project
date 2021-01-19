@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 // import UserInfo from '../UserInfo';
 import axios from "axios";
+import Cookies from "js-cookie";
 import "./App.css";
 
 import Project from "./components/Project";
@@ -46,6 +47,9 @@ export default function App() {
   const [tracks, setTracks] = useState([]);
   const [user, setUser] = useState(null);
 
+  const hasCookie = Cookies.get("connect.sid");
+  console.log("I AM A COOKIE ----", hasCookie);
+
   // useEffect(() => {
   //   axios
   //     .get(`http://localhost:8000/api/stems`)
@@ -61,28 +65,28 @@ export default function App() {
       <div className="App">
         <Switch>
           <Route path="/home">
-            <Home isLoggedIn={user} />
+            <Home isLoggedIn={hasCookie} currentUser={user}/>
           </Route>
           <Route path="/gear">
-            <Gear isLoggedIn={user} setUser={setUser} />
+            <Gear isLoggedIn={hasCookie} currentUser={user} setUser={setUser} />
           </Route>
           <Route path="/library">
-            <Library isLoggedIn={user} />
+            <Library isLoggedIn={hasCookie} currentUser={user} />
           </Route>
           <Route path="/collection">
-            <Collection isLoggedIn={user} />
+            <Collection isLoggedIn={hasCookie} currentUser={user} />
           </Route>
           <Route path="/search">
-            <Search isLoggedIn={user} />
+            <Search isLoggedIn={hasCookie} currentUser={user} />
           </Route>
           <Route path="/project/:id">
-            <Project isLoggedIn={user}/>
+            <Project isLoggedIn={hasCookie} currentUser={user} />
           </Route>
           <Route path="/register">
-            <Register />
+            <Register isLoggedIn={hasCookie} />
           </Route>
           <Route path="/login">
-            <Login isLoggedIn={user} setUser={setUser} />
+            <Login isLoggedIn={hasCookie} setUser={setUser} currentUser={user} />
           </Route>
           <Route path="/">
             <Entry />
