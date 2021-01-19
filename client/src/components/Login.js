@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function Login(props) {
-  const { setUser } = props;
+  const { setUser, isLoggedIn } = props;
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPasswordData] = useState("");
 
@@ -35,7 +35,7 @@ export default function Login(props) {
     setPasswordData(event.target.value);
   };
 
-  return (
+  return !isLoggedIn ? (
     <div>
       <Link to="/home">Home</Link>
       <h1>I AM Login</h1>
@@ -61,5 +61,5 @@ export default function Login(props) {
         <button type="submit">Login</button>
       </form>
     </div>
-  );
+  ) : <Redirect to="/home"/> ;
 }
