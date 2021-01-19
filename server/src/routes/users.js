@@ -5,7 +5,7 @@ const { addUser, login } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
-  // REGISTER ROUTE
+  // Register Route
   router.post("/", (req, res) => {
     const { first_name, email, password } = req.body;
 
@@ -28,7 +28,7 @@ module.exports = (db) => {
       });
   });
 
-  // LOGIN POST ROUTE
+  // Login Route
   router.post("/login", (req, res) => {
     const { email, password } = req.body;
 
@@ -49,6 +49,7 @@ module.exports = (db) => {
       });
   });
 
+  // Logout Route
   router.get("/logout", (req, res) => {
     req.session = null;
     res.send(`logout route`);
