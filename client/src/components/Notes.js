@@ -20,9 +20,7 @@ export default function Notes(props) {
         id: projectId,
         notes: note
       })
-      .then((res) => {
-        // setNote(res);
-        // console.log(`from put request`, res);
+      .then(() => {
       })
       .catch((err) => console.log(err));
   };
