@@ -17,7 +17,6 @@ export default function Notes(props) {
         notes: note
       })
       .then((res) => {
-        setNote(res);
         console.log(`from put request`, res);
       })
       .catch((err) => console.log(err));

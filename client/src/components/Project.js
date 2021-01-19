@@ -7,11 +7,11 @@ import ProjectNav from "./ProjectNav";
 import Notes from "./Notes"
 
 export default function Project(props) {
-  const [content, setContent] = useState([{title: "", artist: "", url: ""}])
+  const [content, setContent] = useState([{ title: "", artist: "", url: "" }])
   const { isLoggedIn } = props;
-  const {id} = useParams()
+  const { id } = useParams()
 
-  useEffect(()=> {
+  useEffect(() => {
     axios
       .get(`http://localhost:8000/api/project/${id}`)
       .then(data => setContent(data.data.projects))
@@ -19,8 +19,8 @@ export default function Project(props) {
   }, [])
 
   const stems = content.map((project) => {
-    const {title, url, icon, peaks_array} = project
-    return {title, url, icon, peaks_array}
+    const { title, url, icon, peaks_array } = project
+    return { title, url, icon, peaks_array }
   })
 
   console.log("I AM CONTENT ZERO DO I HAVE A NOTE", content[0].notes);
@@ -31,10 +31,10 @@ export default function Project(props) {
       <h1>{content[0].title}</h1>
       <h2>{content[0].artist}</h2>
       <Player tracks={stems}></Player>
-      <Notes projectId={content[0].id} existingNote={content[0].notes}/>
+      {content[0] && <Notes projectId={content[0].id} existingNote={content[0].notes} />}
       <ProjectNav />
     </div>
   ) : (
-    <Redirect to="/" />
-  );
+      <Redirect to="/" />
+    );
 }
