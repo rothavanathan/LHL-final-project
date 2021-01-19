@@ -6,13 +6,9 @@ const logger = require("morgan");
 const cookieSession = require("cookie-session");
 const dotenv = require('dotenv');
 dotenv.config()
-
 const projectRouter = require("./routes/project");
 const usersRouter = require("./routes/users");
 const contentRouter = require("./routes/content");
-
-// Will need all relevant routes setup here
-
 const app = express();
 
 app.use(
@@ -37,15 +33,14 @@ db.connect();
 app.use(logger("dev"));
 app.use(cors());
 app.use(express.json());
-// was originally false below
+// came as originally false below
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// API Routes
 app.use("/api/project", projectRouter(db));
 app.use("/api/users", usersRouter(db));
 app.use("/api/content", contentRouter(db));
-
-// Other relevant api routes will come here
 
 module.exports = app;
