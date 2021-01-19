@@ -10,8 +10,9 @@ export default function NewProjectForm(props) {
 
   const saveProject = () => {
     axios
-      .put("/api/project/new", {
+      .put("http://localhost:8000/api/project/new", {
         title: projectTitle,
+        song_id: songId
       })
       .then((res) => {
         console.log("IN NEW PROJECT", res);
