@@ -12,16 +12,26 @@ export default function Search(props) {
   const [term, setTerm] = useState("");
   const [results, setResults] = useState([]);
 
+
+  //SEARCH QUERY
   useEffect(() => {
     axios({
+      //gets fill data from itunes
       method: 'get',
       url: `https://itunes.apple.com/search?term=${term.toLowerCase()}&country=CA&media=music&entity=song`
     })
-      .then(response => {
-        // console.log(response.data.results)
-        setResults(response.data.results)
+      //gets our actual db data
+      .then(data1 => {
+        axios.get(`api/content/${term.toLowerCase}`)
+          .then(data2 => {
+            // console.log(`data1 is: `, data1.data.results)
+            console.log(`data2 is: `, data1.data.results)
+
+            const response = { ...data1, ...data2 }
+            setResults(data1.data.results)
+          })
+          .catch(err => console.log(err))
       })
-      .catch(err => console.log(err))
   }, [term])
 
   const handleChange = (event) => {
