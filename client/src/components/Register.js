@@ -1,17 +1,19 @@
 //for development -> click through to test userflows
 import { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function Register(props) {
+  const { setUser, isLoggedIn } = props;
   const [nameData, setNameData] = useState("");
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPasswordData] = useState("");
 
-  const [user, setUser] = useState({
-    first_name: "",
-    email: "",
-    password: "",
-  });
+  // const [user, setUser] = useState({
+  //   first_name: "",
+  //   email: "",
+  //   password: "",
+  // });
 
   // useEffect(() => {
   //   saveUser()
@@ -49,8 +51,9 @@ export default function Register(props) {
     setPasswordData(event.target.value);
   };
 
-  return (
+  return !isLoggedIn ? (
     <div>
+      <Link to="/login">Login</Link>
       <h1>I AM Register</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -83,5 +86,5 @@ export default function Register(props) {
         <button type="submit">Register</button>
       </form>
     </div>
-  );
+  ) : <Redirect to="/home"/> ;
 }

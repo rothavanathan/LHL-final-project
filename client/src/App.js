@@ -79,7 +79,7 @@ export default function App() {
             <Project isLoggedIn={user}/>
           </Route>
           <Route path="/register">
-            <Register />
+            <Register isLoggedIn={user} setUser={setUser} />
           </Route>
           <Route path="/login">
             <Login isLoggedIn={user} setUser={setUser} />
