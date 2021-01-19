@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Player from "./Player";
 import ProjectNav from "./ProjectNav";
+import Notes from "./Notes"
 
 export default function Project(props) {
   const [content, setContent] = useState([{title: "", artist: "", url: ""}])
@@ -28,6 +29,7 @@ export default function Project(props) {
       <h1>{content[0].title}</h1>
       <h2>{content[0].artist}</h2>
       <Player tracks={stems}></Player>
+      <Notes />
       <ProjectNav />
     </div>
   ) : (
