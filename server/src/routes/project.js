@@ -23,7 +23,7 @@ module.exports = (db) => {
   });
 
     // ADD NOTE TO PROJECT BY ID
-    router.put("/", (req, res) => {
+    router.put("/addnote", (req, res) => {
       const query = `
         UPDATE projects
         SET notes = $1

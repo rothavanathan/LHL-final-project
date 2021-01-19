@@ -12,7 +12,7 @@ export default function Notes(props) {
 
   const saveNote = () => {
     axios
-      .put("http://localhost:8000/api/project", {
+      .put("http://localhost:8000/api/project/addnote", {
         id: projectId,
         notes: note
       })
