@@ -1,104 +1,182 @@
 //  Where the query functionality will lie
 
-module.exports = (db) => {
-  // Gets all users
-  const getUsers = () => {
-      const query = {
-          text: 'SELECT * FROM users',
-      };
-
-      return db
-          .query(query)
-          .then((result) => result.rows)
-          .catch((err) => err);
-  };
-
-  const getStems = () => {
+// Gets all users
+const getUserByEmail = (email, db) => {
     const query = {
-        text: 'SELECT * FROM stems',
+        text:
+        `
+          SELECT * FROM users
+          WHERE email = $1;
+        `,
+        values: [email]
     };
 
     return db
         .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
-  };
 
-  // Finds user by email
-  const getUserByEmail = email => {
-
-      const query = {
-          text: `SELECT * FROM users WHERE email = $1` ,
-          values: [email]
-      }
-
-      return db
-          .query(query)
-          .then(result => result.rows[0])
-          .catch((err) => err);
-  }
-  // Adds user to db
-  const addUser = (firstName, email, password) => {
-      const query = {
-          text: `INSERT INTO users (first_name, email, password) VALUES ($1, $2, $3) RETURNING *` ,
-          values: [firstName, email, password]
-      }
-
-      return db.query(query)
-          .then(result => result.rows[0])
-          .catch(err => err);
-  }
-  // Gets users by projects, unsure about functionality rn - not working
-  const getUsersByProjects = () => {
-      const query = {
-          text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
-      FROM users
-      INNER JOIN posts
-      ON users.id = posts.user_id`
-      }
-
-      return db.query(query)
-          .then(result => result.rows)
-          .catch(err => err);
-
-  }
-
-  // Gets users by collections, unsure about functionality rn - not working
-  const getUsersByCollections = () => {
-    const query = {
-        text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
-    FROM users
-    INNER JOIN posts
-    ON users.id = posts.user_id`
-    }
-
-    return db.query(query)
-        .then(result => result.rows)
-        .catch(err => err);
-
-  }
-  // 
-  const getSongByProject = () => {
-    const query = {
-        text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
-    FROM users
-    INNER JOIN posts
-    ON users.id = posts.user_id`
-    }
-
-    return db.query(query)
-        .then(result => result.rows)
-        .catch(err => err);
-
-  }
-
-  return {
-      getUsers,
-      getUserByEmail,
-      addUser,
-      getUsersByProjects,
-      getUsersByCollections, 
-      getSongByProject,
-      getStems
-  };
 };
+
+const getCollectionsByUser = (id, db) => {
+  const query = {
+      text: `
+      SELECT * FROM collections
+      WHERE user_id = $1;
+      `,
+      values: [id]
+  }
+
+  return db.query(query)
+      .then(result => {
+        if (result.rows.length > 0) {
+          return Promise.resolve(result.rows)
+        } else {
+          return Promise.reject(`no result from query`)
+        }
+      })
+      .catch(err => err);
+
+}
+
+const getProjectsByUser = (id, db) => {
+  const query = {
+      text: `
+        SELECT *
+        FROM projects
+        WHERE user_id = $1;
+      `,
+      values: [id]
+  }
+
+  return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+
+}
+
+const getProjectsByCollection = (id, db) => {
+  const query = {
+      text: `
+        SELECT *
+        FROM projects
+        JOIN users on projects.user_id = users.id
+        WHERE users.id = $1;
+      `,
+      values: [id]
+  }
+
+  return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+
+}
+
+const getSongByProject = (id, db) => {
+  const query = {
+      text:
+      `
+        SELECT *
+        FROM songs
+        WHERE project_id = $1;
+      `,
+      values: [id]
+  };
+
+  return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+};
+
+const getStemsBySong = (id, db) => {
+  const query = {
+      text:
+      `
+        SELECT *
+        FROM stems
+        WHERE song_id = $1;
+      `,
+      values: [id]
+  };
+
+  return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+};
+
+// Adds user to db
+const addUser = (firstName, email, password, db) => {
+    const query = {
+        text: `
+          INSERT INTO users (first_name, email, password)
+          VALUES ($1, $2, $3)
+          RETURNING *;
+        `,
+        values: [firstName, email, password]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+}
+
+const addProject = (notes, title, userId, collectionsId, db) => {
+  const query = {
+      text: `
+        INSERT INTO projects (notes, title, user_id, collections_id)
+        VALUES ($1, $2, $3, 4)
+        RETURNING *;
+        `,
+      values: [notes, title, userId, collectionsId]
+  }
+
+  return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+}
+
+const addCollection = (name, thumbnail, userId, db) => {
+  const query = {
+      text: `
+        INSERT INTO collections (name, thumbnail, user_id)
+        VALUES ($1, $2, $3)
+        RETURNING *;
+        `,
+      values: [name, thumbnail, userId]
+  }
+
+  return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+}
+
+const addExistingProjectToCollection = (collectionId, projectId, db) => {
+  const query = {
+      text: `
+        UPDATE projects
+        SET collection.id = $1
+        WHERE id = $2;
+        `,
+      values: [collectionId, projectId]
+  }
+
+  return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+}
+
+
+
+module.exports = {
+    getUserByEmail,
+    getCollectionsByUser,
+    getProjectsByUser,
+    getProjectsByCollection,
+    getSongByProject,
+    getStemsBySong,
+    addUser,
+    addProject,
+    addCollection,
+    addExistingProjectToCollection
+};
+

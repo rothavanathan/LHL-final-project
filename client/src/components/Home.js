@@ -1,32 +1,52 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Link, Redirect } from "react-router-dom";
 import Nav from "./Nav";
+import axios from 'axios';
 
 export default function Home(props) {
-  return (
+  const { isLoggedIn } = props;
+
+  const [collections, setCollections] = useState([])
+  const [projects, setProjects] = useState([])
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      axios
+      .get('/api/content')
+      .then(data => {
+        setCollections(data.data.collections);
+        setProjects(data.data.projects);
+      })
+    }
+  }, []);
+
+  return isLoggedIn ? (
     <div>
       <Link to="/gear">Gear</Link>
       <h1>I AM Home</h1>
       <section>
-        <header>Collections</header>
+        <header>Recent Collections</header>
         <ul>
-          <li>+ Collection</li>
-          <li>Jack Black - Bass lessons</li>
-          <li>AC/DC - Tribute Band setlist</li>
-          <li>Favourite Synth Sounds</li>
+          <li>+ Collections</li>
+          {collections.map((collection, i) =>
+            <li key={i}>{collection.name}</li>)}
+
         </ul>
       </section>
       <section>
-        <header>Projects</header>
+        <header>Recent Projects</header>
         <ul>
           <li>+ Project</li>
-          <li>Highway to Hell - for Jack</li>
-          <li>Highway to Hell - chord chart</li>
-          <li>
-            <Link to="/project">Burial Ground - guitar part</Link>
-          </li>
+          {projects.map((project, i) =>
+            <li key={i}>
+              <Link to={`/project/${project.id}`}>{project.title}</Link>
+            </li>
+          )}
         </ul>
       </section>
       <Nav />
     </div>
+  ) : (
+    <Redirect to="/" />
   );
 }

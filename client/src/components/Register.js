@@ -1,7 +1,6 @@
 //for development -> click through to test userflows
-import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState } from "react";
+import axios from "axios";
 
 export default function Register(props) {
   const [nameData, setNameData] = useState("");
@@ -11,46 +10,44 @@ export default function Register(props) {
   const [user, setUser] = useState({
     first_name: "",
     email: "",
-    password: ""
+    password: "",
   });
 
-    // useEffect(() => {
-    //   saveUser()
-    // }, []);
+  // useEffect(() => {
+  //   saveUser()
+  // }, []);
 
   const saveUser = () => {
-
     axios
-      .post("/users", {
+      .post("/api/users", {
         first_name: nameData,
         email: emailData,
-        password: passwordData
+        password: passwordData,
       })
       .then((res) => {
-        setUser(res.rows);
-        console.log(`from put request`, res.rows)
+        setUser(res);
+        console.log(`from put request`, res);
       })
       .catch((err) => console.log(err));
-
-  }
+  };
 
   const handleSubmit = (event) => {
-    // event.preventDefault()
-
-    saveUser() // Save games when form is submitted
-  }
+    event.preventDefault();
+    console.log(`in handleSubmit. event is `, event);
+    saveUser(); // Save games when form is submitted
+  };
 
   const handleName = (event) => {
-    setNameData(event.target.value)
-  }
+    setNameData(event.target.value);
+  };
 
   const handleEmail = (event) => {
-    setEmailData(event.target.value)
-  }
+    setEmailData(event.target.value);
+  };
 
   const handlePassword = (event) => {
-    setPasswordData(event.target.value)
-  }
+    setPasswordData(event.target.value);
+  };
 
   return (
     <div>
@@ -83,9 +80,7 @@ export default function Register(props) {
           aria-label="password"
         ></input>
 
-        <button type="submit">
-          Register
-        </button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
