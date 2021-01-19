@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-r
 // import UserInfo from '../UserInfo';
 import axios from "axios";
 import "./App.css";
-
 import Project from "./components/Project";
 import Entry from "./components/Entry";
 import Login from "./components/Login";
@@ -14,47 +13,18 @@ import Library from "./components/Library";
 import Home from "./components/Home";
 import Collection from "./components/Collection";
 
-// hardcoded track data
-// const oldtracks = [
-//   {
-//     id: 0,
-//     title: "Guitar",
-//     url:
-//       "https://rykabrown.com/wp-content/uploads/2021/01/BURIAL-GROUND_guitar_main.mp3",
-//   },
-//   {
-//     id: 1,
-//     title: "DRUMS",
-//     url:
-//       "https://rykabrown.com/wp-content/uploads/2021/01/BURIAL_GROUND_drums.mp3",
-//   },
-//   {
-//     id: 2,
-//     title: "LEAD VOCALS",
-//     url:
-//       "https://rykabrown.com/wp-content/uploads/2021/01/BURIAL-GROUND_lead_vocal.mp3",
-//   },
-//   {
-//     id: 2,
-//     title: "BASS",
-//     url:
-//       "https://rykabrown.com/wp-content/uploads/2021/01/BURIAL_GROUND_bass.mp3",
-//   },
-// ];
-
 export default function App() {
   const [tracks, setTracks] = useState([]);
   const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:8000/api/stems`)
-  //     .then((res) => {
-  //       // console.log(`from get request`, res.data.stems)
-  //       setTracks(res.data.stems);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
+  useEffect(() => {
+    const localUser = localStorage.getItem("user") || null
+    setUser(localUser)
+  }, [])
+// instead of local, have use effect thatt uses on mount to send axios req to backend 
+  useEffect(() => {
+    localStorage.setItem("user", user)
+  }, [user])
 
   return (
     <Router>
@@ -92,3 +62,5 @@ export default function App() {
     </Router>
   );
 }
+
+// routing system that usee state
