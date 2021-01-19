@@ -1,10 +1,19 @@
-// Methods in helpers to be incorporated here too
-
-// addUser, getby email, get by collection
-
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const {
+  getUserByEmail,
+  getCollectionsByUser,
+  getProjectsByUser,
+  getProjectsByCollection,
+  getSongByProject,
+  getStemsBySong,
+  addUser,
+  addProject,
+  addCollection,
+  addExistingProjectToCollection,
+  login
+} = require('../helpers/dbHelpers')
 
 module.exports = (db) => {
   /* GET all users*/
@@ -19,31 +28,7 @@ module.exports = (db) => {
       });
   });
 
-  const getUserWithEmail = (email, database) => {
-    return database
-      .query(
-        `
-      SELECT users.* FROM users
-      WHERE users.email = $1
-      `,
-        [email]
-      )
-      .then((res) => {
-        return res.rows.length > 0
-          ? Promise.resolve(res.rows)
-          : Promise.reject(`no user with that email`);
-      });
-  };
 
-  const login = (email, passwordInput, database) => {
-    return getUserWithEmail(email, database).then((rows) => {
-      if (bcrypt.compareSync(passwordInput, rows[0].password)) {
-        return Promise.resolve(rows);
-      } else {
-        return Promise.reject(null);
-      }
-    });
-  };
 
   // REGISTER ROUTE
   router.post("/", (req, res) => {
@@ -68,7 +53,7 @@ module.exports = (db) => {
       });
   });
 
-  //LOGIN POST ROUTE
+  // LOGIN POST ROUTE
   router.post("/login", (req, res) => {
     const { email, password } = req.body;
 
@@ -83,6 +68,7 @@ module.exports = (db) => {
       })
       .catch((err) => {
         res.sendStatus(401);
+        console.log(err)
       });
   });
 
