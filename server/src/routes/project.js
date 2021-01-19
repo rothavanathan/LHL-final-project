@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getSongByProject } = require("../helpers/dbHelpers");
+const { getSongByProject, addNoteToProject } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
@@ -20,18 +20,10 @@ module.exports = (db) => {
 
     // ADD NOTE TO PROJECT BY ID
     router.put("/addnote", (req, res) => {
-      const query = `
-        UPDATE projects
-        SET notes = $1
-        WHERE id = $2;
-      `;
-
       const { notes, id } = req.body;
 
-      console.log(notes, id);
-
+      addNoteToProject(notes, id, db)
       return db
-        .query(query, [notes, id])
         .then((data) => {
           console.log(`insert completed!`, data);
           // const users = data.rows;

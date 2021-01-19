@@ -31,6 +31,22 @@ const getProjectsByUser = (id, db) => {
   return db.query(query);
 };
 
+const addNoteToProject = (notes, id, db) => {
+  const query = {
+    text: `
+      UPDATE projects
+      SET notes = $1
+      WHERE id = $2;
+      `,
+    values: [notes, id],
+  };
+
+  return db
+    .query(query)
+    .then((result) => result.rows)
+    .catch((err) => err);
+};
+
 const getProjectsByCollection = (id, db) => {
   const query = {
     text: `
@@ -170,4 +186,5 @@ module.exports = {
   addCollection,
   addExistingProjectToCollection,
   login,
+  addNoteToProject
 };
