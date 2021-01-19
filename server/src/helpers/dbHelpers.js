@@ -103,19 +103,15 @@ const getStemsBySong = (id, db) => {
 };
 
 // Adds user to db
-const addUser = (firstName, email, password, db) => {
-    const query = {
-        text: `
+const addUser = (first_name, email, hashedPassword, db) => {
+    const query = `
           INSERT INTO users (first_name, email, password)
           VALUES ($1, $2, $3)
           RETURNING *;
-        `,
-        values: [firstName, email, password]
-    }
+        ` 
 
-    return db.query(query)
-        .then(result => result.rows[0])
-        .catch(err => err);
+    return db
+      .query(query, [first_name, email, hashedPassword])
 }
 
 const addProject = (notes, title, userId, collectionsId, db) => {
