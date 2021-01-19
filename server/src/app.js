@@ -3,7 +3,8 @@ const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const cookieSession = require("cookie-session");
+// const cookieSession = require("cookie-session");
+const session = require("express-session");
 // const db = require("../db")
 
 // const dbHelpers = require('./helpers/dbHelpers')(db);
@@ -16,12 +17,12 @@ const contentRouter = require("./routes/content");
 
 const app = express();
 
-app.use(
-  cookieSession({
-    name: "session",
-    keys: ["key1", "key2"],
-  })
-);
+// app.use(
+//   cookieSession({
+//     name: "session",
+//     keys: ["key1", "key2"],
+//   })
+// );
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -50,6 +51,17 @@ app.use(express.json());
 // was originally false below
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(
+  session({
+    secret: "greenday4life",
+    cookie: {
+      sameSite: false, // this may need to be false is you are accessing from another React app
+      httpOnly: false, // this must be false if you want to access the cookie
+    }
+  })
+);
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/project", projectRouter(db));
