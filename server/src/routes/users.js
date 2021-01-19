@@ -32,25 +32,18 @@ module.exports = (db) => {
 
   // REGISTER ROUTE
   router.post("/", (req, res) => {
-    const query = `INSERT INTO users (first_name, email, password) VALUES ($1, $2, $3) RETURNING *`;
-
     const { first_name, email, password } = req.body;
 
-    console.log(first_name, email, password);
     const hashedPassword = bcrypt.hashSync(password, 12);
-    console.log("HASHED: ", hashedPassword);
 
-    return db
-      .query(query, [first_name, email, hashedPassword])
-      .then((data) => {
-        console.log(`insert completed!`, data);
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch((err) => {
-        console.log(`ruh roh`, err);
-        res.status(500).json({ error: err.message });
-      });
+    return addUser(first_name, email, hashedPassword, db)
+    .then((data) => {
+      const users = data.rows;
+      res.json({ users });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
   });
 
   // LOGIN POST ROUTE
@@ -67,8 +60,7 @@ module.exports = (db) => {
         res.send({ userEmail });
       })
       .catch((err) => {
-        res.sendStatus(401);
-        console.log(err)
+        res.status(401);
       });
   });
 
