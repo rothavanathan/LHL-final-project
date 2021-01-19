@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Notes(props) {
-  const [note, setNote] = useState("");
   const projectId = props.projectId;
-  console.log("AM I AN ID", projectId)
+  const existingNote = props.existingNote;
+  const [note, setNote] = useState(existingNote);
 
   const handleNote = (event) => {
     setNote(event.target.value);
@@ -25,8 +25,7 @@ export default function Notes(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`in handleSubmit. event is `, event);
-    saveNote(); // Save games when form is submitted
+    saveNote();
   };
 
   return (
