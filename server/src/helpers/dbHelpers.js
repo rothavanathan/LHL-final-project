@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+
 const getUserByEmail = (email, db) => {
     const query = {
         text:
@@ -69,20 +70,15 @@ const getProjectsByCollection = (id, db) => {
 }
 
 const getSongByProject = (id, db) => {
-  const query = {
-      text:
-      `
-        SELECT *
-        FROM songs
-        WHERE project_id = $1;
-      `,
-      values: [id]
-  };
+  const query =
+      `SELECT projects.*, songs.*, stems.*
+      FROM projects
+      JOIN songs ON projects.id = songs.project_id
+      JOIN stems ON songs.id = stems.song_id
+      WHERE projects.id = ${id};`
 
   return db
       .query(query)
-      .then((result) => result.rows)
-      .catch((err) => err);
 };
 
 const getStemsBySong = (id, db) => {
