@@ -60,6 +60,7 @@ module.exports = (db) => {
       .then((data) => {
         console.log(`insert completed!`, data);
         const users = data.rows;
+        req.session.userId = users[0].id;
         res.json({ users });
       })
       .catch((err) => {
