@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import axios from "axios";
 import Nav from "./Nav";
 import Results from "./Results";
+import NewProject from "./NewProject"
 import { Redirect } from "react-router-dom";
 import { TextField } from '@material-ui/core';
 
@@ -18,7 +19,7 @@ export default function Search(props) {
       url: `https://itunes.apple.com/search?term=${term.toLowerCase()}&country=CA&media=music&entity=song`
     })
       .then(response => {
-        // console.log(response.data.results)
+        console.log(response.data.results)
         setResults(response.data.results)
       })
       .catch(err => console.log(err))
@@ -28,11 +29,13 @@ export default function Search(props) {
     setTerm(event.target.value)
   }
 
+  const songId = 1;
   return isLoggedIn ? (
     <div>
       <h1>I AM Search</h1>
       <TextField variant="filled" value={term} onChange={handleChange} color="primary"></TextField>
       {/* <p>{results}</p> */}
+      <NewProject songId={songId}/>
       <Results results={results}></Results>
       <Nav />
     </div>
