@@ -3,24 +3,36 @@ const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cookieSession = require("cookie-session");
 // const db = require("../db")
+
 // const dbHelpers = require('./helpers/dbHelpers')(db);
 
-const stemsRouter = require("./routes/stems");
+const projectRouter = require("./routes/project");
 const usersRouter = require("./routes/users");
+const contentRouter = require("./routes/content");
+
 // Will need all relevant routes setup here
 
 const app = express();
 
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+  })
+);
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 // const dbParams = require("../lib/db.js");
-const db = new Pool({    
+const db = new Pool({
   host: "localhost",
   port: 5432,
   user: "labber",
   password: "labber",
-  database: "stem"});
+  database: "stem",
+});
 db.connect();
 // const db = new Pool(dbParams);
 
@@ -40,8 +52,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/api/stems", stemsRouter(db));
+app.use("/api/project", projectRouter(db));
 app.use("/api/users", usersRouter(db));
+app.use("/api/content", contentRouter(db));
+
 // Other relevant api routes will come here
 
 module.exports = app;

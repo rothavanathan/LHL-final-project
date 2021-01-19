@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useState, useEffect} from "react";
+import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
+// import UserInfo from '../UserInfo';
 import axios from "axios";
 import "./App.css";
 
@@ -43,44 +44,45 @@ import Collection from "./components/Collection";
 
 export default function App() {
   const [tracks, setTracks] = useState([]);
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/stems`)
-      .then((res) => {
-        // console.log(`from get request`, res.data.stems)
-        setTracks(res.data.stems);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:8000/api/stems`)
+  //     .then((res) => {
+  //       // console.log(`from get request`, res.data.stems)
+  //       setTracks(res.data.stems);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   return (
     <Router>
       <div className="App">
         <Switch>
+          <Route path="/home">
+            <Home isLoggedIn={user} />
+          </Route>
+          <Route path="/gear">
+            <Gear isLoggedIn={user} setUser={setUser} />
+          </Route>
+          <Route path="/library">
+            <Library isLoggedIn={user} />
+          </Route>
+          <Route path="/collection">
+            <Collection isLoggedIn={user} />
+          </Route>
+          <Route path="/search">
+            <Search isLoggedIn={user} />
+          </Route>
+          <Route path="/project/:id">
+            <Project isLoggedIn={user}/>
+          </Route>
           <Route path="/register">
             <Register />
           </Route>
           <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/gear">
-            <Gear />
-          </Route>
-          <Route path="/library">
-            <Library />
-          </Route>
-          <Route path="/collection">
-            <Collection />
-          </Route>
-          <Route path="/search">
-            <Search />
-          </Route>
-          <Route path="/project">
-            <Project tracks={tracks} />
+            <Login isLoggedIn={user} setUser={setUser} />
           </Route>
           <Route path="/">
             <Entry />

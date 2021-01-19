@@ -1,3 +1,9 @@
+import { Redirect } from "react-router-dom";
 export default function Collection(props) {
-  return <h1>I AM Collection</h1>;
+  const { isLoggedIn, } = props;
+
+  return isLoggedIn ? (
+  <h1>I AM Collection</h1> ) : (
+  <Redirect to="/" />
+  );
 }

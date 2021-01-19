@@ -1,5 +1,3 @@
-const { getStems } = require('../helpers/dbHelpers')
-
 // We will use project routes instead of stems routes
 // Methods in helpers to be incorporated here too
 
@@ -8,11 +6,16 @@ const router = express.Router();
 
 module.exports = (db) => {
   /* GET all stems*/
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM stems;`)
+  router.get("/:id", (req, res) => {
+
+    db.query(`SELECT projects.*, songs.*, stems.*
+    FROM projects
+    JOIN songs ON projects.id = songs.project_id
+    JOIN stems ON songs.id = stems.song_id
+    WHERE projects.id = ${req.params.id};`)
       .then((data) => {
-        const stems = data.rows;
-        res.json({ stems });
+        const projects = data.rows;
+        res.json({ projects });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
