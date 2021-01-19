@@ -87,7 +87,7 @@ module.exports = (db) => {
   });
 
   router.get("/logout", (req, res) => {
-    req.session = null;
+    res.clearCookie('connect.sid')
     res.send(`logout route`);
   });
 
