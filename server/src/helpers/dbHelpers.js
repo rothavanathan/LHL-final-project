@@ -31,6 +31,22 @@ const getProjectsByUser = (id, db) => {
   return db.query(query);
 };
 
+const addNoteToProject = (notes, id, db) => {
+  const query = {
+    text: `
+      UPDATE projects
+      SET notes = $1
+      WHERE id = $2;
+      `,
+    values: [notes, id],
+  };
+
+  return db
+    .query(query)
+    .then((result) => result.rows)
+    .catch((err) => err);
+};
+
 const getProjectsByCollection = (id, db) => {
   const query = {
     text: `
@@ -84,14 +100,31 @@ const addUser = (first_name, email, hashedPassword, db) => {
   return db.query(query, [first_name, email, hashedPassword]);
 };
 
-const addProject = (notes, title, userId, collectionsId, db) => {
+const addProject = (title, user_id, db) => {
   const query = {
     text: `
-        INSERT INTO projects (notes, title, user_id, collections_id)
-        VALUES ($1, $2, $3, 4)
+        INSERT INTO projects (title, user_id)
+        VALUES ($1, $2)
         RETURNING *;
         `,
-    values: [notes, title, userId, collectionsId],
+    values: [title, user_id],
+  };
+
+  return db
+    .query(query)
+    .then((result) => result.rows[0])
+    .catch((err) => err);
+};
+
+// Add song to a project
+const addSongToProject = (title, user_id, db) => {
+  const query = {
+    text: `
+        INSERT INTO songs (title, user_id)
+        VALUES ($1, $2)
+        RETURNING *;
+        `,
+    values: [title, user_id],
   };
 
   return db
@@ -170,4 +203,5 @@ module.exports = {
   addCollection,
   addExistingProjectToCollection,
   login,
+  addNoteToProject
 };

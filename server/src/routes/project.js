@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getSongByProject } = require("../helpers/dbHelpers");
+const { getSongByProject, addNoteToProject, addProject } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
@@ -20,25 +20,29 @@ module.exports = (db) => {
 
     // ADD NOTE TO PROJECT BY ID
     router.put("/addnote", (req, res) => {
-      const query = `
-        UPDATE projects
-        SET notes = $1
-        WHERE id = $2;
-      `;
-
       const { notes, id } = req.body;
 
-      console.log(notes, id);
-
+      addNoteToProject(notes, id, db)
       return db
-        .query(query, [notes, id])
         .then((data) => {
           console.log(`insert completed!`, data);
-          // const users = data.rows;
-          // req.session.userId = users[0].id;
-          // res.json({ users });
-          console.log("DATA----", data)
-          console.log("ROWS-----", data.rows);
+        })
+        .catch((err) => {
+          console.log(`ruh roh`, err);
+          res.status(500).json({ error: err.message });
+        });
+    });
+
+    // ADD Project
+    router.put("/new", (req, res) => {
+      const { title } = req.body;
+      const id = req.session.userId;
+
+      addProject(title, id, db)
+      return db
+        .then((data) => {
+          console.log(`insert completed!`, data);
+          res.send({ id });
         })
         .catch((err) => {
           console.log(`ruh roh`, err);
