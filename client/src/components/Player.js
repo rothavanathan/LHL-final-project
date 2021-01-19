@@ -20,7 +20,7 @@ const Player = ({ tracks }) => {
   return (
     <div className="player">
       {tracks.map((track, i) => {
-        return <Waveform key={i} track={track} context={audioCtx} />
+        return track.url && <Waveform key={i} track={track} context={audioCtx} />
       })};
       <div id="transport">
 
