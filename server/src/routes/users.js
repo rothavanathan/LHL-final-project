@@ -17,7 +17,6 @@ module.exports = (db) => {
           res.sendStatus(404);
         } else {
           const user = userInfo.rows[0];
-          //  cookie must be set here
           req.session.userId = user.id;
           const userEmail = user.email;
           res.send({ userEmail });

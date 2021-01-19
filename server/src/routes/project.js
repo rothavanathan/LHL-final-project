@@ -4,7 +4,7 @@ const { getSongByProject } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
-  // Fetch Song Data for Project
+  // Fetch Song Data for Project View
   router.get("/:id", (req, res) => {
     const id = req.params.id;
 
@@ -17,6 +17,6 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  
+
   return router;
 };
