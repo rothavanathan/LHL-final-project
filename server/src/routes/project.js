@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getSongByProject, addNoteToProject } = require("../helpers/dbHelpers");
+const { getSongByProject, addNoteToProject, addProject } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
@@ -26,6 +26,23 @@ module.exports = (db) => {
       return db
         .then((data) => {
           console.log(`insert completed!`, data);
+        })
+        .catch((err) => {
+          console.log(`ruh roh`, err);
+          res.status(500).json({ error: err.message });
+        });
+    });
+
+    // ADD Project
+    router.put("/new", (req, res) => {
+      const { title } = req.body;
+      const id = req.session.userId;
+
+      addProject(title, id, db)
+      return db
+        .then((data) => {
+          console.log(`insert completed!`, data);
+          res.send({ id });
         })
         .catch((err) => {
           console.log(`ruh roh`, err);
