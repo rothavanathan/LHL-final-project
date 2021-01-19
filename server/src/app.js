@@ -4,9 +4,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cookieSession = require("cookie-session");
-// const db = require("../db")
-
-// const dbHelpers = require('./helpers/dbHelpers')(db);
+const dotenv = require('dotenv');
+dotenv.config()
 
 const projectRouter = require("./routes/project");
 const usersRouter = require("./routes/users");
@@ -25,24 +24,16 @@ app.use(
 
 // PG database client/connection setup
 const { Pool } = require("pg");
-// const dbParams = require("../lib/db.js");
+const dbParams = require("../lib/db.js");
+console.log(dbParams)
 const db = new Pool({
-  host: "localhost",
-  port: 5432,
-  user: "labber",
-  password: "labber",
-  database: "stem",
+  host: dbParams.host,
+  port: dbParams.port,
+  user: dbParams.user,
+  password: dbParams.password,
+  database: dbParams.database,
 });
 db.connect();
-// const db = new Pool(dbParams);
-
-// Prior issues with below env details, needs to be resolved
-
-// DB_HOST = localhost
-// DB_USER = labber
-// DB_PASS = labber
-// DB_NAME = stem
-// DB_PORT = 5432
 
 app.use(logger("dev"));
 app.use(cors());
