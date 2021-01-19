@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS songs CASCADE;
 CREATE TABLE songs(
     id SERIAL PRIMARY KEY NOT NULL,
-    project_id INTEGER REFERENCES projects(id),
     artist VARCHAR(255) NOT NULL,
     title VARCHAR(255) NOT NULL,
     album VARCHAR(255) NOT NULL,

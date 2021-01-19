@@ -67,7 +67,7 @@ const getProjectsByCollection = (id, db) => {
 const getSongByProject = (id, db) => {
   const query = `SELECT projects.*, songs.*, stems.*
       FROM projects
-      JOIN songs ON projects.id = songs.project_id
+      JOIN songs ON projects.song_id = songs.id
       JOIN stems ON songs.id = stems.song_id
       WHERE projects.id = ${id};`;
 
