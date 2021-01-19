@@ -82,7 +82,7 @@ export default function App() {
             <Register />
           </Route>
           <Route path="/login">
-            <Login setUser={setUser} />
+            <Login isLoggedIn={user} setUser={setUser} />
           </Route>
           <Route path="/">
             <Entry />
