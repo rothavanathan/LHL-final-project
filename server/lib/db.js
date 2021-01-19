@@ -1,6 +1,6 @@
 let dbParams = {};
-// DATABASE_URL id a comination of the the dbparams details
-//  Rither way of connecting is viable
+//  DATABASE_URL id a combination of the the dbparams details
+//  Either way of connecting is viable
 //  If deploying with heroku, they use db_url - can be taken apart to form db params object
 if (process.env.DATABASE_URL) {
   dbParams.connectionString = process.env.DATABASE_URL;
