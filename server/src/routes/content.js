@@ -27,6 +27,7 @@ const router = express.Router();
               const projects = result2.rows
               console.log(`result 1 was`, result1.rows)
               console.log(`result 2 was`, result2.rows)
+              console.log("USER ID----", req.session.userId)
               res.json( {collections, projects})
             })
         })
