@@ -3,6 +3,8 @@ import axios from "axios";
 
 export default function Notes(props) {
   const [note, setNote] = useState("");
+  const projectId = props.projectId;
+  console.log("AM I AN ID", projectId)
 
   const handleNote = (event) => {
     setNote(event.target.value);
@@ -10,10 +12,9 @@ export default function Notes(props) {
 
   const saveNote = () => {
     axios
-      .post("/api/users", {
-        // first_name: nameData,
-        // email: emailData,
-        // password: passwordData,
+      .put("http://localhost:8000/api/project", {
+        id: projectId,
+        notes: note
       })
       .then((res) => {
         setNote(res);
