@@ -25,7 +25,6 @@ app.use(
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("../lib/db.js");
-console.log(dbParams)
 const db = new Pool({
   host: dbParams.host,
   port: dbParams.port,
