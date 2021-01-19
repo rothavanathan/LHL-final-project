@@ -4,11 +4,15 @@ import axios from "axios";
 export default function Notes(props) {
   const projectId = props.projectId;
   const existingNote = props.existingNote;
-  const [note, setNote] = useState(existingNote);
+  const [note, setNote] = useState("");
 
   const handleNote = (event) => {
     setNote(event.target.value);
   };
+
+  useEffect(() => {
+    setNote(existingNote);
+  }, [existingNote]);
 
   const saveNote = () => {
     axios
@@ -17,8 +21,8 @@ export default function Notes(props) {
         notes: note
       })
       .then((res) => {
-        setNote(res);
-        console.log(`from put request`, res);
+        // setNote(res);
+        // console.log(`from put request`, res);
       })
       .catch((err) => console.log(err));
   };
