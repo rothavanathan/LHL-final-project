@@ -3,7 +3,7 @@ import axios from "axios";
 import Nav from "./Nav";
 import Results from "./Results";
 import { Redirect } from "react-router-dom";
-import { TextField } from '@material-ui/core';
+import { DialogTitle, TextField } from '@material-ui/core';
 
 
 
@@ -22,13 +22,27 @@ export default function Search(props) {
     })
       //gets our actual db data
       .then(data1 => {
-        axios.get(`api/content/${term.toLowerCase}`)
+        axios.get(`api/content/search/${term.toLowerCase()}`)
           .then(data2 => {
             // console.log(`data1 is: `, data1.data.results)
-            console.log(`data2 is: `, data1.data.results)
-
-            const response = { ...data1, ...data2 }
-            setResults(data1.data.results)
+            // console.log(`you hit the search content route. data2 is: `, data2.data)
+            const response = []
+            if (data2.data.length > 0) {
+              const data2formatted = data2.data.map(entry => {
+                return {
+                  trackId: entry.id,
+                  artistName: entry.artist,
+                  artworkUrl100: entry.url_album_artwork,
+                  trackName: entry.title,
+                  collectionName: entry.album,
+                  url_full_song_preview: entry.url_full_song_preview
+                }
+              })
+              response.push(...data2formatted)
+            }
+            response.push(...data1.data.results)
+            console.log(`response is `, response)
+            setResults(response)
           })
           .catch(err => console.log(err))
       })
