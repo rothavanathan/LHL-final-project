@@ -4,7 +4,7 @@ const getSongsBySearch = (search, db) => {
 
   const query =
     `SELECT * FROM songs
-    WHERE artist ILIKE $1||'%';`;
+    WHERE artist ILIKE $1;`;
   console.log(query)
   return db.query(query, [search]);
 }
