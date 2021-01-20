@@ -6,8 +6,8 @@ import Emitter from "../EventEmitter";
 export default function Waveform({
   track,
   context,
-  setSoloCounter,
-  soloCounter,
+  // setSoloCounter,
+  // soloCounter,
 }) {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
@@ -68,14 +68,14 @@ export default function Waveform({
       if (!wavesurfer.current.solo && !wavesurfer.current.getMute()) {
         wavesurfer.current.setMute(true);
       } else if (!wavesurfer.current.solo && wavesurfer.current.getMute()) {
-        console.log(`${track.name} is not soloed but is muted`);
+        // console.log(`${track.trackName} is not soloed but is muted`);
       } else if (wavesurfer.current.solo) {
         wavesurfer.current.setMute(false);
       }
     });
 
     Emitter.on("soloOFF", () => {
-      console.log(`somone turned a solo OFF.`);
+      // console.log(`somone turned a solo OFF.`);
       //currently checks if it's own solo is off but we need to check if EVERY solo is off
       wavesurfer.current.solo = false;
       setSolo(false);
