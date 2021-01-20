@@ -40,7 +40,7 @@ export default function App() {
           <Route path="/library">
             <Library isLoggedIn={user} />
           </Route>
-          <Route path="/collection">
+          <Route path="/collection/:id">
             <Collection isLoggedIn={user} />
           </Route>
           {/* <Route path="/song">
