@@ -23,6 +23,7 @@ export default function Home(props) {
   return isLoggedIn ? (
     <div>
       <Link to="/gear">Gear</Link>
+      <Link to="/song">Song</Link>
       <h1>I AM Home</h1>
       <section>
         <header>Recent Collections</header>
