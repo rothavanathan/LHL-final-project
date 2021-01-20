@@ -39,9 +39,7 @@ module.exports = (db) => {
 
     addProject(title, song_id, user_id, db)
       .then((data) => {
-        // console.log(`insert completed!`, data);
         const projectId = data.rows[0].id
-        console.log("ID------------------", projectId)
         res.send({ projectId });
       })
       .catch((err) => {

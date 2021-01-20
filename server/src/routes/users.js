@@ -18,8 +18,9 @@ module.exports = (db) => {
         } else {
           const user = userInfo.rows[0];
           req.session.userId = user.id;
+          const userId = user.id;
           const userEmail = user.email;
-          res.send({ userEmail });
+          res.send({ userId });
         }
       })
       .catch((err) => {
@@ -39,8 +40,9 @@ module.exports = (db) => {
           const user = userInfo[0];
           console.log(user)
           req.session.userId = user.id;
+          const userId = user.id;
           const userEmail = user.email;
-          res.send({ userEmail });
+          res.send({ userId });
         }
       })
       .catch((err) => {
