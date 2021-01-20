@@ -1,5 +1,14 @@
 const bcrypt = require("bcrypt");
 
+const getSongsBySearch = (search, db) => {
+
+  const query =
+    `SELECT * FROM songs
+    WHERE artist ILIKE $1||'%';`;
+  console.log(query)
+  return db.query(query, [search]);
+}
+
 const getUserByEmail = (email, db) => {
   const query = {
     text: `
@@ -192,6 +201,7 @@ module.exports = {
   getProjectsByCollection,
   getSongByProject,
   getStemsBySong,
+  getSongsBySearch,
   addUser,
   addProject,
   addCollection,
