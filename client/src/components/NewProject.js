@@ -3,19 +3,20 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function NewProjectForm(props) {
-  const { songId } = props;
+  const { songId, user } = props;
   // const { setUser, isLoggedIn } = props;
   const [projectTitle, setProjectTitle] = useState("");
-  // const [passwordData, setPasswordData] = useState("");
+  const [projectId, setProjectId] = useState("");
 
   const saveProject = () => {
     axios
       .put("http://localhost:8000/api/project/new", {
         title: projectTitle,
-        song_id: songId
+        song_id: songId,
+        user_id: user
       })
       .then((res) => {
-        console.log("IN NEW PROJECT", res);
+        setProjectId(res.data.projectId);
       })
       .catch((err) => console.log(err));
   };
