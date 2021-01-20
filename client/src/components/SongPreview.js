@@ -84,7 +84,7 @@ export default function SongPreview(props) {
         </div>
         <button class="btn-btn danger" onClick={handleClick}>Cancel</button>
 
-        <NewProject songId={trackId} user={props.isLoggedIn} />
+        <NewProject songId={trackId} user={props.user} />
 
       </Card >
     </Grid >
