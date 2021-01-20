@@ -109,11 +109,11 @@ const addUser = (first_name, email, hashedPassword, db) => {
 const addProject = (title, song_id, user_id, db) => {
   const query = {
     text: `
-        INSERT INTO projects (title, song_id, user_id)
-        VALUES ($1, $2, $3)
+        INSERT INTO projects (title, song_id, user_id, notes)
+        VALUES ($1, $2, $3, $4)
         RETURNING *;
         `,
-    values: [title, song_id, user_id],
+    values: [title, song_id, user_id, ""],
   };
 
   return db.query(query)
