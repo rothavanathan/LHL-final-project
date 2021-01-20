@@ -26,14 +26,13 @@ export default function NewProjectForm(props) {
     saveProject();
   };
 
-  const handleProject= (event) => {
+  const handleProject = (event) => {
     setProjectTitle(event.target.value);
   };
 
   return (
     <div>
-      <Link to="/home">Home</Link>
-      <h1>I AM NEW PROJECT</h1>
+      <p>Add New Project?</p>
       <form onSubmit={handleSubmit}>
         <input
           value={projectTitle}
