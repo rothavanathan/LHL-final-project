@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
+    flexGrow: 1
   },
   cardContent: {
     flexGrow: 1,
@@ -22,28 +23,34 @@ export default function Album(props) {
   // const albumInfoClass = classnames("album__info", {
   //   "album__info--explicit": props.collectionExplicitness === "explicit"
   // });
+  const { setSong, songData } = props;
+
+  const handleClick = () => {
+    console.log("SONG---------", songData)
+    setSong(songData)
+  }
 
   const classes = useStyles();
   return (
-    <Grid item key={props.key} xs={12} sm={6} md={4}>
-    <Card className={`${classes.card} card`}>
-      <CardMedia
-        className={classes.cardMedia}
-        image={props.artworkUrl100}
-        title={props.trackName}
-      />
-      <CardContent className={classes.cardContent}>
-        <Typography gutterBottom variant="h5" component="h2">
-        {props.trackName}
-        </Typography>
-        <Typography>
-          {props.artistName}
-        </Typography>
-        <Typography>
-          {props.collectionName}
-        </Typography>
-      </CardContent>
-    </Card>
-  </Grid>
+    <Grid item key={props.key} xs={6} sm={6} md={4}>
+      <Card className={`${classes.card} card`} onClick={handleClick}>
+        <CardMedia
+          className={classes.cardMedia}
+          image={props.artworkUrl100}
+          title={props.trackName}
+        />
+        <CardContent className={classes.cardContent}>
+          <Typography gutterBottom variant="h5" component="h2">
+            {props.trackName}
+          </Typography>
+          <Typography>
+            {props.artistName}
+          </Typography>
+          <Typography>
+            {props.collectionName}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grid>
   )
 }
