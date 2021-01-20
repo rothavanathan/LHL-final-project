@@ -9,6 +9,7 @@ dotenv.config()
 const projectRouter = require("./routes/project");
 const usersRouter = require("./routes/users");
 const contentRouter = require("./routes/content");
+const collectionRouter = require("./routes/collection");
 const app = express();
 
 app.use(
@@ -42,5 +43,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/project", projectRouter(db));
 app.use("/api/users", usersRouter(db));
 app.use("/api/content", contentRouter(db));
+app.use("/api/collection", collectionRouter(db));
 
 module.exports = app;

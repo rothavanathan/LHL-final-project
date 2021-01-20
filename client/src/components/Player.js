@@ -16,6 +16,7 @@ const Player = ({ tracks }) => {
   };
 
 
+  console.log("TRACKS-------", tracks)
 
   return (
     <div className="player">

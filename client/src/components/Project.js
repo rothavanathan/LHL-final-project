@@ -18,9 +18,11 @@ export default function Project(props) {
       .catch(err => console.log(err))
   }, [])
 
+  console.log("CONTENT----------", content);
+
   const stems = content.map((project) => {
-    const { title, url, icon, peaks_array } = project
-    return { title, url, icon, peaks_array }
+    const { title, url, icon, peaks_array, name } = project
+    return { title, url, icon, peaks_array, name }
   })
 
   console.log("I AM CONTENT ZERO DO I HAVE A NOTE", content[0].notes);
