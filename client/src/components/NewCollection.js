@@ -15,11 +15,13 @@ export default function NewCollectionForm(props) {
         user_id: user
       })
       .then((res) => {
+        console.log("DATA----------", res.data);
+
+        console.log("COLECTION----------", res.data.collectionId);
         setCollectionId(res.data.collectionId);
       })
       .catch((err) => console.log(err));
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     saveCollection();
