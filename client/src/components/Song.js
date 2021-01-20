@@ -26,7 +26,6 @@ export default function Album(props) {
   const { setSong, songData } = props;
 
   const handleClick = () => {
-    console.log("SONG---------", songData)
     setSong(songData)
   }
 
