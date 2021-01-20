@@ -17,6 +17,7 @@ export default function Gear(props) {
       .then((res) => {
         console.log(`user is logged out. check cookies to confirm!`);
         setUser(null);
+        localStorage.clear()
       })
       .catch((err) => console.log(err));
   };
