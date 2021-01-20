@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function NewCollectionForm(props) {
-  const { user } = props;
+  const { user, setCollections, closeForm } = props;
   // const { setUser, isLoggedIn } = props;
   const [collectionName, setCollectionName] = useState("");
   const [collectionId, setCollectionId] = useState("");
@@ -18,7 +18,10 @@ export default function NewCollectionForm(props) {
         console.log("DATA----------", res.data);
 
         console.log("COLECTION----------", res.data.collectionId);
-        setCollectionId(res.data.collectionId);
+        setCollections(prev => {
+          return [...prev, res.data.data]
+        })
+        closeForm(false)
       })
       .catch((err) => console.log(err));
   };
