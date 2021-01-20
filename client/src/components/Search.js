@@ -2,7 +2,8 @@ import React, { Fragment, useState, useEffect } from "react";
 import axios from "axios";
 import Nav from "./Nav";
 import Results from "./Results";
-import NewProject from "./NewProject"
+import NewProject from "./NewProject";
+import SongPreview from "./SongPreview";
 import { Redirect } from "react-router-dom";
 import { DialogTitle, TextField } from '@material-ui/core';
 
@@ -25,8 +26,8 @@ export default function Search(props) {
       .then(data1 => {
         axios.get(`api/content/search/${term.toLowerCase()}`)
           .then(data2 => {
-            // console.log(`data1 is: `, data1.data.results)
-            // console.log(`you hit the search content route. data2 is: `, data2.data)
+            console.log(`data1 is: `, data1.data.results)
+            console.log(`you hit the search content route. data2 is: `, data2.data)
             const response = []
             if (data2.data.length > 0) {
               const data2formatted = data2.data.map(entry => {
@@ -53,6 +54,9 @@ export default function Search(props) {
     setTerm(event.target.value)
   }
 
+  // const { trackName, url_full_song_preview, artistName, artworkUrl100 } = results[0];
+  // console.log("RESULTSSSSS: ", results)
+
   const songId = 1;
   return isLoggedIn ? (
     <div>
@@ -61,6 +65,8 @@ export default function Search(props) {
       {/* <p>{results}</p> */}
       <NewProject songId={songId} user={isLoggedIn}/>
       <Results results={results}></Results>
+      {/* const { thumbnail, title, previewTrack, artist } = props; */}
+      { results.length > 0 && (<SongPreview results = {results[0]}/>) }
       <Nav />
     </div>
   ) : (
