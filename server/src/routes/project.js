@@ -36,10 +36,12 @@ module.exports = (db) => {
   // title, song_id, user_id
   router.put("/new", (req, res) => {
     const { title, song_id, user_id } = req.body;
-
+    console.log(`req.body in new project route is `, req.body)
     addProject(title, song_id, user_id, db)
       .then((data) => {
+        console.log(`return from new project route is:`, data.rows)
         const projectId = data.rows[0].id
+
         res.send({ projectId });
       })
       .catch((err) => {

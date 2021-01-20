@@ -20,6 +20,7 @@ export default function Search(props) {
   const { isLoggedIn } = props;
   const [term, setTerm] = useState("");
   const [results, setResults] = useState([]);
+  const [isSongSelected, setIsSongSelected] = useState({})
 
 
   //SEARCH QUERY
@@ -33,8 +34,8 @@ export default function Search(props) {
       .then(data1 => {
         axios.get(`api/content/search/${term.toLowerCase()}`)
           .then(data2 => {
-            console.log(`data1 is: `, data1.data.results)
-            console.log(`you hit the search content route. data2 is: `, data2.data)
+            // console.log(`data1 is: `, data1.data.results)
+            // console.log(`you hit the search content route. data2 is: `, data2.data)
             const response = []
             if (data2.data.length > 0) {
               const data2formatted = data2.data.map(entry => {
@@ -44,13 +45,13 @@ export default function Search(props) {
                   artworkUrl100: entry.url_album_artwork,
                   trackName: entry.title,
                   collectionName: entry.album,
-                  url_full_song_preview: entry.url_full_song_preview
+                  previewUrl: entry.url_full_song_preview
                 }
               })
               response.push(...data2formatted)
             }
             response.push(...data1.data.results)
-            console.log(`response is `, response)
+            // console.log(`response is `, response)
             setResults(response)
           })
           .catch(err => console.log(err))
@@ -61,28 +62,34 @@ export default function Search(props) {
     setTerm(event.target.value)
   }
 
+  // console.log("RESULTS------------", results)
+
   // const { trackName, url_full_song_preview, artistName, artworkUrl100 } = results[0];
   // console.log("RESULTSSSSS: ", results)
 
   const songId = 1;
   const classes = useStyles();
-  return isLoggedIn ? (
+  return !isSongSelected.trackName ? (
     <div>
       <h1>I AM Search</h1>
       <TextField variant="filled" value={term} onChange={handleChange} color="primary"></TextField>
       {/* <p>{results}</p> */}
-      <NewProject songId={songId} user={isLoggedIn}/>
-      <NewCollection songId={songId} user={isLoggedIn}/>
+      {/* <NewProject songId={songId} user={isLoggedIn} /> */}
+      <NewCollection songId={songId} user={isLoggedIn} />
       <Container className={classes.cardGrid} maxWidth="md" id="projects">
         <Grid container spacing={4}>
-          <Results results={results}></Results>
+          <Results results={results} setSong={setIsSongSelected}></Results>
         </Grid>
       </Container>
       {/* const { thumbnail, title, previewTrack, artist } = props; */}
-      { results.length > 0 && (<SongPreview results = {results[0]}/>) }
+
       <Nav />
-    </div>
+    </div >
   ) : (
-      <Redirect to="/" />
-    );
+      <div>
+        <SongPreview results={isSongSelected} setSong={setIsSongSelected} user={isLoggedIn} />
+        <Nav />
+      </div>
+
+    )
 }

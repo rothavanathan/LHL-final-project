@@ -12,21 +12,22 @@ export default function NewCollectionForm(props) {
     axios
       .put("http://localhost:8000/api/collection/new", {
         name: collectionName,
-        thumbnail: "",
         user_id: user
       })
       .then((res) => {
+        console.log("DATA----------", res.data);
+
+        console.log("COLECTION----------", res.data.collectionId);
         setCollectionId(res.data.collectionId);
       })
       .catch((err) => console.log(err));
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     saveCollection();
   };
 
-  const handleCollection= (event) => {
+  const handleCollection = (event) => {
     setCollectionName(event.target.value);
   };
 

@@ -10,14 +10,12 @@ export default function Home(props) {
   const [projects, setProjects] = useState([])
 
   useEffect(() => {
-    if (isLoggedIn) {
-      axios
+    axios
       .get('/api/content')
       .then(data => {
         setCollections(data.data.collections);
         setProjects(data.data.projects);
       })
-    }
   }, []);
 
   return isLoggedIn ? (
@@ -48,6 +46,6 @@ export default function Home(props) {
       <Nav />
     </div>
   ) : (
-    <Redirect to="/" />
-  );
+      <Redirect to="/" />
+    );
 }

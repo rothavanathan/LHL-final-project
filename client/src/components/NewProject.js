@@ -13,9 +13,11 @@ export default function NewProjectForm(props) {
       .put("http://localhost:8000/api/project/new", {
         title: projectTitle,
         song_id: songId,
-        user_id: user
+        user_id: user,
+        notes: ""
       })
       .then((res) => {
+        console.log("PROJECT----------", res.data.projectId);
         setProjectId(res.data.projectId);
       })
       .catch((err) => console.log(err));
@@ -26,14 +28,13 @@ export default function NewProjectForm(props) {
     saveProject();
   };
 
-  const handleProject= (event) => {
+  const handleProject = (event) => {
     setProjectTitle(event.target.value);
   };
 
   return (
     <div>
-      <Link to="/home">Home</Link>
-      <h1>I AM NEW PROJECT</h1>
+      <p>Add New Project?</p>
       <form onSubmit={handleSubmit}>
         <input
           value={projectTitle}
@@ -44,6 +45,7 @@ export default function NewProjectForm(props) {
         ></input>
         <button type="submit">Save</button>
       </form>
+      {projectId && <Redirect to={`/project/${projectId}`} />}
     </div>
   )
 }

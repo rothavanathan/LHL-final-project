@@ -4,16 +4,21 @@ import SongPreview from "./SongPreview"
 import Song from "./Song";
 
 export default function Results(props) {
-  const { results } = props;
+  const { results, setSong } = props;
+
+
 
   return results.map(song => {
     return (
       <Fragment>
         <Song
-          key={song.trackId} {...song}
+          setSong={setSong}
+          key={song.trackId}
+          {...song}
+          songData={song}
           width={1 / 4} />
-        {/* <SongPreview /> */}
-      </Fragment>
+
+      </ Fragment>
     );
   });
 }
