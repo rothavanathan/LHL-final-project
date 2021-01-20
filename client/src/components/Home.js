@@ -21,12 +21,10 @@ export default function Home(props) {
   return isLoggedIn ? (
     <div>
       <Link to="/gear">Gear</Link>
-      <Link to="/song">Song</Link>
-      <h1>I AM Home</h1>
+      <h1>Home</h1>
       <section>
         <header>Recent Collections</header>
         <ul>
-          <li>+ Collections</li>
           {collections.map((collection, i) =>
             <li key={i}>
               <Link to={`/collection/${collection.id}`}>{collection.name}</Link>
@@ -37,7 +35,6 @@ export default function Home(props) {
       <section>
         <header>Recent Projects</header>
         <ul>
-          <li>+ Project</li>
           {projects.map((project, i) =>
             <li key={i}>
               <Link to={`/project/${project.id}`}>{project.title}</Link>

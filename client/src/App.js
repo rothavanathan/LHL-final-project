@@ -43,9 +43,6 @@ export default function App() {
           <Route path="/collection/:id">
             <Collection isLoggedIn={user} />
           </Route>
-          {/* <Route path="/song">
-            <SongPreview isLoggedIn={user} />
-          </Route> */}
           <Route path="/search">
             <Search isLoggedIn={user} />
           </Route>
