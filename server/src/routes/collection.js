@@ -1,9 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const { addCollection } = require("../helpers/dbHelpers");
+const { addCollection, getProjectsByCollection } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
+  // grab projects associated with this collection
+  router.get("/:id", (req, res) => {
+    const id = req.params.id;
+
+    getProjectsByCollection(id, db)
+      .then((data) => {
+        console.log(`projects from collection id ${id} are`, data)
+        const projects = data
+        res.json({ projects });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
   // ADD Collection
   // name, thumbnail, userId
   router.put("/new", (req, res) => {
@@ -18,7 +32,7 @@ module.exports = (db) => {
         const collectionId = data.id
         const thumbnail = data.thumbnail
 
-        res.send({ collectionId, thumbnail });
+        res.send({ data });
       })
       .catch((err) => {
         console.log(`ruh roh`, err);

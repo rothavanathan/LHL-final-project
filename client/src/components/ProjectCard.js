@@ -23,10 +23,10 @@ export default function Album(props) {
   // const albumInfoClass = classnames("album__info", {
   //   "album__info--explicit": props.collectionExplicitness === "explicit"
   // });
-  const { setSong, songData } = props;
+
 
   const handleClick = () => {
-    setSong(songData)
+
   }
 
   const classes = useStyles();
