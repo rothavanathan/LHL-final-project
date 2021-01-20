@@ -38,6 +38,7 @@ export default function Album(props) {
           className={classes.cardMedia}
           image={props.artworkUrl100}
           title={props.trackName}
+          style={useStyles.media}
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
