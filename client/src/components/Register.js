@@ -27,8 +27,7 @@ export default function Register(props) {
         password: passwordData,
       })
       .then((res) => {
-        setUser(res);
-        console.log(`from put request`, res);
+        setUser(res.data.userId);
       })
       .catch((err) => console.log(err));
   };
