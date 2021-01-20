@@ -33,7 +33,7 @@ export default function Project(props) {
       <h1>{content[0].title}</h1>
       <h2>{content[0].artist}</h2>
       <Player tracks={stems}></Player>
-      {content[0] && <Notes projectId={content[0].id} existingNote={content[0].notes} />}
+      {content[0] && <Notes projectId={id} existingNote={content[0].notes} />}
       <ProjectNav />
     </div>
   ) : (

@@ -13,9 +13,11 @@ export default function NewProjectForm(props) {
       .put("http://localhost:8000/api/project/new", {
         title: projectTitle,
         song_id: songId,
-        user_id: user
+        user_id: user,
+        notes: ""
       })
       .then((res) => {
+        console.log("PROJECT----------", res.data.projectId);
         setProjectId(res.data.projectId);
       })
       .catch((err) => console.log(err));
@@ -43,6 +45,7 @@ export default function NewProjectForm(props) {
         ></input>
         <button type="submit">Save</button>
       </form>
+      {projectId && <Redirect to={`/project/${projectId}`} />}
     </div>
   )
 }
