@@ -31,11 +31,11 @@ export default function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/home">
-            <Home isLoggedIn={user} />
-          </Route>
           <Route path="/gear">
             <Gear isLoggedIn={user} setUser={setUser} />
+          </Route>
+          <Route path="/home">
+            <Home isLoggedIn={user} />
           </Route>
           <Route path="/library">
             <Library isLoggedIn={user} />

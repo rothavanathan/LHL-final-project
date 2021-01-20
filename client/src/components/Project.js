@@ -8,15 +8,22 @@ import Notes from "./Notes"
 
 export default function Project(props) {
   const [content, setContent] = useState([{ title: "", artist: "", url: "" }])
+  const [collections, setCollections] = useState([{ name: "", user_id: "", thumbnail: "" }])
+
   const { isLoggedIn } = props;
   const { id } = useParams()
 
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/project/${id}`)
-      .then(data => setContent(data.data.projects))
-      .catch(err => console.log(err))
+      .then(() => {
+        axios.get('/api/content')
+          .then(data => setContent(data.data.projects))
+          .catch(err => console.log(err))
+      })
   }, [])
+
+
 
   console.log("CONTENT----------", content);
 

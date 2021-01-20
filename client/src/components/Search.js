@@ -71,11 +71,11 @@ export default function Search(props) {
   const classes = useStyles();
   return !isSongSelected.trackName ? (
     <div>
-      <h1>I AM Search</h1>
+      <h1>Search</h1>
       <TextField variant="filled" value={term} onChange={handleChange} color="primary"></TextField>
       {/* <p>{results}</p> */}
       {/* <NewProject songId={songId} user={isLoggedIn} /> */}
-      <NewCollection songId={songId} user={isLoggedIn} />
+      {/* <NewCollection songId={songId} user={isLoggedIn} /> */}
       <Container className={classes.cardGrid} maxWidth="md" id="projects">
         <Grid container spacing={4}>
           <Results results={results} setSong={setIsSongSelected}></Results>
