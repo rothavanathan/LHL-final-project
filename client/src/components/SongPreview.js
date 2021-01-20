@@ -1,17 +1,12 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
+import {CardContent, CardMedia, IconButton, Typography, Grid } from '@material-ui/core';
+import { SkipPrevious, PlayArrow, SkipNext }from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   details: {
     display: 'flex',
@@ -46,33 +41,35 @@ export default function SongPreview(props) {
   }
 
   return (
-    <Card className={classes.root}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            {trackName}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {artistName}
-          </Typography>
-        </CardContent>
-        <div className={classes.controls}>
-          <IconButton aria-label="previous">
-            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-          </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon className={classes.playIcon} onClick={handlePreview}/>
-          </IconButton>
-          <IconButton aria-label="next">
-            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-          </IconButton>
+    <Grid item key={props.id} xs={12}>
+      <Card className={classes.root}>
+        <div className={classes.details}>
+          <CardContent className={classes.content}>
+            <Typography component="h5" variant="h5">
+              {trackName}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              {artistName}
+            </Typography>
+          </CardContent>
+          <div className={classes.controls}>
+            <IconButton aria-label="previous">
+              {theme.direction === 'rtl' ? <SkipNext /> : <SkipPrevious />}
+            </IconButton>
+            <IconButton aria-label="play/pause">
+              <PlayArrow className={classes.playIcon} onClick={handlePreview}/>
+            </IconButton>
+            <IconButton aria-label="next">
+              {theme.direction === 'rtl' ? <SkipPrevious /> : <SkipNext />}
+            </IconButton>
+          </div>
         </div>
-      </div>
-      <CardMedia
-        className={classes.cover}
-        image={artworkUrl100}
-        title={trackName}
-      />
-    </Card>
+        <CardMedia
+          className={classes.cover}
+          image={artworkUrl100}
+          title={trackName}
+        />
+      </Card>
+    </Grid>
   );
 }

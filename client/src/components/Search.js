@@ -5,9 +5,15 @@ import Results from "./Results";
 import NewProject from "./NewProject";
 import SongPreview from "./SongPreview";
 import { Redirect } from "react-router-dom";
-import { DialogTitle, TextField } from '@material-ui/core';
+import { DialogTitle, TextField, Grid, Container } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-
+const useStyles = makeStyles((theme) => ({
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  }
+}));
 
 export default function Search(props) {
   const { isLoggedIn } = props;
@@ -58,13 +64,18 @@ export default function Search(props) {
   // console.log("RESULTSSSSS: ", results)
 
   const songId = 1;
+  const classes = useStyles();
   return isLoggedIn ? (
     <div>
       <h1>I AM Search</h1>
       <TextField variant="filled" value={term} onChange={handleChange} color="primary"></TextField>
       {/* <p>{results}</p> */}
       <NewProject songId={songId} user={isLoggedIn}/>
-      <Results results={results}></Results>
+      <Container className={classes.cardGrid} maxWidth="md" id="projects">
+        <Grid container spacing={4}>
+          <Results results={results}></Results>
+        </Grid>
+      </Container>
       {/* const { thumbnail, title, previewTrack, artist } = props; */}
       { results.length > 0 && (<SongPreview results = {results[0]}/>) }
       <Nav />
