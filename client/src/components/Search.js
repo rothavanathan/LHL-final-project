@@ -62,17 +62,19 @@ export default function Search(props) {
     setTerm(event.target.value)
   }
 
+  // console.log("RESULTS------------", results)
+
   // const { trackName, url_full_song_preview, artistName, artworkUrl100 } = results[0];
   // console.log("RESULTSSSSS: ", results)
 
   const songId = 1;
   const classes = useStyles();
-  return isLoggedIn ? (
+  return !isSongSelected.trackName ? (
     <div>
       <h1>I AM Search</h1>
       <TextField variant="filled" value={term} onChange={handleChange} color="primary"></TextField>
       {/* <p>{results}</p> */}
-      <NewProject songId={songId} user={isLoggedIn} />
+      {/* <NewProject songId={songId} user={isLoggedIn} /> */}
       <NewCollection songId={songId} user={isLoggedIn} />
       <Container className={classes.cardGrid} maxWidth="md" id="projects">
         <Grid container spacing={4}>
@@ -80,10 +82,14 @@ export default function Search(props) {
         </Grid>
       </Container>
       {/* const { thumbnail, title, previewTrack, artist } = props; */}
-      { isSongSelected.trackName && (<SongPreview results={isSongSelected} setSong={setIsSongSelected} />)}
+
       <Nav />
     </div >
   ) : (
-      <Redirect to="/" />
-    );
+      <div>
+        <SongPreview results={isSongSelected} setSong={setIsSongSelected} user={isLoggedIn} />
+        <Nav />
+      </div>
+
+    )
 }
