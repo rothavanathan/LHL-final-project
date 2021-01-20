@@ -6,7 +6,6 @@ export default function Results(props) {
   const { results } = props;
 
   return results.map(song => {
-    console.log(song)
     return (
       <Fragment>
         <Song

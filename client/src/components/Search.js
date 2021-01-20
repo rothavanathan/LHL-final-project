@@ -3,7 +3,7 @@ import axios from "axios";
 import Nav from "./Nav";
 import Results from "./Results";
 import { Redirect } from "react-router-dom";
-import { TextField } from '@material-ui/core';
+import { DialogTitle, TextField } from '@material-ui/core';
 
 
 
@@ -12,16 +12,40 @@ export default function Search(props) {
   const [term, setTerm] = useState("");
   const [results, setResults] = useState([]);
 
+
+  //SEARCH QUERY
   useEffect(() => {
     axios({
+      //gets fill data from itunes
       method: 'get',
       url: `https://itunes.apple.com/search?term=${term.toLowerCase()}&country=CA&media=music&entity=song`
     })
-      .then(response => {
-        // console.log(response.data.results)
-        setResults(response.data.results)
+      //gets our actual db data
+      .then(data1 => {
+        axios.get(`api/content/search/${term.toLowerCase()}`)
+          .then(data2 => {
+            // console.log(`data1 is: `, data1.data.results)
+            // console.log(`you hit the search content route. data2 is: `, data2.data)
+            const response = []
+            if (data2.data.length > 0) {
+              const data2formatted = data2.data.map(entry => {
+                return {
+                  trackId: entry.id,
+                  artistName: entry.artist,
+                  artworkUrl100: entry.url_album_artwork,
+                  trackName: entry.title,
+                  collectionName: entry.album,
+                  url_full_song_preview: entry.url_full_song_preview
+                }
+              })
+              response.push(...data2formatted)
+            }
+            response.push(...data1.data.results)
+            console.log(`response is `, response)
+            setResults(response)
+          })
+          .catch(err => console.log(err))
       })
-      .catch(err => console.log(err))
   }, [term])
 
   const handleChange = (event) => {
