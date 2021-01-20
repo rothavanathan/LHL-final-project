@@ -56,10 +56,11 @@ const addNoteToProject = (notes, id, db) => {
 const getProjectsByCollection = (id, db) => {
   const query = {
     text: `
-        SELECT *
+        SELECT projects.*, songs.*
         FROM projects
-        JOIN users on projects.user_id = users.id
-        WHERE users.id = $1;
+        JOIN songs on projects.song_id = songs.id
+        JOIN collections on projects.collection_id = collections.id
+        WHERE collections.id = $1;
       `,
     values: [id],
   };
