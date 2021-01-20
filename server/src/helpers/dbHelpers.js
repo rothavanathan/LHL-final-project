@@ -50,10 +50,7 @@ const addNoteToProject = (notes, id, db) => {
     values: [notes, id],
   };
 
-  return db
-    .query(query)
-    .then((result) => result.rows)
-    .catch((err) => err);
+  return db.query(query)
 };
 
 const getProjectsByCollection = (id, db) => {
@@ -76,7 +73,7 @@ const getProjectsByCollection = (id, db) => {
 const getSongByProject = (id, db) => {
   const query = `SELECT projects.*, songs.*, stems.*
       FROM projects
-      JOIN songs ON projects.id = songs.project_id
+      JOIN songs ON projects.song_id = songs.id
       JOIN stems ON songs.id = stems.song_id
       WHERE projects.id = ${id};`;
 
@@ -109,20 +106,17 @@ const addUser = (first_name, email, hashedPassword, db) => {
   return db.query(query, [first_name, email, hashedPassword]);
 };
 
-const addProject = (title, user_id, db) => {
+const addProject = (title, song_id, user_id, db) => {
   const query = {
     text: `
-        INSERT INTO projects (title, user_id)
-        VALUES ($1, $2)
+        INSERT INTO projects (title, song_id, user_id)
+        VALUES ($1, $2, $3)
         RETURNING *;
         `,
-    values: [title, user_id],
+    values: [title, song_id, user_id],
   };
 
-  return db
-    .query(query)
-    .then((result) => result.rows[0])
-    .catch((err) => err);
+  return db.query(query)
 };
 
 // Add song to a project

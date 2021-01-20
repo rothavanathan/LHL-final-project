@@ -18,37 +18,35 @@ module.exports = (db) => {
       });
   });
 
-    // ADD NOTE TO PROJECT BY ID
-    router.put("/addnote", (req, res) => {
-      const { notes, id } = req.body;
+  // ADD NOTE TO PROJECT BY ID
+  router.put("/addnote", (req, res) => {
+    const { notes, id } = req.body;
 
-      addNoteToProject(notes, id, db)
-      return db
-        .then((data) => {
-          console.log(`insert completed!`, data);
-        })
-        .catch((err) => {
-          console.log(`ruh roh`, err);
-          res.status(500).json({ error: err.message });
-        });
-    });
+    addNoteToProject(notes, id, db)
+      .then((data) => {
+        console.log(`insert completed!`, data);
+      })
+      .catch((err) => {
+        console.log(`ruh roh`, err);
+        res.status(500).json({ error: err.message });
+      });
+  });
 
-    // ADD Project
-    router.put("/new", (req, res) => {
-      const { title } = req.body;
-      const id = req.session.userId;
+  // ADD Project
+  // title, song_id, user_id
+  router.put("/new", (req, res) => {
+    const { title, song_id, user_id } = req.body;
 
-      addProject(title, id, db)
-      return db
-        .then((data) => {
-          console.log(`insert completed!`, data);
-          res.send({ id });
-        })
-        .catch((err) => {
-          console.log(`ruh roh`, err);
-          res.status(500).json({ error: err.message });
-        });
-    });
+    addProject(title, song_id, user_id, db)
+      .then((data) => {
+        const projectId = data.rows[0].id
+        res.send({ projectId });
+      })
+      .catch((err) => {
+        console.log(`ruh roh`, err);
+        res.status(500).json({ error: err.message });
+      });
+  });
 
   return router;
 
