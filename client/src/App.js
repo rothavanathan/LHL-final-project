@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 // import UserInfo from '../UserInfo';
 import axios from "axios";
@@ -22,7 +22,7 @@ export default function App() {
     const localUser = localStorage.getItem("user") || null
     setUser(localUser)
   }, [])
-// instead of local, have use effect thatt uses on mount to send axios req to backend
+  // instead of local, have use effect thatt uses on mount to send axios req to backend
   useEffect(() => {
     localStorage.setItem("user", user)
   }, [user])
@@ -50,10 +50,13 @@ export default function App() {
             <Search isLoggedIn={user} />
           </Route>
           <Route path="/project/:id">
-            <Project isLoggedIn={user}/>
+            <Project isLoggedIn={user} />
           </Route>
           <Route path="/login">
             <Login isLoggedIn={user} setUser={setUser} />
+          </Route>
+          <Route path="/register">
+            <Register isLoggedIn={user} setUser={setUser} />
           </Route>
           <Route path="/">
             <Entry />
