@@ -12,7 +12,7 @@ export default function Results(props) {
         <Song
           key={song.trackId} {...song}
           width={1 / 4} />
-        <SongPreview />
+        {/* <SongPreview /> */}
       </Fragment>
     );
   });

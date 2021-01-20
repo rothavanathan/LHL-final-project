@@ -36,18 +36,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SongPreview(props) {
+  const { trackName, url_full_song_preview, artistName, artworkUrl100 } = props.results;
   const classes = useStyles();
   const theme = useTheme();
+
+  const handlePreview = () => {
+    //do some stuff
+    console.log(url_full_song_preview);
+  }
 
   return (
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            Live From Space
+            {trackName}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
+            {artistName}
           </Typography>
         </CardContent>
         <div className={classes.controls}>
@@ -55,7 +61,7 @@ export default function SongPreview(props) {
             {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
           <IconButton aria-label="play/pause">
-            <PlayArrowIcon className={classes.playIcon} />
+            <PlayArrowIcon className={classes.playIcon} onClick={handlePreview}/>
           </IconButton>
           <IconButton aria-label="next">
             {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
@@ -64,8 +70,8 @@ export default function SongPreview(props) {
       </div>
       <CardMedia
         className={classes.cover}
-        image="/static/images/cards/live-from-space.jpg"
-        title="Live from space album cover"
+        image={artworkUrl100}
+        title={trackName}
       />
     </Card>
   );
