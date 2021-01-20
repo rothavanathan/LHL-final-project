@@ -12,7 +12,6 @@ export default function NewCollectionForm(props) {
     axios
       .put("http://localhost:8000/api/collection/new", {
         name: collectionName,
-        thumbnail: "",
         user_id: user
       })
       .then((res) => {
@@ -26,7 +25,7 @@ export default function NewCollectionForm(props) {
     saveCollection();
   };
 
-  const handleCollection= (event) => {
+  const handleCollection = (event) => {
     setCollectionName(event.target.value);
   };
 
