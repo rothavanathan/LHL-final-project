@@ -29,7 +29,7 @@ export default function Library(props) {
   }
 
   return isCollectionFormOpen ? (
-    <NewCollection closeForm={closeCollectionForm} user={isLoggedIn} />
+    <NewCollection closeForm={closeCollectionForm} user={isLoggedIn} setCollections={setCollections} />
 
 
   )
