@@ -3,6 +3,7 @@ import axios from "axios";
 import Nav from "./Nav";
 import Results from "./Results";
 import NewProject from "./NewProject";
+import NewCollection from "./NewCollection";
 import SongPreview from "./SongPreview";
 import { Redirect } from "react-router-dom";
 import { DialogTitle, TextField, Grid, Container } from '@material-ui/core';
@@ -71,6 +72,7 @@ export default function Search(props) {
       <TextField variant="filled" value={term} onChange={handleChange} color="primary"></TextField>
       {/* <p>{results}</p> */}
       <NewProject songId={songId} user={isLoggedIn}/>
+      <NewCollection songId={songId} user={isLoggedIn}/>
       <Container className={classes.cardGrid} maxWidth="md" id="projects">
         <Grid container spacing={4}>
           <Results results={results}></Results>
