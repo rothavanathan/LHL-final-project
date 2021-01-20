@@ -1,8 +1,11 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import { CardContent, CardMedia, IconButton, Typography, Grid } from '@material-ui/core';
+import { CardContent, CardMedia, IconButton, Typography, Grid, Button } from '@material-ui/core';
 import { SkipPrevious, PlayArrow, SkipNext } from '@material-ui/icons';
+import { Link, Redirect } from "react-router-dom";
+import NewProject from "./NewProject"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SongPreview(props) {
-  const { trackName, previewUrl, artistName, artworkUrl100 } = props.results;
+  const { trackName, previewUrl, artistName, artworkUrl100, trackId } = props.results;
   const classes = useStyles();
   const theme = useTheme();
 
@@ -80,7 +83,10 @@ export default function SongPreview(props) {
           />
         </div>
         <button class="btn-btn danger" onClick={handleClick}>Cancel</button>
-      </Card>
-    </Grid>
+
+        <NewProject songId={trackId} user={props.isLoggedIn} />
+
+      </Card >
+    </Grid >
   );
 }
