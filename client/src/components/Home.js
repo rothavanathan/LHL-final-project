@@ -28,7 +28,9 @@ export default function Home(props) {
         <ul>
           <li>+ Collections</li>
           {collections.map((collection, i) =>
-            <li key={i}>{collection.name}</li>)}
+            <li key={i}>
+              <Link to={`/collection/${collection.id}`}>{collection.name}</Link>
+            </li>)}
 
         </ul>
       </section>
