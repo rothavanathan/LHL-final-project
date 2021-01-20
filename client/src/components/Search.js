@@ -35,7 +35,7 @@ export default function Search(props) {
       <h1>I AM Search</h1>
       <TextField variant="filled" value={term} onChange={handleChange} color="primary"></TextField>
       {/* <p>{results}</p> */}
-      <NewProject songId={songId}/>
+      <NewProject songId={songId} user={isLoggedIn}/>
       <Results results={results}></Results>
       <Nav />
     </div>
