@@ -6,7 +6,7 @@ import { SkipPrevious, PlayArrow, SkipNext }from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   details: {
     display: 'flex',

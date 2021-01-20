@@ -24,28 +24,9 @@ export default function Album(props) {
   // });
 
   const classes = useStyles();
-
-  // return (
-  //   <Card
-  //     variant="elevation"
-  //     raised="true"
-
-  //   >
-  //     <article className="album">
-  //       <img className="album__thumbnail" src={props.artworkUrl100} alt="Album" />
-  //       <div className={albumInfoClass}>
-  //         <div className="song__name">{props.trackName}</div>
-  //         <div className="album__name">{props.collectionName}</div>
-  //         <div className="album__artist">{props.artistName}</div>
-  //       </div>
-  //       <div>Hamburger</div>
-  //     </article>
-
-  //   </Card>
-  // );
   return (
     <Grid item key={props.key} xs={12} sm={6} md={4}>
-    <Card className={classes.card}>
+    <Card className={`${classes.card} card`}>
       <CardMedia
         className={classes.cardMedia}
         image={props.artworkUrl100}
