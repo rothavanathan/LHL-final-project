@@ -1,7 +1,29 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import { Box, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
 import WaveSurfer from "wavesurfer.js";
 import Emitter from "../EventEmitter";
+
+const useStyles = makeStyles({
+  box: {
+    display: "flex",
+    alignItems: "center",
+    color: "rgb(244, 240, 234)",
+    // width: "80%",
+    // justifyContent: "flex"
+  },
+  stemTitle: {
+    color: "rgb(244, 240, 234)",
+    flexBasis: "50%",
+    // fontSize: "1.5em"
+  },
+
+});
+
 
 export default function Waveform({
   track,
@@ -9,6 +31,7 @@ export default function Waveform({
   // setSoloCounter,
   // soloCounter,
 }) {
+  const classes = useStyles()
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [volume, setVolume] = useState(0.5);
@@ -20,14 +43,17 @@ export default function Waveform({
     waveColor: "#F5F5DC",
     progressColor: "rgb(245, 103, 93)",
     cursorColor: "rgb(245, 103, 93)",
+    barMinHeight: 1,
     barWidth: 3,
     barRadius: 3,
     responsive: true,
-    height: 150,
+    height: 80,
+    // width: "50%",
     // If true, normalize by the maximum peak instead of 1.0.
     normalize: true,
     // Use the PeakCache to improve rendering speed of large waveforms.
     partialRender: true,
+
     audioContext: context,
   });
 
@@ -134,16 +160,23 @@ export default function Waveform({
   return (
     <div>
       <div id="waveform" ref={waveformRef} />
-      <div className="controls">
-        <h2>{track.name}</h2>
-        <button className={!isMuted ? "mute" : "unmute"} onClick={handleMute}>
+      <Box className={classes.box}>
+        <Typography className={classes.stemTitle} component="h3">
+          {track.name}
+        </Typography>
+
+        <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+          <Button className={!isMuted ? "mute" : "unmute"} onClick={handleMute}>M</Button>
+          <Button className={!soloed ? "solo" : "unsolo"} onClick={handleSolo}>S</Button>
+        </ButtonGroup>
+        {/* <button className={!isMuted ? "mute" : "unmute"} onClick={handleMute}>
           {" "}
           M
         </button>
         <button className={!soloed ? "solo" : "unsolo"} onClick={handleSolo}>
           {" "}
           S
-        </button>
+        </button> */}
         <input
           type="range"
           id="volume"
@@ -156,8 +189,8 @@ export default function Waveform({
           onChange={onVolumeChange}
           defaultValue={volume}
         />
-        <label htmlFor="volume">Volume</label>
-      </div>
+        <label htmlFor="volume"></label>
+      </Box>
       <hr />
     </div>
   );

@@ -1,4 +1,6 @@
-import React from 'react';
+import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -23,9 +25,9 @@ export default function SimpleBottomNavigation() {
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction label="Home" icon={<HomeIcon />} href="/home"/>
-      <BottomNavigationAction label="Search" icon={<SearchIcon />} href="/search"/>
-      <BottomNavigationAction label="Library" icon={<LibraryMusicIcon/> } href="/library"/>
+      <BottomNavigationAction label="Home" icon={<HomeIcon />} href="/home" />
+      <BottomNavigationAction label="Search" icon={<SearchIcon />} href="/search" />
+      <BottomNavigationAction label="Library" icon={<LibraryMusicIcon />} href="/library" />
     </BottomNavigation>
   );
 }
