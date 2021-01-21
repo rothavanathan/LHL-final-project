@@ -1,10 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import {Tab, BottomNavigationAction } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -20,12 +21,11 @@ export default function SimpleBottomNavigation() {
 
   return (
     <BottomNavigation
-      showLabels
       className={classes.root}
     >
-      <BottomNavigationAction label="Home" icon={<HomeIcon />} href="/home"/>
-      <BottomNavigationAction label="Search" icon={<SearchIcon />} href="/search"/>
-      <BottomNavigationAction label="Library" icon={<LibraryMusicIcon/> } href="/library"/>
+      <Tab to="/home" icon={<HomeIcon />} component={Link}/>
+      <Tab to="/search" icon={<SearchIcon />} component={Link} />
+      <Tab to="/library" icon={<LibraryMusicIcon/> } component={Link} />
     </BottomNavigation>
   );
 }
