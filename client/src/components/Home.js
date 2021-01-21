@@ -1,10 +1,10 @@
 import { useState, useEffect, Fragment } from 'react';
-import { Redirect, RouterLink } from "react-router-dom";
-import Nav from "./Nav";
-import ProjectCard from "./ProjectCard";
+import { Redirect } from "react-router-dom";
 import axios from 'axios';
 import { Container, Grid, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Nav from "./Nav";
+import ProjectCard from "./ProjectCard";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -26,8 +26,6 @@ export default function Home(props) {
       .then(data => {
         setCollections(data.data.collections);
         setProjects(data.data.projects);
-        console.log("COLLECTIONS-----", data.data.collections)
-        console.log("PROJECTS-----", data.data.projects)
       })
   }, []);
 
@@ -41,7 +39,6 @@ export default function Home(props) {
           <Grid container spacing={4}>
             {collections.map((collection, i) =>
               <Fragment key={i}>
-                {/* <Link to={`/collection/${collection.id}`}> */}
                 <ProjectCard
                   key={collection.id}
                   title={collection.name}
@@ -67,7 +64,6 @@ export default function Home(props) {
                   songTitle={project.song_title}
                   songArtist={project.artist}
                 />
-                {/* </Link> */}
               </Fragment>
               )}
             </Grid>

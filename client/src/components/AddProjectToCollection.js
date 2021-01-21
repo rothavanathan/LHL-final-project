@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import {InputLabel, FormHelperText, FormControl, NativeSelect} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -38,9 +33,9 @@ export default function AddProjectToCollection(props) {
           name: 'Add to Collection'
         }}
       >
-        <option aria-label="No Collection" value="">--</option>
-        {collections.map(collection => {
-          return <option value={collection.id}>{collection.name}</option>
+        <option aria-label="None" value="" />
+        {collections.map((collection, i) => {
+          return <option key ={i} value={collection.id}>{collection.name}</option>
         })}
 
       </NativeSelect>
