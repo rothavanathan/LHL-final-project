@@ -75,6 +75,12 @@ export default function Library(props) {
               </ul>
               <Container className={classes.cardGrid} maxWidth="md" id="projects">
                 <Grid container spacing={4}>
+                      <ProjectCard
+                        key={1000}
+                        title={"Start a New Project"}
+                        thumbnail={"https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80"}
+                        link={`/search`}
+                      />
                   {collections.map((collection, i) =>
                     <Fragment key={i}>
                       <ProjectCard
