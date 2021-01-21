@@ -1,11 +1,11 @@
 import { useState, useEffect, Fragment } from 'react';
-import axios from "axios"
-import Nav from "./Nav";
-import NewCollection from "./NewCollection"
-import { Redirect, Link } from "react-router-dom";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
 import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ProjectCard from "./ProjectCard";
+import Nav from "./Nav";
+import NewCollection from "./NewCollection";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -39,11 +39,11 @@ export default function Library(props) {
     setIsCollectionFormOpen(false)
   }
 
-  return isCollectionFormOpen ? (
+  return isLoggedIn ? (
+  <div>
+    { isCollectionFormOpen ? (
     <NewCollection closeForm={closeCollectionForm} user={isLoggedIn} setCollections={setCollections} />
-  )
-    :
-    (
+    ) : (
       <div>
         <h1>Library</h1>
         <section>
@@ -57,7 +57,6 @@ export default function Library(props) {
             <Grid container spacing={4}>
               {collections.map((collection, i) =>
                 <Fragment key={i}>
-                  {/* <Link to={`/collection/${collection.id}`}> */}
                   <ProjectCard
                     key={collection.id}
                     title={collection.name}
@@ -86,7 +85,6 @@ export default function Library(props) {
                     songTitle={project.song_title}
                     songArtist={project.artist}
                   />
-                  {/* </Link> */}
                 </Fragment>
               )}
             </Grid>
@@ -94,5 +92,9 @@ export default function Library(props) {
         </section>
         <Nav />
       </div >
-    )
+      )}
+    </div>
+  ) : (
+        <Redirect to="/" />
+      )
 }
