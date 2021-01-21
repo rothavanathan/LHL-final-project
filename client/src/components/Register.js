@@ -1,9 +1,8 @@
-//for development -> click through to test userflows
 import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-import { makeStyles } from '@material-ui/core/styles';
-import { FormControl, Button } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import { FormControl, Button } from "@material-ui/core";
 
 export default function Register(props) {
   const { setUser, isLoggedIn } = props;
@@ -43,16 +42,14 @@ export default function Register(props) {
   };
 
   const useStyles = makeStyles((theme) => ({
-
     formDiv: {
-      height: "60%"
+      height: "60%",
     },
 
     heading: {
       color: "antiquewhite",
       fontFamily: "Noto Sans",
       margin: "50px",
-
     },
 
     heading2: {
@@ -60,7 +57,6 @@ export default function Register(props) {
       fontFamily: "Noto Sans",
       fontSize: 15,
       margin: "40px",
-
     },
 
     form: {
@@ -68,99 +64,92 @@ export default function Register(props) {
       flexDirection: "column",
       alignItems: "center",
       width: "100%",
-      height: "50%"
+      height: "50%",
     },
 
     email: {
-      width: '80%',
+      width: "80%",
       color: "white",
-      display: 'flex',
-      flexDirection: 'column',
+      display: "flex",
+      flexDirection: "column",
     },
 
     emailText: {
       color: "white",
       display: "flex",
-      backgroundColor:" #000821",
+      backgroundColor: " #000821",
       border: "none",
-      borderBottom:" #3b2c13 4px solid",
+      borderBottom: " #3b2c13 4px solid",
       backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
       margin: "30px",
       outline: "none",
       alignSelf: "center",
       width: "100%",
       fontSize: "15px",
-
-
     },
 
     password: {
-      width: '80%',
+      width: "80%",
       color: "white",
-      display: 'flex',
-      flexDirection: 'column',
-      
+      display: "flex",
+      flexDirection: "column",
     },
 
     passwordText: {
       color: "white",
       display: "flex",
-      backgroundColor:" #000821",
+      backgroundColor: " #000821",
       border: "none",
-      borderBottom:" #3b2c13 4px solid",
+      borderBottom: " #3b2c13 4px solid",
       backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
       margin: "30px",
       outline: "none",
       width: "100%",
       alignSelf: "center",
       fontSize: "15px",
-
     },
 
     name: {
-      width: '80%',
+      width: "80%",
       color: "white",
-      display: 'flex',
-      flexDirection: 'column',
-      
+      display: "flex",
+      flexDirection: "column",
     },
     nameText: {
       color: "white",
       display: "flex",
-      backgroundColor:" #000821",
+      backgroundColor: " #000821",
       border: "none",
-      borderBottom:" #3b2c13 4px solid",
+      borderBottom: " #3b2c13 4px solid",
       backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
       margin: "30px",
       outline: "none",
       width: "100%",
       alignSelf: "center",
       fontSize: "15px",
-
     },
 
     regButton: {
       fontFamily: "Noto Sans",
-      display: 'flex',
+      display: "flex",
       background: "#044a10",
       width: "60%",
       margin: "40px",
-      color: "antiquewhite"
+      color: "antiquewhite",
     },
 
     back: {
       flexGrow: 1,
-      display: 'flex',
+      display: "flex",
     },
 
     regLink: {
       color: "antiquewhite",
-      textDecoration: "none"
-    }
-
+      textDecoration: "none",
+    },
   }));
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   return !isLoggedIn ? (
     <div>
@@ -168,49 +157,58 @@ export default function Register(props) {
       <h2 className={classes.heading2}>Let's get you signed up</h2>
 
       <div className={classes.formDiv}>
-      <form autocomplete="off" className={classes.form} onSubmit={handleSubmit}>
-      <FormControl className={classes.emailInput}>
-        <input className={classes.nameText}
-          onChange={handleName}
-          type="first_name"
-          value={nameData}
-          name="first_name"
-          placeholder="Beethoven? Drake? Is that you?"
-          aria-label="first_name"
-        ></input>
-      </FormControl>
-      <FormControl className={classes.emailInput}>
-        <input className={classes.emailText}
-          value={emailData}
-          onChange={handleEmail}
-          type="email"
-          name="email"
-          placeholder="example@gmail.com"
-          aria-label="email"
-        ></input>
+        <form
+          autocomplete="off"
+          className={classes.form}
+          onSubmit={handleSubmit}
+        >
+          <FormControl className={classes.emailInput}>
+            <input
+              className={classes.nameText}
+              onChange={handleName}
+              type="first_name"
+              value={nameData}
+              name="first_name"
+              placeholder="Beethoven? Drake? Is that you?"
+              aria-label="first_name"
+            ></input>
+          </FormControl>
+          <FormControl className={classes.emailInput}>
+            <input
+              className={classes.emailText}
+              value={emailData}
+              onChange={handleEmail}
+              type="email"
+              name="email"
+              placeholder="example@gmail.com"
+              aria-label="email"
+            ></input>
           </FormControl>
           <FormControl className={classes.passwordInput}>
-        <input className={classes.passwordText}
-          value={passwordData}
-          onChange={handlePassword}
-          type="password"
-          name="password"
-          placeholder="Password... is not a great password"
-          aria-label="password"
-        ></input>
+            <input
+              className={classes.passwordText}
+              value={passwordData}
+              onChange={handlePassword}
+              type="password"
+              name="password"
+              placeholder="Password... is not a great password"
+              aria-label="password"
+            ></input>
           </FormControl>
 
-          <Button 
-            className={classes.regButton} 
-            type="submit"
-            >Sign up
+          <Button className={classes.regButton} type="submit">
+            Sign up
           </Button>
-      </form>
+        </form>
 
-      <Link to="/login" className={classes.regLink}>
-        <href className={classes.regLink}>Already registered? Login here</href>
-      </Link>
+        <Link to="/login" className={classes.regLink}>
+          <href className={classes.regLink}>
+            Already registered? Login here
+          </href>
+        </Link>
       </div>
     </div>
-  ) : <Redirect to="/home"/> ;
+  ) : (
+    <Redirect to="/home" />
+  );
 }
