@@ -1,9 +1,11 @@
 :root {
   --black: black;
   --white: rgb(244, 240, 234);
-  --primary-color: rgb(166, 197, 210);
+  --primary-color: rgb(245, 103, 93);
   --main-color: black;
-  --secondary-color: rgb(228, 156, 214);
+  --secondary-color: #a6c5d2;
+  --tertiary-color: rgb(80, 32, 28);
+
 }
 
 body {
@@ -83,7 +85,7 @@ body {
 
 hr {
   color: var(--white);
-  opacity: 30%;
+  opacity: 10%;
   width: 90%;
 }
 
