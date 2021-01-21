@@ -9,13 +9,18 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    transition: "all .25s linear",
+    boxShadow: "0px 2px 2px 0px rgb(245, 103, 93)",
+    '&:hover': {
+      boxShadow: "-1px 10px 29px 0px rgb(245, 103, 93)"
+   },
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
     flexGrow: 1
   },
   cardContent: {
-    flexGrow: 1,
+    flexGrow: 1
   },
 }));
 
@@ -32,7 +37,7 @@ export default function Album(props) {
   const classes = useStyles();
   return (
     <Grid item key={props.key} xs={6} sm={6} md={4}>
-      <Card className={`${classes.card} card`} onClick={handleClick}>
+      <Card className={classes.card} onClick={handleClick}>
         <CardMedia
           className={classes.cardMedia}
           image={props.artworkUrl100}
