@@ -8,25 +8,18 @@
 
 body {
   /* background: rgb(34, 33, 34); */
-  background: #1a1a1a;
+
+  background: #000821;
+  background-image: url("https://www.transparenttextures.com/patterns/otis-redding.png");
+
+/*   background: #1a1a1a; */
+
   color: white;
 }
 
 .App {
   font-family: sans-serif;
   text-align: center;
-}
-
-button {
-  background: white;
-  color: black;
-  border: none;
-  width: 60px;
-  height: 60px;
-  border-radius: 100%;
-  outline: none;
-  text-transform: uppercase;
-  transition: all 0.2s ease;
 }
 
 .mute {
@@ -60,10 +53,6 @@ button {
 }
 
 .unsolo:hover {
-  background: var(--white);
-}
-
-button:hover {
   background: var(--white);
 }
 
