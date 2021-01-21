@@ -40,14 +40,15 @@ const getProjectsByUser = (id, db) => {
   return db.query(query);
 };
 
-const addNoteToProject = (notes, id, db) => {
+const addNoteToProject = (notes, collection_id, project_id, db) => {
   const query = {
     text: `
       UPDATE projects
-      SET notes = $1
-      WHERE id = $2;
+      SET notes = $1, collection_id = $2
+      WHERE id = $3
+      RETURNING *;
       `,
-    values: [notes, id],
+    values: [notes, collection_id, project_id],
   };
 
   return db.query(query)

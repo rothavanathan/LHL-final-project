@@ -18,6 +18,8 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+
   // ADD Collection
   // name, thumbnail, userId
   router.put("/new", (req, res) => {

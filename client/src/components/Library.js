@@ -36,7 +36,7 @@ export default function Library(props) {
     :
     (
       <div>
-        <h1>I AM Library</h1>
+        <h1>Library</h1>
         <section>
           <header>Recent Collections</header>
           <ul>
@@ -44,7 +44,10 @@ export default function Library(props) {
               + Collections
           </li>
             {collections.map((collection, i) =>
-              <li key={i}>{collection.name}</li>)}
+              <li key={i}>
+                <Link to={`/collection/${collection.id}`}>{collection.name}</Link>
+              </li>)}
+
 
           </ul>
         </section>

@@ -25,12 +25,12 @@ export default function Gear(props) {
   return isLoggedIn ? (
     <div>
       <Link to="/home">Home</Link>
-      <h1>I AM Gear/ Settings</h1>
+      <h1>Settings</h1>
       <form onSubmit={handleSubmit}>
         <button type="submit">LOGOUT</button>
       </form>
     </div>
   ) : (
-    <Redirect to="/" />
-  );
+      <Redirect to="/" />
+    );
 }

@@ -35,7 +35,7 @@ export default function Collection(props) {
 
   return isLoggedIn ? (
     <div>
-      <h1>I AM Collection</h1>
+      <h1>Your Collections</h1>
       {projects.map(project => {
         return <ProjectCard
           // setSong={setSong}
