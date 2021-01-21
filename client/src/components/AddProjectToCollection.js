@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    color: "#ffffff"
+    color: "#ffffff",
+    background: "white"
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -37,7 +38,6 @@ export default function AddProjectToCollection(props) {
           name: 'Add to Collection'
         }}
       >
-        <option aria-label="None" value="" />
         {collections.map(collection => {
           return <option value={collection.id}>{collection.name}</option>
         })}
