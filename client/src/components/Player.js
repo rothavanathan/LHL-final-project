@@ -1,19 +1,26 @@
 import React, { useState } from "react";
+
+import { makeStyles } from '@material-ui/core/styles';
+
 import Waveform from "./Waveform";
 import Emitter from "../EventEmitter"
 
-const AudioCtx = window.AudioContext || window.webkitAudioContext;
-const audioCtx = new AudioCtx();
+const useStyles = makeStyles((theme) => ({
+  waveform: {
+    height: "60px"
+  }
+}));
 
-const Player = ({ tracks }) => {
-  const [playing, setPlay] = useState(false);
-  const handlePlayPause = () => {
-    setPlay(!playing);
-    Emitter.emit('clickPlayPause', "");
-  };
-  const handleRewind = () => {
-    Emitter.emit('clickRewind', setPlay(playing));
-  };
+export default function Player({ tracks, audioCtx }) {
+  const classes = useStyles();
+  // const [playing, setPlay] = useState(false);
+  // const handlePlayPause = () => {
+  //   setPlay(!playing);
+  //   Emitter.emit('clickPlayPause', "");
+  // };
+  // const handleRewind = () => {
+  //   Emitter.emit('clickRewind', setPlay(playing));
+  // };
 
 
   // console.log("TRACKS-------", tracks)
@@ -21,15 +28,18 @@ const Player = ({ tracks }) => {
   return (
     <div className="player">
       {tracks.map((track, i) => {
-        return track.url && <Waveform key={i} track={track} context={audioCtx} />
-      })};
-      <div id="transport">
+        return track.url && <Waveform
+          key={i}
+          track={track}
+          context={audioCtx}
+          className={classes.waveform} />
+      })}
+      {/* <div id="transport">
 
         <button onClick={handleRewind}>Rewind</button>
         <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default Player;

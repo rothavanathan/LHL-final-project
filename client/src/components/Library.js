@@ -1,10 +1,21 @@
-import { useState, useEffect } from 'react';
-import axios from "axios"
+import { useState, useEffect, Fragment } from 'react';
+import axios from "axios";
+import { Redirect } from "react-router-dom";
+import { Container, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import ProjectCard from "./ProjectCard";
 import Nav from "./Nav";
-import NewCollection from "./NewCollection"
-import { Redirect, Link } from "react-router-dom";
+import NewCollection from "./NewCollection";
+
+const useStyles = makeStyles((theme) => ({
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+}));
 
 export default function Library(props) {
+  const classes = useStyles();
   const [collections, setCollections] = useState([])
   const [projects, setProjects] = useState([])
   const [isCollectionFormOpen, setIsCollectionFormOpen] = useState(false)
@@ -28,13 +39,11 @@ export default function Library(props) {
     setIsCollectionFormOpen(false)
   }
 
-  return isCollectionFormOpen ? (
+  return isLoggedIn ? (
+  <div>
+    { isCollectionFormOpen ? (
     <NewCollection closeForm={closeCollectionForm} user={isLoggedIn} setCollections={setCollections} />
-
-
-  )
-    :
-    (
+    ) : (
       <div>
         <h1>Library</h1>
         <section>
@@ -43,26 +52,49 @@ export default function Library(props) {
             <li onClick={openCollectionForm}>
               + Collections
           </li>
-            {collections.map((collection, i) =>
-              <li key={i}>
-                <Link to={`/collection/${collection.id}`}>{collection.name}</Link>
-              </li>)}
-
-
           </ul>
+          <Container className={classes.cardGrid} maxWidth="md" id="projects">
+            <Grid container spacing={4}>
+              {collections.map((collection, i) =>
+                <Fragment key={i}>
+                  <ProjectCard
+                    key={collection.id}
+                    title={collection.name}
+                    thumbnail={collection.thumbnail}
+                    link={`/collection/${collection.id}`}
+                  />
+                </Fragment>
+              )}
+            </Grid>
+          </Container>
         </section>
         <section>
           <header>Recent Projects</header>
           <ul>
             <li>+ Project</li>
-            {projects.map((project, i) =>
-              <li key={i}>
-                <Link to={`/project/${project.id}`}>{project.title}</Link>
-              </li>
-            )}
           </ul>
+          <Container className={classes.cardGrid} maxWidth="md" id="projects" >
+            <Grid container spacing={4} >
+              {projects.map((project, i) =>
+                <Fragment key={i}>
+                  <ProjectCard
+                    key={project.id}
+                    title={project.title}
+                    thumbnail={project.url_album_artwork}
+                    link={`/project/${project.id}`}
+                    songTitle={project.song_title}
+                    songArtist={project.artist}
+                  />
+                </Fragment>
+              )}
+            </Grid>
+          </Container>
         </section>
         <Nav />
       </div >
-    )
+      )}
+    </div>
+  ) : (
+        <Redirect to="/" />
+      )
 }

@@ -2,19 +2,70 @@ import { useState, useEffect } from "react";
 import { Link, Redirect, useParams, Prompt } from "react-router-dom";
 import axios from 'axios';
 
+import { makeStyles } from '@material-ui/core/styles';
+import SaveIcon from '@material-ui/icons/Save';
+import { Box, Typography } from '@material-ui/core';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+
 import Player from "./Player";
+import PlayerTransport from "./PlayerTransport";
 import ProjectNav from "./ProjectNav";
 import Notes from "./Notes"
 import AddProjectToCollection from "./AddProjectToCollection"
 
+
+const useStyles = makeStyles((theme) => ({
+  header: {
+    marginTop: 20,
+    display: "flex"
+  },
+  backArrow: {
+    fontSize: "large",
+    padding: 10,
+    marginLeft: 10
+  },
+  titleBox: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start"
+  },
+  player: {
+    width: "50%"
+  },
+
+  projectForm: {
+    width: 'calc(100% - 20px)',
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  formBox: {
+    display: "flex",
+    justifyContent: "space-between"
+    // flexDirection: "column"
+  },
+  saveIcon: {
+    margin: "auto",
+    fontSize: 56,
+    color: "rgb(245, 103, 93)"
+  },
+
+
+
+}));
+
 export default function Project(props) {
+  const classes = useStyles();
   const [content, setContent] = useState([{ title: "", artist: "", url: "" }])
   const [collections, setCollections] = useState([{ name: "", user_id: "", thumbnail: "" }])
   const [collectionId, setCollectionId] = useState()
   const [note, setNote] = useState("");
-
   const { isLoggedIn } = props;
   const { id } = useParams()
+  console.log("IS LOGGED IN-------", isLoggedIn);
+
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const audioCtx = new AudioCtx();
+
 
   useEffect(() => {
     axios
@@ -40,8 +91,9 @@ export default function Project(props) {
   }, [])
 
 
-  let OGcollectionId = content[0].collection_id
-  let existingNote = content[0].notes
+  const project = content[0]
+  let OGcollectionId = project.collection_id
+  let existingNote = project.notes
   // console.log("CONTENT----------", content);
 
   const stems = content.map((project) => {
@@ -49,9 +101,10 @@ export default function Project(props) {
     return { title, url, icon, peaks_array, name }
   })
 
+
   const check = () => {
 
-    if (content[0].notes !== note || collectionId !== OGcollectionId) {
+    if (project.notes !== note || collectionId !== OGcollectionId) {
       return true
     } else {
       return false
@@ -79,33 +132,63 @@ export default function Project(props) {
   };
 
 
-  // console.log("I AM CONTENT ZERO DO I HAVE A NOTE", content[0].notes);
+  // console.log("I AM CONTENT ZERO DO I HAVE A NOTE", project.notes);
 
   return isLoggedIn ? (
     <div>
-      <Link to="/home">Back to Home</Link>
-      <h1>{content[0].title}</h1>
-      <h2>{content[0].artist}</h2>
 
-      <form onSubmit={handleSubmit}>
-        <h3>collections</h3>
-        <AddProjectToCollection
-          collections={collections}
-          collectionId={collectionId}
-          setCollectionId={setCollectionId} >
-        </AddProjectToCollection>
-        {content[0] && <Notes projectId={id} existingNote={content[0].notes} note={note} setNote={setNote} />}
-        <button type="submit">Save</button>
-      </form>
+      <div className="main-window">
+        <header className={classes.header}>
+          <Link to="/home">
+            <ArrowBackIosIcon
+              className={classes.backArrow}
+            >Back to Home
+            </ArrowBackIosIcon>
+          </Link>
 
+          <Box className={classes.titleBox}>
 
-      <Player tracks={stems}></Player>
+            <Typography component="h1" variant="h5">
+              {project.title}
+            </Typography>
+
+            <Typography variant="subtitle1">
+              {project.artist}
+            </Typography>
+          </Box>
+        </header>
+
+        <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player"></Player>
+
+        <form className={classes.projectForm} onSubmit={handleSubmit}>
+          <Box className={classes.formBox}>
+            <AddProjectToCollection
+              collections={collections}
+              collectionId={collectionId}
+              setCollectionId={setCollectionId} >
+            </AddProjectToCollection>
+
+            <SaveIcon
+              className={classes.saveIcon}
+              type="submit"
+            >Save
+            </SaveIcon>
+          </Box>
+
+          {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} />}
+
+        </form>
+      </div>
+
+      <PlayerTransport tracks={stems} audioCtx={audioCtx} />
       <ProjectNav />
+
       <Prompt
         when={check()}
         message={"Don't you want to saaaaaaave!?"}
       />
-    </div>
+
+    </div >
   ) : (
       <Redirect to="/" />
     );

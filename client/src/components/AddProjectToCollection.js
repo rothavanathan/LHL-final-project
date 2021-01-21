@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import {InputLabel, FormHelperText, FormControl, NativeSelect} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
+
+    width: '80%',
     color: "#ffffff",
-    background: "white"
+    background: "rgb(244, 240, 234)"
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    // marginTop: theme.spacing(1),
   },
 }));
 
@@ -30,7 +25,7 @@ export default function AddProjectToCollection(props) {
   return (
 
     <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="age-native-helper">Collections</InputLabel>
+      <InputLabel htmlFor="age-native-helper">Save to Collection</InputLabel>
       <NativeSelect
         // value={state.age}
         onChange={handleChange}
@@ -39,12 +34,11 @@ export default function AddProjectToCollection(props) {
         }}
       >
         <option aria-label="None" value="" />
-        {collections.map(collection => {
-          return <option value={collection.id}>{collection.name}</option>
+        {collections.map((collection, i) => {
+          return <option key ={i} value={collection.id}>{collection.name}</option>
         })}
 
       </NativeSelect>
-      <FormHelperText>Choose a Collection</FormHelperText>
     </FormControl>
   )
 

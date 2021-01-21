@@ -1,9 +1,20 @@
-import { useState, useEffect } from 'react';
-import { Link, Redirect } from "react-router-dom";
-import Nav from "./Nav";
+import { useState, useEffect, Fragment } from 'react';
+import { Redirect } from "react-router-dom";
 import axios from 'axios';
+import { Container, Grid, Link } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Nav from "./Nav";
+import ProjectCard from "./ProjectCard";
+
+const useStyles = makeStyles((theme) => ({
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+}));
 
 export default function Home(props) {
+  const classes = useStyles();
   const { isLoggedIn } = props;
 
   const [collections, setCollections] = useState([])
@@ -20,27 +31,43 @@ export default function Home(props) {
 
   return isLoggedIn ? (
     <div>
+      <div>
       <Link to="/gear">Gear</Link>
       <h1>Home</h1>
-      <section>
         <header>Recent Collections</header>
-        <ul>
-          {collections.map((collection, i) =>
-            <li key={i}>
-              <Link to={`/collection/${collection.id}`}>{collection.name}</Link>
-            </li>)}
-
-        </ul>
-      </section>
+        <Container className={classes.cardGrid} maxWidth="md" id="projects">
+          <Grid container spacing={4}>
+            {collections.map((collection, i) =>
+              <Fragment key={i}>
+                <ProjectCard
+                  key={collection.id}
+                  title={collection.name}
+                  thumbnail={collection.thumbnail}
+                  link={`/collection/${collection.id}`}
+                />
+              </Fragment>
+              )}
+            </Grid>
+          </Container>
+          </div>
       <section>
         <header>Recent Projects</header>
-        <ul>
-          {projects.map((project, i) =>
-            <li key={i}>
-              <Link to={`/project/${project.id}`}>{project.title}</Link>
-            </li>
-          )}
-        </ul>
+        <Container className={classes.cardGrid} maxWidth="md" id="projects" >
+          <Grid container spacing={4} >
+            {projects.map((project, i) =>
+              <Fragment key={i}>
+                <ProjectCard
+                  key={project.id}
+                  title={project.title}
+                  thumbnail={project.url_album_artwork}
+                  link={`/project/${project.id}`}
+                  songTitle={project.song_title}
+                  songArtist={project.artist}
+                />
+              </Fragment>
+              )}
+            </Grid>
+          </Container>
       </section>
       <Nav />
     </div>
