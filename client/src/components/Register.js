@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+import { makeStyles } from '@material-ui/core/styles';
+
 
 export default function Register(props) {
   const { setUser, isLoggedIn } = props;
