@@ -3,6 +3,8 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormControl, Button } from "@material-ui/core";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+
 
 export default function Login(props) {
   const { setUser, isLoggedIn } = props;
@@ -36,21 +38,22 @@ export default function Login(props) {
   };
 
   const useStyles = makeStyles((theme) => ({
-    formDiv: {
-      height: "60%",
-    },
-
-    heading: {
+    main: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "baseline",
+      justifyContent: "center",      
       color: "antiquewhite",
       fontFamily: "Noto Sans",
-      margin: "50px",
+      margin: "20px",
+
     },
 
     heading2: {
       color: "antiquewhite",
       fontFamily: "Noto Sans",
       fontSize: 15,
-      margin: "40px",
+      margin: "30px",
     },
 
     form: {
@@ -127,7 +130,14 @@ export default function Login(props) {
 
   return !isLoggedIn ? (
     <div>
-      <h1 className={classes.heading}>Look who's back</h1>
+      <div className={classes.main}>
+          <Link to="/entry">
+            <ArrowBackIosIcon>
+            </ArrowBackIosIcon>
+          </Link>      
+          <h1 className={classes.main}>Welcome Back!</h1>
+      </div>
+
       <h2 className={classes.heading2}>Let's get you logged in</h2>
 
       <div className={classes.formDiv}>

@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import axios from 'axios';
-import { Container, Grid, Link } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Nav from "./Nav";
 import ProjectCard from "./ProjectCard";
