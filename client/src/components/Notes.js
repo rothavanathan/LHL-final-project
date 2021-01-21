@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Notes(props) {
-  const projectId = props.projectId;
-  const existingNote = props.existingNote;
-  const [note, setNote] = useState("");
+  // const projectId = props.projectId;
+  // const existingNote = props.existingNote;
+
+  const { projectId, existingNote, note, setNote } = props;
+
 
   const handleNote = (event) => {
     setNote(event.target.value);

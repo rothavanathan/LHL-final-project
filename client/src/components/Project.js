@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
-import { Link, Redirect, useParams } from "react-router-dom";
+import { Link, Redirect, useParams, Prompt } from "react-router-dom";
 import axios from 'axios';
 
 import Player from "./Player";
 import ProjectNav from "./ProjectNav";
 import Notes from "./Notes"
+import AddProjectToCollection from "./AddProjectToCollection"
 
 export default function Project(props) {
   const [content, setContent] = useState([{ title: "", artist: "", url: "" }])
   const [collections, setCollections] = useState([{ name: "", user_id: "", thumbnail: "" }])
   const [collectionId, setCollectionId] = useState()
+  const [note, setNote] = useState("");
 
   const { isLoggedIn } = props;
   const { id } = useParams()
@@ -38,13 +40,23 @@ export default function Project(props) {
   }, [])
 
 
-
+  const OGcollectionId = content[0].collection_id
   // console.log("CONTENT----------", content);
 
   const stems = content.map((project) => {
     const { title, url, icon, peaks_array, name } = project
     return { title, url, icon, peaks_array, name }
   })
+
+  const check = () => {
+
+    if (content[0].notes !== note || collectionId !== OGcollectionId) {
+      return true
+    } else {
+      return false
+    }
+  }
+
 
   // console.log("I AM CONTENT ZERO DO I HAVE A NOTE", content[0].notes);
 
@@ -55,15 +67,18 @@ export default function Project(props) {
       <h2>{content[0].artist}</h2>
       <h3>collections</h3>
       <ul>
-        {collections.map(collection => {
-          return <li>{collection.name}</li>
-        })}
+
       </ul>
+      <AddProjectToCollection collections={collections} collectionId={collectionId} setCollectionId={setCollectionId} ></AddProjectToCollection>
 
 
       <Player tracks={stems}></Player>
-      {content[0] && <Notes projectId={id} existingNote={content[0].notes} />}
+      {content[0] && <Notes projectId={id} existingNote={content[0].notes} note={note} setNote={setNote} />}
       <ProjectNav />
+      <Prompt
+        when={check()}
+        message={"Don't you want to saaaaaaave!?"}
+      />
     </div>
   ) : (
       <Redirect to="/" />
