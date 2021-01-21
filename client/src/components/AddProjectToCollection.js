@@ -4,13 +4,13 @@ import {InputLabel, FormHelperText, FormControl, NativeSelect} from '@material-u
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
+
+    width: '80%',
     color: "#ffffff",
-    background: "white"
+    background: "rgb(244, 240, 234)"
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    // marginTop: theme.spacing(1),
   },
 }));
 
@@ -25,7 +25,7 @@ export default function AddProjectToCollection(props) {
   return (
 
     <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="age-native-helper">Collections</InputLabel>
+      <InputLabel htmlFor="age-native-helper">Save to Collection</InputLabel>
       <NativeSelect
         // value={state.age}
         onChange={handleChange}
@@ -39,7 +39,6 @@ export default function AddProjectToCollection(props) {
         })}
 
       </NativeSelect>
-      <FormHelperText>Choose a Collection</FormHelperText>
     </FormControl>
   )
 
