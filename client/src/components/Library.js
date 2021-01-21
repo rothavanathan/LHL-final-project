@@ -40,61 +40,61 @@ export default function Library(props) {
   }
 
   return isLoggedIn ? (
-  <div>
-    { isCollectionFormOpen ? (
-    <NewCollection closeForm={closeCollectionForm} user={isLoggedIn} setCollections={setCollections} />
-    ) : (
-      <div>
-        <h1>Library</h1>
-        <section>
-          <header>Recent Collections</header>
-          <ul>
-            <li onClick={openCollectionForm}>
-              + Collections
+    <div>
+      { isCollectionFormOpen ? (
+        <NewCollection closeForm={closeCollectionForm} user={isLoggedIn} setCollections={setCollections} />
+      ) : (
+          <div>
+            <h1>Library</h1>
+            <section>
+              <header>All Collections</header>
+              <ul>
+                <li onClick={openCollectionForm}>
+                  + Collections
           </li>
-          </ul>
-          <Container className={classes.cardGrid} maxWidth="md" id="projects">
-            <Grid container spacing={4}>
-              {collections.map((collection, i) =>
-                <Fragment key={i}>
-                  <ProjectCard
-                    key={collection.id}
-                    title={collection.name}
-                    thumbnail={collection.thumbnail}
-                    link={`/collection/${collection.id}`}
-                  />
-                </Fragment>
-              )}
-            </Grid>
-          </Container>
-        </section>
-        <section>
-          <header>Recent Projects</header>
-          <ul>
-            <li>+ Project</li>
-          </ul>
-          <Container className={classes.cardGrid} maxWidth="md" id="projects" >
-            <Grid container spacing={4} >
-              {projects.map((project, i) =>
-                <Fragment key={i}>
-                  <ProjectCard
-                    key={project.id}
-                    title={project.title}
-                    thumbnail={project.url_album_artwork}
-                    link={`/project/${project.id}`}
-                    songTitle={project.song_title}
-                    songArtist={project.artist}
-                  />
-                </Fragment>
-              )}
-            </Grid>
-          </Container>
-        </section>
-        <Nav />
-      </div >
-      )}
+              </ul>
+              <Container className={classes.cardGrid} maxWidth="md" id="projects">
+                <Grid container spacing={4}>
+                  {collections.map((collection, i) =>
+                    <Fragment key={i}>
+                      <ProjectCard
+                        key={collection.id}
+                        title={collection.name}
+                        thumbnail={collection.thumbnail}
+                        link={`/collection/${collection.id}`}
+                      />
+                    </Fragment>
+                  )}
+                </Grid>
+              </Container>
+            </section>
+            <section>
+              <header>All Projects</header>
+              <ul>
+                <li>+ Project</li>
+              </ul>
+              <Container className={classes.cardGrid} maxWidth="md" id="projects" >
+                <Grid container spacing={4} >
+                  {projects.map((project, i) =>
+                    <Fragment key={i}>
+                      <ProjectCard
+                        key={project.id}
+                        title={project.title}
+                        thumbnail={project.url_album_artwork}
+                        link={`/project/${project.id}`}
+                        songTitle={project.song_title}
+                        songArtist={project.artist}
+                      />
+                    </Fragment>
+                  )}
+                </Grid>
+              </Container>
+            </section>
+            <Nav />
+          </div >
+        )}
     </div>
   ) : (
-        <Redirect to="/" />
-      )
+      <Redirect to="/" />
+    )
 }

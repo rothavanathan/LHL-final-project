@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Grid, Typography} from '@material-ui/core';
+import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 
@@ -9,14 +9,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     transition: "all .25s linear",
+
     boxShadow: "none",
     '&:hover': {
       boxShadow: "-1px 10px 29px 0px rgb(245, 103, 93)"
-   },
+    },
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
     flexGrow: 1,
+    backgroundColor: "var(--white)",
   },
   cardContent: {
     flexGrow: 1,

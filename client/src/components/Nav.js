@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     width: '100%',
     position: 'fixed',
     bottom: 0,
-    background: "rgb(245, 103, 93)"
+    background: "var(--tertiary-color)"
   }
 });
 
