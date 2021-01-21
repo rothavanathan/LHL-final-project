@@ -18,13 +18,14 @@ module.exports = (db) => {
       });
   });
 
-  // ADD NOTE TO PROJECT BY ID
+  // Update PROJECT with new note and ID
   router.put("/addnote", (req, res) => {
-    const { notes, id } = req.body;
+    const { notes, id, collection_id } = req.body;
 
-    addNoteToProject(notes, id, db)
+    addNoteToProject(notes, collection_id, id, db)
       .then((data) => {
         console.log(`insert completed!`, data);
+        res.json(data)
       })
       .catch((err) => {
         console.log(`ruh roh`, err);

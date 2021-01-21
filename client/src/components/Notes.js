@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Divider } from "@material-ui/core";
 
 export default function Notes(props) {
   // const projectId = props.projectId;
@@ -16,24 +17,10 @@ export default function Notes(props) {
     setNote(existingNote);
   }, [existingNote]);
 
-  const saveNote = () => {
-    axios
-      .put("http://localhost:8000/api/project/addnote", {
-        id: projectId,
-        notes: note
-      })
-      .then(() => {
-      })
-      .catch((err) => console.log(err));
-  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    saveNote();
-  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <h1>Project Notes:</h1>
       <textarea
         onChange={handleNote}
@@ -41,7 +28,7 @@ export default function Notes(props) {
         type="text"
         name="notes_area"
       ></textarea>
-      <button type="submit">Save Note</button>
-    </form>
+    </div>
+
   )
 }

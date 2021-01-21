@@ -40,7 +40,8 @@ export default function Project(props) {
   }, [])
 
 
-  const OGcollectionId = content[0].collection_id
+  let OGcollectionId = content[0].collection_id
+  let existingNote = content[0].notes
   // console.log("CONTENT----------", content);
 
   const stems = content.map((project) => {
@@ -57,6 +58,26 @@ export default function Project(props) {
     }
   }
 
+  const saveNote = () => {
+    axios
+      .put("http://localhost:8000/api/project/addnote", {
+        id,
+        notes: note,
+        collection_id: collectionId
+      })
+      .then((data) => {
+        console.log(`data back from save`, data.data.rows[0])
+        existingNote = data.data.rows[0].notes
+        OGcollectionId = data.data.rows[0].collection_id
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    saveNote();
+  };
+
 
   // console.log("I AM CONTENT ZERO DO I HAVE A NOTE", content[0].notes);
 
@@ -65,15 +86,20 @@ export default function Project(props) {
       <Link to="/home">Back to Home</Link>
       <h1>{content[0].title}</h1>
       <h2>{content[0].artist}</h2>
-      <h3>collections</h3>
-      <ul>
 
-      </ul>
-      <AddProjectToCollection collections={collections} collectionId={collectionId} setCollectionId={setCollectionId} ></AddProjectToCollection>
+      <form onSubmit={handleSubmit}>
+        <h3>collections</h3>
+        <AddProjectToCollection
+          collections={collections}
+          collectionId={collectionId}
+          setCollectionId={setCollectionId} >
+        </AddProjectToCollection>
+        {content[0] && <Notes projectId={id} existingNote={content[0].notes} note={note} setNote={setNote} />}
+        <button type="submit">Save</button>
+      </form>
 
 
       <Player tracks={stems}></Player>
-      {content[0] && <Notes projectId={id} existingNote={content[0].notes} note={note} setNote={setNote} />}
       <ProjectNav />
       <Prompt
         when={check()}
