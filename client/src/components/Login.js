@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControl, FormHelperText, Button } from '@material-ui/core';
-import { blue } from "@material-ui/core/colors";
+import { FormControl, Button } from '@material-ui/core';
 
 export default function Login(props) {
   const { setUser, isLoggedIn } = props;
@@ -126,6 +125,11 @@ export default function Login(props) {
       display: 'flex',
     },
 
+    regLink: {
+      color: "antiquewhite",
+      textDecoration: "none"
+    }
+
   }));
 
   const classes = useStyles()
@@ -136,7 +140,7 @@ export default function Login(props) {
       <h2 className={classes.heading2}>Let's get you logged in</h2>
 
       <div className={classes.formDiv}>
-        <form autocomplete="off" className={classes.form} onSubmit={handleSubmit}>
+        <form  className={classes.form} onSubmit={handleSubmit}>
           <FormControl className={classes.emailInput}>
             <input className={classes.emailText}
               value={emailData}
@@ -165,6 +169,9 @@ export default function Login(props) {
             >Login
           </Button>
         </form>
+          <Link to="/register" className={classes.regLink}>
+             <href className={classes.regLink}>Don't have an account? Register here</href>
+          </Link>
       </div>
     </div>
   ) : <Redirect to="/home"/> ;
