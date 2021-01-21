@@ -66,7 +66,6 @@ export default function Collection(props) {
     </div>
 
   ) : (
-      // <Redirect to="/" />
-      <h1>YOU ARE A REDIRECT</h1>
+      <Redirect to="/" />
     );
 }

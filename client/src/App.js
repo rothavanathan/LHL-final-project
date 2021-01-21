@@ -19,13 +19,15 @@ export default function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const localUser = localStorage.getItem("user") || null
+    const localUser = localStorage.getItem("user")
     setUser(localUser)
   }, [])
   // instead of local, have use effect thatt uses on mount to send axios req to backend
   useEffect(() => {
     localStorage.setItem("user", user)
   }, [user])
+
+  console.log("LOCAL USER IN APP-----", user);
 
   return (
     <Router>

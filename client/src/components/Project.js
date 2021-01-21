@@ -15,6 +15,7 @@ export default function Project(props) {
 
   const { isLoggedIn } = props;
   const { id } = useParams()
+  console.log("IS LOGGED IN-------", isLoggedIn);
 
   useEffect(() => {
     axios

@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, CardActions, CardActionArea, CardContent, CardMedia, Grid, Typography, Link } from '@material-ui/core';
+import { Card, CardActions, CardActionArea, CardContent, CardMedia, Grid, Typography} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
 
 import classnames from "classnames";
 
@@ -39,7 +40,8 @@ export default function Album(props) {
   return (
     <Grid item key={props.key} xs={6} sm={6} md={4} className={classes.card} >
       <Card className={classes.card} onClick={handleClick}>
-        <CardActionArea href={props.link}>
+        {/* <CardActionArea href={props.link}> */}
+        <Link to={props.link} >
           <CardMedia
             className={classes.cardMedia}
             image={props.thumbnail}
@@ -57,7 +59,8 @@ export default function Album(props) {
               {props.songArtist}
             </Typography>
           </CardContent>
-        </CardActionArea>
+        {/* </CardActionArea> */}
+        </Link>
       </Card>
     </Grid>
   )
