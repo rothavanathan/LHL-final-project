@@ -1,13 +1,21 @@
 import { useState, useEffect, Fragment } from 'react';
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import { Container, Grid } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ProjectCard from "./ProjectCard";
 import Nav from "./Nav";
 import NewCollection from "./NewCollection";
 
 const useStyles = makeStyles((theme) => ({
+  mainHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    paddingLeft: 20,
+    paddingRight: 40,
+    marginTop: 40,
+    marginBottom: 40
+  },
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
@@ -45,9 +53,21 @@ export default function Library(props) {
         <NewCollection closeForm={closeCollectionForm} user={isLoggedIn} setCollections={setCollections} />
       ) : (
           <div>
-            <h1>Library</h1>
+            <header className={classes.mainHeader}>
+              <Typography
+                component="h1"
+                variant="h4"
+                color="var(--white)">
+                Library
+          </Typography>
+
+            </header>
             <section>
-              <header>All Collections</header>
+              <Typography
+                component="header"
+                variant="h5"
+              >All Collections
+          </Typography>
               <ul>
                 <li onClick={openCollectionForm}>
                   + Collections
@@ -69,7 +89,11 @@ export default function Library(props) {
               </Container>
             </section>
             <section>
-              <header>All Projects</header>
+              <Typography
+                component="header"
+                variant="h5"
+              >All Projects
+          </Typography>
               <ul>
                 <li>+ Project</li>
               </ul>

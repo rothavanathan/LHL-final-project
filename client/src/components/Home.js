@@ -1,16 +1,33 @@
 import { useState, useEffect, Fragment } from 'react';
-import { Redirect, Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
-import { Container, Grid } from '@material-ui/core';
+
+import { Container, Grid, Typography } from '@material-ui/core';
+
 import { makeStyles } from '@material-ui/core/styles';
+import SettingsIcon from '@material-ui/icons/Settings';
+
 import Nav from "./Nav";
 import ProjectCard from "./ProjectCard";
 
 const useStyles = makeStyles((theme) => ({
+  mainHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    paddingLeft: 20,
+    paddingRight: 40,
+    marginTop: 40,
+    marginBottom: 40
+  },
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
+  gearIcon: {
+    color: "var(--white)",
+    fontSize: 36,
+    alignSelf: "flex-end"
+  }
 }));
 
 export default function Home(props) {
@@ -32,26 +49,48 @@ export default function Home(props) {
   return isLoggedIn ? (
     <div>
       <div>
-      <Link to="/gear">Gear</Link>
-      <h1>Home</h1>
-        <header>Recent Collections</header>
-        <Container className={classes.cardGrid} maxWidth="md" id="projects">
-          <Grid container spacing={4}>
-            {collections.map((collection, i) =>
-              <Fragment key={i}>
-                <ProjectCard
-                  key={collection.id}
-                  title={collection.name}
-                  thumbnail={collection.thumbnail}
-                  link={`/collection/${collection.id}`}
-                />
-              </Fragment>
+        <header className={classes.mainHeader}>
+          <Typography
+            component="h1"
+            variant="h4"
+            color="var(--white)">
+            Home
+          </Typography>
+          <Link to="/gear">
+            <SettingsIcon
+              className={classes.gearIcon}
+            >Gear
+            </SettingsIcon>
+          </Link>
+        </header>
+        <section>
+          <Typography
+            component="header"
+            variant="h5"
+          >Recent Collections
+          </Typography>
+          <Container className={classes.cardGrid} maxWidth="md" id="projects">
+            <Grid container spacing={4}>
+              {collections.map((collection, i) =>
+                <Fragment key={i}>
+                  <ProjectCard
+                    key={collection.id}
+                    title={collection.name}
+                    thumbnail={collection.thumbnail}
+                    link={`/collection/${collection.id}`}
+                  />
+                </Fragment>
               )}
             </Grid>
           </Container>
-          </div>
+        </section>
+      </div>
       <section>
-        <header>Recent Projects</header>
+        <Typography
+          component="header"
+          variant="h5">
+          Recent Projects
+          </Typography>
         <Container className={classes.cardGrid} maxWidth="md" id="projects" >
           <Grid container spacing={4} >
             {projects.map((project, i) =>
@@ -65,9 +104,9 @@ export default function Home(props) {
                   songArtist={project.artist}
                 />
               </Fragment>
-              )}
-            </Grid>
-          </Container>
+            )}
+          </Grid>
+        </Container>
       </section>
       <Nav />
     </div>
