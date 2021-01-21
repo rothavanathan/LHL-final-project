@@ -8,6 +8,8 @@ import SongPreview from "./SongPreview";
 import { Redirect } from "react-router-dom";
 import { DialogTitle, TextField, Grid, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import useDebounce from "../hooks/useDebounce";
+import { TextFormatTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -23,7 +25,19 @@ export default function Search(props) {
   const { isLoggedIn } = props;
   const [term, setTerm] = useState("");
   const [results, setResults] = useState([]);
-  const [isSongSelected, setIsSongSelected] = useState({})
+  const [isSongSelected, setIsSongSelected] = useState({});
+  const [isSearching, setIsSearching] = useState(false);
+
+  const debouncedSearchTerm = useDebounce(term, 200);
+
+  useEffect(
+    () => {
+      // Make sure we have a value (user has entered something in input)
+      if (debouncedSearchTerm) {
+        setIsSearching(true);
+        setTerm(debouncedSearchTerm)
+      }
+    },[debouncedSearchTerm]);
 
 
   //SEARCH QUERY
@@ -54,12 +68,13 @@ export default function Search(props) {
               response.push(...data2formatted)
             }
             response.push(...data1.data.results)
-            // console.log(`response is `, response)
-            setResults(response)
+            setResults(response);
+            //once we have results
+            setIsSearching(false);
           })
           .catch(err => console.log(err))
       })
-  }, [term])
+  }, [debouncedSearchTerm])
 
   const handleChange = (event) => {
     setTerm(event.target.value)
