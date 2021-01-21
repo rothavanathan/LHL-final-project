@@ -38,6 +38,7 @@ export default function AddProjectToCollection(props) {
           name: 'Add to Collection'
         }}
       >
+        <option aria-label="None" value="" />
         {collections.map(collection => {
           return <option value={collection.id}>{collection.name}</option>
         })}

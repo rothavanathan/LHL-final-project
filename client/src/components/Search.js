@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
+  },
+  searchBox: {
+    background: "white"
   }
 }));
 
@@ -72,7 +75,7 @@ export default function Search(props) {
   return !isSongSelected.trackName ? (
     <div>
       <h1>Search</h1>
-      <TextField variant="filled" value={term} onChange={handleChange} color="primary"></TextField>
+      <TextField variant="filled" value={term} onChange={handleChange} className={classes.searchBox}></TextField>
       {/* <p>{results}</p> */}
       {/* <NewProject songId={songId} user={isLoggedIn} /> */}
       {/* <NewCollection songId={songId} user={isLoggedIn} /> */}
