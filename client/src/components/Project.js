@@ -3,7 +3,7 @@ import { Link, Redirect, useParams, Prompt } from "react-router-dom";
 import axios from 'axios';
 
 import Player from "./Player";
-import ProjectNav from "./ProjectNav";
+import Nav from "./Nav";
 import Notes from "./Notes"
 import AddProjectToCollection from "./AddProjectToCollection"
 
@@ -100,7 +100,7 @@ export default function Project(props) {
 
 
       <Player tracks={stems}></Player>
-      <ProjectNav />
+      <Nav />
       <Prompt
         when={check()}
         message={"Don't you want to saaaaaaave!?"}
