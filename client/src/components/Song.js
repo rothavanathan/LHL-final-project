@@ -10,9 +10,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     transition: "all .25s linear",
-    boxShadow: "0px 2px 2px 0px rgb(245, 103, 93)",
+    background: "rgb(244, 240, 234)",
+    boxShadow: "0px 2px 2px 0px rgb(244, 240, 234)",
     '&:hover': {
-      boxShadow: "-1px 10px 29px 0px rgb(245, 103, 93)"
+      boxShadow: "-1px 10px 10px 0px rgb(244, 240, 234)"
    },
   },
   cardMedia: {
@@ -20,8 +21,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1
   },
   cardContent: {
-    flexGrow: 1
+    flexGrow: 1,
+    color: "black",
+    fontSize: ".6rem",
+    background: "rgb(244, 240, 234)"
   },
+  cardText: {
+    fontSize: ".75rem"
+  }
 }));
 
 export default function Album(props) {
@@ -45,13 +52,13 @@ export default function Album(props) {
           style={useStyles.media}
         />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h7" component="h2">
             {props.trackName}
           </Typography>
-          <Typography>
+          <Typography className={classes.cardText}>
             {props.artistName}
           </Typography>
-          <Typography>
+          <Typography className={classes.cardText}>
             {props.collectionName}
           </Typography>
         </CardContent>
