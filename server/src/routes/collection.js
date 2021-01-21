@@ -12,6 +12,7 @@ module.exports = (db) => {
       .then((data) => {
         console.log(`projects from collection id ${id} are`, data)
         const projects = data
+        console.log("PROJECCCC------", projects)
         res.json({ projects });
       })
       .catch((err) => {
