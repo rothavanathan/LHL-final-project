@@ -90,6 +90,7 @@ export default function Collection(props) {
           </Container>
         </div>
       )}
+      <Nav />
     </div>
   ) : (
       <Redirect to="/" />
