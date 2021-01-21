@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Grid, Typography} from '@material-ui/core';
+import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import { TextRotationNoneTwoTone } from "@material-ui/icons";
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   cardMedia: {
     paddingTop: '56.25%', // 16:9
     flexGrow: 1,
+    backgroundColor: "var(--white)",
   },
   cardContent: {
     flexGrow: 1,

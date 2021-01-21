@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography, Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import '../RangeInput.css';
 
 import WaveSurfer from "wavesurfer.js";
 import Emitter from "../EventEmitter";
+
 
 const useStyles = makeStyles({
   box: {
@@ -21,7 +23,9 @@ const useStyles = makeStyles({
     flexBasis: "50%",
     // fontSize: "1.5em"
   },
-
+  input: {
+    color: "primary"
+  }
 });
 
 
@@ -187,7 +191,7 @@ export default function Waveform({
           max="1"
           step=".025"
           onChange={onVolumeChange}
-          defaultValue={volume}
+          value={volume}
         />
         <label htmlFor="volume"></label>
       </Box>
