@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     background: "rgb(244, 240, 234)",
     boxShadow: "0px 2px 2px 0px rgb(244, 240, 234)",
     '&:hover': {
-      boxShadow: "-1px 10px 10px 0px rgb(244, 240, 234)"
+      boxShadow: "-1px 10px 29px 0px rgb(244, 240, 234)"
    },
   },
   cardMedia: {
