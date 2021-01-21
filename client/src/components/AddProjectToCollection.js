@@ -39,8 +39,8 @@ export default function AddProjectToCollection(props) {
         }}
       >
         <option aria-label="None" value="" />
-        {collections.map(collection => {
-          return <option value={collection.id}>{collection.name}</option>
+        {collections.map((collection, i) => {
+          return <option key ={i} value={collection.id}>{collection.name}</option>
         })}
 
       </NativeSelect>

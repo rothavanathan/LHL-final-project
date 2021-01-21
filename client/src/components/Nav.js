@@ -25,7 +25,7 @@ export default function SimpleBottomNavigation() {
     >
       <Tab to="/home" icon={<HomeIcon />} component={Link}/>
       <Tab to="/search" icon={<SearchIcon />} component={Link} />
-      <Tab to="/library" icon={<LibraryMusicIcon/> } component={Link} />
+      <Tab to="/library" icon={<LibraryMusicIcon/>} component={Link} />
     </BottomNavigation>
   );
 }
