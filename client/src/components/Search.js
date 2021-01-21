@@ -70,7 +70,7 @@ export default function Search(props) {
   // const { trackName, url_full_song_preview, artistName, artworkUrl100 } = results[0];
   // console.log("RESULTSSSSS: ", results)
 
-  const songId = 1;
+  // const songId = 1;
   const classes = useStyles();
   return !isSongSelected.trackName ? (
     <div>

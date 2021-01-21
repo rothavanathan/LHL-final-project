@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-
 import React, { useState } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles({
@@ -20,7 +19,6 @@ const useStyles = makeStyles({
 
 export default function SimpleBottomNavigation() {
   const classes = useStyles();
-  // const [value, setValue] = useState(0);
 
   return (
     <BottomNavigation

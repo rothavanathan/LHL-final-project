@@ -61,6 +61,7 @@ export default function Project(props) {
   const [note, setNote] = useState("");
   const { isLoggedIn } = props;
   const { id } = useParams()
+  console.log("IS LOGGED IN-------", isLoggedIn);
 
   const AudioCtx = window.AudioContext || window.webkitAudioContext;
   const audioCtx = new AudioCtx();
@@ -135,6 +136,7 @@ export default function Project(props) {
 
   return isLoggedIn ? (
     <div>
+
       <div className="main-window">
         <header className={classes.header}>
           <Link to="/home">
@@ -180,6 +182,7 @@ export default function Project(props) {
 
       <PlayerTransport tracks={stems} audioCtx={audioCtx} />
       <ProjectNav />
+
       <Prompt
         when={check()}
         message={"Don't you want to saaaaaaave!?"}
