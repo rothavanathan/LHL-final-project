@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import HomeIcon from '@material-ui/icons/Home';
+import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
 import SettingsIcon from '@material-ui/icons/Settings';
 import BookIcon from '@material-ui/icons/Book';
 
@@ -27,7 +27,7 @@ export default function SimpleBottomNavigation() {
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction label="Player" icon={<HomeIcon />} href="#player" />
+      <BottomNavigationAction label="Player" icon={<TuneOutlinedIcon />} href="#player" />
       <BottomNavigationAction label="Notes" icon={<BookIcon />} href="#notes" />
       <BottomNavigationAction label="Global" icon={<SettingsIcon />} href="#global" />
     </BottomNavigation>
