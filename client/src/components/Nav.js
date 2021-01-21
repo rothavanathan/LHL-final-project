@@ -1,16 +1,5 @@
 import { Link } from "react-router-dom";
 
-// export default function Nav(props) {
-//   return (
-//     <div>
-//       <Link to="/home">Home</Link>
-//       <Link to="/search">Search</Link>
-//       <Link to="/library">Library</Link>
-//     </div>
-
-//   );
-// }
-
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -38,9 +27,9 @@ export default function SimpleBottomNavigation() {
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction label="Home" icon={<HomeIcon />} href="/home"/>
-      <BottomNavigationAction label="Search" icon={<SearchIcon />} href="/search"/>
-      <BottomNavigationAction label="Library" icon={<LibraryMusicIcon/> } href="/library"/>
+      <BottomNavigationAction label="Home" icon={<HomeIcon />} href="/home" />
+      <BottomNavigationAction label="Search" icon={<SearchIcon />} href="/search" />
+      <BottomNavigationAction label="Library" icon={<LibraryMusicIcon />} href="/library" />
     </BottomNavigation>
   );
 }

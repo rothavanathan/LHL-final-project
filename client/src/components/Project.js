@@ -87,6 +87,9 @@ export default function Project(props) {
       <h1>{content[0].title}</h1>
       <h2>{content[0].artist}</h2>
 
+
+
+      <Player tracks={stems} id="player"></Player>
       <form onSubmit={handleSubmit}>
         <h3>collections</h3>
         <AddProjectToCollection
@@ -94,12 +97,9 @@ export default function Project(props) {
           collectionId={collectionId}
           setCollectionId={setCollectionId} >
         </AddProjectToCollection>
-        {content[0] && <Notes projectId={id} existingNote={content[0].notes} note={note} setNote={setNote} />}
+        {content[0] && <Notes id="notes" projectId={id} existingNote={content[0].notes} note={note} setNote={setNote} />}
         <button type="submit">Save</button>
       </form>
-
-
-      <Player tracks={stems}></Player>
       <ProjectNav />
       <Prompt
         when={check()}
