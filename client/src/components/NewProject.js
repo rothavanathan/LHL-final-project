@@ -34,7 +34,7 @@ export default function NewProjectForm(props) {
 
   return (
     <div>
-      <p>Add New Project?</p>
+      <p>Start New Project?</p>
       <form onSubmit={handleSubmit}>
         <input
           value={projectTitle}

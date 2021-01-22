@@ -2,10 +2,10 @@
   --black: #1a1a1a;
   --white: rgb(244, 240, 234);
   --primary-color: rgb(245, 103, 93);
-  --main-color: black;
-  --secondary-color: #a6c5d2;
+  --secondary-color: #ffff5e;
   --tertiary-color: rgb(80, 32, 28);
-
+  --red: rgb(57, 255, 186);
+  
 }
 
 body {
