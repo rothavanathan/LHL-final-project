@@ -44,8 +44,8 @@ export default function Home(props) {
     axios
       .get('/api/content')
       .then(data => {
-        setCollections(data.data.collections);
-        setProjects(data.data.projects);
+        setCollections(data.data.collections.splice(0, 3));
+        setProjects(data.data.projects.splice(0, 3));
       })
       .catch((err) => console.log(err));
   }, []);
