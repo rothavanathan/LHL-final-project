@@ -55,10 +55,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Project(props) {
   const classes = useStyles();
-  const [content, setContent] = useState([{ title: "", artist: "", url: "" }])
-  const [collections, setCollections] = useState([{ name: "", user_id: "", thumbnail: "" }])
-  const [collectionId, setCollectionId] = useState()
+  const [content, setContent] = useState([{ title: "", artist: "", url: "" }]);
+  const [collections, setCollections] = useState([{ name: "", user_id: "", thumbnail: "" }]);
+  const [collectionId, setCollectionId] = useState();
   const [note, setNote] = useState("");
+  const [isNotChanged, setIsNotChanged] = useState(false);
   const { isLoggedIn } = props;
   const { id } = useParams()
   console.log("IS LOGGED IN-------", isLoggedIn);
@@ -100,14 +101,14 @@ export default function Project(props) {
   })
 
 
-  const check = () => {
+  // const check = () => {
 
-    if (project.notes !== note || collectionId !== OGcollectionId) {
-      return true
-    } else {
-      return false
-    }
-  }
+  //   if (project.notes !== note || collectionId !== OGcollectionId) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
 
   const saveNote = () => {
     axios
@@ -117,7 +118,6 @@ export default function Project(props) {
         collection_id: collectionId
       })
       .then((data) => {
-        console.log(`data back from save`, data.data.rows[0])
         existingNote = data.data.rows[0].notes
         OGcollectionId = data.data.rows[0].collection_id
       })
@@ -125,9 +125,9 @@ export default function Project(props) {
   };
 
   const handleSubmit = (event) => {
-    console.log("CLICKKKKKK")
     event.preventDefault();
     saveNote();
+    setIsNotChanged(true);
   };
 
 
@@ -175,7 +175,7 @@ export default function Project(props) {
             </IconButton>
           </Box>
 
-          {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} />}
+          {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged}/>}
 
         </form>
       </div>
@@ -184,7 +184,7 @@ export default function Project(props) {
       <ProjectNav />
 
       <Prompt
-        when={check()}
+        when={!isNotChanged}
         message={"Don't you want to saaaaaaave!?"}
       />
 
