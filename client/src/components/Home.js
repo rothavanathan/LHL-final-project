@@ -44,6 +44,7 @@ export default function Home(props) {
         setCollections(data.data.collections);
         setProjects(data.data.projects);
       })
+      .catch((err) => console.log(err));
   }, []);
 
   return isLoggedIn ? (
