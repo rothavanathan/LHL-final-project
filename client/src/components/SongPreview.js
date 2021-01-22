@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import { CardContent, CardMedia, IconButton, Typography, Grid, Button } from '@material-ui/core';
+import { CardContent, CardMedia, IconButton, Typography, Grid, Button, Box } from '@material-ui/core';
 import { SkipPrevious, PlayArrow, SkipNext } from '@material-ui/icons';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { Link, Redirect } from "react-router-dom";
 import NewProject from "./NewProject"
 
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     paddingLeft: theme.spacing(1),
+
     paddingBottom: theme.spacing(1),
   },
   playIcon: {
@@ -46,25 +48,46 @@ export default function SongPreview(props) {
   const handleClick = () => {
     props.setSong({})
   }
+  console.log(`artwork url is`, artworkUrl100)
 
   return (
-    <Grid item key={props.id} xs={12}>
-      <Card className={classes.root}>
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <CardMedia
-              className={classes.cover}
-              image={artworkUrl100}
-              title={trackName}
-            />
-            <Typography component="h5" variant="h5">
-              {trackName}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              {artistName}
-            </Typography>
-          </CardContent>
-          {/* <div className={classes.controls}>
+    <div>
+      <header className={classes.header}>
+
+        <ArrowBackIosIcon
+          className={classes.backArrow}
+          onClick={handleClick}
+        >Back to Home
+            </ArrowBackIosIcon>
+
+
+        <Box className={classes.titleBox}>
+
+          <Typography component="h1" variant="h5">
+            Search
+          </Typography>
+
+        </Box>
+      </header>
+
+      <Grid item key={props.id} xs={12}>
+        <Card className={classes.root}>
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <CardMedia
+                className={classes.cover}
+                image={artworkUrl100}
+                title={trackName}
+                style={useStyles.media}
+              />
+              <Typography component="h5" variant="h5">
+                {trackName}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                {artistName}
+              </Typography>
+            </CardContent>
+            {/* <div className={classes.controls}>
             <IconButton aria-label="previous">
               {theme.direction === 'rtl' ? <SkipNext /> : <SkipPrevious />}
             </IconButton>
@@ -75,18 +98,19 @@ export default function SongPreview(props) {
               {theme.direction === 'rtl' ? <SkipPrevious /> : <SkipNext />}
             </IconButton>
           </div> */}
-          <CardMedia
-            component="audio"
-            image={previewUrl}
-            title='title'
-            controls
-          />
-        </div>
-        <button class="btn-btn danger" onClick={handleClick}>Cancel</button>
+            <CardMedia
+              component="audio"
+              image={previewUrl}
+              title='title'
+              controls
+            />
+          </div>
+          <button class="btn-btn danger" onClick={handleClick}>Cancel</button>
 
+        </Card >
         <NewProject songId={trackId} user={props.user} />
 
-      </Card >
-    </Grid >
+      </Grid >
+    </div>
   );
 }

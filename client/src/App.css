@@ -1,5 +1,5 @@
 :root {
-  --black: black;
+  --black: #1a1a1a;
   --white: rgb(244, 240, 234);
   --primary-color: rgb(245, 103, 93);
   --main-color: black;
@@ -9,12 +9,10 @@
 }
 
 body {
-  /* background: rgb(34, 33, 34); */
 
-  background: #000821;
   background-image: url("https://www.transparenttextures.com/patterns/otis-redding.png");
 
-/*   background: #1a1a1a; */
+  background: var(--black);
 
   color: white;
 }

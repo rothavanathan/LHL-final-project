@@ -42,7 +42,7 @@ export default function Login(props) {
       display: "flex",
       flexDirection: "row",
       alignItems: "baseline",
-      justifyContent: "center",      
+      justifyContent: "center",
       color: "antiquewhite",
       fontFamily: "Noto Sans",
       margin: "20px",
@@ -72,11 +72,11 @@ export default function Login(props) {
     },
 
     emailText: {
-      color: "white",
+      color: "var(--white)",
       display: "flex",
-      backgroundColor: " #000821",
+      backgroundColor: "var(--black)",
       border: "none",
-      borderBottom: " #3b2c13 4px solid",
+      borderBottom: "var(--tertiary-color) 4px solid",
       backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
       margin: "30px",
       outline: "none",
@@ -93,11 +93,11 @@ export default function Login(props) {
     },
 
     passwordText: {
-      color: "white",
+      color: "var(--white)",
       display: "flex",
-      backgroundColor: " #000821",
+      backgroundColor: "var(--black)",
       border: "none",
-      borderBottom: " #3b2c13 4px solid",
+      borderBottom: "var(--tertiary-color) 4px solid",
       backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
       margin: "30px",
       outline: "none",
@@ -109,10 +109,10 @@ export default function Login(props) {
     logButton: {
       fontFamily: "Noto Sans",
       display: "flex",
-      background: "#044a10",
+      background: "var(--primary-color)",
       width: "60%",
       margin: "40px",
-      color: "antiquewhite",
+      color: "var(--white)",
     },
 
     back: {
@@ -131,11 +131,11 @@ export default function Login(props) {
   return !isLoggedIn ? (
     <div>
       <div className={classes.main}>
-          <Link to="/entry">
-            <ArrowBackIosIcon>
-            </ArrowBackIosIcon>
-          </Link>      
-          <h1 className={classes.main}>Welcome Back!</h1>
+        <Link to="/entry">
+          <ArrowBackIosIcon>
+          </ArrowBackIosIcon>
+        </Link>
+        <h1 className={classes.main}>Welcome Back!</h1>
       </div>
 
       <h2 className={classes.heading2}>Let's get you logged in</h2>
@@ -178,6 +178,6 @@ export default function Login(props) {
       </div>
     </div>
   ) : (
-    <Redirect to="/home" />
-  );
+      <Redirect to="/home" />
+    );
 }

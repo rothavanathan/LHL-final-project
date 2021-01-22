@@ -32,7 +32,7 @@ export default function Entry(props) {
     logButton: {
       fontFamily: "Noto Sans",
       display: "flex",
-      background: "#044a10",
+      background: "rgb(245, 103, 93)",
       width: "60%",
       margin: "25px",
       color: "antiquewhite",
@@ -48,7 +48,6 @@ export default function Entry(props) {
 
   return (
     <div className={classes.entryImage}>
-      <h1>LOGO</h1>
 
       <h1 className={classes.heading}>Layers</h1>
 
