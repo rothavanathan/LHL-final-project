@@ -9,6 +9,9 @@ import BookIcon from '@material-ui/icons/Book';
 
 const useStyles = makeStyles({
   root: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
     width: '100%',
     position: 'fixed',
     bottom: 0,
@@ -17,7 +20,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ProjectNav() {
+export default function ProjectNav(props) {
   const classes = useStyles();
   // const [value, setValue] = useState(0);
 
@@ -25,10 +28,10 @@ export default function ProjectNav() {
     window[`scrollTo`]({ top: 0, behavior: 'smooth' })
   }
   const handleNotesClick = () => {
-    window[`scrollTo`]({ bottom: 0, behavior: 'smooth' })
+    window[`scrollTo`]({ top: props.height, behavior: 'smooth' })
   }
   const handleGlobalClick = () => {
-    window[`scrollTo`]({ bottom: 0, behavior: 'smooth' })
+    window[`scrollTo`]({ top: props.height, behavior: 'smooth' })
   }
 
   return (

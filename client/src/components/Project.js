@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, Redirect, useParams, Prompt } from "react-router-dom";
 import axios from 'axios';
 
@@ -48,10 +48,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 56,
     color: "rgb(245, 103, 93)"
   },
-
-
-
 }));
+
 
 export default function Project(props) {
   const classes = useStyles();
@@ -60,6 +58,11 @@ export default function Project(props) {
   const [collectionId, setCollectionId] = useState()
   const [note, setNote] = useState("");
   const { isLoggedIn } = props;
+
+  //for scroll to bottom
+  const [height, setHeight] = useState(0)
+  const ref = useRef(null)
+
   const { id } = useParams()
   console.log("IS LOGGED IN-------", isLoggedIn);
 
@@ -90,6 +93,9 @@ export default function Project(props) {
       })
   }, [])
 
+  useEffect(() => {
+    setHeight(ref.current.clientHeight)
+  })
 
   const project = content[0]
   let OGcollectionId = project.collection_id
@@ -137,7 +143,7 @@ export default function Project(props) {
   return isLoggedIn ? (
     <div>
 
-      <div className="main-window">
+      <div className="main-window" ref={ref}>
         <header className={classes.header}>
           <Link to="/home">
             <ArrowBackIosIcon
@@ -181,7 +187,7 @@ export default function Project(props) {
       </div>
 
       <PlayerTransport tracks={stems} audioCtx={audioCtx} />
-      <ProjectNav />
+      <ProjectNav height={height} />
 
       <Prompt
         when={check()}
