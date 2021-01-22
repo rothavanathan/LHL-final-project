@@ -4,8 +4,8 @@ import { Redirect } from "react-router-dom";
 import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ProjectCard from "./ProjectCard";
+import NewCollectionCard from './NewCollectionCard'
 import Nav from "./Nav";
-import NewCollection from "./NewCollection";
 
 const useStyles = makeStyles((theme) => ({
   mainHeader: {
@@ -26,7 +26,6 @@ export default function Library(props) {
   const classes = useStyles();
   const [collections, setCollections] = useState([])
   const [projects, setProjects] = useState([])
-  const [isCollectionFormOpen, setIsCollectionFormOpen] = useState(false)
   const { isLoggedIn } = props;
 
   useEffect(() => {
@@ -39,19 +38,16 @@ export default function Library(props) {
   }, []);
 
 
-  const openCollectionForm = () => {
-    setIsCollectionFormOpen(true)
-  }
+  // const openCollectionForm = () => {
+  //   setIsCollectionFormOpen(true)
+  // }
 
-  const closeCollectionForm = () => {
-    setIsCollectionFormOpen(false)
-  }
+  // const closeCollectionForm = () => {
+  //   setIsCollectionFormOpen(false)
+  // }
 
   return isLoggedIn ? (
     <div>
-      { isCollectionFormOpen ? (
-        <NewCollection closeForm={closeCollectionForm} user={isLoggedIn} setCollections={setCollections} />
-      ) : (
           <div>
             <header className={classes.mainHeader}>
               <Typography
@@ -60,7 +56,6 @@ export default function Library(props) {
                 color="var(--white)">
                 Library
           </Typography>
-
             </header>
             <section>
               <Typography
@@ -69,12 +64,21 @@ export default function Library(props) {
               >All Collections
           </Typography>
               <ul>
-                <li onClick={openCollectionForm}>
+                {/* <li onClick={openCollectionForm}>
                   + Collections
-          </li>
+          </li> */}
               </ul>
               <Container className={classes.cardGrid} maxWidth="md" id="projects">
                 <Grid container spacing={4}>
+                  <Fragment>
+                    <NewCollectionCard
+                      key={0}
+                      title={"Start a New Collection"}
+                      image={"https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80"}
+                      isLoggedIn={isLoggedIn}
+                      setCollections={setCollections}
+                    />
+                  </Fragment>
                   {collections.map((collection, i) =>
                     <Fragment key={i}>
                       <ProjectCard
@@ -94,9 +98,6 @@ export default function Library(props) {
                 variant="h5"
               >All Projects
           </Typography>
-              <ul>
-                <li>+ Project</li>
-              </ul>
               <Container className={classes.cardGrid} maxWidth="md" id="projects" >
                 <Grid container spacing={4} >
                   <ProjectCard
@@ -122,7 +123,6 @@ export default function Library(props) {
             </section>
             <Nav />
           </div >
-        )}
     </div>
   ) : (
       <Redirect to="/" />
