@@ -49,13 +49,12 @@ export default function NewCollectionCard(props) {
         <NewCollectionForm closeForm={closeCollectionForm} user={isLoggedIn} setCollections={setCollections} />
       ) : (
       <Grid item key={props.key} xs={6} sm={6} md={4}>
-        <Card className={classes.card}>
+        <Card className={classes.card} onClick={openCollectionForm}>
           <CardMedia
             className={classes.cardMedia}
             image={props.image}
             title={props.title}
             style={useStyles.media}
-            onClick={openCollectionForm}
           />
           <CardContent className={classes.cardContent}>
             <Typography gutterBottom variant="h7" component="h2">
