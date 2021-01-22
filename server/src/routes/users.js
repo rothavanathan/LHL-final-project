@@ -1,20 +1,27 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const { addUser, login, getUserByEmail } = require("../helpers/dbHelpers");
+const { addUser, getUserByEmail } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
   // Register Route
   router.post("/", (req, res) => {
     const { first_name, email, password } = req.body;
-
+    console.log("NEW USER EMAIL--------------->", email)
     const hashedPassword = bcrypt.hashSync(password, 12);
 
-    return addUser(first_name, email, hashedPassword, db)
+    getUserByEmail(email, db)
       .then((userInfo) => {
-        if (!userInfo) {
-          res.sendStatus(404);
+        console.log("USER----->", userInfo.rows[0])
+        if (!email || !password || !first_name) {
+          console.log("MISSING VALUE");
+          // show error
+          res.send("MISSING_VALUE")
+        } else if (userInfo.rows.length !== 0) {
+          console.log("user exists");
+          // show error
+          res.send("USER_EXISTS")
         } else {
           const user = userInfo.rows[0];
           req.session["user_id"] = user.id;
@@ -22,6 +29,7 @@ module.exports = (db) => {
           const userId = user.id;
           const userEmail = user.email;
           res.send({ userId });
+
         }
       })
       .catch((err) => {
@@ -38,7 +46,7 @@ module.exports = (db) => {
         if (userInfo.rows.length === 0) {
           console.log("NO USER FOUND")
           console.log("THIS BE DA DB RES---------->", userInfo.rows)
-          res.send("ERROR")
+          res.send("LOGIN_ERROR")
           // above will handle sending back error
         } else {
           const user = userInfo.rows[0];
