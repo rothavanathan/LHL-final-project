@@ -25,7 +25,7 @@ export default function Login(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`Event has been submitted from form-control----> `, event);
+    // console.log(`Event has been submitted from form-control----> `, event);
     loginUser();
   };
 
