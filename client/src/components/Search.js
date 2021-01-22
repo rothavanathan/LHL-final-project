@@ -16,8 +16,13 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
+
   searchBox: {
-    background: "white"
+    color: "white",
+    backgroundColor: "#1a1a1a",
+    border: "none",
+    borderBottom: "var(--tertiary-color) 4px solid",
+    width: "80%"
   }
 }));
 
@@ -37,7 +42,7 @@ export default function Search(props) {
         setIsSearching(true);
         setTerm(term)
       }
-    },[debouncedSearchTerm]);
+    }, [debouncedSearchTerm]);
 
 
   //SEARCH QUERY
@@ -48,6 +53,7 @@ export default function Search(props) {
       url: `https://itunes.apple.com/search?term=${term.toLowerCase()}&country=CA&media=music&entity=song`
     })
       //gets our actual db data
+      .catch(err => console.log(err))
       .then(data1 => {
         axios.get(`api/content/search/${term.toLowerCase()}`)
           .then(data2 => {
@@ -90,7 +96,7 @@ export default function Search(props) {
   return !isSongSelected.trackName ? (
     <div>
       <h1>Search</h1>
-      <TextField variant="filled" value={term} onChange={handleChange} className={classes.searchBox}></TextField>
+      <TextField variant="filled" value={term} onChange={handleChange} className={classes.searchBox} />
       {/* <p>{results}</p> */}
       {/* <NewProject songId={songId} user={isLoggedIn} /> */}
       {/* <NewCollection songId={songId} user={isLoggedIn} /> */}

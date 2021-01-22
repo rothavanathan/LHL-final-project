@@ -3,7 +3,31 @@ import { Link, Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Nav from "./Nav";
-import { FormControl, Button } from "@material-ui/core";
+import { FormControl, Button, Typography } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  main: {
+    marginTop: 20,
+    marginBottom: 40,
+    display: "flex",
+    color: "var(--white)",
+    alignItems: "center"
+  },
+  backArrow: {
+    fontSize: "large",
+    padding: 10,
+    marginLeft: 10,
+    marginTop: 10
+  },
+  logButton: {
+    fontFamily: "Noto Sans",
+    display: "flex",
+    background: "var(--primary-color)",
+    width: "60%",
+    margin: "40px",
+    color: "var(--white)",
+  },
+}));
 
 export default function Gear(props) {
   const { isLoggedIn, setUser } = props;
@@ -25,37 +49,22 @@ export default function Gear(props) {
       .catch((err) => console.log(err));
   };
 
-  const useStyles = makeStyles((theme) => ({
-    main: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "baseline",
-      justifyContent: "center",
-      color: "antiquewhite",
-    },
 
-    logButton: {
-      fontFamily: "Noto Sans",
-      display: "flex",
-      background: "#044a10",
-      width: "60%",
-      margin: "40px",
-      color: "antiquewhite",
-    },
-  }));
 
   const classes = useStyles();
 
   return isLoggedIn ? (
     <div>
-      <div className={classes.main}>
+      <header className={classes.main}>
         <Link to="/home">
           <ArrowBackIosIcon className={classes.backArrow}>
             Back to Home
           </ArrowBackIosIcon>
         </Link>
-        <h1>Settings</h1>
-      </div>
+        <Typography component="h1" variant="h5">
+          Settings
+        </Typography>
+      </header>
 
       <FormControl className={classes.passwordInput}>
         <form onSubmit={handleSubmit}>
@@ -68,6 +77,6 @@ export default function Gear(props) {
       <Nav />
     </div>
   ) : (
-    <Redirect to="/" />
-  );
+      <Redirect to="/" />
+    );
 }

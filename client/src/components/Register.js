@@ -48,15 +48,15 @@ export default function Register(props) {
       display: "flex",
       flexDirection: "row",
       alignItems: "baseline",
-      justifyContent: "center",      
-      color: "antiquewhite",
+      justifyContent: "center",
+      color: "var(--white)",
       fontFamily: "Noto Sans",
       margin: "20px",
 
     },
 
     heading2: {
-      color: "antiquewhite",
+      color: "var(--white)",
       fontFamily: "Noto Sans",
       fontSize: 15,
       margin: "40px",
@@ -78,11 +78,11 @@ export default function Register(props) {
     },
 
     emailText: {
-      color: "white",
+      color: "var(--white)",
       display: "flex",
-      backgroundColor: " #000821",
+      backgroundColor: "var(--black)",
       border: "none",
-      borderBottom: " #3b2c13 4px solid",
+      borderBottom: "var(--tertiary-color) 4px solid",
       backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
       margin: "30px",
       outline: "none",
@@ -93,17 +93,17 @@ export default function Register(props) {
 
     password: {
       width: "80%",
-      color: "white",
+      color: "var(--white)",
       display: "flex",
       flexDirection: "column",
     },
 
     passwordText: {
-      color: "white",
+      color: "var(--white)",
       display: "flex",
-      backgroundColor: " #000821",
+      backgroundColor: "var(--black)",
       border: "none",
-      borderBottom: " #3b2c13 4px solid",
+      borderBottom: "var(--tertiary-color) 4px solid",
       backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
       margin: "30px",
       outline: "none",
@@ -114,17 +114,17 @@ export default function Register(props) {
 
     name: {
       width: "80%",
-      color: "white",
+      color: "var(--white)",
       display: "flex",
       flexDirection: "column",
     },
-    
+
     nameText: {
-      color: "white",
+      color: "var(--white)",
       display: "flex",
-      backgroundColor: " #000821",
+      backgroundColor: "var(--black)",
       border: "none",
-      borderBottom: " #3b2c13 4px solid",
+      borderBottom: "var(--tertiary-color) 4px solid",
       backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
       margin: "30px",
       outline: "none",
@@ -136,10 +136,10 @@ export default function Register(props) {
     regButton: {
       fontFamily: "Noto Sans",
       display: "flex",
-      background: "#044a10",
+      background: "var(--primary-color)",
       width: "60%",
       margin: "40px",
-      color: "antiquewhite",
+      color: "var(--white)",
     },
 
     back: {
@@ -148,7 +148,7 @@ export default function Register(props) {
     },
 
     regLink: {
-      color: "antiquewhite",
+      color: "var(--white)",
       textDecoration: "none",
     },
   }));
@@ -157,13 +157,13 @@ export default function Register(props) {
 
   return !isLoggedIn ? (
     <div>
-      
+
       <div className={classes.main}>
-          <Link to="/entry">
-            <ArrowBackIosIcon>
-            </ArrowBackIosIcon>
-          </Link>      
-          <h1 className={classes.main}>Welcome!</h1>
+        <Link to="/entry">
+          <ArrowBackIosIcon>
+          </ArrowBackIosIcon>
+        </Link>
+        <h1 className={classes.main}>Welcome!</h1>
       </div>
 
       <h2 className={classes.heading2}>Let's get you signed up</h2>
@@ -221,6 +221,6 @@ export default function Register(props) {
       </div>
     </div>
   ) : (
-    <Redirect to="/home" />
-  );
+      <Redirect to="/home" />
+    );
 }

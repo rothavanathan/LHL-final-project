@@ -32,9 +32,9 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: var(--tertiary-color);
 }
 input[type=range]::-moz-range-track {
-  width: 50%;
-  max-width: 200px;
-  height: 8.4px;
+  /* width: 50%; */
+  /* max-width: 200px; */
+  height: 6px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   background: var(--tertiary-color);
