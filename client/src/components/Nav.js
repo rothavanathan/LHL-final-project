@@ -10,6 +10,9 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles({
   root: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
     width: '100%',
     position: 'fixed',
     bottom: 0,
@@ -22,11 +25,12 @@ export default function SimpleBottomNavigation() {
 
   return (
     <BottomNavigation
+      showLabels
       className={classes.root}
     >
-      <Tab to="/home" icon={<HomeIcon />} component={Link} />
-      <Tab to="/search" icon={<SearchIcon />} component={Link} />
-      <Tab to="/library" icon={<LibraryMusicIcon />} component={Link} />
+      <Tab label="Home" to="/home" icon={<HomeIcon />} component={Link} />
+      <Tab label="Search" to="/search" icon={<SearchIcon />} component={Link} />
+      <Tab label="Library" to="/library" icon={<LibraryMusicIcon />} component={Link} />
     </BottomNavigation>
   );
 }

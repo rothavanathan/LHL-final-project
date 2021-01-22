@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, Redirect, useParams, Prompt } from "react-router-dom";
 import axios from 'axios';
 
@@ -50,10 +50,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 56,
     color: "rgb(245, 103, 93)"
   },
-
-
-
 }));
+
 
 export default function Project(props) {
   const classes = useStyles();
@@ -65,6 +63,11 @@ export default function Project(props) {
   const [open, setOpen] = useState(false);
   const [redirectOnDelete, setRedirectOnDelete] = useState(true);
   const { isLoggedIn } = props;
+
+  //for scroll to bottom
+  const [height, setHeight] = useState(0)
+  const ref = useRef(null)
+
   const { id } = useParams()
   console.log("IS LOGGED IN-------", isLoggedIn);
 
@@ -92,6 +95,9 @@ export default function Project(props) {
       })
   }, [])
 
+  useEffect(() => {
+    setHeight(ref.current.clientHeight)
+  })
 
   const project = content[0]
   let OGcollectionId = project.collection_id
@@ -209,7 +215,7 @@ export default function Project(props) {
         </div>
 
         <PlayerTransport tracks={stems} audioCtx={audioCtx} />
-        <ProjectNav />
+        <ProjectNav height={height} />
 
         <Prompt
           when={!isNotChanged}
@@ -217,7 +223,6 @@ export default function Project(props) {
         />
       </div>
       )}
-
     </div >
   ) : (
       <Redirect to="/" />
