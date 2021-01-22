@@ -152,10 +152,10 @@ export default function Project(props) {
             <Typography component="h1" variant="h5">
               {project.project_title}
             </Typography>
-
             <Typography variant="subtitle1">
-              {project.artist}
+              {project.title} - {project.artist}
             </Typography>
+
           </Box>
         </header>
 
