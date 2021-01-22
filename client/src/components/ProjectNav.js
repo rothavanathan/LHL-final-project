@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import { BottomNavigation, Tab } from '@material-ui/core/';
 import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
 import SettingsIcon from '@material-ui/icons/Settings';
 import BookIcon from '@material-ui/icons/Book';
@@ -18,18 +17,28 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SimpleBottomNavigation() {
+export default function ProjectNav() {
   const classes = useStyles();
   // const [value, setValue] = useState(0);
+
+  const handlePlayerClick = () => {
+    window[`scrollTo`]({ top: 0, behavior: 'smooth' })
+  }
+  const handleNotesClick = () => {
+    window[`scrollTo`]({ bottom: 0, behavior: 'smooth' })
+  }
+  const handleGlobalClick = () => {
+    window[`scrollTo`]({ bottom: 0, behavior: 'smooth' })
+  }
 
   return (
     <BottomNavigation
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction label="Player" icon={<TuneOutlinedIcon />} href="#player" />
-      <BottomNavigationAction label="Notes" icon={<BookIcon />} href="#notes" />
-      <BottomNavigationAction label="Global" icon={<SettingsIcon />} href="#global" />
+      <Tab label="Player" icon={<TuneOutlinedIcon />} onClick={handlePlayerClick} />
+      <Tab label="Notes" icon={<BookIcon />} onClick={handleNotesClick} />
+      <Tab label="Global" icon={<SettingsIcon />} onClick={handleNotesClick} />
     </BottomNavigation>
   );
 }
