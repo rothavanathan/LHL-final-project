@@ -77,6 +77,7 @@ export default function Project(props) {
           .get('/api/content')
           .then(data2 => {
             console.log(`grabbing content for the collections`, data2.data.collections);
+            console.log("PROJECTS----------", data.data.projects)
             setContent(data.data.projects);
             console.log(`project data`, data.data.projects[0].collection_id)
             setCollectionId(data.data.projects[0].collection_id);
@@ -97,8 +98,8 @@ export default function Project(props) {
   // console.log("CONTENT----------", content);
 
   const stems = content.map((project) => {
-    const { title, url, icon, peaks_array, name } = project
-    return { title, url, icon, peaks_array, name }
+    const { title, url, icon, peaks_array, name, project_title } = project
+    return { title, url, icon, peaks_array, name, project_title }
   })
 
 
@@ -149,7 +150,7 @@ export default function Project(props) {
           <Box className={classes.titleBox}>
 
             <Typography component="h1" variant="h5">
-              {project.title}
+              {project.project_title}
             </Typography>
 
             <Typography variant="subtitle1">
