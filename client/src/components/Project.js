@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography, IconButton } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 import Player from "./Player";
@@ -55,10 +55,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Project(props) {
   const classes = useStyles();
-  const [content, setContent] = useState([{ title: "", artist: "", url: "" }])
-  const [collections, setCollections] = useState([{ name: "", user_id: "", thumbnail: "" }])
-  const [collectionId, setCollectionId] = useState()
+  const [content, setContent] = useState([{ title: "", artist: "", url: "" }]);
+  const [collections, setCollections] = useState([{ name: "", user_id: "", thumbnail: "" }]);
+  const [collectionId, setCollectionId] = useState();
   const [note, setNote] = useState("");
+  const [isNotChanged, setIsNotChanged] = useState(false);
   const { isLoggedIn } = props;
   const { id } = useParams()
   console.log("IS LOGGED IN-------", isLoggedIn);
@@ -76,9 +77,7 @@ export default function Project(props) {
           //grabbing collections for user
           .get('/api/content')
           .then(data2 => {
-            console.log(`grabbing content for the collections`, data2.data.collections);
             setContent(data.data.projects);
-            console.log(`project data`, data.data.projects[0].collection_id)
             setCollectionId(data.data.projects[0].collection_id);
             setCollections(data2.data.collections)
           })
@@ -97,19 +96,19 @@ export default function Project(props) {
   // console.log("CONTENT----------", content);
 
   const stems = content.map((project) => {
-    const { title, url, icon, peaks_array, name } = project
-    return { title, url, icon, peaks_array, name }
+    const { title, url, icon, peaks_array, name, project_title } = project
+    return { title, url, icon, peaks_array, name, project_title }
   })
 
 
-  const check = () => {
+  // const check = () => {
 
-    if (project.notes !== note || collectionId !== OGcollectionId) {
-      return true
-    } else {
-      return false
-    }
-  }
+  //   if (project.notes !== note || collectionId !== OGcollectionId) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
 
   const saveNote = () => {
     axios
@@ -119,7 +118,6 @@ export default function Project(props) {
         collection_id: collectionId
       })
       .then((data) => {
-        console.log(`data back from save`, data.data.rows[0])
         existingNote = data.data.rows[0].notes
         OGcollectionId = data.data.rows[0].collection_id
       })
@@ -129,10 +127,11 @@ export default function Project(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     saveNote();
+    setIsNotChanged(true);
   };
 
 
-  // console.log("I AM CONTENT ZERO DO I HAVE A NOTE", project.notes);
+  console.log(existingNote);
 
   return isLoggedIn ? (
     <div>
@@ -149,12 +148,12 @@ export default function Project(props) {
           <Box className={classes.titleBox}>
 
             <Typography component="h1" variant="h5">
-              {project.title}
+              {project.project_title}
+            </Typography>
+            <Typography variant="subtitle1">
+              {project.title} - {project.artist}
             </Typography>
 
-            <Typography variant="subtitle1">
-              {project.artist}
-            </Typography>
           </Box>
         </header>
 
@@ -168,14 +167,15 @@ export default function Project(props) {
               setCollectionId={setCollectionId} >
             </AddProjectToCollection>
 
-            <SaveIcon
-              className={classes.saveIcon}
-              type="submit"
-            >Save
-            </SaveIcon>
+            <IconButton aria-label="save" type="submit">
+              <SaveIcon
+                className={classes.saveIcon}
+              >Save
+              </SaveIcon>
+            </IconButton>
           </Box>
 
-          {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} />}
+          {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged}/>}
 
         </form>
       </div>
@@ -184,7 +184,7 @@ export default function Project(props) {
       <ProjectNav />
 
       <Prompt
-        when={check()}
+        when={!isNotChanged}
         message={"Don't you want to saaaaaaave!?"}
       />
 
