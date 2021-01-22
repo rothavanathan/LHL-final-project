@@ -41,7 +41,7 @@ export default function NewCollectionForm(props) {
 
   const saveCollection = () => {
     axios
-      .put("http://localhost:8000/api/collection/new", {
+      .put("http://localhost:8000/api/collection/", {
         name: collectionName,
         user_id: user
       })
