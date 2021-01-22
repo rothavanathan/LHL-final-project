@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography, IconButton } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 import Player from "./Player";
@@ -76,10 +76,7 @@ export default function Project(props) {
           //grabbing collections for user
           .get('/api/content')
           .then(data2 => {
-            console.log(`grabbing content for the collections`, data2.data.collections);
-            console.log("PROJECTS----------", data.data.projects)
             setContent(data.data.projects);
-            console.log(`project data`, data.data.projects[0].collection_id)
             setCollectionId(data.data.projects[0].collection_id);
             setCollections(data2.data.collections)
           })
@@ -128,12 +125,13 @@ export default function Project(props) {
   };
 
   const handleSubmit = (event) => {
+    console.log("CLICKKKKKK")
     event.preventDefault();
     saveNote();
   };
 
 
-  // console.log("I AM CONTENT ZERO DO I HAVE A NOTE", project.notes);
+  console.log(existingNote);
 
   return isLoggedIn ? (
     <div>
@@ -169,11 +167,12 @@ export default function Project(props) {
               setCollectionId={setCollectionId} >
             </AddProjectToCollection>
 
-            <SaveIcon
-              className={classes.saveIcon}
-              type="submit"
-            >Save
-            </SaveIcon>
+            <IconButton aria-label="save" type="submit">
+              <SaveIcon
+                className={classes.saveIcon}
+              >Save
+              </SaveIcon>
+            </IconButton>
           </Box>
 
           {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} />}
