@@ -13,6 +13,7 @@ import PlayerTransport from "./PlayerTransport";
 import ProjectNav from "./ProjectNav";
 import Notes from "./Notes"
 import AddProjectToCollection from "./AddProjectToCollection"
+import ConfirmDelete from "./ConfirmDelete";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -61,7 +62,8 @@ export default function Project(props) {
   const [collectionId, setCollectionId] = useState();
   const [note, setNote] = useState("");
   const [isNotChanged, setIsNotChanged] = useState(true);
-  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [redirectOnDelete, setRedirectOnDelete] = useState(true);
   const { isLoggedIn } = props;
   const { id } = useParams()
   console.log("IS LOGGED IN-------", isLoggedIn);
@@ -113,6 +115,12 @@ export default function Project(props) {
       .catch((err) => console.log(err));
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    saveNote();
+    setIsNotChanged(true);
+  };
+
   const deleteProject = () => {
     axios
       .delete(`http://localhost:8000/api/project/${id}`)
@@ -122,72 +130,93 @@ export default function Project(props) {
       .catch((err) => console.log(err));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    saveNote();
-    setIsNotChanged(true);
+  const handleAlertOpen = () => {
+    setOpen(true);
   };
+
+  const handleCancelDelete = () => {
+    setOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteProject();
+    setRedirectOnDelete(false);
+  }
 
 
   return isLoggedIn ? (
     <div>
-      <div className="main-window">
-        <header className={classes.header}>
-          <Link to="/home">
-            <ArrowBackIosIcon
-              className={classes.backArrow}
-            >Back to Home
-            </ArrowBackIosIcon>
-          </Link>
+      {!redirectOnDelete ? (
+        <Redirect to="/home" />
+      ) : (
+      <div>
+        <div className="main-window">
+          <header className={classes.header}>
+            <Link to="/home">
+              <ArrowBackIosIcon
+                className={classes.backArrow}
+              >Back to Home
+              </ArrowBackIosIcon>
+            </Link>
 
-          <Box className={classes.titleBox}>
+            <Box className={classes.titleBox}>
 
-            <Typography component="h1" variant="h5">
-              {project.project_title}
-            </Typography>
-            <Typography variant="subtitle1">
-              {project.title} - {project.artist}
-            </Typography>
+              <Typography component="h1" variant="h5">
+                {project.project_title}
+              </Typography>
+              <Typography variant="subtitle1">
+                {project.title} - {project.artist}
+              </Typography>
 
-          </Box>
-        </header>
+            </Box>
+          </header>
 
-        <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player"></Player>
+          <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player"></Player>
 
-        <form className={classes.projectForm} onSubmit={handleSubmit}>
-          <Box className={classes.formBox}>
-            <AddProjectToCollection
-              collections={collections}
-              collectionId={collectionId}
-              setCollectionId={setCollectionId} >
-            </AddProjectToCollection>
+          <form className={classes.projectForm} onSubmit={handleSubmit}>
+            <Box className={classes.formBox}>
+              <AddProjectToCollection
+                collections={collections}
+                collectionId={collectionId}
+                setCollectionId={setCollectionId} >
+              </AddProjectToCollection>
 
-            <IconButton aria-label="save" type="submit">
-              <SaveIcon
-                className={classes.saveIcon}
-              >
-              </SaveIcon>
-            </IconButton>
-            <IconButton aria-label="delete" onClick={deleteProject}>
-              <DeleteForeverIcon
-                className={classes.saveIcon}
-              >
-              </DeleteForeverIcon>
-            </IconButton>
-          </Box>
+              <IconButton aria-label="save" type="submit">
+                <SaveIcon
+                  className={classes.saveIcon}
+                >
+                </SaveIcon>
+              </IconButton>
+              <IconButton aria-label="delete" onClick={handleAlertOpen}>
+                <DeleteForeverIcon
+                  className={classes.saveIcon}
+                >
+                </DeleteForeverIcon>
+              </IconButton>
+              <ConfirmDelete
+                open={open}
+                setOpen={setOpen}
+                handleAlertOpen={handleAlertOpen}
+                handleConfirmDelete={handleConfirmDelete}
+                handleCancelDelete={handleCancelDelete}
+                name={content[0].project_title}
+              />
+            </Box>
 
-          {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged}/>}
+            {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged}/>}
 
-        </form>
+          </form>
+        </div>
+
+        <PlayerTransport tracks={stems} audioCtx={audioCtx} />
+        <ProjectNav />
+
+        <Prompt
+          when={!isNotChanged}
+          message={"Don't you want to saaaaaaave!?"}
+        />
       </div>
-
-      <PlayerTransport tracks={stems} audioCtx={audioCtx} />
-      <ProjectNav />
-
-      <Prompt
-        when={!isNotChanged}
-        message={"Don't you want to saaaaaaave!?"}
-      />
+      )}
 
     </div >
   ) : (
