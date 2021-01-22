@@ -122,6 +122,18 @@ const addProject = (title, song_id, user_id, db) => {
   return db.query(query)
 };
 
+const deleteProject = (id, db) => {
+  const query = {
+    text: `
+        DELETE FROM projects
+        WHERE id = $1;
+        `,
+    values: [id],
+  };
+
+  return db.query(query)
+};
+
 // Add song to a project
 const addSongToProject = (title, user_id, db) => {
   const query = {
@@ -210,5 +222,6 @@ module.exports = {
   addCollection,
   addExistingProjectToCollection,
   login,
-  addNoteToProject
+  addNoteToProject,
+  deleteProject
 };

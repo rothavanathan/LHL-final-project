@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getSongByProject, addNoteToProject, addProject } = require("../helpers/dbHelpers");
+const { getSongByProject, addNoteToProject, addProject, deleteProject } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
@@ -19,8 +19,9 @@ module.exports = (db) => {
   });
 
   // Update PROJECT with new note and ID
-  router.put("/addnote", (req, res) => {
-    const { notes, id, collection_id } = req.body;
+  router.put("/:id", (req, res) => {
+    const { notes, collection_id } = req.body;
+    const id = req.params.id
 
     addNoteToProject(notes, collection_id, id, db)
       .then((data) => {
@@ -35,7 +36,7 @@ module.exports = (db) => {
 
   // ADD Project
   // title, song_id, user_id
-  router.put("/new", (req, res) => {
+  router.put("/", (req, res) => {
     const { title, song_id, user_id } = req.body;
     console.log(`req.body in new project route is `, req.body)
     addProject(title, song_id, user_id, db)
@@ -44,6 +45,22 @@ module.exports = (db) => {
         const projectId = data.rows[0].id
 
         res.send({ projectId });
+      })
+      .catch((err) => {
+        console.log(`ruh roh`, err);
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  // delete project
+  router.delete("/:id", (req, res) => {
+    const id = req.params.id;
+    // const { id } = req.body;
+    console.log("ID---hfduiwe", id)
+    deleteProject(id, db)
+      .then(() => {
+        console.log(id, " Was deleted!")
+        res.send("DELETE");
       })
       .catch((err) => {
         console.log(`ruh roh`, err);
