@@ -1,5 +1,3 @@
-const bcrypt = require("bcrypt");
-
 const getSongsBySearch = (search, db) => {
 
   const query =
@@ -171,32 +169,6 @@ const addExistingProjectToCollection = (collectionId, projectId, db) => {
     .catch((err) => err);
 };
 
-const login = (email, passwordInput, database) => {
-  return getUserWithEmail(email, database).then((rows) => {
-    if (bcrypt.compareSync(passwordInput, rows[0].password)) {
-      return Promise.resolve(rows);
-    } else {
-      return Promise.reject(null);
-    }
-  });
-};
-
-const getUserWithEmail = (email, database) => {
-  return database
-    .query(
-      `
-    SELECT users.* FROM users
-    WHERE users.email = $1
-    `,
-      [email]
-    )
-    .then((res) => {
-      return res.rows.length > 0
-        ? Promise.resolve(res.rows)
-        : Promise.reject(`no user with that email`);
-    });
-};
-
 module.exports = {
   getUserByEmail,
   getCollectionsByUser,
@@ -209,6 +181,5 @@ module.exports = {
   addProject,
   addCollection,
   addExistingProjectToCollection,
-  login,
   addNoteToProject
 };
