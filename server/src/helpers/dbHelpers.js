@@ -57,7 +57,7 @@ const addNoteToProject = (notes, collection_id, project_id, db) => {
 const getProjectsByCollection = (id, db) => {
   const query = {
     text: `
-        SELECT projects.title as project_title, songs.*, collections.name as collection_name
+        SELECT projects.id as project_id, projects.title as project_title, songs.*, collections.name as collection_name
         FROM projects
         JOIN songs on projects.song_id = songs.id
         JOIN collections on projects.collection_id = collections.id
