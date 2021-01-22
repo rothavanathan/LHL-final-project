@@ -33,7 +33,8 @@ const getProjectsByUser = (id, db) => {
         SELECT projects.*, songs.url_album_artwork, songs.title as song_title, songs.artist
         FROM projects
         JOIN songs ON projects.song_id = songs.id
-        WHERE user_id = ${id};
+        WHERE user_id = ${id}
+        ORDER BY user_id desc;
       `;
 
   return db.query(query);
@@ -60,7 +61,8 @@ const getProjectsByCollection = (id, db) => {
         FROM projects
         JOIN songs on projects.song_id = songs.id
         JOIN collections on projects.collection_id = collections.id
-        WHERE collections.id = $1;
+        WHERE collections.id = $1
+        ORDER BY collections.id desc;
       `,
     values: [id],
   };
