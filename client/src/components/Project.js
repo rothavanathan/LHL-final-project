@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { Box, Typography, IconButton } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
@@ -60,6 +61,7 @@ export default function Project(props) {
   const [collectionId, setCollectionId] = useState();
   const [note, setNote] = useState("");
   const [isNotChanged, setIsNotChanged] = useState(true);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const { isLoggedIn } = props;
   const { id } = useParams()
   console.log("IS LOGGED IN-------", isLoggedIn);
@@ -82,7 +84,6 @@ export default function Project(props) {
             setCollections(data2.data.collections)
           })
           .then(data2 => {
-
             setContent(data.data.projects)
           })
           .catch(err => console.log(err))
@@ -93,33 +94,30 @@ export default function Project(props) {
   const project = content[0]
   let OGcollectionId = project.collection_id
   let existingNote = project.notes
-  // console.log("CONTENT----------", content);
 
   const stems = content.map((project) => {
     const { title, url, icon, peaks_array, name, project_title } = project
     return { title, url, icon, peaks_array, name, project_title }
   })
 
-
-  // const check = () => {
-
-  //   if (project.notes !== note || collectionId !== OGcollectionId) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
-
   const saveNote = () => {
     axios
-      .put("http://localhost:8000/api/project/addnote", {
-        id,
+      .put(`http://localhost:8000/api/project/${id}`, {
         notes: note,
         collection_id: collectionId
       })
       .then((data) => {
         existingNote = data.data.rows[0].notes
         OGcollectionId = data.data.rows[0].collection_id
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const deleteProject = () => {
+    axios
+      .delete(`http://localhost:8000/api/project/${id}`)
+      .then(() => {
+        console.log("DELETED!")
       })
       .catch((err) => console.log(err));
   };
@@ -131,11 +129,8 @@ export default function Project(props) {
   };
 
 
-  console.log(existingNote);
-
   return isLoggedIn ? (
     <div>
-
       <div className="main-window">
         <header className={classes.header}>
           <Link to="/home">
@@ -170,8 +165,14 @@ export default function Project(props) {
             <IconButton aria-label="save" type="submit">
               <SaveIcon
                 className={classes.saveIcon}
-              >Save
+              >
               </SaveIcon>
+            </IconButton>
+            <IconButton aria-label="delete" onClick={deleteProject}>
+              <DeleteForeverIcon
+                className={classes.saveIcon}
+              >
+              </DeleteForeverIcon>
             </IconButton>
           </Box>
 
