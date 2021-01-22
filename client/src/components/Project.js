@@ -59,7 +59,7 @@ export default function Project(props) {
   const [collections, setCollections] = useState([{ name: "", user_id: "", thumbnail: "" }]);
   const [collectionId, setCollectionId] = useState();
   const [note, setNote] = useState("");
-  const [isNotChanged, setIsNotChanged] = useState(false);
+  const [isNotChanged, setIsNotChanged] = useState(true);
   const { isLoggedIn } = props;
   const { id } = useParams()
   console.log("IS LOGGED IN-------", isLoggedIn);
