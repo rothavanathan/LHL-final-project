@@ -156,7 +156,7 @@ export default function Project(props) {
         <Redirect to="/home" />
       ) : (
       <div>
-        <div className="main-window">
+        <div className="main-window" ref={ref}>
           <header className={classes.header}>
             <Link to="/home">
               <ArrowBackIosIcon
