@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const { addUser, login } = require("../helpers/dbHelpers");
+const { addUser, login, getUserByEmail } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
@@ -17,7 +17,8 @@ module.exports = (db) => {
           res.sendStatus(404);
         } else {
           const user = userInfo.rows[0];
-          req.session.userId = user.id;
+          req.session["user_id"] = user.id;
+          console.log("COOOOKIEEEE----------",  req.session["user_id"])
           const userId = user.id;
           const userEmail = user.email;
           res.send({ userId });
@@ -32,13 +33,16 @@ module.exports = (db) => {
   router.post("/login", (req, res) => {
     const { email, password } = req.body;
 
-    return login(email, password, db)
+    getUserByEmail(email, db)
       .then((userInfo) => {
-        if (!userInfo) {
-          res.status(404).json({ error: err.message });
+        if (userInfo.rows.length === 0) {
+          console.log("NO USER FOUND")
+          console.log("THIS BE DA DB RES---------->", userInfo.rows)
+          res.send("ERROR")
+          // above will handle sending back error
         } else {
-          const user = userInfo[0];
-          console.log(user)
+          const user = userInfo.rows[0];
+          console.log("THIS BE DA USER---------------->", user)
           req.session.userId = user.id;
           const userId = user.id;
           const userEmail = user.email;
@@ -46,7 +50,9 @@ module.exports = (db) => {
         }
       })
       .catch((err) => {
-        res.status(401).json({ error: err.message });
+        if (err){
+          res.status(401).json({ error: err.message });
+        } 
       });
   });
 
