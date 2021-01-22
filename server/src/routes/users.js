@@ -23,12 +23,18 @@ module.exports = (db) => {
           // show error
           res.send("USER_EXISTS")
         } else {
-          const user = userInfo.rows[0];
-          req.session["user_id"] = user.id;
-          console.log("COOOOKIEEEE----------",  req.session["user_id"])
-          const userId = user.id;
-          const userEmail = user.email;
-          res.send({ userId });
+          addUser(first_name, email, hashedPassword, db)
+          .then(newUser => {
+
+            const user = newUser.rows[0];
+            req.session["user_id"] = user.id;
+            console.log("COOOOKIEEEE----------",  req.session["user_id"])
+            const userId = user.id;
+            const userEmail = user.email;
+            console.log("Registered as User: ----->", user.first_name, user.password, user.email, user.id)
+            res.send({ userId });
+            
+          })
 
         }
       })
@@ -48,13 +54,23 @@ module.exports = (db) => {
           console.log("THIS BE DA DB RES---------->", userInfo.rows)
           res.send("LOGIN_ERROR")
           // above will handle sending back error
+        } else if (!bcrypt.compareSync(password, userInfo.rows[0].password)) {
+          // the conditional could be cleaner
+          console.log("BCRYPTE BOOL", bcrypt.compareSync(password, userInfo.rows[0].password))
+          console.log("PASSWORD-----", password)
+          console.log("DB_PASSWORD-----", userInfo.rows[0].password)
+
+          console.log("WRONG PASSWORD")
+          res.send("PASSWORD_ERROR")
         } else {
+
           const user = userInfo.rows[0];
           console.log("THIS BE DA USER---------------->", user)
           req.session.userId = user.id;
           const userId = user.id;
           const userEmail = user.email;
           res.send({ userId });
+          
         }
       })
       .catch((err) => {
