@@ -10,23 +10,7 @@ import WaveSurfer from "wavesurfer.js";
 import Emitter from "../EventEmitter";
 
 
-const useStyles = makeStyles({
-  box: {
-    display: "flex",
-    alignItems: "center",
-    color: "rgb(244, 240, 234)",
-    // width: "80%",
-    // justifyContent: "flex"
-  },
-  stemTitle: {
-    color: "rgb(244, 240, 234)",
-    flexBasis: "50%",
-    // fontSize: "1.5em"
-  },
-  input: {
-    color: "primary"
-  }
-});
+
 
 
 export default function Waveform({
@@ -35,12 +19,45 @@ export default function Waveform({
   // setSoloCounter,
   // soloCounter,
 }) {
-  const classes = useStyles()
+
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [volume, setVolume] = useState(0.5);
   const [isMuted, setIsMuted] = useState(false);
   const [soloed, setSolo] = useState(false);
+
+  const useStyles = makeStyles({
+    box: {
+      display: "flex",
+      alignItems: "center",
+      color: "var(--white)",
+      // width: "80%",
+      // justifyContent: "flex"
+    },
+    stemTitle: {
+      color: "var(--white)",
+      flexBasis: "50%",
+      // fontSize: "1.5em"
+    },
+    input: {
+      // color: "primary"
+    },
+    muteButton: {
+      color: `${!isMuted ? "var(--primary-color)" : "var(--red)"}`,
+      "&:hover": {
+        color: "var(--white)",
+        backgroundColor: "rgba(244, 240, 234, 0.1);"
+      }
+    },
+    soloButton: {
+      color: `${!soloed ? "var(--primary-color)" : "var(--secondary-color)"}`,
+      "&:hover": {
+        color: "var(--white)",
+        backgroundColor: "rgba(244, 240, 234, 0.1);"
+      }
+    },
+  });
+  const classes = useStyles()
 
   const formWaveSurferOptions = (ref) => ({
     container: ref,
@@ -170,8 +187,8 @@ export default function Waveform({
         </Typography>
 
         <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-          <Button className={!isMuted ? "mute" : "unmute"} onClick={handleMute}>M</Button>
-          <Button className={!soloed ? "solo" : "unsolo"} onClick={handleSolo}>S</Button>
+          <Button className={classes.muteButton} onClick={handleMute}>M</Button>
+          <Button className={classes.soloButton} onClick={handleSolo}>S</Button>
         </ButtonGroup>
         {/* <button className={!isMuted ? "mute" : "unmute"} onClick={handleMute}>
           {" "}

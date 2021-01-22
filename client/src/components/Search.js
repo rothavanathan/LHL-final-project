@@ -40,7 +40,7 @@ export default function Search(props) {
       // Make sure we have a value (user has entered something in input)
       if (debouncedSearchTerm) {
         setIsSearching(true);
-        setTerm(term)
+        // setTerm(term)
       }
     }, [debouncedSearchTerm]);
 
