@@ -40,7 +40,6 @@ export default function Search(props) {
       // Make sure we have a value (user has entered something in input)
       if (debouncedSearchTerm) {
         setIsSearching(true);
-        // setTerm(term)
       }
     }, [debouncedSearchTerm]);
 
@@ -57,8 +56,6 @@ export default function Search(props) {
       .then(data1 => {
         axios.get(`api/content/search/${term.toLowerCase()}`)
           .then(data2 => {
-            // console.log(`data1 is: `, data1.data.results)
-            // console.log(`you hit the search content route. data2 is: `, data2.data)
             const response = []
             if (data2.data.length > 0) {
               const data2formatted = data2.data.map(entry => {
@@ -86,27 +83,16 @@ export default function Search(props) {
     setTerm(event.target.value)
   }
 
-  // console.log("RESULTS------------", results)
-
-  // const { trackName, url_full_song_preview, artistName, artworkUrl100 } = results[0];
-  // console.log("RESULTSSSSS: ", results)
-
-  // const songId = 1;
   const classes = useStyles();
   return !isSongSelected.trackName ? (
     <div>
       <h1>Search</h1>
       <TextField variant="filled" value={term} onChange={handleChange} className={classes.searchBox} />
-      {/* <p>{results}</p> */}
-      {/* <NewProject songId={songId} user={isLoggedIn} /> */}
-      {/* <NewCollection songId={songId} user={isLoggedIn} /> */}
       <Container className={classes.cardGrid} maxWidth="md" id="projects">
         <Grid container spacing={4}>
           <Results results={results} setSong={setIsSongSelected}></Results>
         </Grid>
       </Container>
-      {/* const { thumbnail, title, previewTrack, artist } = props; */}
-
       <Nav />
     </div >
   ) : (
@@ -114,6 +100,5 @@ export default function Search(props) {
         <SongPreview results={isSongSelected} setSong={setIsSongSelected} user={isLoggedIn} />
         <Nav />
       </div>
-
     )
 }

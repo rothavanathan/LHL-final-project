@@ -24,7 +24,8 @@ const getUserByEmail = (email, db) => {
 const getCollectionsByUser = (id, db) => {
   const query = `
       SELECT * FROM collections
-      WHERE user_id = ${id};
+      WHERE user_id = ${id}
+      ORDER BY collections.id desc;
       `;
 
   return db.query(query);
