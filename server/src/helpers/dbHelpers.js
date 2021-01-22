@@ -10,15 +10,12 @@ const getSongsBySearch = (search, db) => {
 }
 
 const getUserByEmail = (email, db) => {
-  const query = {
-    text: `
+  const query = `
           SELECT * FROM users
           WHERE email = $1;
-        `,
-    values: [email],
-  };
-
-  return db.query(query);
+        `
+  const values = [email]
+  return db.query(query, values);
 };
 
 const getCollectionsByUser = (id, db) => {
