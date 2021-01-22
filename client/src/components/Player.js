@@ -23,7 +23,7 @@ export default function Player({ tracks, audioCtx }) {
   // };
 
 
-  // console.log("TRACKS-------", tracks)
+  console.log("TRACKS-------", tracks)
 
   return (
     <div className="player">

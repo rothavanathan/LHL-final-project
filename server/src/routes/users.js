@@ -1,26 +1,41 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const { addUser, login } = require("../helpers/dbHelpers");
+const { addUser, getUserByEmail } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
   // Register Route
   router.post("/", (req, res) => {
     const { first_name, email, password } = req.body;
-
+    console.log("NEW USER EMAIL--------------->", email)
     const hashedPassword = bcrypt.hashSync(password, 12);
 
-    return addUser(first_name, email, hashedPassword, db)
+    getUserByEmail(email, db)
       .then((userInfo) => {
-        if (!userInfo) {
-          res.sendStatus(404);
+        console.log("USER----->", userInfo.rows[0])
+        if (!email || !password || !first_name) {
+          console.log("MISSING VALUE");
+          // show error
+          res.send("MISSING_VALUE")
+        } else if (userInfo.rows.length !== 0) {
+          console.log("user exists");
+          // show error
+          res.send("USER_EXISTS")
         } else {
-          const user = userInfo.rows[0];
-          req.session.userId = user.id;
-          const userId = user.id;
-          const userEmail = user.email;
-          res.send({ userId });
+          addUser(first_name, email, hashedPassword, db)
+          .then(newUser => {
+
+            const user = newUser.rows[0];
+            req.session["user_id"] = user.id;
+            console.log("COOOOKIEEEE----------",  req.session["user_id"])
+            const userId = user.id;
+            const userEmail = user.email;
+            console.log("Registered as User: ----->", user.first_name, user.password, user.email, user.id)
+            res.send({ userId });
+            
+          })
+
         }
       })
       .catch((err) => {
@@ -32,21 +47,36 @@ module.exports = (db) => {
   router.post("/login", (req, res) => {
     const { email, password } = req.body;
 
-    return login(email, password, db)
+    getUserByEmail(email, db)
       .then((userInfo) => {
-        if (!userInfo) {
-          res.status(404).json({ error: err.message });
+        if (userInfo.rows.length === 0) {
+          console.log("NO USER FOUND")
+          console.log("THIS BE DA DB RES---------->", userInfo.rows)
+          res.send("LOGIN_ERROR")
+          // above will handle sending back error
+        } else if (!bcrypt.compareSync(password, userInfo.rows[0].password)) {
+          // the conditional could be cleaner
+          console.log("BCRYPTE BOOL", bcrypt.compareSync(password, userInfo.rows[0].password))
+          console.log("PASSWORD-----", password)
+          console.log("DB_PASSWORD-----", userInfo.rows[0].password)
+
+          console.log("WRONG PASSWORD")
+          res.send("PASSWORD_ERROR")
         } else {
-          const user = userInfo[0];
-          console.log(user)
+
+          const user = userInfo.rows[0];
+          console.log("THIS BE DA USER---------------->", user)
           req.session.userId = user.id;
           const userId = user.id;
           const userEmail = user.email;
           res.send({ userId });
+          
         }
       })
       .catch((err) => {
-        res.status(401).json({ error: err.message });
+        if (err){
+          res.status(401).json({ error: err.message });
+        } 
       });
   });
 

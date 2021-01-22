@@ -6,7 +6,7 @@ import Nav from "./Nav";
 import { FormControl, Button, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  main: {
+  header: {
     marginTop: 20,
     marginBottom: 40,
     display: "flex",
@@ -55,7 +55,7 @@ export default function Gear(props) {
 
   return isLoggedIn ? (
     <div>
-      <header className={classes.main}>
+      <header className={classes.header}>
         <Link to="/home">
           <ArrowBackIosIcon className={classes.backArrow}>
             Back to Home

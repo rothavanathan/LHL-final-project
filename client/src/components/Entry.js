@@ -2,6 +2,7 @@ import { Link, Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 
+// maybe on rerender this page should clear cookies/local?
 export default function Entry(props) {
   const useStyles = makeStyles((theme) => ({
     entryImage: {

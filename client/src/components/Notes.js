@@ -15,15 +15,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Notes(props) {
   const classes = useStyles();
-  // const projectId = props.projectId;
-  // const existingNote = props.existingNote;
 
 
-  const { projectId, existingNote, note, setNote } = props;
+  const { existingNote, note, setNote, setIsNotChanged } = props;
 
 
   const handleNote = (event) => {
     setNote(event.target.value);
+    setIsNotChanged(false);
   };
 
   useEffect(() => {
@@ -40,7 +39,6 @@ export default function Notes(props) {
         label="Project Notes"
         multiline
         rows={10}
-        defaultValue="Default Value"
         value={note}
         // variant="outlined"
         onChange={handleNote}

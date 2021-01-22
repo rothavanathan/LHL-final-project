@@ -8,21 +8,54 @@ import { Link, Redirect } from "react-router-dom";
 import NewProject from "./NewProject"
 
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex'
+
   },
-  details: {
+  main: {
+    marginBottom: 100
+  },
+  header: {
+    marginTop: 20,
+    marginBottom: 40,
+    display: "flex",
+    color: "var(--white)",
+    alignItems: "center"
+  },
+  backArrow: {
+    fontSize: "large",
+    padding: 10,
+    marginLeft: 10,
+    // marginTop: 10
+  },
+  card: {
+    minHeight: "70vh",
+    width: "calc(100%-20)",
+    marginLeft: 10,
+    marginRight: 10,
+    padding: 20,
+    borderRadius: 10,
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: "center",
+    backgroundColor: "var(--white)"
+
   },
   content: {
-    flex: '1 0 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: "spacce-around",
+    padding: 0
   },
   cover: {
-    width: 151,
+    height: "auto",
+    width: "95%",
+    // margin: "auto"
   },
   controls: {
+    selfAlign: "flex-end",
     display: 'flex',
     alignItems: 'center',
     paddingLeft: theme.spacing(1),
@@ -32,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   playIcon: {
     height: 38,
     width: 38,
-  },
+  }
 }));
 
 export default function SongPreview(props) {
@@ -52,65 +85,67 @@ export default function SongPreview(props) {
 
   return (
     <div>
-      <header className={classes.header}>
+      <Box className={classes.main}>
 
-        <ArrowBackIosIcon
-          className={classes.backArrow}
-          onClick={handleClick}
-        >Back to Home
+        <header className={classes.header}>
+
+          <ArrowBackIosIcon
+            className={classes.backArrow}
+            onClick={handleClick}
+          >Back to Home
             </ArrowBackIosIcon>
 
 
-        <Box className={classes.titleBox}>
+          <Box className={classes.titleBox}>
 
-          <Typography component="h1" variant="h5">
-            Search
+            <Typography component="h1" variant="h5">
+              Search
           </Typography>
 
-        </Box>
-      </header>
+          </Box>
+        </header>
 
-      <Grid item key={props.id} xs={12}>
-        <Card className={classes.root}>
-          <div className={classes.details}>
+        <Grid item key={props.id} xs={12}>
+          <Card className={classes.card}>
+
             <CardContent className={classes.content}>
               <CardMedia
+                component="img"
+                alt={`artwork for ${trackName}`}
                 className={classes.cover}
                 image={artworkUrl100}
-                title={trackName}
-                style={useStyles.media}
+              // title={trackName}
+              // style={useStyles.media}
               />
-              <Typography component="h5" variant="h5">
+              <Typography component="h2" variant="h5">
                 {trackName}
               </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
+              <Typography component="h3" variant="subtitle1" color="textSecondary">
                 {artistName}
               </Typography>
-            </CardContent>
-            {/* <div className={classes.controls}>
+              {/* <div className={classes.controls}>
             <IconButton aria-label="previous">
-              {theme.direction === 'rtl' ? <SkipNext /> : <SkipPrevious />}
+            {theme.direction === 'rtl' ? <SkipNext /> : <SkipPrevious />}
             </IconButton>
             <IconButton aria-label="play/pause">
-              <PlayArrow className={classes.playIcon} onClick={handlePreview} />
+            <PlayArrow className={classes.playIcon} onClick={handlePreview} />
             </IconButton>
             <IconButton aria-label="next">
-              {theme.direction === 'rtl' ? <SkipPrevious /> : <SkipNext />}
+            {theme.direction === 'rtl' ? <SkipPrevious /> : <SkipNext />}
             </IconButton>
           </div> */}
-            <CardMedia
-              component="audio"
-              image={previewUrl}
-              title='title'
-              controls
-            />
-          </div>
-          <button class="btn-btn danger" onClick={handleClick}>Cancel</button>
-
-        </Card >
+              <CardMedia
+                component="audio"
+                image={previewUrl}
+                title='title'
+                controls
+              />
+            </CardContent>
+          </Card >
+        </Grid >
         <NewProject songId={trackId} user={props.user} />
+      </Box>
 
-      </Grid >
     </div>
   );
 }

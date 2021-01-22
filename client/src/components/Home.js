@@ -20,13 +20,16 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 40
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(7),
   },
   gearIcon: {
     color: "var(--white)",
     fontSize: 36,
     alignSelf: "flex-end"
+  },
+  typography: {
+    marginBottom: 20
   }
 }));
 
@@ -41,9 +44,10 @@ export default function Home(props) {
     axios
       .get('/api/content')
       .then(data => {
-        setCollections(data.data.collections);
-        setProjects(data.data.projects);
+        setCollections(data.data.collections.splice(0, 3));
+        setProjects(data.data.projects.splice(0, 3));
       })
+      .catch((err) => console.log(err));
   }, []);
 
   return isLoggedIn ? (
@@ -64,12 +68,13 @@ export default function Home(props) {
           </Link>
         </header>
         <section>
-          <Typography
-            component="header"
-            variant="h5"
-          >Recent Collections
-          </Typography>
           <Container className={classes.cardGrid} maxWidth="md" id="projects">
+            <Typography className={classes.typography}
+              component="header"
+              variant="h5"
+              align="left"
+            > Recent Collections
+            </Typography>
             <Grid container spacing={4}>
               {collections.map((collection, i) =>
                 <Fragment key={i}>
@@ -86,12 +91,13 @@ export default function Home(props) {
         </section>
       </div>
       <section>
-        <Typography
-          component="header"
-          variant="h5">
-          Recent Projects
-          </Typography>
         <Container className={classes.cardGrid} maxWidth="md" id="projects" >
+          <Typography className={classes.typography}
+            component="header"
+            variant="h5"
+            align="left">
+            Recent Projects
+          </Typography>
           <Grid container spacing={4} >
             {projects.map((project, i) =>
               <Fragment key={i}>

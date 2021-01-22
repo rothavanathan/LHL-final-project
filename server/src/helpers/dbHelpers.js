@@ -10,21 +10,19 @@ const getSongsBySearch = (search, db) => {
 }
 
 const getUserByEmail = (email, db) => {
-  const query = {
-    text: `
+  const query = `
           SELECT * FROM users
           WHERE email = $1;
-        `,
-    values: [email],
-  };
-
-  return db.query(query);
+        `
+  const values = [email]
+  return db.query(query, values);
 };
 
 const getCollectionsByUser = (id, db) => {
   const query = `
       SELECT * FROM collections
-      WHERE user_id = ${id};
+      WHERE user_id = ${id}
+      ORDER BY collections.id desc;
       `;
 
   return db.query(query);
@@ -35,7 +33,8 @@ const getProjectsByUser = (id, db) => {
         SELECT projects.*, songs.url_album_artwork, songs.title as song_title, songs.artist
         FROM projects
         JOIN songs ON projects.song_id = songs.id
-        WHERE user_id = ${id};
+        WHERE user_id = ${id}
+        ORDER BY user_id desc;
       `;
 
   return db.query(query);
@@ -62,7 +61,8 @@ const getProjectsByCollection = (id, db) => {
         FROM projects
         JOIN songs on projects.song_id = songs.id
         JOIN collections on projects.collection_id = collections.id
-        WHERE collections.id = $1;
+        WHERE collections.id = $1
+        ORDER BY collections.id desc;
       `,
     values: [id],
   };
@@ -74,7 +74,7 @@ const getProjectsByCollection = (id, db) => {
 };
 
 const getSongByProject = (id, db) => {
-  const query = `SELECT projects.*, songs.*, stems.*
+  const query = `SELECT projects.*, projects.title as project_title, songs.*, stems.*
       FROM projects
       JOIN songs ON projects.song_id = songs.id
       JOIN stems ON songs.id = stems.song_id
