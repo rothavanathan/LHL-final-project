@@ -53,7 +53,7 @@ export default function Home(props) {
         setRefresh(false);
       })
       .catch((err) => console.log(err));
-  }, [refresh]);
+  }, [refresh, isLoggedIn]);
 
   return isLoggedIn ? (
     <div>
