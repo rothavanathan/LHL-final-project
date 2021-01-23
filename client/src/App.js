@@ -35,7 +35,8 @@ const theme = createMuiTheme({
     }
   },
   typography: {
-    fontFamily: notoFont
+    fontFamily: notoFont,
+    color: "var(--white)"
   }
 });
 
@@ -67,13 +68,13 @@ export default function App() {
               <Gear isLoggedIn={user} setUser={setUser} />
             </Route>
             <Route path="/home">
-              <Home isLoggedIn={user} refresh={refresh} setRefresh={setRefresh}/>
+              <Home isLoggedIn={user} refresh={refresh} setRefresh={setRefresh} />
             </Route>
             <Route path="/library">
               <Library isLoggedIn={user} />
             </Route>
             <Route path="/collection/:id">
-              <Collection isLoggedIn={user} setRefresh={setRefresh}/>
+              <Collection isLoggedIn={user} setRefresh={setRefresh} />
             </Route>
             <Route path="/search">
               <Search isLoggedIn={user} />
