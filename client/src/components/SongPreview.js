@@ -65,6 +65,14 @@ const useStyles = makeStyles((theme) => ({
   playIcon: {
     height: 38,
     width: 38,
+  },
+  audio: {
+    border: "2px solid var(--tertiary-color)",
+    borderRadius: "10px",
+    marginTop: ".75em"
+  },
+  h2: {
+    paddingTop: ".75em"
   }
 }));
 
@@ -117,7 +125,7 @@ export default function SongPreview(props) {
               // title={trackName}
               // style={useStyles.media}
               />
-              <Typography component="h2" variant="h5">
+              <Typography className={classes.h2} component="h2" variant="h5">
                 {trackName}
               </Typography>
               <Typography component="h3" variant="subtitle1" color="textSecondary">
@@ -134,16 +142,16 @@ export default function SongPreview(props) {
             {theme.direction === 'rtl' ? <SkipPrevious /> : <SkipNext />}
             </IconButton>
           </div> */}
-              <CardMedia
+              <CardMedia className={classes.audio}
                 component="audio"
                 image={previewUrl}
                 title='title'
                 controls
               />
+              <NewProject songId={trackId} user={props.user} />
             </CardContent>
           </Card >
         </Grid >
-        <NewProject songId={trackId} user={props.user} />
       </Box>
 
     </div>

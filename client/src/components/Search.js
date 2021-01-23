@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
   searchBox: {
     color: "white",
-    backgroundColor: "#1a1a1a",
+    backgroundColor: "var(--black)",
     border: "none",
     borderBottom: "var(--tertiary-color) 2px solid",
     width: "80%"

@@ -10,24 +10,28 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     transition: "all .25s linear",
-    background: "rgb(244, 240, 234)",
-    boxShadow: "0px 2px 2px 0px rgb(244, 240, 234)",
+    background: "var(--black)",
+    backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
+    boxShadow: "0px 2px 2px 0px var(--white)",
     '&:hover': {
-      boxShadow: "-1px 10px 29px 0px rgb(244, 240, 234)"
-   },
+      boxShadow: "-1px 10px 29px 0px var(--white)"
+    }
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: "var(--black)",
   },
   cardContent: {
     flexGrow: 1,
-    color: "black",
-    fontSize: ".6rem",
-    background: "rgb(244, 240, 234)"
+    color: "var(--white)",
+    fontSize: ".6rem"
   },
   cardText: {
     fontSize: ".75rem"
+  },
+  link: {
+    textDecoration: "none"
   }
 }));
 
