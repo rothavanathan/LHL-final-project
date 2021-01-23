@@ -60,6 +60,9 @@ export default function NewCollectionCard(props) {
             <Typography gutterBottom variant="subtitle-1" component="h2">
               {props.title}
             </Typography>
+            <Typography className={classes.cardText}>
+              {props.subtitle}
+            </Typography>
           </CardContent>
         </Card>
       </Grid>
