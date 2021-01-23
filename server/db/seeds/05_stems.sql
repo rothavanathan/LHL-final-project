@@ -45,4 +45,12 @@ insert into stems (song_id, name, url, icon, peaks_array) values (4, 'Guitar', '
 insert into stems (song_id, name, url, icon, peaks_array) values (4, 'CS80', 'https://rykabrown.com/wp-content/uploads/2021/01/CS80-1.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');
 insert into stems (song_id, name, url, icon, peaks_array) values (4, 'Beat', 'https://rykabrown.com/wp-content/uploads/2021/01/Beat-3.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');
 insert into stems (song_id, name, url, icon, peaks_array) values (4, 'Bass', 'https://rykabrown.com/wp-content/uploads/2021/01/Bass-4.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');
-insert into stems (song_id, name, url, icon, peaks_array) values (4, 'Accapella', 'https://rykabrown.com/wp-content/uploads/2021/01/Accapela-1.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');
+insert into stems (song_id, name, url, icon, peaks_array) values (4, 'Accapela', 'https://rykabrown.com/wp-content/uploads/2021/01/Accapela-1.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');
+
+--5 Phoenix - Armistice
+insert into stems (song_id, name, url, icon, peaks_array) values (5, 'Accapela', 'https://rykabrown.com/wp-content/uploads/2021/01/Accapela-2.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');
+insert into stems (song_id, name, url, icon, peaks_array) values (5, 'Bass', 'https://rykabrown.com/wp-content/uploads/2021/01/Bass-5.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');
+insert into stems (song_id, name, url, icon, peaks_array) values (5, 'Beat', 'https://rykabrown.com/wp-content/uploads/2021/01/Beat-4.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');
+insert into stems (song_id, name, url, icon, peaks_array) values (5, 'Goblins', 'https://rykabrown.com/wp-content/uploads/2021/01/Goblins.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');
+insert into stems (song_id, name, url, icon, peaks_array) values (5, 'Guitar', 'https://rykabrown.com/wp-content/uploads/2021/01/Guitar-2.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');
+insert into stems (song_id, name, url, icon, peaks_array) values (5, 'Keys-CS', 'https://rykabrown.com/wp-content/uploads/2021/01/Keys-CS.mp3', 'https://robohash.org/rerumestrepudiandae.png?size=50x50&set=set1', 'bi-directional');

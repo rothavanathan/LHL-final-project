@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   saveIcon: {
     margin: "auto",
     fontSize: 56,
-    color: "rgb(245, 103, 93)"
+    color: "var(--quad-color)"
   },
 }));
 

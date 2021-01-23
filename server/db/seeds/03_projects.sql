@@ -4,6 +4,7 @@ insert into projects (song_id, user_id, collection_id, title, notes) values (1, 
 insert into projects (song_id, user_id, collection_id, title, notes) values (2, 1, 2, 'Lizstomania - synth bass and tambo', 'playing moog bass line and tambourine in the chorus.. PRACTICE!!');
 insert into projects (song_id, user_id, collection_id, title, notes) values (3, 1, 2, '1901 - playing bass', 'buy more picks for this one.');
 insert into projects (song_id, user_id, collection_id, title, notes) values (4, 1, 2, 'Fences - playing bass', 'tricky chorus. listen a bunch. Chris cues the end.');
+insert into projects (song_id, user_id, collection_id, title, notes) values (5, 1, 2, 'Armistice - synth', 'figure out the goblins synth hook part');
 
 
 -- Marya's playlists

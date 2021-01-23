@@ -43,7 +43,7 @@ export default function Waveform({
       // color: "primary"
     },
     muteButton: {
-      color: `${!isMuted ? "var(--primary-color)" : "var(--red)"}`,
+      color: `${!isMuted ? "var(--primary-color)" : "var(--quad-color)"}`,
       "&:hover": {
         color: "var(--white)",
         backgroundColor: "rgba(244, 240, 234, 0.1);"
