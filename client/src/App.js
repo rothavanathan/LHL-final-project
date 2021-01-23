@@ -20,6 +20,8 @@ import Home from "./components/Home";
 import Collection from "./components/Collection";
 import SongPreview from "./components/SongPreview"
 
+const notoFont = "'Noto Sans', sans-serif";
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -32,6 +34,9 @@ const theme = createMuiTheme({
       main: "rgb(244, 240, 234)",
     }
   },
+  typography: {
+    fontFamily: notoFont
+  }
 });
 
 
