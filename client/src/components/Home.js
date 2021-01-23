@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home(props) {
   const classes = useStyles();
-  const { isLoggedIn } = props;
+  const { isLoggedIn, refresh, setRefresh } = props;
 
   console.log("LOIIIILL----", isLoggedIn);
 
@@ -49,9 +49,10 @@ export default function Home(props) {
       .then(data => {
         setCollections(data.data.collections.splice(0, 3));
         setProjects(data.data.projects.splice(0, 3));
+        setRefresh(false);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [refresh]);
 
   return isLoggedIn ? (
     <div>

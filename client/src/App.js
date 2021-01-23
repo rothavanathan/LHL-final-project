@@ -38,6 +38,7 @@ const theme = createMuiTheme({
 export default function App() {
   const [tracks, setTracks] = useState([]);
   const [user, setUser] = useState(localStorage.getItem("user") ? localStorage.getItem("user") : null);
+  const [refresh, setRefresh] = useState(false);
 
 
   useEffect(() => {
@@ -61,13 +62,13 @@ export default function App() {
               <Gear isLoggedIn={user} setUser={setUser} />
             </Route>
             <Route path="/home">
-              <Home isLoggedIn={user} />
+              <Home isLoggedIn={user} refresh={refresh} setRefresh={setRefresh}/>
             </Route>
             <Route path="/library">
               <Library isLoggedIn={user} />
             </Route>
             <Route path="/collection/:id">
-              <Collection isLoggedIn={user} />
+              <Collection isLoggedIn={user} setRefresh={setRefresh}/>
             </Route>
             <Route path="/search">
               <Search isLoggedIn={user} />

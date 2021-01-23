@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Collection(props) {
   const classes = useStyles();
-  const isLoggedIn = props.isLoggedIn;
+  const { isLoggedIn, setRefresh } = props;
   const { id } = useParams();
   const [projects, setProjects] = useState([{collection_name: ""}]);
   const [open, setOpen] = useState(false);
@@ -55,7 +55,8 @@ export default function Collection(props) {
 
   const handleConfirmDelete = () => {
     deleteProject();
-    console.log("DELETE")
+    console.log("DELETE");
+    setRefresh(true);
     setRedirectOnDelete(true);
   }
 
