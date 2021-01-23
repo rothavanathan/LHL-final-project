@@ -20,6 +20,8 @@ import Home from "./components/Home";
 import Collection from "./components/Collection";
 import SongPreview from "./components/SongPreview"
 
+const notoFont = "'Noto Sans', sans-serif";
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -32,6 +34,9 @@ const theme = createMuiTheme({
       main: "rgb(244, 240, 234)",
     }
   },
+  typography: {
+    fontFamily: notoFont
+  }
 });
 
 
@@ -39,6 +44,7 @@ export default function App() {
   const [tracks, setTracks] = useState([]);
   const userInStorage = useState(localStorage.getItem("user"));
   const [user, setUser] = useState(userInStorage ? userInStorage : null);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const localUser = localStorage.getItem("user")
@@ -61,13 +67,13 @@ export default function App() {
               <Gear isLoggedIn={user} setUser={setUser} />
             </Route>
             <Route path="/home">
-              <Home isLoggedIn={user} />
+              <Home isLoggedIn={user} refresh={refresh} setRefresh={setRefresh}/>
             </Route>
             <Route path="/library">
               <Library isLoggedIn={user} />
             </Route>
             <Route path="/collection/:id">
-              <Collection isLoggedIn={user} />
+              <Collection isLoggedIn={user} setRefresh={setRefresh}/>
             </Route>
             <Route path="/search">
               <Search isLoggedIn={user} />
