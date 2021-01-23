@@ -18,11 +18,16 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 10,
     color: "rgb(244, 240, 234)",
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
-    padding: 5,
+    padding: 3,
     '& > * + *': {
       marginTop: theme.spacing(2),
     },
+  },
+  transport: {
+    display: "flex",
+    justifyContent: "center",
   },
   icon: {
     marginLeft: 10,
@@ -31,8 +36,9 @@ const useStyles = makeStyles((theme) => ({
     color: "var(--white)"
   },
   progressBar: {
-    height: 100,
-    color: "white"
+    height: 6,
+    color: "white",
+    width: "100%",
   }
 }));
 
@@ -56,8 +62,8 @@ export default function PlayerTransport({ hasLoaded }) {
 
   return (
     <div id="transport" className={classes.root}>
-      {/* <LinearProgress className={classes.progressBar} /> */}
-      <div>
+      {!hasLoaded && <LinearProgress className={classes.progressBar} />}
+      {hasLoaded && (<div className={classes.transport}>
         <IconButton onClick={handleRewind} aria-label="Rewind">
           <FastRewindIcon className={classes.icon} />
         </IconButton>
@@ -65,7 +71,7 @@ export default function PlayerTransport({ hasLoaded }) {
         <IconButton className={classes.icon} aria-label="Play/Pause" onClick={handlePlayPause}>
           {playing ? <Pause className={classes.icon} /> : <PlayArrow className={classes.icon} />}
         </IconButton>
-      </div>
+      </div>)}
 
     </div>
   );
