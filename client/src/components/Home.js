@@ -1,12 +1,9 @@
 import { useState, useEffect, Fragment } from 'react';
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
-
 import { Container, Grid, Typography } from '@material-ui/core';
-
 import { makeStyles } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
-
 import Nav from "./Nav";
 import ProjectCard from "./ProjectCard";
 import NewCollectionCard from './NewCollectionCard';
@@ -37,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Home(props) {
   const classes = useStyles();
   const { isLoggedIn, refresh, setRefresh } = props;
-
   const [collections, setCollections] = useState([])
   const [projects, setProjects] = useState([])
 

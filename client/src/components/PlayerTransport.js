@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import Emitter from "../EventEmitter";
 import { makeStyles } from '@material-ui/core/styles';
-
 import IconButton from '@material-ui/core/IconButton';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import Pause from '@material-ui/icons/Pause';
 import FastRewindIcon from '@material-ui/icons/FastRewind';
-import { Icon } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,9 +54,6 @@ export default function PlayerTransport({ hasLoaded }) {
       Emitter.emit('clickRewind', setPlay(playing));
     }
   };
-
-
-  // console.log("TRACKS-------", tracks)
 
   return (
     <div id="transport" className={classes.root}>

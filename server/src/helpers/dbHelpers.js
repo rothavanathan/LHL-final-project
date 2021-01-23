@@ -1,20 +1,16 @@
-const bcrypt = require("bcrypt");
-
 const getSongsBySearch = (search, db) => {
-
-  const query =
-    `SELECT * FROM songs
+  const query = `SELECT * FROM songs
     WHERE artist ILIKE $1;`;
-  console.log(query)
+
   return db.query(query, [search]);
-}
+};
 
 const getUserByEmail = (email, db) => {
   const query = `
           SELECT * FROM users
           WHERE email = $1;
-        `
-  const values = [email]
+        `;
+  const values = [email];
   return db.query(query, values);
 };
 
@@ -40,35 +36,36 @@ const getProjectsByUser = (id, db) => {
   return db.query(query);
 };
 
-const addNoteAndCollectionToProject = (notes, collection_id, project_id, db) => {
-  const query = {
-    text: `
+const addNoteAndCollectionToProject = (
+  notes,
+  collection_id,
+  project_id,
+  db
+) => {
+  const query = `
       UPDATE projects
       SET notes = $1, collection_id = $2
       WHERE id = $3
       RETURNING *;
-      `,
-    values: [notes, collection_id, project_id],
-  };
+      `;
 
-  return db.query(query)
+  const values = [notes, collection_id, project_id];
+  return db.query(query, values);
 };
 
 const getProjectsByCollection = (id, db) => {
-  const query = {
-    text: `
+  const query = `
         SELECT projects.id as project_id, projects.title as project_title, songs.*, collections.name as collection_name
         FROM projects
         JOIN songs on projects.song_id = songs.id
         JOIN collections on projects.collection_id = collections.id
         WHERE collections.id = $1
         ORDER BY collections.id desc;
-      `,
-    values: [id],
-  };
+      `;
 
+  const values = [id];
   return db
-    .query(query)
+    .query(query, values)
     .then((result) => result.rows)
     .catch((err) => err);
 };
@@ -84,17 +81,15 @@ const getSongByProject = (id, db) => {
 };
 
 const getStemsBySong = (id, db) => {
-  const query = {
-    text: `
+  const query = `
         SELECT *
         FROM stems
         WHERE song_id = $1;
-      `,
-    values: [id],
-  };
+      `;
 
+  const values = [id];
   return db
-    .query(query)
+    .query(query, values)
     .then((result) => result.rows)
     .catch((err) => err);
 };
@@ -106,116 +101,77 @@ const addUser = (first_name, email, hashedPassword, db) => {
           RETURNING *;
         `;
 
-  return db.query(query, [first_name, email, hashedPassword]);
+  const values = [first_name, email, hashedPassword];
+  return db.query(query, values);
 };
 
 const addProject = (title, song_id, user_id, db) => {
-  const query = {
-    text: `
+  const query = `
         INSERT INTO projects (title, song_id, user_id, notes)
         VALUES ($1, $2, $3, $4)
         RETURNING *;
-        `,
-    values: [title, song_id, user_id, ""],
-  };
+        `;
 
-  return db.query(query)
+  const values = [title, song_id, user_id, ""];
+  return db.query(query, values);
 };
 
 const deleteProject = (id, db) => {
-  const query = {
-    text: `
+  const query = `
         DELETE FROM projects
         WHERE id = $1;
-        `,
-    values: [id],
-  };
+        `;
 
-  return db.query(query)
+  const values = [id];
+  return db.query(query, values);
 };
 
 const deleteCollection = (id, db) => {
-  const query = {
-    text: `
+  const query = `
         DELETE FROM collections
         WHERE id = $1;
-        `,
-    values: [id],
-  };
+        `;
 
-  return db.query(query)
+  const values = [id];
+  return db.query(query, values);
 };
 
 const updateProjectCollectionId = (id, db) => {
-  const query = {
-    text: `
+  const query = `
         UPDATE projects
         SET collection_id = $1
         WHERE collection_id = $2;
-        `,
-    values: [null, id],
-  };
+        `;
 
-  return db.query(query)
+  const values = [null, id];
+  return db.query(query, values);
 };
 
-// Add song to a project
 const addSongToProject = (title, user_id, db) => {
-  const query = {
-    text: `
+  const query = `
         INSERT INTO songs (title, user_id)
         VALUES ($1, $2)
         RETURNING *;
-        `,
-    values: [title, user_id],
-  };
+        `;
 
+  const values = [title, user_id];
   return db
-    .query(query)
+    .query(query, values)
     .then((result) => result.rows[0])
     .catch((err) => err);
 };
 
 const addCollection = (name, thumbnail, userId, db) => {
-  const query = {
-    text: `
+  const query = `
         INSERT INTO collections (name, thumbnail, user_id)
         VALUES ($1, $2, $3)
         RETURNING *;
-        `,
-    values: [name, thumbnail, userId],
-  };
-
+        `;
+  const values = [name, thumbnail, userId];
   return db
-    .query(query)
+    .query(query, values)
     .then((result) => result.rows[0])
     .catch((err) => err);
-};
-
-const login = (email, passwordInput, database) => {
-  return getUserWithEmail(email, database).then((rows) => {
-    if (bcrypt.compareSync(passwordInput, rows[0].password)) {
-      return Promise.resolve(rows);
-    } else {
-      return Promise.reject(null);
-    }
-  });
-};
-
-const getUserWithEmail = (email, database) => {
-  return database
-    .query(
-      `
-    SELECT users.* FROM users
-    WHERE users.email = $1
-    `,
-      [email]
-    )
-    .then((res) => {
-      return res.rows.length > 0
-        ? Promise.resolve(res.rows)
-        : Promise.reject(`no user with that email`);
-    });
 };
 
 module.exports = {
@@ -229,9 +185,8 @@ module.exports = {
   addUser,
   addProject,
   addCollection,
-  login,
   addNoteAndCollectionToProject,
   deleteProject,
   deleteCollection,
-  updateProjectCollectionId
+  updateProjectCollectionId,
 };

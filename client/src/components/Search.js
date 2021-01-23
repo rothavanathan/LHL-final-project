@@ -1,15 +1,11 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Nav from "./Nav";
 import Results from "./Results";
-import NewProject from "./NewProject";
-import NewCollection from "./NewCollection";
 import SongPreview from "./SongPreview";
-import { Redirect } from "react-router-dom";
 import { TextField, Grid, Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import useDebounce from "../hooks/useDebounce";
-import { TextFormatTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   mainHeader: {
@@ -24,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
-
   searchBox: {
     color: "white",
     backgroundColor: "var(--black)",
@@ -88,8 +83,6 @@ export default function Search(props) {
               return entry;
 
             })
-            console.log(hiResItunes)
-
             response.push(...hiResItunes)
             setResults(response);
             //once we have results

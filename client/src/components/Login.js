@@ -2,11 +2,8 @@ import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-
 import { FormControl, Button, Typography, Box } from "@material-ui/core";
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import LoginError from "./LoginError"
-
 
 const useStyles = makeStyles((theme) => ({
   mainBox: {
@@ -64,10 +61,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
   },
-
   regLink: {
     textDecoration: "none",
-
   },
   subtitle1: {
     fontStyle: "oblique",
@@ -90,18 +85,12 @@ export default function Login(props) {
         password: passwordData,
       })
       .then((res) => {
-        // console.log("THIS IS RES ---------", res.data)
         if (res.data.userId) {
-          // console.log("TRUE USER------->", res.data.userId)
           setUser(res.data.userId);
         } else {
-          // res.data === "that email doesn't exist" || "that password is incorrect"
-          // console.log("FIND EMAIL----------->", res.data)
-
           setEmailError(res.data) || setPassError(res.data)
           setOpen(true)
           setTimeout(function () { setOpen(false); }, 2000);
-
         }
       })
       .catch((err) => console.log(err));
@@ -133,34 +122,25 @@ export default function Login(props) {
 
       <div className={classes.main}>
 
-        {/* <Link to="/entry">
-          <ArrowBackIosIcon className={classes.backArrow}>
-          </ArrowBackIosIcon>
-        </Link> */}
         <Typography
           component="h1"
           variant="h2"
           className={classes.heading}
         >
           You're Back!
-
         </Typography>
-
 
         <LoginError
           open={open}
           setOpen={setOpen}
           handleErrorOpen={handleErrorOpen}
-          handleErrorOpen={handleErrorClosed}
+          handleErrorClosed={handleErrorClosed}
           emailError={emailError}
           passError={passError}
-
         />
       </div>
       <Typography component="h2" variant="subtitle2" className={classes.heading2} texttAlign="left">
-
         Let's get you logged in
-
       </Typography>
 
       <div className={classes.formDiv}>
@@ -198,7 +178,6 @@ export default function Login(props) {
             className={classes.subtitle1}
           >
             Don't have an account? Register here
-
           </Typography>
 
         </Link>

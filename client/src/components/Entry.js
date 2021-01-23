@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, Box } from "@material-ui/core";
-import logo from '../public/LAYERS_crop.png';
+import logo from "../public/LAYERS_crop.png";
 
 const useStyles = makeStyles((theme) => ({
   mainBox: {
@@ -18,14 +18,14 @@ const useStyles = makeStyles((theme) => ({
 
   heading: {
     marginTop: "2.5em",
-    marginBottom: "0.5em"
+    marginBottom: "0.5em",
   },
 
   heading2: {
     fontSize: 15,
     margin: "1.5em",
 
-    textAlign: "center"
+    textAlign: "center",
   },
   logButton: {
     display: "flex",
@@ -34,9 +34,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "1.5em",
     "&:hover": {
       backgroundColor: "var(--white)",
-      color: "black"
-
-    }
+      color: "var(--black)",
+    },
   },
 
   back: {
@@ -47,34 +46,33 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "6em",
     width: "14em",
     height: "14em",
-  }
+  },
 }));
-
 
 export default function Entry(props) {
   const classes = useStyles();
 
   return (
     <Box className={classes.mainBox}>
-
-      {/* <div className={classes.entryImage}> */}
       <img src={logo} className={classes.homeImg} alt="Layers logo" />
-      {/* <Typography component="h1" variant="h2" className={classes.heading}>
-          Layers
 
-      </Typography> */}
-
-      <Typography component="h2" variant="subtitle2" className={classes.heading2} texttAlign="left">
-
-
-        With Layers you can isolate the parts of a track to teach or learn. Drums, guitar, vocals, or a combination of a few?
-
+      <Typography
+        component="h2"
+        variant="subtitle2"
+        className={classes.heading2}
+        texttAlign="left"
+      >
+        With Layers you can isolate the parts of a track to teach or learn.
+        Drums, guitar, vocals, or a combination of a few?
       </Typography>
-      <Typography component="h2" variant="subtitle2" className={classes.heading2} fontStyle="oblique">
+      <Typography
+        component="h2"
+        variant="subtitle2"
+        className={classes.heading2}
+        fontStyle="oblique"
+      >
         It's really up to you.
-
-    </Typography>
-
+      </Typography>
 
       <div className={classes.formDiv}>
         <Button to="/register" component={Link} className={classes.logButton}>
@@ -85,7 +83,6 @@ export default function Entry(props) {
           Login
         </Button>
       </div>
-      {/* </div > */}
     </Box>
   );
 }

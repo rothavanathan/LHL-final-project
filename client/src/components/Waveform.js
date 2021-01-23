@@ -1,17 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { Box, Typography, Input } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import '../RangeInput.css';
-
 import WaveSurfer from "wavesurfer.js";
 import Emitter from "../EventEmitter";
-
-
-
-
 
 export default function Waveform({
   track,
@@ -30,13 +24,10 @@ export default function Waveform({
       display: "flex",
       alignItems: "center",
       color: "var(--white)",
-      // width: "80%",
-      // justifyContent: "flex"
     },
     stemTitle: {
       color: "var(--white)",
       flexBasis: "50%",
-      // fontSize: "1.5em"
     },
     input: {
       // color: "primary"
@@ -72,12 +63,10 @@ export default function Waveform({
     barRadius: 3,
     responsive: true,
     height: 80,
-    // width: "50%",
     // If true, normalize by the maximum peak instead of 1.0.
     normalize: true,
     // Use the PeakCache to improve rendering speed of large waveforms.
     partialRender: true,
-
     audioContext: context,
   });
 
@@ -87,9 +76,7 @@ export default function Waveform({
     const options = formWaveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
     wavesurfer.current.solo = false;
-
     wavesurfer.current.load(track.url);
-
     wavesurfer.current.on("ready", function () {
       // make sure object stillavailable when file loaded
       if (wavesurfer.current) {
@@ -118,15 +105,12 @@ export default function Waveform({
       if (!wavesurfer.current.solo && !wavesurfer.current.getMute()) {
         wavesurfer.current.setMute(true);
       } else if (!wavesurfer.current.solo && wavesurfer.current.getMute()) {
-        // console.log(`${track.trackName} is not soloed but is muted`);
       } else if (wavesurfer.current.solo) {
         wavesurfer.current.setMute(false);
       }
     });
 
     Emitter.on("soloOFF", () => {
-      // console.log(`somone turned a solo OFF.`);
-      //currently checks if it's own solo is off but we need to check if EVERY solo is off
       wavesurfer.current.solo = false;
       setSolo(false);
       if (!wavesurfer.current.wasMuted) {
@@ -137,8 +121,6 @@ export default function Waveform({
         setIsMuted(true);
       }
     });
-    // Removes events, elements and disconnects Web Audio nodes.
-    // when component unmount
     return () => {
       wavesurfer.current.unAll();
       wavesurfer.current.destroy();
@@ -163,8 +145,6 @@ export default function Waveform({
     } else if (wavesurfer.current.solo) {
       wavesurfer.current.solo = false;
     }
-
-    // Emitter.emit(`${soloed ? 'soloON' : 'soloOFF'}`)
   };
 
   useEffect(() => {
@@ -193,14 +173,7 @@ export default function Waveform({
           <Button className={classes.muteButton} onClick={handleMute}>M</Button>
           <Button className={classes.soloButton} onClick={handleSolo}>S</Button>
         </ButtonGroup>
-        {/* <button className={!isMuted ? "mute" : "unmute"} onClick={handleMute}>
-          {" "}
-          M
-        </button>
-        <button className={!soloed ? "solo" : "unsolo"} onClick={handleSolo}>
-          {" "}
-          S
-        </button> */}
+
         <input
           type="range"
           id="volume"

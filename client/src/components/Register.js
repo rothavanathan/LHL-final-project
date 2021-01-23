@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import { FormControl, Button, Typography, Box, Input } from "@material-ui/core";
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { FormControl, Button, Typography, Box } from "@material-ui/core";
 import RegError from "./RegError"
 
 const useStyles = makeStyles((theme) => ({
@@ -65,15 +64,12 @@ const useStyles = makeStyles((theme) => ({
       color: "black"
     }
   },
-
   back: {
     flexGrow: 1,
     display: "flex",
   },
-
   regLink: {
     textDecoration: "none",
-
   },
   subtitle1: {
     fontStyle: "oblique",
@@ -88,7 +84,6 @@ export default function Register(props) {
   const [open, setOpen] = useState(false);
   const [passError, setPassError] = useState("");
   const [emailError, setEmailError] = useState("");
-
   const classes = useStyles();
 
   const saveUser = () => {
@@ -99,18 +94,12 @@ export default function Register(props) {
         password: passwordData,
       })
       .then((res) => {
-        console.log("FIND ERROR----------->", res.data);
         if (res.data.userId) {
-          // console.log("TRUE USER------->", res.data.userId)
           setUser(res.data.userId);
         } else {
-          // res.data === "that email doesn't exist" || "that password is incorrect"
-          // console.log("FIND EMAIL----------->", res.data)
-
           setEmailError(res.data) || setPassError(res.data)
           setOpen(true)
           setTimeout(function () { setOpen(false); }, 2000);
-
         }
       })
       .catch((err) => console.log(err));
@@ -146,17 +135,13 @@ export default function Register(props) {
     <Box className={classes.mainBox}>
 
       <div className={classes.main}>
-        {/* <Link to="/entry">
-          <ArrowBackIosIcon>
-          </ArrowBackIosIcon>
-        </Link> */}
+
         <Typography
           component="h1"
           variant="h2"
           className={classes.heading}
         >
           Welcome!
-
         </Typography>
 
       </div>
@@ -165,14 +150,12 @@ export default function Register(props) {
         open={open}
         setOpen={setOpen}
         handleErrorOpen={handleErrorOpen}
-        handleErrorOpen={handleErrorClosed}
+        handleErrorClosed={handleErrorClosed}
         emailError={emailError}
         passError={passError}
       />
       <Typography component="h2" variant="subtitle2" className={classes.heading2} texttAlign="left">
-
         Let's get you signed up
-
       </Typography>
 
       <form

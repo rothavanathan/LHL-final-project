@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-
-import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { BottomNavigation, Tab } from '@material-ui/core/';
 import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
@@ -25,7 +23,6 @@ const useStyles = makeStyles({
 
 export default function ProjectNav(props) {
   const classes = useStyles();
-  // const [value, setValue] = useState(0);
 
   const handlePlayerClick = () => {
     window[`scrollTo`]({ top: 0, behavior: 'smooth' })

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-
 import { makeStyles } from '@material-ui/core/styles';
-
 import Waveform from "./Waveform";
-import Emitter from "../EventEmitter"
 
 const useStyles = makeStyles((theme) => ({
   waveform: {
@@ -16,7 +13,6 @@ export default function Player({ tracks, audioCtx, setHasLoaded }) {
   const [loadCounter, setLoadCounter] = useState(0);
 
   if (loadCounter === tracks.length) {
-    console.log(`done loading!`)
     setHasLoaded(true);
   }
 

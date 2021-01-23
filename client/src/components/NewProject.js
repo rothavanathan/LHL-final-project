@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 export default function NewProjectForm(props) {
   const classes = useStyles();
   const { songId, user } = props;
-  // const { setUser, isLoggedIn } = props;
   const [projectTitle, setProjectTitle] = useState("");
   const [projectId, setProjectId] = useState("");
 
@@ -36,7 +35,6 @@ export default function NewProjectForm(props) {
         notes: ""
       })
       .then((res) => {
-        console.log("PROJECT----------", res.data.projectId);
         setProjectId(res.data.projectId);
       })
       .catch((err) => console.log(err));
