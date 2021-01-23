@@ -1,8 +1,6 @@
 import React from "react";
-import { Card, CardActions, CardContent, CardMedia, Grid, Typography, Link } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
-import classnames from "classnames";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -18,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%',
     flexGrow: 1,
     backgroundColor: "var(--black)",
   },
@@ -36,9 +34,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Album(props) {
-  // const albumInfoClass = classnames("album__info", {
-  //   "album__info--explicit": props.collectionExplicitness === "explicit"
-  // });
   const { setSong, songData } = props;
 
   const handleClick = () => {

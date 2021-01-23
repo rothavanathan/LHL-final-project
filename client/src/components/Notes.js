@@ -14,11 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Notes(props) {
   const classes = useStyles();
-
-
   const { existingNote, note, setNote, setIsNotChanged } = props;
-
-
   const handleNote = (event) => {
     setNote(event.target.value);
     setIsNotChanged(false);
@@ -27,8 +23,6 @@ export default function Notes(props) {
   useEffect(() => {
     setNote(existingNote);
   }, [existingNote]);
-
-
 
   return (
     <div>
@@ -42,6 +36,5 @@ export default function Notes(props) {
         onChange={handleNote}
       />
     </div>
-
   )
 }

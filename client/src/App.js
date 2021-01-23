@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
-// import UserInfo from '../UserInfo';
-import axios from "axios";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
-
 import Project from "./components/Project";
 import Entry from "./components/Entry";
 import Login from "./components/Login";
@@ -18,7 +12,6 @@ import Register from "./components/Register";
 import Library from "./components/Library";
 import Home from "./components/Home";
 import Collection from "./components/Collection";
-import SongPreview from "./components/SongPreview"
 
 const theme = createMuiTheme({
   palette: {
@@ -39,7 +32,6 @@ const theme = createMuiTheme({
 
 
 export default function App() {
-  const [tracks, setTracks] = useState([]);
   const userInStorage = useState(localStorage.getItem("user"));
   const [user, setUser] = useState(userInStorage ? userInStorage : null);
   const [refresh, setRefresh] = useState(false);
@@ -48,12 +40,9 @@ export default function App() {
     const localUser = localStorage.getItem("user")
     setUser(localUser)
   }, [])
-  // instead of local, have use effect thatt uses on mount to send axios req to backend
   useEffect(() => {
     localStorage.setItem("user", user)
   }, [user])
-
-  console.log("LOCAL USER IN APP-----", user);
 
   return (
 
@@ -94,5 +83,3 @@ export default function App() {
     </Router>
   );
 }
-
-// routing system that usee state

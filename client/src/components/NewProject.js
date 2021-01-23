@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 export default function NewProjectForm(props) {
   const classes = useStyles();
   const { songId, user } = props;
-  // const { setUser, isLoggedIn } = props;
   const [projectTitle, setProjectTitle] = useState("");
   const [projectId, setProjectId] = useState("");
 

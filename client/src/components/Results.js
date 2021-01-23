@@ -1,12 +1,8 @@
 import { Fragment } from "react";
-import SongPreview from "./SongPreview"
-
 import Song from "./Song";
 
 export default function Results(props) {
   const { results, setSong } = props;
-
-
 
   return results.map(song => {
     return (
@@ -17,7 +13,6 @@ export default function Results(props) {
           {...song}
           songData={song}
           width={1 / 4} />
-
       </ Fragment>
     );
   });

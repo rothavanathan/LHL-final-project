@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import React from 'react';
-
 import { makeStyles } from '@material-ui/core/styles';
 import { Tab, BottomNavigation, } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 import SearchIcon from '@material-ui/icons/Search';
-
 
 const useStyles = makeStyles({
   root: {

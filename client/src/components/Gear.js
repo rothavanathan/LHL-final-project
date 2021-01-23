@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Gear(props) {
   const { isLoggedIn, setUser } = props;
+  const classes = useStyles();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(`in handleSubmit. event is `, event);
     logoutUser();
   };
 
@@ -41,14 +41,11 @@ export default function Gear(props) {
     axios
       .get("/api/users/logout")
       .then((res) => {
-        // console.log(`user is logged out. check cookies to confirm!----------`, res);
         setUser(null);
         localStorage.clear();
       })
       .catch((err) => console.log(err));
   };
-
-  const classes = useStyles();
 
   return isLoggedIn ? (
     <div>

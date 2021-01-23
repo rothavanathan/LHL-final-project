@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-
 import { makeStyles } from '@material-ui/core/styles';
-
 import Waveform from "./Waveform";
-import Emitter from "../EventEmitter"
 
 const useStyles = makeStyles((theme) => ({
   waveform: {

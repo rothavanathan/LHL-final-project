@@ -10,11 +10,8 @@
 }
 
 body {
-
   background-image: url("https://www.transparenttextures.com/patterns/otis-redding.png");
-
   background: var(--black);
-
   color: var(--white);
   margin-bottom: 10%;
 }
@@ -24,13 +21,11 @@ body {
   text-align: center;
 }
 
-
 hr {
   color: var(--white);
   opacity: 10%;
   width: 90%;
 }
-
 
 Waveform {
   z-index: 1;
