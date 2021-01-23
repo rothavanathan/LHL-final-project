@@ -37,12 +37,15 @@ export default function Home(props) {
   const classes = useStyles();
   const { isLoggedIn } = props;
 
+  console.log("LOIIIILL----", isLoggedIn);
+
   const [collections, setCollections] = useState([])
   const [projects, setProjects] = useState([])
 
+  // get collections & projects by user id
   useEffect(() => {
     axios
-      .get('/api/content')
+      .get(`/api/content/${isLoggedIn}`)
       .then(data => {
         setCollections(data.data.collections.splice(0, 3));
         setProjects(data.data.projects.splice(0, 3));

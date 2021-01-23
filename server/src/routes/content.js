@@ -32,8 +32,9 @@ module.exports = (db) => {
   });
 
   // Fetch Collections & Project Data for Home View
-  router.get("/", (req, res) => {
-    const userID = req.session.userId;
+  router.get("/:id", (req, res) => {
+    const userID = req.params.id;
+    console.log("AHFUIAHFIA====", [req.session.userId])
     console.log(`userID is `, userID)
     if (!userID) {
       res.status(403).send(`lol fuck you`);

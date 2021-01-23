@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {InputLabel, FormHelperText, FormControl, NativeSelect} from '@material-ui/core';
+import { InputLabel, FormHelperText, FormControl, NativeSelect } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -25,17 +25,19 @@ export default function AddProjectToCollection(props) {
   return (
 
     <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="age-native-helper">Save to Collection</InputLabel>
+      {/* <InputLabel htmlFor="Save-Project-To-Collection">Save project to collection</InputLabel> */}
       <NativeSelect
-        // value={state.age}
+        id="Save-Project-To-Collection"
+        aria-label="Save-Prooject-To-Collection"
+        value={collectionId}
         onChange={handleChange}
         inputProps={{
           name: 'Add to Collection'
         }}
       >
-        <option aria-label="None" value="" />
+        <option aria-label="No Collection" value="">-- No Collection --</option>
         {collections.map((collection, i) => {
-          return <option key ={i} value={collection.id}>{collection.name}</option>
+          return <option key={i} value={collection.id}>{collection.name}</option>
         })}
 
       </NativeSelect>
