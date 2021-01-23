@@ -12,9 +12,9 @@ const useStyles = makeStyles((theme) => ({
     transition: "all .25s linear",
     background: "rgb(3, 3, 3)",
     backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
-    boxShadow: "0px 2px 2px 0px rgb(244, 240, 234)",
+    boxShadow: "0px 2px 2px 0px var(--white)",
     '&:hover': {
-      boxShadow: "-1px 10px 29px 0px rgb(244, 240, 234)"
+      boxShadow: "-1px 10px 29px 0px var(--white)"
     }
   },
   cardMedia: {

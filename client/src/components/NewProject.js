@@ -6,11 +6,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   input: {
-    color: "white",
-    backgroundColor: "#1a1a1a",
+    color: "var(--black)",
+    backgroundColor: "var(--white)",
     border: "none",
     borderBottom: "var(--tertiary-color) 2px solid",
-    width: "70%"
+    width: "100%",
+    marginTop: "1em",
+    fontSize: ".9em"
   }
 }));
 
@@ -47,14 +49,13 @@ export default function NewProjectForm(props) {
 
   return (
     <div>
-      <p>Start New Project?</p>
       <form onSubmit={handleSubmit}>
         <Input className={classes.input}
           value={projectTitle}
           onChange={handleProject}
           type="text"
           name="project_name"
-          placeholder="Enter Project Name"
+          placeholder="Ready? Name your new project!"
         ></Input>
         <Button type="submit" color="primary">Save</Button>
       </form>

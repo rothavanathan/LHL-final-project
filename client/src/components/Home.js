@@ -38,8 +38,6 @@ export default function Home(props) {
   const classes = useStyles();
   const { isLoggedIn, refresh, setRefresh } = props;
 
-  console.log("LOIIIILL----", isLoggedIn);
-
   const [collections, setCollections] = useState([])
   const [projects, setProjects] = useState([])
 
