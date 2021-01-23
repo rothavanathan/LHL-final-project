@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, Box } from "@material-ui/core";
+
+const notoFont = "'Noto Sans', sans-serif";
+
 const useStyles = makeStyles((theme) => ({
   mainBox: {
     maxWidth: "20em",
@@ -20,21 +23,21 @@ const useStyles = makeStyles((theme) => ({
   heading: {
 
 
-    fontFamily: "Noto Sans",
+    fontFamily: notoFont,
     marginTop: "2.5em",
     marginBottom: "0.5em"
   },
 
   heading2: {
 
-    fontFamily: "Noto Sans",
+    fontFamily: notoFont,
     fontSize: 15,
     margin: "1.5em",
 
     textAlign: "center"
   },
   logButton: {
-    fontFamily: "Noto Sans",
+    fontFamily: notoFont,
     display: "flex",
     background: "var(--primary-color)",
     width: "60%",
@@ -66,14 +69,14 @@ export default function Entry(props) {
 
 
         With Layers you can isolate the parts of a track to teach or learn. Drums, guitar, vocals, or a combination of a few?
-        
+
       </Typography>
       <Typography component="h2" variant="subtitle2" className={classes.heading2} fontStyle="oblique">
       It's really up to you.
 
     </Typography>
-      
-      
+
+
       <div className={classes.formDiv}>
         <Button to="/register" component={Link} className={classes.logButton}>
         Sign up
