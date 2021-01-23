@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
   },
   logButton: {
-    fontFamily: "Noto Sans",
     display: "flex",
     background: "var(--primary-color)",
     width: "60%",
