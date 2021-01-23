@@ -73,7 +73,16 @@ export default function Search(props) {
               })
               response.push(...data2formatted)
             }
-            response.push(...data1.data.results)
+            //construct 600x600 URL from artworkURL100
+            const hiResItunes = data1.data.results.map(entry => {
+              const newURL = entry.artworkUrl100.replace('100x100bb.jpg', '600x600bb.jpg')
+              entry.artworkUrl100 = newURL
+              return entry;
+
+            })
+            console.log(hiResItunes)
+
+            response.push(...hiResItunes)
             setResults(response);
             //once we have results
             setIsSearching(false);

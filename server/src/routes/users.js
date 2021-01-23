@@ -16,12 +16,12 @@ module.exports = (db) => {
         console.log("USER----->", userInfo.rows[0])
         if (!email || !password || !first_name) {
           console.log("MISSING VALUE");
-          // show error
-          res.send("MISSING_VALUE")
+          const valError = "you're missing a field"
+          res.send(valError)
         } else if (userInfo.rows.length !== 0) {
           console.log("user exists");
-          // show error
-          res.send("USER_EXISTS")
+          const userError = "that email is taken"
+          res.send(userError)
         } else {
           addUser(first_name, email, hashedPassword, db)
           .then(newUser => {
@@ -52,16 +52,17 @@ module.exports = (db) => {
         if (userInfo.rows.length === 0) {
           console.log("NO USER FOUND")
           console.log("THIS BE DA DB RES---------->", userInfo.rows)
-          res.send("LOGIN_ERROR")
+          const emailError = "that email doesn't exist"
+          res.send(emailError)
           // above will handle sending back error
         } else if (!bcrypt.compareSync(password, userInfo.rows[0].password)) {
           // the conditional could be cleaner
           console.log("BCRYPTE BOOL", bcrypt.compareSync(password, userInfo.rows[0].password))
           console.log("PASSWORD-----", password)
           console.log("DB_PASSWORD-----", userInfo.rows[0].password)
-
+          const passError = "that password is incorrect"
           console.log("WRONG PASSWORD")
-          res.send("PASSWORD_ERROR")
+          res.send(passError)
         } else {
 
           const user = userInfo.rows[0];
