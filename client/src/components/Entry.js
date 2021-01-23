@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, Box } from "@material-ui/core";
 
-const notoFont = "'Noto Sans', sans-serif";
-
 const useStyles = makeStyles((theme) => ({
   mainBox: {
     maxWidth: "20em",
@@ -21,23 +19,17 @@ const useStyles = makeStyles((theme) => ({
   },
 
   heading: {
-
-
-    fontFamily: notoFont,
     marginTop: "2.5em",
     marginBottom: "0.5em"
   },
 
   heading2: {
-
-    fontFamily: notoFont,
     fontSize: 15,
     margin: "1.5em",
 
     textAlign: "center"
   },
   logButton: {
-    fontFamily: notoFont,
     display: "flex",
     background: "var(--primary-color)",
     width: "60%",

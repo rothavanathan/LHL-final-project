@@ -5,7 +5,6 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Nav from "./Nav";
 import { FormControl, Button, Typography } from "@material-ui/core";
 
-const notoFont = "'Noto Sans', sans-serif";
 const useStyles = makeStyles((theme) => ({
   header: {
     marginTop: 20,
@@ -21,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
   },
   logButton: {
-    fontFamily: notoFont,
     display: "flex",
     background: "var(--primary-color)",
     width: "60%",

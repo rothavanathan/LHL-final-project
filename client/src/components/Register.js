@@ -6,8 +6,6 @@ import { FormControl, Button, Typography, Box, Input } from "@material-ui/core";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import RegError from "./RegError"
 
-const notoFont = "'Noto Sans', sans-serif";
-
 const useStyles = makeStyles((theme) => ({
   mainBox: {
     maxWidth: "20em",
@@ -23,8 +21,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   heading: {
-
-    fontFamily: notoFont,
     marginTop: "2.5em",
     marginBottom: "0.5em"
   },
@@ -58,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
     color: "var(--white)",
   },
   regButton: {
-    fontFamily: notoFont,
     display: "flex",
     background: "var(--primary-color)",
     width: "60%",

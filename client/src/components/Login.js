@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 10,
   },
   heading: {
-    fontFamily: "Noto Sans",
     marginTop: "2.5em",
     marginBottom: "0.5em"
   },
@@ -48,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "15px",
   },
   logButton: {
-    fontFamily: "Noto Sans",
     display: "flex",
     background: "var(--primary-color)",
     width: "60%",
@@ -64,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
   regLink: {
     textDecoration: "none",
-    
+
   },
   subtitle1: {
     fontStyle: "oblique",
@@ -134,9 +132,9 @@ export default function Login(props) {
           <ArrowBackIosIcon className={classes.backArrow}>
           </ArrowBackIosIcon>
         </Link> */}
-        <Typography 
-          component="h1" 
-          variant="h2" 
+        <Typography
+          component="h1"
+          variant="h2"
           className={classes.heading}
         >
           You're Back!
@@ -195,9 +193,9 @@ export default function Login(props) {
             className={classes.subtitle1}
           >
             Don't have an account? Register here
-            
-          </Typography>       
-          
+
+          </Typography>
+
         </Link>
       </div>
     </Box>
