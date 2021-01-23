@@ -35,7 +35,6 @@ export default function NewProjectForm(props) {
         notes: ""
       })
       .then((res) => {
-        console.log("PROJECT----------", res.data.projectId);
         setProjectId(res.data.projectId);
       })
       .catch((err) => console.log(err));
