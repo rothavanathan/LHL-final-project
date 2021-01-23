@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: ".9em"
   },
   input: {
-    color: "black"
+    color: "black",
+    background: "none"
   }
 }));
 
