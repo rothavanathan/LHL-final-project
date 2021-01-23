@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from "axios";
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -15,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 2px 2px 0px rgb(244, 240, 234)",
     '&:hover': {
       boxShadow: "-1px 10px 29px 0px rgb(244, 240, 234)"
-   },
+    },
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
@@ -35,9 +34,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NewCollectionForm(props) {
   const classes = useStyles();
   const { user, setCollections, closeForm } = props;
-  // const { setUser, isLoggedIn } = props;
   const [collectionName, setCollectionName] = useState("");
-  const [collectionId, setCollectionId] = useState("");
 
   const saveCollection = () => {
     axios
@@ -47,7 +44,7 @@ export default function NewCollectionForm(props) {
       })
       .then((res) => {
         setCollections(prev => {
-          return [...prev, res.data.data]
+          return [res.data.data, ...prev]
         })
         closeForm(false)
       })
@@ -86,6 +83,6 @@ export default function NewCollectionForm(props) {
           </form>
         </CardContent>
       </Card>
-  </Grid>
+    </Grid>
   )
 }

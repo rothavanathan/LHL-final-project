@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
-import { TextRotationNoneTwoTone } from "@material-ui/icons";
+// import { TextRotationNoneTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   card: {
