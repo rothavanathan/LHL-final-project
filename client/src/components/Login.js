@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
+
 import { FormControl, Button, Typography, Box } from "@material-ui/core";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import LoginError from "./LoginError"
+
 
 const useStyles = makeStyles((theme) => ({
   mainBox: {
@@ -16,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     alignItems: "baseline",
     justifyContent: "center",
-
   },
   backArrow: {
     fontSize: 20,
@@ -75,8 +76,8 @@ export default function Login(props) {
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPasswordData] = useState("");
   const [open, setOpen] = useState(false);
-  const [passError, setPassError] = useState("")
-  const [emailError, setEmailError] = useState("")
+  const [passError, setPassError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const classes = useStyles();
 
   const loginUser = () => {
@@ -93,9 +94,11 @@ export default function Login(props) {
         } else {
           // res.data === "that email doesn't exist" || "that password is incorrect"
           // console.log("FIND EMAIL----------->", res.data)
+
           setEmailError(res.data) || setPassError(res.data)
           setOpen(true)
           setTimeout(function () { setOpen(false); }, 2000);
+
         }
       })
       .catch((err) => console.log(err));
@@ -126,6 +129,7 @@ export default function Login(props) {
     <Box className={classes.mainBox}>
 
       <div className={classes.main}>
+
         {/* <Link to="/entry">
           <ArrowBackIosIcon className={classes.backArrow}>
           </ArrowBackIosIcon>
@@ -138,6 +142,7 @@ export default function Login(props) {
           You're Back!
 
         </Typography>
+
 
         <LoginError
           open={open}
@@ -197,6 +202,6 @@ export default function Login(props) {
       </div>
     </Box>
   ) : (
-      <Redirect to="/home" />
-    );
+    <Redirect to="/home" />
+  );
 }

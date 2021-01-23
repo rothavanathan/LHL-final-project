@@ -6,6 +6,7 @@ import { FormControl, Button, Typography, Box, Input } from "@material-ui/core";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import RegError from "./RegError"
 
+
 const useStyles = makeStyles((theme) => ({
   mainBox: {
     maxWidth: "20em",
@@ -19,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     alignItems: "baseline",
     justifyContent: "center",
-
   },
   heading: {
 
@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
   },
+
   regLink: {
     textDecoration: "none",
 
@@ -79,15 +80,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 export default function Register(props) {
   const { setUser, isLoggedIn } = props;
   const [nameData, setNameData] = useState("");
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPasswordData] = useState("");
   const [open, setOpen] = useState(false);
-  const [passError, setPassError] = useState("")
-  const [emailError, setEmailError] = useState("")
+  const [passError, setPassError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const classes = useStyles();
 
@@ -99,16 +99,18 @@ export default function Register(props) {
         password: passwordData,
       })
       .then((res) => {
-        console.log("FIND ERROR----------->", res.data)
+        console.log("FIND ERROR----------->", res.data);
         if (res.data.userId) {
           // console.log("TRUE USER------->", res.data.userId)
           setUser(res.data.userId);
         } else {
           // res.data === "that email doesn't exist" || "that password is incorrect"
           // console.log("FIND EMAIL----------->", res.data)
+
           setEmailError(res.data) || setPassError(res.data)
           setOpen(true)
           setTimeout(function () { setOpen(false); }, 2000);
+
         }
       })
       .catch((err) => console.log(err));
@@ -140,6 +142,7 @@ export default function Register(props) {
   };
 
   return !isLoggedIn ? (
+
     <Box className={classes.mainBox}>
 
       <div className={classes.main}>
@@ -155,6 +158,7 @@ export default function Register(props) {
           Welcome!
 
         </Typography>
+
       </div>
 
       <RegError
@@ -164,7 +168,6 @@ export default function Register(props) {
         handleErrorOpen={handleErrorClosed}
         emailError={emailError}
         passError={passError}
-
       />
       <Typography component="h2" variant="subtitle2" className={classes.heading2} texttAlign="left">
 
@@ -226,6 +229,6 @@ export default function Register(props) {
 
     </Box>
   ) : (
-      <Redirect to="/home" />
-    );
+    <Redirect to="/home" />
+  );
 }

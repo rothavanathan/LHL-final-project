@@ -11,13 +11,13 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 40,
     display: "flex",
     color: "var(--white)",
-    alignItems: "center"
+    alignItems: "center",
   },
   backArrow: {
     fontSize: "large",
     padding: 10,
     marginLeft: 10,
-    marginTop: 10
+    marginTop: 10,
   },
   logButton: {
     fontFamily: "Noto Sans",
@@ -42,14 +42,12 @@ export default function Gear(props) {
     axios
       .get("/api/users/logout")
       .then((res) => {
-        // console.log(`user is logged out. check cookies to confirm!`);
+        // console.log(`user is logged out. check cookies to confirm!----------`, res);
         setUser(null);
         localStorage.clear();
       })
       .catch((err) => console.log(err));
   };
-
-
 
   const classes = useStyles();
 
@@ -77,6 +75,6 @@ export default function Gear(props) {
       <Nav />
     </div>
   ) : (
-      <Redirect to="/" />
-    );
+    <Redirect to="/" />
+  );
 }

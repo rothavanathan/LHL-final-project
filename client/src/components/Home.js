@@ -9,6 +9,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 import Nav from "./Nav";
 import ProjectCard from "./ProjectCard";
+import NewCollectionCard from './NewCollectionCard';
 
 const useStyles = makeStyles((theme) => ({
   mainHeader: {
@@ -52,7 +53,7 @@ export default function Home(props) {
         setRefresh(false);
       })
       .catch((err) => console.log(err));
-  }, [refresh]);
+  }, [refresh, isLoggedIn]);
 
   return isLoggedIn ? (
     <div>
@@ -80,6 +81,17 @@ export default function Home(props) {
             > Recent Collections
             </Typography>
             <Grid container spacing={4}>
+              {collections.length === 0 ? (
+                <NewCollectionCard
+                  key={0}
+                  title={"There's nothing here yet!"}
+                  subtitle={"Start a new collection"}
+                  image={"https://rykabrown.com/wp-content/uploads/2021/01/new-coll.png"}
+                  isLoggedIn={isLoggedIn}
+                  setCollections={setCollections}
+                />
+            ) : (
+            <Fragment>
               {collections.map((collection, i) =>
                 <Fragment key={i}>
                   <ProjectCard
@@ -90,6 +102,8 @@ export default function Home(props) {
                   />
                 </Fragment>
               )}
+              </Fragment>
+            )}
             </Grid>
           </Container>
         </section>
@@ -103,17 +117,29 @@ export default function Home(props) {
             Recent Projects
           </Typography>
           <Grid container spacing={4} >
-            {projects.map((project, i) =>
-              <Fragment key={i}>
-                <ProjectCard
-                  key={project.id}
-                  title={project.title}
-                  thumbnail={project.url_album_artwork}
-                  link={`/project/${project.id}`}
-                  songTitle={project.song_title}
-                  songArtist={project.artist}
-                />
-              </Fragment>
+          {collections.length === 0 ? (
+            <ProjectCard
+              key={1000}
+              title={"Ready to make some music?"}
+              songTitle={"Start a new project"}
+              thumbnail={"https://rykabrown.com/wp-content/uploads/2021/01/new-proj.png"}
+              link={`/search`}
+            />
+            ) : (
+            <Fragment>
+              {projects.map((project, i) =>
+                <Fragment key={i}>
+                  <ProjectCard
+                    key={project.id}
+                    title={project.title}
+                    thumbnail={project.url_album_artwork}
+                    link={`/project/${project.id}`}
+                    songTitle={project.song_title}
+                    songArtist={project.artist}
+                  />
+                </Fragment>
+              )}
+            </Fragment>
             )}
           </Grid>
         </Container>
