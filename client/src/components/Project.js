@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, Redirect, useParams, Prompt } from "react-router-dom";
 import axios from 'axios';
+import useVisualMode from "../hooks/useVisualMode";
 
 import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
@@ -151,6 +152,20 @@ export default function Project(props) {
     deleteProject();
     setRedirectOnDelete(false);
   }
+
+  const EMPTY = "EMPTY";
+  const SHOW = "SHOW";
+  const CREATE = "CREATE";
+  const SAVING = "SAVING";
+  const DELETING = "DELETING";
+  const CONFIRMING = "CONFIRM";
+  const EDIT = "EDIT";
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE";
+
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
 
 
   return isLoggedIn ? (
