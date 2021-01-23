@@ -48,7 +48,7 @@ export default function Album(props) {
             style={useStyles.media}
           />
           <CardContent className={classes.cardContent}>
-            <Typography gutterBottom variant="h7" component="h2">
+            <Typography gutterBottom variant="subtitle-1" component="h2">
               {props.title}
             </Typography>
             <Typography className={classes.cardText}>
