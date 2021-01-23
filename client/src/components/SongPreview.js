@@ -65,6 +65,10 @@ const useStyles = makeStyles((theme) => ({
   playIcon: {
     height: 38,
     width: 38,
+  },
+  audio: {
+    border: "2px solid rgb(80, 32, 28)",
+    borderRadius: "10px"
   }
 }));
 
@@ -134,7 +138,7 @@ export default function SongPreview(props) {
             {theme.direction === 'rtl' ? <SkipPrevious /> : <SkipNext />}
             </IconButton>
           </div> */}
-              <CardMedia
+              <CardMedia className={classes.audio}
                 component="audio"
                 image={previewUrl}
                 title='title'

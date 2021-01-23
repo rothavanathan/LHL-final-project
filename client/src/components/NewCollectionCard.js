@@ -9,7 +9,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     transition: "all .25s linear",
-    background: "rgb(244, 240, 234)",
+    background: "rgb(3, 3, 3)",
+    backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
     boxShadow: "0px 2px 2px 0px rgb(244, 240, 234)",
     '&:hover': {
       boxShadow: "-1px 10px 29px 0px rgb(244, 240, 234)"
@@ -18,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
   cardMedia: {
     paddingTop: '56.25%', // 16:9
     flexGrow: 1,
-    backgroundColor: "var(--white)",
+    backgroundColor: "var(--black)",
   },
   cardContent: {
     flexGrow: 1,
-    color: "black",
+    color: "var(--white)",
     fontSize: ".6rem"
   },
   cardText: {

@@ -16,7 +16,8 @@ const useStyles = makeStyles({
     width: '100%',
     position: 'fixed',
     bottom: 0,
-    background: "black",
+    background: "rgb(3, 3, 3)",
+    backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
     paddingTop: 10,
   }
 });
