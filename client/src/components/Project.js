@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
   mainWindow: {
     marginLeft: 10,
     marginRight: 10,
+    marginBottom: 160,
   },
-
   header: {
     marginTop: 20,
     marginBottom: 20,
