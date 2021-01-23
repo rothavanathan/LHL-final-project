@@ -2,9 +2,9 @@
   --black: #1a1a1a;
   --white: rgb(244, 240, 234);
   --primary-color: rgb(245, 103, 93);
-  --secondary-color: #ffff5e;
+  --secondary-color: #ffff6f;
   --tertiary-color: rgb(80, 32, 28);
-  --quad-color: rgb(57, 255, 186);
+  --quad-color: rgb(92, 255, 198);
   
 }
 
@@ -22,64 +22,6 @@ body {
   text-align: center;
 }
 
-.mute {
-  background: rgb(245, 103, 93);
-}
-
-.mute:hover {
-  background: var(--white);
-}
-
-.unmute {
-  background: white;
-  color: black;
-}
-
-.unmute:hover {
-  background: white;
-}
-
-.solo {
-  background: rgb(245, 103, 93);
-}
-
-.solo:hover {
-  background: var(--white);
-}
-
-.unsolo {
-  background: white;
-  color: black;
-}
-
-.unsolo:hover {
-  background: var(--white);
-}
-
-.playlist {
-  text-align: left;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.playlist-item {
-  color: #444;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  padding: 1em;
-}
-
-.playlist-item.selected {
-  font-weight: bold;
-}
-
-.playlist-item:hover {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.controls {
-  text-align: left;
-  padding: 1em;
-}
 
 hr {
   color: var(--white);
@@ -87,14 +29,6 @@ hr {
   width: 90%;
 }
 
-#transport {
-  /* display: flex; */
-  /* z-index: 10;
-  position: fixed;
-  right: 20px;
-  top: 80px;
-  color: black; */
-}
 
 Waveform {
   z-index: 1;
