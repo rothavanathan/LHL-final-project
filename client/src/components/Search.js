@@ -6,12 +6,20 @@ import NewProject from "./NewProject";
 import NewCollection from "./NewCollection";
 import SongPreview from "./SongPreview";
 import { Redirect } from "react-router-dom";
-import { DialogTitle, TextField, Grid, Container } from '@material-ui/core';
+import { TextField, Grid, Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import useDebounce from "../hooks/useDebounce";
 import { TextFormatTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
+  mainHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    paddingLeft: 20,
+    paddingRight: 40,
+    marginTop: 40,
+    marginBottom: 40
+  },
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
@@ -98,7 +106,14 @@ export default function Search(props) {
   const classes = useStyles();
   return !isSongSelected.trackName ? (
     <div>
-      <h1>Search</h1>
+      <header className={classes.mainHeader}>
+        <Typography
+          component="h1"
+          variant="h4"
+          color="var(--white)">
+          Search
+          </Typography>
+      </header>
       <TextField
         variant="filled"
         value={term}

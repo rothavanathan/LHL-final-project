@@ -40,9 +40,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   homeImg: {
-    marginTop: "4em",
-    width: "16em",
-    height: "16em",
+    marginTop: "6em",
+    width: "14em",
+    height: "14em",
   }
 }));
 
