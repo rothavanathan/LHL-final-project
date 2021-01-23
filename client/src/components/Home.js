@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardGrid: {
     paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(7),
+    paddingBottom: theme.spacing(5),
   },
   gearIcon: {
     color: "var(--white)",
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "flex-end"
   },
   typography: {
-    marginBottom: 48,
+    marginBottom: 20,
   }
 }));
 

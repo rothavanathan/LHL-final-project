@@ -62,7 +62,7 @@ export default function Collection(props) {
 
 
   // card for empty collection
-  const emptyCollection = [{collection_name: "Wow, this looks lonely!", project_title: "Add A Project!", url_album_artwork: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8ZGFuY2V8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"}];
+  const emptyCollection = [{collection_name: "Wow, this looks lonely!", project_title: "Add A Project!", url_album_artwork: "https://rykabrown.com/wp-content/uploads/2021/01/new-proj.png"}];
 
   return isLoggedIn ? (
     <div>
