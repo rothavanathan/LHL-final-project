@@ -16,6 +16,7 @@ body {
   background: var(--black);
 
   color: var(--white);
+  margin-bottom: 10%;
 }
 
 .App {
