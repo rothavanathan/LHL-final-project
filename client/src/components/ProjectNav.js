@@ -1,10 +1,10 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { BottomNavigation, Tab } from '@material-ui/core/';
 import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
-import SettingsIcon from '@material-ui/icons/Settings';
+import HomeIcon from '@material-ui/icons/Home';
 import BookIcon from '@material-ui/icons/Book';
 
 const useStyles = makeStyles({
@@ -39,9 +39,9 @@ export default function ProjectNav(props) {
       showLabels
       className={classes.root}
     >
+      <Tab label="Home" to="/home" icon={<HomeIcon />} component={Link} />
       <Tab label="Player" icon={<TuneOutlinedIcon />} onClick={handlePlayerClick} />
       <Tab label="Notes" icon={<BookIcon />} onClick={handleNotesClick} />
-      <Tab label="Global" icon={<SettingsIcon />} onClick={handleNotesClick} />
     </BottomNavigation>
   );
 }

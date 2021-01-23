@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     borderBottom: "var(--tertiary-color) 4px solid",
     width: "80%"
+  },
+  input: {
+    color: "white"
   }
 }));
 
@@ -87,7 +90,14 @@ export default function Search(props) {
   return !isSongSelected.trackName ? (
     <div>
       <h1>Search</h1>
-      <TextField variant="filled" value={term} onChange={handleChange} className={classes.searchBox} />
+      <TextField
+        variant="filled"
+        value={term}
+        onChange={handleChange}
+        className={classes.searchBox}
+        InputProps={{
+          className: classes.input
+        }} />
       <Container className={classes.cardGrid} maxWidth="md" id="projects">
         <Grid container spacing={4}>
           <Results results={results} setSong={setIsSongSelected}></Results>

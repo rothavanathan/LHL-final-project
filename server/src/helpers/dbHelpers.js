@@ -34,7 +34,7 @@ const getProjectsByUser = (id, db) => {
         FROM projects
         JOIN songs ON projects.song_id = songs.id
         WHERE user_id = ${id}
-        ORDER BY user_id desc;
+        ORDER BY projects.id desc;
       `;
 
   return db.query(query);
@@ -57,7 +57,7 @@ const addNoteAndCollectionToProject = (notes, collection_id, project_id, db) => 
 const getProjectsByCollection = (id, db) => {
   const query = {
     text: `
-        SELECT projects.title as project_title, songs.*, collections.name as collection_name
+        SELECT projects.id as project_id, projects.title as project_title, songs.*, collections.name as collection_name
         FROM projects
         JOIN songs on projects.song_id = songs.id
         JOIN collections on projects.collection_id = collections.id

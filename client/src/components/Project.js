@@ -153,6 +153,7 @@ export default function Project(props) {
       {!redirectOnDelete ? (
         <Redirect to="/home" />
       ) : (
+
       <div>
         <div className="main-window" ref={ref}>
           <header className={classes.header}>
@@ -161,66 +162,69 @@ export default function Project(props) {
                 className={classes.backArrow}
               >Back to Home
               </ArrowBackIosIcon>
-            </Link>
+                </Link>
 
-            <Box className={classes.titleBox}>
+                <Box className={classes.titleBox}>
 
-              <Typography component="h1" variant="h5">
-                {project.project_title}
-              </Typography>
-              <Typography variant="subtitle1">
-                {project.title} - {project.artist}
-              </Typography>
+                  <Typography component="h1" variant="h5">
+                    {project.project_title}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    {project.title} - {project.artist}
+                  </Typography>
 
-            </Box>
-          </header>
+                </Box>
+              </header>
 
-          <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player"></Player>
+              <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player"></Player>
 
-          <form className={classes.projectForm} onSubmit={handleSubmit}>
-            <Box className={classes.formBox}>
-              <AddProjectToCollection
-                collections={collections}
-                collectionId={collectionId}
-                setCollectionId={setCollectionId} >
-              </AddProjectToCollection>
+              <form
+                className={classes.projectForm}
+                onSubmit={handleSubmit}
+              >
+                <Box className={classes.formBox}>
+                  <AddProjectToCollection
+                    collections={collections}
+                    collectionId={collectionId}
+                    setCollectionId={setCollectionId} >
+                  </AddProjectToCollection>
 
-              <IconButton aria-label="save" type="submit">
-                <SaveIcon
-                  className={classes.saveIcon}
-                >
-                </SaveIcon>
-              </IconButton>
-              <IconButton aria-label="delete" onClick={handleAlertOpen}>
-                <DeleteForeverIcon
-                  className={classes.saveIcon}
-                >
-                </DeleteForeverIcon>
-              </IconButton>
-              <ConfirmDelete
-                open={open}
-                setOpen={setOpen}
-                handleAlertOpen={handleAlertOpen}
-                handleConfirmDelete={handleConfirmDelete}
-                handleCancelDelete={handleCancelDelete}
-                name={content[0].project_title}
-              />
-            </Box>
+                  <IconButton aria-label="save" type="submit">
+                    <SaveIcon
+                      className={classes.saveIcon}
+                    >
+                    </SaveIcon>
+                  </IconButton>
+                  <IconButton aria-label="delete" onClick={handleAlertOpen}>
+                    <DeleteForeverIcon
+                      className={classes.saveIcon}
+                    >
+                    </DeleteForeverIcon>
+                  </IconButton>
+                  <ConfirmDelete
+                    open={open}
+                    setOpen={setOpen}
+                    handleAlertOpen={handleAlertOpen}
+                    handleConfirmDelete={handleConfirmDelete}
+                    handleCancelDelete={handleCancelDelete}
+                    name={content[0].project_title}
+                  />
+                </Box>
 
-            {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged}/>}
+                {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged} />}
 
-          </form>
-        </div>
+              </form>
+            </div>
 
-        <PlayerTransport tracks={stems} audioCtx={audioCtx} />
-        <ProjectNav height={height} />
+            <PlayerTransport tracks={stems} audioCtx={audioCtx} />
+            <ProjectNav height={height} />
 
-        <Prompt
-          when={!isNotChanged}
-          message={"Don't you want to saaaaaaave!?"}
-        />
-      </div>
-      )}
+            <Prompt
+              when={!isNotChanged}
+              message={"Don't you want to saaaaaaave!?"}
+            />
+          </div>
+        )}
     </div >
   ) : (
       <Redirect to="/" />
