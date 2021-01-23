@@ -9,9 +9,6 @@ const useStyles = makeStyles((theme) => ({
   entryImage: {
     backgroundImage: `url(${"https://unsplash.com/photos/MEL-jJnm7RQ"})`,
   },
-
-offMaster
-
   formDiv: {
     display: "flex",
     flexDirection: "column",
