@@ -34,7 +34,7 @@ export default function Library(props) {
   // get collections & projects by user id
   useEffect(() => {
     axios
-      .get('/api/content')
+      .get(`/api/content/${isLoggedIn}`)
       .then(data => {
         setCollections(data.data.collections);
         setProjects(data.data.projects);
