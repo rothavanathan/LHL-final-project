@@ -52,16 +52,17 @@ module.exports = (db) => {
         if (userInfo.rows.length === 0) {
           console.log("NO USER FOUND")
           console.log("THIS BE DA DB RES---------->", userInfo.rows)
-          res.send("LOGIN_ERROR")
+          const emailError = "that email doesn't exist"
+          res.send(emailError)
           // above will handle sending back error
         } else if (!bcrypt.compareSync(password, userInfo.rows[0].password)) {
           // the conditional could be cleaner
           console.log("BCRYPTE BOOL", bcrypt.compareSync(password, userInfo.rows[0].password))
           console.log("PASSWORD-----", password)
           console.log("DB_PASSWORD-----", userInfo.rows[0].password)
-
+          const passError = "that password is incorrect"
           console.log("WRONG PASSWORD")
-          res.send("PASSWORD_ERROR")
+          res.send(passError)
         } else {
 
           const user = userInfo.rows[0];

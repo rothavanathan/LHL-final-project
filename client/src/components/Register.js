@@ -4,6 +4,117 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormControl, Button } from "@material-ui/core";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import LoginError from "./LoginError"
+
+const useStyles = makeStyles((theme) => ({
+  main: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "baseline",
+    justifyContent: "center",
+    color: "var(--white)",
+    fontFamily: "Noto Sans",
+    margin: "20px",
+
+  },
+
+  heading2: {
+    color: "var(--white)",
+    fontFamily: "Noto Sans",
+    fontSize: 15,
+    margin: "40px",
+  },
+
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%",
+    height: "50%",
+  },
+
+  email: {
+    width: "80%",
+    color: "white",
+    display: "flex",
+    flexDirection: "column",
+  },
+
+  emailText: {
+    color: "var(--white)",
+    display: "flex",
+    backgroundColor: "var(--black)",
+    border: "none",
+    borderBottom: "var(--tertiary-color) 4px solid",
+    backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
+    margin: "30px",
+    outline: "none",
+    alignSelf: "center",
+    width: "100%",
+    fontSize: "15px",
+  },
+
+  password: {
+    width: "80%",
+    color: "var(--white)",
+    display: "flex",
+    flexDirection: "column",
+  },
+
+  passwordText: {
+    color: "var(--white)",
+    display: "flex",
+    backgroundColor: "var(--black)",
+    border: "none",
+    borderBottom: "var(--tertiary-color) 4px solid",
+    backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
+    margin: "30px",
+    outline: "none",
+    width: "100%",
+    alignSelf: "center",
+    fontSize: "15px",
+  },
+
+  name: {
+    width: "80%",
+    color: "var(--white)",
+    display: "flex",
+    flexDirection: "column",
+  },
+
+  nameText: {
+    color: "var(--white)",
+    display: "flex",
+    backgroundColor: "var(--black)",
+    border: "none",
+    borderBottom: "var(--tertiary-color) 4px solid",
+    backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
+    margin: "30px",
+    outline: "none",
+    width: "100%",
+    alignSelf: "center",
+    fontSize: "15px",
+  },
+
+  regButton: {
+    fontFamily: "Noto Sans",
+    display: "flex",
+    background: "var(--primary-color)",
+    width: "60%",
+    margin: "40px",
+    color: "var(--white)",
+  },
+
+  back: {
+    flexGrow: 1,
+    display: "flex",
+  },
+  
+  regLink: {
+    color: "var(--white)",
+    textDecoration: "none",
+  },
+}));
 
 
 export default function Register(props) {
@@ -11,7 +122,8 @@ export default function Register(props) {
   const [nameData, setNameData] = useState("");
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPasswordData] = useState("");
-
+  const classes = useStyles();
+  
   const saveUser = () => {
     axios
       .post("/api/users", {
@@ -20,6 +132,8 @@ export default function Register(props) {
         password: passwordData,
       })
       .then((res) => {
+        console.log("FIND ERROR----------->", res.data)
+
         setUser(res.data.userId);
       })
       .catch((err) => console.log(err));
@@ -27,7 +141,6 @@ export default function Register(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`in handleSubmit. event is `, event);
     saveUser();
   };
 
@@ -42,118 +155,6 @@ export default function Register(props) {
   const handlePassword = (event) => {
     setPasswordData(event.target.value);
   };
-
-  const useStyles = makeStyles((theme) => ({
-    main: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "baseline",
-      justifyContent: "center",
-      color: "var(--white)",
-      fontFamily: "Noto Sans",
-      margin: "20px",
-
-    },
-
-    heading2: {
-      color: "var(--white)",
-      fontFamily: "Noto Sans",
-      fontSize: 15,
-      margin: "40px",
-    },
-
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      width: "100%",
-      height: "50%",
-    },
-
-    email: {
-      width: "80%",
-      color: "white",
-      display: "flex",
-      flexDirection: "column",
-    },
-
-    emailText: {
-      color: "var(--white)",
-      display: "flex",
-      backgroundColor: "var(--black)",
-      border: "none",
-      borderBottom: "var(--tertiary-color) 4px solid",
-      backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
-      margin: "30px",
-      outline: "none",
-      alignSelf: "center",
-      width: "100%",
-      fontSize: "15px",
-    },
-
-    password: {
-      width: "80%",
-      color: "var(--white)",
-      display: "flex",
-      flexDirection: "column",
-    },
-
-    passwordText: {
-      color: "var(--white)",
-      display: "flex",
-      backgroundColor: "var(--black)",
-      border: "none",
-      borderBottom: "var(--tertiary-color) 4px solid",
-      backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
-      margin: "30px",
-      outline: "none",
-      width: "100%",
-      alignSelf: "center",
-      fontSize: "15px",
-    },
-
-    name: {
-      width: "80%",
-      color: "var(--white)",
-      display: "flex",
-      flexDirection: "column",
-    },
-
-    nameText: {
-      color: "var(--white)",
-      display: "flex",
-      backgroundColor: "var(--black)",
-      border: "none",
-      borderBottom: "var(--tertiary-color) 4px solid",
-      backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
-      margin: "30px",
-      outline: "none",
-      width: "100%",
-      alignSelf: "center",
-      fontSize: "15px",
-    },
-
-    regButton: {
-      fontFamily: "Noto Sans",
-      display: "flex",
-      background: "var(--primary-color)",
-      width: "60%",
-      margin: "40px",
-      color: "var(--white)",
-    },
-
-    back: {
-      flexGrow: 1,
-      display: "flex",
-    },
-
-    regLink: {
-      color: "var(--white)",
-      textDecoration: "none",
-    },
-  }));
-
-  const classes = useStyles();
 
   return !isLoggedIn ? (
     <div>

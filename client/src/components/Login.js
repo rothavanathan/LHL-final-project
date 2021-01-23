@@ -4,12 +4,105 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormControl, Button } from "@material-ui/core";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import LoginError from "./LoginError"
 
+const useStyles = makeStyles((theme) => ({
+  main: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "baseline",
+    justifyContent: "center",
+    color: "antiquewhite",
+    fontFamily: "Noto Sans",
+    margin: "20px",
+
+  },
+
+  heading2: {
+    color: "antiquewhite",
+    fontFamily: "Noto Sans",
+    fontSize: 15,
+    margin: "30px",
+  },
+
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%",
+    height: "50%",
+  },
+
+  email: {
+    width: "80%",
+    color: "white",
+    display: "flex",
+    flexDirection: "column",
+  },
+
+  emailText: {
+    color: "var(--white)",
+    display: "flex",
+    backgroundColor: "var(--black)",
+    border: "none",
+    borderBottom: "var(--tertiary-color) 4px solid",
+    backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
+    margin: "30px",
+    outline: "none",
+    alignSelf: "center",
+    width: "100%",
+    fontSize: "15px",
+  },
+
+  password: {
+    width: "80%",
+    color: "white",
+    display: "flex",
+    flexDirection: "column",
+  },
+
+  passwordText: {
+    color: "var(--white)",
+    display: "flex",
+    backgroundColor: "var(--black)",
+    border: "none",
+    borderBottom: "var(--tertiary-color) 4px solid",
+    backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
+    margin: "30px",
+    outline: "none",
+    width: "100%",
+    alignSelf: "center",
+    fontSize: "15px",
+  },
+
+  logButton: {
+    fontFamily: "Noto Sans",
+    display: "flex",
+    background: "var(--primary-color)",
+    width: "60%",
+    margin: "40px",
+    color: "var(--white)",
+  },
+
+  back: {
+    flexGrow: 1,
+    display: "flex",
+  },
+
+  regLink: {
+    color: "antiquewhite",
+    textDecoration: "none",
+  },
+}));
 
 export default function Login(props) {
   const { setUser, isLoggedIn } = props;
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPasswordData] = useState("");
+  const [open, setOpen] = useState(false);
+  const [passError, setPassError] = useState("")
+  const [emailError, setEmailError] = useState("")
+  const classes = useStyles();
 
   const loginUser = () => {
     axios
@@ -18,14 +111,23 @@ export default function Login(props) {
         password: passwordData,
       })
       .then((res) => {
-        setUser(res.data.userId);
+        // console.log("THIS IS RES ---------", res.data)
+        if (res.data.userId) {
+          // console.log("TRUE USER------->", res.data.userId)
+          setUser(res.data.userId);
+        } else {
+          // res.data === "that email doesn't exist" || "that password is incorrect"
+          // console.log("FIND EMAIL----------->", res.data)
+          setEmailError(res.data) || setPassError(res.data)
+          setOpen(true)
+          setTimeout(function(){ setOpen(false); }, 2000);
+        }
       })
       .catch((err) => console.log(err));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(`Event has been submitted from form-control----> `, event);
     loginUser();
   };
 
@@ -37,96 +139,13 @@ export default function Login(props) {
     setPasswordData(event.target.value);
   };
 
-  const useStyles = makeStyles((theme) => ({
-    main: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "baseline",
-      justifyContent: "center",
-      color: "antiquewhite",
-      fontFamily: "Noto Sans",
-      margin: "20px",
+  const handleErrorOpen = () => {
+    setOpen(true);
+  };
 
-    },
-
-    heading2: {
-      color: "antiquewhite",
-      fontFamily: "Noto Sans",
-      fontSize: 15,
-      margin: "30px",
-    },
-
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      width: "100%",
-      height: "50%",
-    },
-
-    email: {
-      width: "80%",
-      color: "white",
-      display: "flex",
-      flexDirection: "column",
-    },
-
-    emailText: {
-      color: "var(--white)",
-      display: "flex",
-      backgroundColor: "var(--black)",
-      border: "none",
-      borderBottom: "var(--tertiary-color) 4px solid",
-      backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
-      margin: "30px",
-      outline: "none",
-      alignSelf: "center",
-      width: "100%",
-      fontSize: "15px",
-    },
-
-    password: {
-      width: "80%",
-      color: "white",
-      display: "flex",
-      flexDirection: "column",
-    },
-
-    passwordText: {
-      color: "var(--white)",
-      display: "flex",
-      backgroundColor: "var(--black)",
-      border: "none",
-      borderBottom: "var(--tertiary-color) 4px solid",
-      backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
-      margin: "30px",
-      outline: "none",
-      width: "100%",
-      alignSelf: "center",
-      fontSize: "15px",
-    },
-
-    logButton: {
-      fontFamily: "Noto Sans",
-      display: "flex",
-      background: "var(--primary-color)",
-      width: "60%",
-      margin: "40px",
-      color: "var(--white)",
-    },
-
-    back: {
-      flexGrow: 1,
-      display: "flex",
-    },
-
-    regLink: {
-      color: "antiquewhite",
-      textDecoration: "none",
-    },
-  }));
-
-  const classes = useStyles();
+  const handleErrorClosed = () => {
+    setOpen(false);
+  };
 
   return !isLoggedIn ? (
     <div>
@@ -136,6 +155,16 @@ export default function Login(props) {
           </ArrowBackIosIcon>
         </Link>
         <h1 className={classes.main}>Welcome Back!</h1>
+
+      <LoginError
+        open={open}
+        setOpen={setOpen}
+        handleErrorOpen={handleErrorOpen}
+        handleErrorOpen={handleErrorClosed}
+        emailError={emailError}
+        passError={passError}
+
+      />
       </div>
 
       <h2 className={classes.heading2}>Let's get you logged in</h2>
