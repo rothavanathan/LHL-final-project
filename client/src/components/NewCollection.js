@@ -29,9 +29,6 @@ const useStyles = makeStyles((theme) => ({
   },
   cardText: {
     fontSize: ".75rem"
-  },
-  button: {
-
   }
 }));
 
