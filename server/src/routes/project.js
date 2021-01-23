@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getSongByProject, addNoteToProject, addProject, deleteProject } = require("../helpers/dbHelpers");
+const { getSongByProject, addNoteAndCollectionToProject, addProject, deleteProject, updateProjectCollectionId } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
@@ -23,7 +23,7 @@ module.exports = (db) => {
     const { notes, collection_id } = req.body;
     const id = req.params.id
 
-    addNoteToProject(notes, collection_id, id, db)
+    addNoteAndCollectionToProject(notes, collection_id, id, db)
       .then((data) => {
         console.log(`insert completed!`, data);
         res.json(data)
@@ -45,6 +45,18 @@ module.exports = (db) => {
         const projectId = data.rows[0].id
 
         res.send({ projectId });
+      })
+      .catch((err) => {
+        console.log(`ruh roh`, err);
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post("/", (req, res) => {
+    const { id } = req.body;
+    updateProjectCollectionId(id, db)
+      .then(() => {
+        res.send( "UPDATE" );
       })
       .catch((err) => {
         console.log(`ruh roh`, err);
