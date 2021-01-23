@@ -95,7 +95,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function Login(props) {
   const { setUser, isLoggedIn } = props;
   const [emailData, setEmailData] = useState("");
@@ -112,20 +111,23 @@ export default function Login(props) {
         password: passwordData,
       })
       .then((res) => {
-        if (res.data === "that email doesn't exist" || "incorrect password") {
-          console.log("FIND ERROR----------->", res.data)
-          setEmailError(res.data)
+        // console.log("THIS IS RES ---------", res.data)
+        if (res.data.userId) {
+          // console.log("TRUE USER------->", res.data.userId)
+          setUser(res.data.userId);
+        } else {
+          // res.data === "that email doesn't exist" || "that password is incorrect"
+          // console.log("FIND EMAIL----------->", res.data)
+          setEmailError(res.data) || setPassError(res.data)
           setOpen(true)
           setTimeout(function(){ setOpen(false); }, 2000);
         }
-        setUser(res.data.userId);
       })
       .catch((err) => console.log(err));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(`Event has been submitted from form-control----> `, event);
     loginUser();
   };
 
@@ -137,8 +139,6 @@ export default function Login(props) {
     setPasswordData(event.target.value);
   };
 
-
-
   const handleErrorOpen = () => {
     setOpen(true);
   };
@@ -146,8 +146,6 @@ export default function Login(props) {
   const handleErrorClosed = () => {
     setOpen(false);
   };
-
-
 
   return !isLoggedIn ? (
     <div>
