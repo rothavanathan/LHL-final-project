@@ -49,7 +49,7 @@ export default function Home(props) {
         setProjects(data.data.projects.splice(0, 3));
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [collections]);
 
   return isLoggedIn ? (
     <div>
