@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "flex-end"
   },
   typography: {
-    marginBottom: 20
+    marginBottom: 48,
   }
 }));
 
@@ -55,57 +55,56 @@ export default function Home(props) {
 
   return isLoggedIn ? (
     <div>
-      <div>
-        <header className={classes.mainHeader}>
-          <Typography
-            component="h1"
-            variant="h4"
-            color="var(--white)">
-            Home
+
+      <header className={classes.mainHeader}>
+        <Typography
+          component="h1"
+          variant="h4"
+          color="var(--white)">
+          Home
+        </Typography>
+        <Link to="/gear">
+          <SettingsIcon
+            className={classes.gearIcon}
+          >Gear
+          </SettingsIcon>
+        </Link>
+      </header>
+      <section>
+        <Container className={classes.cardGrid} maxWidth="md" id="projects">
+          <Typography className={classes.typography}
+            component="header"
+            variant="h5"
+            align="left"
+          > Recent Collections
           </Typography>
-          <Link to="/gear">
-            <SettingsIcon
-              className={classes.gearIcon}
-            >Gear
-            </SettingsIcon>
-          </Link>
-        </header>
-        <section>
-          <Container className={classes.cardGrid} maxWidth="md" id="projects">
-            <Typography className={classes.typography}
-              component="header"
-              variant="h5"
-              align="left"
-            > Recent Collections
-            </Typography>
-            <Grid container spacing={4}>
-              {collections.length === 0 ? (
-                <NewCollectionCard
-                  key={0}
-                  title={"There's nothing here yet!"}
-                  subtitle={"Start a new collection"}
-                  image={"https://rykabrown.com/wp-content/uploads/2021/01/new-coll.png"}
-                  isLoggedIn={isLoggedIn}
-                  setCollections={setCollections}
-                />
+          <Grid container spacing={4}>
+            {collections.length === 0 ? (
+              <NewCollectionCard
+                key={0}
+                title={"There's nothing here yet!"}
+                subtitle={"Start a new collection"}
+                image={"https://rykabrown.com/wp-content/uploads/2021/01/new-coll.png"}
+                isLoggedIn={isLoggedIn}
+                setCollections={setCollections}
+              />
             ) : (
-            <Fragment>
-              {collections.map((collection, i) =>
-                <Fragment key={i}>
-                  <ProjectCard
-                    key={collection.id}
-                    title={collection.name}
-                    thumbnail={collection.thumbnail}
-                    link={`/collection/${collection.id}`}
-                  />
+                <Fragment>
+                  {collections.map((collection, i) =>
+                    <Fragment key={i}>
+                      <ProjectCard
+                        key={collection.id}
+                        title={collection.name}
+                        thumbnail={collection.thumbnail}
+                        link={`/collection/${collection.id}`}
+                      />
+                    </Fragment>
+                  )}
                 </Fragment>
               )}
-              </Fragment>
-            )}
-            </Grid>
-          </Container>
-        </section>
-      </div>
+          </Grid>
+        </Container>
+      </section>
       <section>
         <Container className={classes.cardGrid} maxWidth="md" id="projects" >
           <Typography className={classes.typography}
@@ -115,30 +114,30 @@ export default function Home(props) {
             Recent Projects
           </Typography>
           <Grid container spacing={4} >
-          {collections.length === 0 ? (
-            <ProjectCard
-              key={1000}
-              title={"Ready to make some music?"}
-              songTitle={"Start a new project"}
-              thumbnail={"https://rykabrown.com/wp-content/uploads/2021/01/new-proj.png"}
-              link={`/search`}
-            />
+            {collections.length === 0 ? (
+              <ProjectCard
+                key={1000}
+                title={"Ready to make some music?"}
+                songTitle={"Start a new project"}
+                thumbnail={"https://rykabrown.com/wp-content/uploads/2021/01/new-proj.png"}
+                link={`/search`}
+              />
             ) : (
-            <Fragment>
-              {projects.map((project, i) =>
-                <Fragment key={i}>
-                  <ProjectCard
-                    key={project.id}
-                    title={project.title}
-                    thumbnail={project.url_album_artwork}
-                    link={`/project/${project.id}`}
-                    songTitle={project.song_title}
-                    songArtist={project.artist}
-                  />
+                <Fragment>
+                  {projects.map((project, i) =>
+                    <Fragment key={i}>
+                      <ProjectCard
+                        key={project.id}
+                        title={project.title}
+                        thumbnail={project.url_album_artwork}
+                        link={`/project/${project.id}`}
+                        songTitle={project.song_title}
+                        songArtist={project.artist}
+                      />
+                    </Fragment>
+                  )}
                 </Fragment>
               )}
-            </Fragment>
-            )}
           </Grid>
         </Container>
       </section>
