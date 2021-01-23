@@ -55,6 +55,9 @@ export default function Waveform({
         backgroundColor: "rgba(244, 240, 234, 0.1);"
       }
     },
+    hr: {
+      marginBottom: 20
+    },
   });
   const classes = useStyles()
 
@@ -211,7 +214,7 @@ export default function Waveform({
         />
         <label htmlFor="volume"></label>
       </Box>
-      <hr />
+      <hr className={classes.hr} />
     </div>
   );
 }

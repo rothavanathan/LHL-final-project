@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
   header: {
     marginTop: 20,
+    marginBottom: 20,
     display: "flex"
   },
   backArrow: {

@@ -32,7 +32,10 @@ const useStyles = makeStyles((theme) => ({
     background: "var(--primary-color)",
     width: "60%",
     margin: "1.5em",
-
+    "&:hover": {
+      backgroundColor: "var(--white)",
+      color: "var(--black)"
+    }
   },
 
   back: {

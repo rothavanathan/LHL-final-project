@@ -53,6 +53,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
     marginBottom: "40px",
     color: "var(--white)",
+    "&:hover": {
+      backgroundColor: "var(--white)",
+      color: "var(--black)"
+    }
   },
 
   back: {
@@ -200,6 +204,6 @@ export default function Login(props) {
       </div>
     </Box>
   ) : (
-    <Redirect to="/home" />
-  );
+      <Redirect to="/home" />
+    );
 }
