@@ -1,7 +1,7 @@
 import React, {} from 'react';
 import { Dialog, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 
-export default function LoginError(props) {
+export default function RegError(props) {
 
   return (
     <div>

@@ -16,12 +16,12 @@ module.exports = (db) => {
         console.log("USER----->", userInfo.rows[0])
         if (!email || !password || !first_name) {
           console.log("MISSING VALUE");
-          // show error
-          res.send("MISSING_VALUE")
+          const valError = "you're missing a field"
+          res.send(valError)
         } else if (userInfo.rows.length !== 0) {
           console.log("user exists");
-          // show error
-          res.send("USER_EXISTS")
+          const userError = "that email is taken"
+          res.send(userError)
         } else {
           addUser(first_name, email, hashedPassword, db)
           .then(newUser => {

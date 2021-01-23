@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+
 :root {
   --black: #1a1a1a;
   --white: rgb(244, 240, 234);
@@ -5,7 +7,6 @@
   --secondary-color: #ffff6f;
   --tertiary-color: rgb(80, 32, 28);
   --quad-color: rgb(92, 255, 198);
-  
 }
 
 body {
@@ -18,7 +19,7 @@ body {
 }
 
 .App {
-  font-family: sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   text-align: center;
 }
 
