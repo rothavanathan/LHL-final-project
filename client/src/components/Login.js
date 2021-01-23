@@ -3,8 +3,8 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormControl, Button } from "@material-ui/core";
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import LoginError from "./LoginError"
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import LoginError from "./LoginError";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     color: "antiquewhite",
     fontFamily: "Noto Sans",
     margin: "20px",
-
   },
 
   heading2: {
@@ -100,8 +99,8 @@ export default function Login(props) {
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPasswordData] = useState("");
   const [open, setOpen] = useState(false);
-  const [passError, setPassError] = useState("")
-  const [emailError, setEmailError] = useState("")
+  const [passError, setPassError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const classes = useStyles();
 
   const loginUser = () => {
@@ -118,9 +117,11 @@ export default function Login(props) {
         } else {
           // res.data === "that email doesn't exist" || "that password is incorrect"
           // console.log("FIND EMAIL----------->", res.data)
-          setEmailError(res.data) || setPassError(res.data)
-          setOpen(true)
-          setTimeout(function(){ setOpen(false); }, 2000);
+          setEmailError(res.data) || setPassError(res.data);
+          setOpen(true);
+          setTimeout(function () {
+            setOpen(false);
+          }, 2000);
         }
       })
       .catch((err) => console.log(err));
@@ -151,20 +152,18 @@ export default function Login(props) {
     <div>
       <div className={classes.main}>
         <Link to="/entry">
-          <ArrowBackIosIcon>
-          </ArrowBackIosIcon>
+          <ArrowBackIosIcon></ArrowBackIosIcon>
         </Link>
         <h1 className={classes.main}>Welcome Back!</h1>
 
-      <LoginError
-        open={open}
-        setOpen={setOpen}
-        handleErrorOpen={handleErrorOpen}
-        handleErrorOpen={handleErrorClosed}
-        emailError={emailError}
-        passError={passError}
-
-      />
+        <LoginError
+          open={open}
+          setOpen={setOpen}
+          handleErrorOpen={handleErrorOpen}
+          handleErrorOpen={handleErrorClosed}
+          emailError={emailError}
+          passError={passError}
+        />
       </div>
 
       <h2 className={classes.heading2}>Let's get you logged in</h2>
@@ -207,6 +206,6 @@ export default function Login(props) {
       </div>
     </div>
   ) : (
-      <Redirect to="/home" />
-    );
+    <Redirect to="/home" />
+  );
 }

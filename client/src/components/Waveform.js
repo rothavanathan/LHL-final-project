@@ -16,8 +16,7 @@ import Emitter from "../EventEmitter";
 export default function Waveform({
   track,
   context,
-  // setSoloCounter,
-  // soloCounter,
+  setLoadCounter
 }) {
 
   const waveformRef = useRef(null);
@@ -43,7 +42,7 @@ export default function Waveform({
       // color: "primary"
     },
     muteButton: {
-      color: `${!isMuted ? "var(--primary-color)" : "var(--red)"}`,
+      color: `${!isMuted ? "var(--primary-color)" : "var(--quad-color)"}`,
       "&:hover": {
         color: "var(--white)",
         backgroundColor: "rgba(244, 240, 234, 0.1);"
@@ -93,7 +92,7 @@ export default function Waveform({
         wavesurfer.current.setVolume(volume);
         setVolume(volume);
       }
-
+      setLoadCounter(prev => prev + 1)
       Emitter.on("clickRewind", () => wavesurfer.current.seekTo(0));
       Emitter.on("clickPlayPause", () => wavesurfer.current.playPause());
     });

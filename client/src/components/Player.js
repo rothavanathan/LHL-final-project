@@ -11,19 +11,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Player({ tracks, audioCtx }) {
+export default function Player({ tracks, audioCtx, setHasLoaded }) {
   const classes = useStyles();
-  // const [playing, setPlay] = useState(false);
-  // const handlePlayPause = () => {
-  //   setPlay(!playing);
-  //   Emitter.emit('clickPlayPause', "");
-  // };
-  // const handleRewind = () => {
-  //   Emitter.emit('clickRewind', setPlay(playing));
-  // };
+  const [loadCounter, setLoadCounter] = useState(0);
 
-
-  console.log("TRACKS-------", tracks)
+  if (loadCounter === tracks.length) {
+    console.log(`done loading!`)
+    setHasLoaded(true);
+  }
 
   return (
     <div className="player">
@@ -32,13 +27,9 @@ export default function Player({ tracks, audioCtx }) {
           key={i}
           track={track}
           context={audioCtx}
-          className={classes.waveform} />
+          className={classes.waveform}
+          setLoadCounter={setLoadCounter} />
       })}
-      {/* <div id="transport">
-
-        <button onClick={handleRewind}>Rewind</button>
-        <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
-      </div> */}
     </div>
   );
 };
