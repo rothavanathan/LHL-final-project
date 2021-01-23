@@ -2,106 +2,67 @@ import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import { FormControl, Button } from "@material-ui/core";
+import { FormControl, Button, Typography, Box, Input } from "@material-ui/core";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import RegError from "./RegError"
 
 const useStyles = makeStyles((theme) => ({
+  mainBox: {
+    maxWidth: "20em",
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
   main: {
     display: "flex",
     flexDirection: "row",
     alignItems: "baseline",
     justifyContent: "center",
-    color: "var(--white)",
-    fontFamily: "Noto Sans",
-    margin: "20px",
 
   },
+  heading: {
 
+    fontFamily: "Noto Sans",
+    marginTop: "2.5em",
+    marginBottom: "0.5em"
+  },
   heading2: {
-    color: "var(--white)",
-    fontFamily: "Noto Sans",
-    fontSize: 15,
-    margin: "40px",
+    marginBottom: "1em"
   },
-
   form: {
     display: "flex",
     flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
+    maxWidth: "24em",
+  },
+  formControl: {
     width: "100%",
-    height: "50%",
+    maxWidth: "16em",
   },
-
-  email: {
-    width: "80%",
-    color: "white",
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  emailText: {
+  inputText: {
     color: "var(--white)",
-    display: "flex",
     backgroundColor: "var(--black)",
     border: "none",
-    borderBottom: "var(--tertiary-color) 4px solid",
-    backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
-    margin: "30px",
+    borderBottom: "var(--tertiary-color) 2px solid",
+    marginTop: "20px",
+    marginBottom: "20px",
     outline: "none",
     alignSelf: "center",
     width: "100%",
     fontSize: "15px",
   },
-
-  password: {
-    width: "80%",
+  input: {
     color: "var(--white)",
-    display: "flex",
-    flexDirection: "column",
   },
-
-  passwordText: {
-    color: "var(--white)",
-    display: "flex",
-    backgroundColor: "var(--black)",
-    border: "none",
-    borderBottom: "var(--tertiary-color) 4px solid",
-    backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
-    margin: "30px",
-    outline: "none",
-    width: "100%",
-    alignSelf: "center",
-    fontSize: "15px",
-  },
-
-  name: {
-    width: "80%",
-    color: "var(--white)",
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  nameText: {
-    color: "var(--white)",
-    display: "flex",
-    backgroundColor: "var(--black)",
-    border: "none",
-    borderBottom: "var(--tertiary-color) 4px solid",
-    backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
-    margin: "30px",
-    outline: "none",
-    width: "100%",
-    alignSelf: "center",
-    fontSize: "15px",
-  },
-
   regButton: {
     fontFamily: "Noto Sans",
     display: "flex",
     background: "var(--primary-color)",
     width: "60%",
-    margin: "40px",
+    marginTop: "30px",
+    marginBottom: "40px",
     color: "var(--white)",
   },
 
@@ -109,11 +70,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
   },
-  
   regLink: {
-    color: "var(--white)",
     textDecoration: "none",
+
   },
+  subtitle1: {
+    fontStyle: "oblique",
+  }
 }));
 
 
@@ -127,7 +90,7 @@ export default function Register(props) {
   const [emailError, setEmailError] = useState("")
 
   const classes = useStyles();
-  
+
   const saveUser = () => {
     axios
       .post("/api/users", {
@@ -145,7 +108,7 @@ export default function Register(props) {
           // console.log("FIND EMAIL----------->", res.data)
           setEmailError(res.data) || setPassError(res.data)
           setOpen(true)
-          setTimeout(function(){ setOpen(false); }, 2000);
+          setTimeout(function () { setOpen(false); }, 2000);
         }
       })
       .catch((err) => console.log(err));
@@ -177,14 +140,21 @@ export default function Register(props) {
   };
 
   return !isLoggedIn ? (
-    <div>
+    <Box className={classes.mainBox}>
 
       <div className={classes.main}>
-        <Link to="/entry">
+        {/* <Link to="/entry">
           <ArrowBackIosIcon>
           </ArrowBackIosIcon>
-        </Link>
-        <h1 className={classes.main}>Welcome!</h1>
+        </Link> */}
+        <Typography
+          component="h1"
+          variant="h2"
+          className={classes.heading}
+        >
+          Welcome!
+
+        </Typography>
       </div>
 
       <RegError
@@ -196,61 +166,65 @@ export default function Register(props) {
         passError={passError}
 
       />
+      <Typography component="h2" variant="subtitle2" className={classes.heading2} texttAlign="left">
 
-      <h2 className={classes.heading2}>Let's get you signed up</h2>
+        Let's get you signed up
 
-      <div className={classes.formDiv}>
-        <form
-          autocomplete="off"
-          className={classes.form}
-          onSubmit={handleSubmit}
+      </Typography>
+
+      <form
+        autocomplete="off"
+        className={classes.form}
+        onSubmit={handleSubmit}
+      >
+        <FormControl className={classes.formControl}>
+          <input
+            className={classes.inputText}
+            onChange={handleName}
+            type="first_name"
+            value={nameData}
+            name="first_name"
+            placeholder="Beethoven? Drake? Is that you?"
+            aria-label="first_name"
+          ></input>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <input
+            className={classes.inputText}
+            value={emailData}
+            onChange={handleEmail}
+            type="email"
+            name="email"
+            placeholder="example@gmail.com"
+            aria-label="email"
+          ></input>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <input
+            className={classes.inputText}
+            value={passwordData}
+            onChange={handlePassword}
+            type="password"
+            name="password"
+            placeholder="Password... is not a great password"
+            aria-label="password"
+          ></input>
+        </FormControl>
+
+        <Button className={classes.regButton} type="submit">
+          Sign up
+        </Button>
+      </form>
+
+      <Link to="/login" className={classes.regLink}>
+        <Typography component="subtitle1"
+          className={classes.subtitle1}
         >
-          <FormControl className={classes.emailInput}>
-            <input
-              className={classes.nameText}
-              onChange={handleName}
-              type="first_name"
-              value={nameData}
-              name="first_name"
-              placeholder="Beethoven? Drake? Is that you?"
-              aria-label="first_name"
-            ></input>
-          </FormControl>
-          <FormControl className={classes.emailInput}>
-            <input
-              className={classes.emailText}
-              value={emailData}
-              onChange={handleEmail}
-              type="email"
-              name="email"
-              placeholder="example@gmail.com"
-              aria-label="email"
-            ></input>
-          </FormControl>
-          <FormControl className={classes.passwordInput}>
-            <input
-              className={classes.passwordText}
-              value={passwordData}
-              onChange={handlePassword}
-              type="password"
-              name="password"
-              placeholder="Password... is not a great password"
-              aria-label="password"
-            ></input>
-          </FormControl>
+          Already registered? Login here
+        </Typography>
+      </Link>
 
-          <Button className={classes.regButton} type="submit">
-            Sign up
-          </Button>
-        </form>
-
-        <Link to="/login" className={classes.regLink}>
-          <href className={classes.regLink}>
-            Already registered? Login here
-          </href>
-        </Link>
-      </div>
-    </div>
+    </Box>
   ) : (
       <Redirect to="/home" />
     );

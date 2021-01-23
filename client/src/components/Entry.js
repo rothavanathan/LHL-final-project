@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
     fontFamily: "Noto Sans",
     marginTop: "2.5em",
+    marginBottom: "0.5em"
   },
 
   heading2: {

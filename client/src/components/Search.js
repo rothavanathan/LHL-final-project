@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     backgroundColor: "#1a1a1a",
     border: "none",
-    borderBottom: "var(--tertiary-color) 4px solid",
+    borderBottom: "var(--tertiary-color) 2px solid",
     width: "80%"
   },
   input: {
