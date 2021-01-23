@@ -2,28 +2,32 @@ import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import { FormControl, Button } from "@material-ui/core";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import LoginError from "./LoginError";
+
+import { FormControl, Button, Typography, Box } from "@material-ui/core";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import LoginError from "./LoginError"
+
 
 const useStyles = makeStyles((theme) => ({
+  mainBox: {
+    maxWidth: "20em",
+    margin: "auto",
+  },
   main: {
     display: "flex",
     flexDirection: "row",
     alignItems: "baseline",
     justifyContent: "center",
-    color: "antiquewhite",
-    fontFamily: "Noto Sans",
-    margin: "20px",
   },
-
-  heading2: {
-    color: "antiquewhite",
-    fontFamily: "Noto Sans",
-    fontSize: 15,
-    margin: "30px",
+  backArrow: {
+    fontSize: 20,
+    paddingLeft: 10,
   },
-
+  heading: {
+    fontFamily: "Noto Sans",
+    marginTop: "2.5em",
+    marginBottom: "0.5em"
+  },
   form: {
     display: "flex",
     flexDirection: "column",
@@ -31,55 +35,25 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "50%",
   },
-
-  email: {
-    width: "80%",
-    color: "white",
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  emailText: {
+  inputText: {
     color: "var(--white)",
     display: "flex",
     backgroundColor: "var(--black)",
     border: "none",
-    borderBottom: "var(--tertiary-color) 4px solid",
-    backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
+    borderBottom: "var(--tertiary-color) 2px solid",
     margin: "30px",
     outline: "none",
     alignSelf: "center",
     width: "100%",
     fontSize: "15px",
   },
-
-  password: {
-    width: "80%",
-    color: "white",
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  passwordText: {
-    color: "var(--white)",
-    display: "flex",
-    backgroundColor: "var(--black)",
-    border: "none",
-    borderBottom: "var(--tertiary-color) 4px solid",
-    backgroundImage: `url(${"https://www.transparenttextures.com/patterns/otis-redding.png"})`,
-    margin: "30px",
-    outline: "none",
-    width: "100%",
-    alignSelf: "center",
-    fontSize: "15px",
-  },
-
   logButton: {
     fontFamily: "Noto Sans",
     display: "flex",
     background: "var(--primary-color)",
     width: "60%",
-    margin: "40px",
+    marginTop: "20px",
+    marginBottom: "40px",
     color: "var(--white)",
   },
 
@@ -89,9 +63,12 @@ const useStyles = makeStyles((theme) => ({
   },
 
   regLink: {
-    color: "antiquewhite",
     textDecoration: "none",
+    
   },
+  subtitle1: {
+    fontStyle: "oblique",
+  }
 }));
 
 export default function Login(props) {
@@ -117,11 +94,11 @@ export default function Login(props) {
         } else {
           // res.data === "that email doesn't exist" || "that password is incorrect"
           // console.log("FIND EMAIL----------->", res.data)
-          setEmailError(res.data) || setPassError(res.data);
-          setOpen(true);
-          setTimeout(function () {
-            setOpen(false);
-          }, 2000);
+
+          setEmailError(res.data) || setPassError(res.data)
+          setOpen(true)
+          setTimeout(function () { setOpen(false); }, 2000);
+
         }
       })
       .catch((err) => console.log(err));
@@ -149,12 +126,23 @@ export default function Login(props) {
   };
 
   return !isLoggedIn ? (
-    <div>
+    <Box className={classes.mainBox}>
+
       <div className={classes.main}>
-        <Link to="/entry">
-          <ArrowBackIosIcon></ArrowBackIosIcon>
-        </Link>
-        <h1 className={classes.main}>Welcome Back!</h1>
+
+        {/* <Link to="/entry">
+          <ArrowBackIosIcon className={classes.backArrow}>
+          </ArrowBackIosIcon>
+        </Link> */}
+        <Typography 
+          component="h1" 
+          variant="h2" 
+          className={classes.heading}
+        >
+          You're Back!
+
+        </Typography>
+
 
         <LoginError
           open={open}
@@ -163,16 +151,20 @@ export default function Login(props) {
           handleErrorOpen={handleErrorClosed}
           emailError={emailError}
           passError={passError}
+
         />
       </div>
+      <Typography component="h2" variant="subtitle2" className={classes.heading2} texttAlign="left">
 
-      <h2 className={classes.heading2}>Let's get you logged in</h2>
+        Let's get you logged in
+
+      </Typography>
 
       <div className={classes.formDiv}>
         <form className={classes.form} onSubmit={handleSubmit}>
-          <FormControl className={classes.emailInput}>
+          <FormControl >
             <input
-              className={classes.emailText}
+              className={classes.inputText}
               value={emailData}
               onChange={handleEmail}
               type="email"
@@ -182,9 +174,9 @@ export default function Login(props) {
             ></input>
           </FormControl>
 
-          <FormControl className={classes.passwordInput}>
+          <FormControl>
             <input
-              className={classes.passwordText}
+              className={classes.inputText}
               value={passwordData}
               onChange={handlePassword}
               type="password"
@@ -199,12 +191,16 @@ export default function Login(props) {
           </Button>
         </form>
         <Link to="/register" className={classes.regLink}>
-          <href className={classes.regLink}>
+          <Typography component="subtitle1"
+            className={classes.subtitle1}
+          >
             Don't have an account? Register here
-          </href>
+            
+          </Typography>       
+          
         </Link>
       </div>
-    </div>
+    </Box>
   ) : (
     <Redirect to="/home" />
   );

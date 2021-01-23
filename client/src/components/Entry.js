@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
-
+import { Button, Typography, Box } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
+  mainBox: {
+    maxWidth: "20em",
+    margin: "auto",
+  },
   entryImage: {
     backgroundImage: `url(${"https://unsplash.com/photos/MEL-jJnm7RQ"})`,
   },
+
+offMaster
 
   formDiv: {
     display: "flex",
@@ -16,25 +21,28 @@ const useStyles = makeStyles((theme) => ({
   },
 
   heading: {
-    color: "antiquewhite",
+
+
     fontFamily: "Noto Sans",
-    margin: "50px",
+    marginTop: "2.5em",
+    marginBottom: "0.5em"
   },
 
   heading2: {
-    color: "antiquewhite",
+
     fontFamily: "Noto Sans",
     fontSize: 15,
-    margin: "40px",
-  },
+    margin: "1.5em",
 
+    textAlign: "center"
+  },
   logButton: {
     fontFamily: "Noto Sans",
     display: "flex",
-    background: "rgb(245, 103, 93)",
+    background: "var(--primary-color)",
     width: "60%",
-    margin: "25px",
-    color: "antiquewhite",
+    margin: "1.5em",
+
   },
 
   back: {
@@ -43,27 +51,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function Entry(props) {
   const classes = useStyles();
 
   return (
+    <Box className={classes.mainBox}>
+
     <div className={classes.entryImage}>
-      <h1 className={classes.heading}>Layers</h1>
 
-      <h2 className={classes.heading2}>
-        With Layers you can isolate the parts of a track to teach or learn.
-        Drums, guitar, vocals, or a combination of a few? It's really up to you.
-      </h2>
+      <Typography component="h1" variant="h2" className={classes.heading}>
+        Layers
 
+      </Typography>
+
+      <Typography component="h2" variant="subtitle2" className={classes.heading2} texttAlign="left">
+
+
+        With Layers you can isolate the parts of a track to teach or learn. Drums, guitar, vocals, or a combination of a few?
+        
+      </Typography>
+      <Typography component="h2" variant="subtitle2" className={classes.heading2} fontStyle="oblique">
+      It's really up to you.
+
+    </Typography>
+      
+      
       <div className={classes.formDiv}>
         <Button to="/register" component={Link} className={classes.logButton}>
-          Sign up
+        Sign up
         </Button>
 
         <Button to="/login" component={Link} className={classes.logButton}>
-          Login
+        Login
         </Button>
       </div>
-    </div>
+    </div >
+    </Box>
   );
 }

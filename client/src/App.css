@@ -15,7 +15,7 @@ body {
 
   background: var(--black);
 
-  color: white;
+  color: var(--white);
 }
 
 .App {
@@ -40,10 +40,10 @@ ul {
 }
 
 a {
-  color: white;
+  color: var(--white);
 }
 a:visited {
-  color: white;
+  color: var(--white);
 }
 
 header {
