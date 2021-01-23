@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
   mainWindow: {
     marginLeft: 10,
     marginRight: 10,
+    marginBottom: 160,
   },
-
   header: {
     marginTop: 20,
     marginBottom: 20,
@@ -103,7 +103,7 @@ export default function Project(props) {
 
   useEffect(() => {
     setHeight(ref.current.clientHeight)
-  }, [])
+  }, [hasLoaded])
 
   const project = content[0]
   let OGcollectionId = project.collection_id

@@ -56,8 +56,9 @@ export default function Waveform({
       }
     },
     hr: {
-      marginBottom: 20
-    },
+      marginBottom: 20,
+    }
+
   });
   const classes = useStyles()
 

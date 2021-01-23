@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "1.5em",
     "&:hover": {
       backgroundColor: "var(--white)",
-      color: "var(--black)"
+      color: "black"
+
     }
   },
 

@@ -60,6 +60,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "30px",
     marginBottom: "40px",
     color: "var(--white)",
+    "&:hover": {
+      backgroundColor: "var(--white)",
+      color: "black"
+    }
   },
 
   back: {
@@ -225,6 +229,6 @@ export default function Register(props) {
 
     </Box>
   ) : (
-    <Redirect to="/home" />
-  );
+      <Redirect to="/home" />
+    );
 }
