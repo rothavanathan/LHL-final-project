@@ -22,6 +22,7 @@ export default function Collection(props) {
   const [open, setOpen] = useState(false);
   const [redirectOnDelete, setRedirectOnDelete] = useState(true);
 
+  // get collection & projects bu collection id
   useEffect(() => {
     axios
       .get(`/api/collection/${id}`)
@@ -57,6 +58,7 @@ export default function Collection(props) {
     setRedirectOnDelete(false);
   }
 
+  // card for empty collection
   const emptyCollection = [{collection_name: "Wow, this looks lonely!", project_title: "Add A Project!", url_album_artwork: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8ZGFuY2V8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"}];
 
   return isLoggedIn ? (
@@ -108,7 +110,7 @@ export default function Collection(props) {
               handleAlertOpen={handleAlertOpen}
               handleConfirmDelete={handleConfirmDelete}
               handleCancelDelete={handleCancelDelete}
-              name={projects[0].collection_name}
+              name={emptyCollection[0].collection_name}
             />
             <Container className={classes.cardGrid} maxWidth="md" id="projects" >
               <Grid container spacing={4} >

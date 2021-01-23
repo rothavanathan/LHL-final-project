@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -40,16 +39,8 @@ export default function Notes(props) {
         multiline
         rows={10}
         value={note}
-        // variant="outlined"
         onChange={handleNote}
       />
-      {/* <TextField classNames={classes.notesBox} id="filled-basic" label="Standard"
-        // variant="filled"
-        onChange={handleNote}
-        value={note}
-        type="text"
-        name="notes_area"
-      /> */}
     </div>
 
   )

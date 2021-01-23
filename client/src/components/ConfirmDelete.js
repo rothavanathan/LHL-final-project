@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 
 export default function ConfirmDelete(props) {
@@ -7,9 +7,6 @@ export default function ConfirmDelete(props) {
 
   return (
     <div>
-      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Delete {props.name}
-      </Button> */}
       <Dialog
         open={open}
         onClose={handleCancelDelete}
