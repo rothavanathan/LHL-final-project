@@ -103,7 +103,7 @@ export default function Project(props) {
 
   useEffect(() => {
     setHeight(ref.current.clientHeight)
-  }, [])
+  }, [hasLoaded])
 
   const project = content[0]
   let OGcollectionId = project.collection_id
