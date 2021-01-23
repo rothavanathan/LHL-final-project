@@ -57,7 +57,7 @@ export default function NewCollectionCard(props) {
             style={useStyles.media}
           />
           <CardContent className={classes.cardContent}>
-            <Typography gutterBottom variant="h7" component="h2">
+            <Typography gutterBottom variant="h6" component="h2">
               {props.title}
             </Typography>
           </CardContent>

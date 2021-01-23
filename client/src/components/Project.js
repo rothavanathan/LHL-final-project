@@ -82,7 +82,7 @@ export default function Project(props) {
       .then((data) => {
         axios
           //grabbing collections for user
-          .get('/api/content')
+          .get(`/api/content/${isLoggedIn}`)
           .then(data2 => {
             setContent(data.data.projects);
             setCollectionId(data.data.projects[0].collection_id);
