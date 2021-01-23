@@ -40,7 +40,7 @@ const getProjectsByUser = (id, db) => {
   return db.query(query);
 };
 
-const addNoteToProject = (notes, collection_id, project_id, db) => {
+const addNoteAndCollectionToProject = (notes, collection_id, project_id, db) => {
   const query = {
     text: `
       UPDATE projects
@@ -134,6 +134,31 @@ const deleteProject = (id, db) => {
   return db.query(query)
 };
 
+const deleteCollection = (id, db) => {
+  const query = {
+    text: `
+        DELETE FROM collections
+        WHERE id = $1;
+        `,
+    values: [id],
+  };
+
+  return db.query(query)
+};
+
+const updateProjectCollectionId = (id, db) => {
+  const query = {
+    text: `
+        UPDATE projects
+        SET collection_id = $1
+        WHERE collection_id = $2;
+        `,
+    values: [null, id],
+  };
+
+  return db.query(query)
+};
+
 // Add song to a project
 const addSongToProject = (title, user_id, db) => {
   const query = {
@@ -159,22 +184,6 @@ const addCollection = (name, thumbnail, userId, db) => {
         RETURNING *;
         `,
     values: [name, thumbnail, userId],
-  };
-
-  return db
-    .query(query)
-    .then((result) => result.rows[0])
-    .catch((err) => err);
-};
-
-const addExistingProjectToCollection = (collectionId, projectId, db) => {
-  const query = {
-    text: `
-        UPDATE projects
-        SET collection.id = $1
-        WHERE id = $2;
-        `,
-    values: [collectionId, projectId],
   };
 
   return db
@@ -220,8 +229,9 @@ module.exports = {
   addUser,
   addProject,
   addCollection,
-  addExistingProjectToCollection,
   login,
-  addNoteToProject,
-  deleteProject
+  addNoteAndCollectionToProject,
+  deleteProject,
+  deleteCollection,
+  updateProjectCollectionId
 };

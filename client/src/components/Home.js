@@ -40,6 +40,7 @@ export default function Home(props) {
   const [collections, setCollections] = useState([])
   const [projects, setProjects] = useState([])
 
+  // get collections & projects by user id
   useEffect(() => {
     axios
       .get('/api/content')
