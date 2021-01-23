@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from "axios";
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -35,9 +34,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NewCollectionForm(props) {
   const classes = useStyles();
   const { user, setCollections, closeForm } = props;
-  // const { setUser, isLoggedIn } = props;
   const [collectionName, setCollectionName] = useState("");
-  const [collectionId, setCollectionId] = useState("");
 
   const saveCollection = () => {
     axios

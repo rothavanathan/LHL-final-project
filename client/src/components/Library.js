@@ -31,6 +31,7 @@ export default function Library(props) {
   const [projects, setProjects] = useState([])
   const { isLoggedIn } = props;
 
+  // get collections & projects by user id
   useEffect(() => {
     axios
       .get('/api/content')

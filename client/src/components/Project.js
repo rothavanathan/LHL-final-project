@@ -114,9 +114,7 @@ export default function Project(props) {
         notes: note,
         collection_id: collectionId
       })
-      .then((data) => {
-        existingNote = data.data.rows[0].notes
-        OGcollectionId = data.data.rows[0].collection_id
+      .then(() => {
       })
       .catch((err) => console.log(err));
   };

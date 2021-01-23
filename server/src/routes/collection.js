@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { addCollection, getProjectsByCollection } = require("../helpers/dbHelpers");
+const { addCollection, getProjectsByCollection, deleteCollection } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
@@ -36,6 +36,21 @@ module.exports = (db) => {
         const thumbnail = data.thumbnail
 
         res.send({ data });
+      })
+      .catch((err) => {
+        console.log(`ruh roh`, err);
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  // delete collection
+  router.delete("/:id", (req, res) => {
+    const id = req.params.id;
+    console.log("ID---collection", id)
+    deleteCollection(id, db)
+      .then(() => {
+        console.log(id, " Was deleted!")
+        res.send("DELETE");
       })
       .catch((err) => {
         console.log(`ruh roh`, err);
