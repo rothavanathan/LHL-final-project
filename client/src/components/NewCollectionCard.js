@@ -13,17 +13,17 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 2px 2px 0px rgb(244, 240, 234)",
     '&:hover': {
       boxShadow: "-1px 10px 29px 0px rgb(244, 240, 234)"
-   },
+    },
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: "var(--white)",
   },
   cardContent: {
     flexGrow: 1,
     color: "black",
-    fontSize: ".6rem",
-    background: "rgb(244, 240, 234)"
+    fontSize: ".6rem"
   },
   cardText: {
     fontSize: ".75rem"
@@ -57,7 +57,7 @@ export default function NewCollectionCard(props) {
             style={useStyles.media}
           />
           <CardContent className={classes.cardContent}>
-            <Typography gutterBottom variant="h6" component="h2">
+            <Typography gutterBottom variant="subtitle-1" component="h2">
               {props.title}
             </Typography>
           </CardContent>

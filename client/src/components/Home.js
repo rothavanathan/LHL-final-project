@@ -9,6 +9,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 import Nav from "./Nav";
 import ProjectCard from "./ProjectCard";
+import NewCollectionCard from './NewCollectionCard';
 
 const useStyles = makeStyles((theme) => ({
   mainHeader: {
@@ -80,6 +81,16 @@ export default function Home(props) {
             > Recent Collections
             </Typography>
             <Grid container spacing={4}>
+              {collections.length === 0 ? (
+                <NewCollectionCard
+                  key={0}
+                  title={"Start a New Collection"}
+                  image={"https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80"}
+                  isLoggedIn={isLoggedIn}
+                  setCollections={setCollections}
+                />
+            ) : (
+            <Fragment>
               {collections.map((collection, i) =>
                 <Fragment key={i}>
                   <ProjectCard
@@ -90,6 +101,8 @@ export default function Home(props) {
                   />
                 </Fragment>
               )}
+              </Fragment>
+            )}
             </Grid>
           </Container>
         </section>
@@ -103,17 +116,28 @@ export default function Home(props) {
             Recent Projects
           </Typography>
           <Grid container spacing={4} >
-            {projects.map((project, i) =>
-              <Fragment key={i}>
-                <ProjectCard
-                  key={project.id}
-                  title={project.title}
-                  thumbnail={project.url_album_artwork}
-                  link={`/project/${project.id}`}
-                  songTitle={project.song_title}
-                  songArtist={project.artist}
-                />
-              </Fragment>
+          {collections.length === 0 ? (
+            <ProjectCard
+              key={1000}
+              title={"Start a New Project"}
+              thumbnail={"https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80"}
+              link={`/search`}
+            />
+            ) : (
+            <Fragment>
+              {projects.map((project, i) =>
+                <Fragment key={i}>
+                  <ProjectCard
+                    key={project.id}
+                    title={project.title}
+                    thumbnail={project.url_album_artwork}
+                    link={`/project/${project.id}`}
+                    songTitle={project.song_title}
+                    songArtist={project.artist}
+                  />
+                </Fragment>
+              )}
+            </Fragment>
             )}
           </Grid>
         </Container>
