@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { Box, Typography, Input } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import '../RangeInput.css';
 import WaveSurfer from "wavesurfer.js";

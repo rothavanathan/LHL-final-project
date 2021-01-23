@@ -95,8 +95,6 @@ export default function Project(props) {
   }, [hasLoaded])
 
   const project = content[0]
-  let OGcollectionId = project.collection_id
-  let existingNote = project.notes
 
   const stems = content.map((project) => {
     const { title, url, icon, peaks_array, name, project_title } = project

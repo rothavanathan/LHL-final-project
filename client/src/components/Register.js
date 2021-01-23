@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import { FormControl, Button, Typography, Box, Input } from "@material-ui/core";
+import { FormControl, Button, Typography, Box } from "@material-ui/core";
 import RegError from "./RegError"
 
 const useStyles = makeStyles((theme) => ({
@@ -150,7 +150,7 @@ export default function Register(props) {
         open={open}
         setOpen={setOpen}
         handleErrorOpen={handleErrorOpen}
-        handleErrorOpen={handleErrorClosed}
+        handleErrorClosed={handleErrorClosed}
         emailError={emailError}
         passError={passError}
       />

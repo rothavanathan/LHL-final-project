@@ -13,7 +13,6 @@ export default function Player({ tracks, audioCtx, setHasLoaded }) {
   const [loadCounter, setLoadCounter] = useState(0);
 
   if (loadCounter === tracks.length) {
-    console.log(`done loading!`)
     setHasLoaded(true);
   }
 

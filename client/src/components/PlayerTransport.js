@@ -6,7 +6,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import Pause from '@material-ui/icons/Pause';
 import FastRewindIcon from '@material-ui/icons/FastRewind';
-import { Icon } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
