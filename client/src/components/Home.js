@@ -84,9 +84,9 @@ export default function Home(props) {
               {collections.length === 0 ? (
                 <NewCollectionCard
                   key={0}
-                  title={"There's Nothing Here Yet!"}
+                  title={"There's nothing here yet!"}
                   subtitle={"Start a new collection"}
-                  image={"https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80"}
+                  image={"https://rykabrown.com/wp-content/uploads/2021/01/new-coll.png"}
                   isLoggedIn={isLoggedIn}
                   setCollections={setCollections}
                 />
@@ -121,8 +121,8 @@ export default function Home(props) {
             <ProjectCard
               key={1000}
               title={"Ready to make some music?"}
-              songTitle={"Check out our library"}
-              thumbnail={"https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80"}
+              songTitle={"Start a new project"}
+              thumbnail={"https://rykabrown.com/wp-content/uploads/2021/01/new-proj.png"}
               link={`/search`}
             />
             ) : (
