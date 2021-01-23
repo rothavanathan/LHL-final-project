@@ -10,10 +10,17 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     position: 'fixed',
-    bottom: 50,
+    bottom: 65,
     background: "#1a1a1a;",
     zIndex: 10,
-    color: "rgb(244, 240, 234)"
+    color: "rgb(244, 240, 234)",
+    display: "flex",
+    justifyContent: "center",
+    padding: 5,
+  },
+  icon: {
+    marginLeft: 10,
+    marginRight: 20
   }
 });
 
@@ -35,10 +42,10 @@ export default function PlayerTransport({ tracks, audioCtx }) {
 
     <div id="transport" className={classes.root}>
 
-      <FastRewindIcon style={{ fontSize: 50 }} onClick={handleRewind}>Rewind</FastRewindIcon>
+      <FastRewindIcon className={classes.icon} style={{ fontSize: 50 }} onClick={handleRewind}>Rewind</FastRewindIcon>
       {!playing ?
-        <PlayArrow style={{ fontSize: 50 }} onClick={handlePlayPause}></PlayArrow>
-        : <Pause style={{ fontSize: 50 }} onClick={handlePlayPause}></Pause>}
+        <PlayArrow className={classes.icon} style={{ fontSize: 50 }} onClick={handlePlayPause}></PlayArrow>
+        : <Pause className={classes.icon} style={{ fontSize: 50 }} onClick={handlePlayPause}></Pause>}
     </div>
   );
 };

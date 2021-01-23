@@ -17,6 +17,11 @@ import ConfirmDelete from "./ConfirmDelete";
 
 
 const useStyles = makeStyles((theme) => ({
+  mainWindow: {
+    marginLeft: 10,
+    marginRight: 10,
+  },
+
   header: {
     marginTop: 20,
     display: "flex"
@@ -24,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
   backArrow: {
     fontSize: "large",
     padding: 10,
-    marginLeft: 10
   },
   titleBox: {
     display: "flex",
@@ -36,9 +40,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   projectForm: {
-    width: 'calc(100% - 20px)',
-    marginLeft: 10,
-    marginRight: 10,
+    width: 'calc(100%)',
+    // marginLeft: 10,
+    // marginRight: 10,
   },
   formBox: {
     display: "flex",
@@ -154,13 +158,13 @@ export default function Project(props) {
         <Redirect to="/home" />
       ) : (
 
-      <div>
-        <div className="main-window" ref={ref}>
-          <header className={classes.header}>
-            <Link to="/home">
-              <ArrowBackIosIcon
-                className={classes.backArrow}
-              >Back to Home
+          <div>
+            <div className={classes.mainWindow} ref={ref}>
+              <header className={classes.header}>
+                <Link to="/home">
+                  <ArrowBackIosIcon
+                    className={classes.backArrow}
+                  >Back to Home
               </ArrowBackIosIcon>
                 </Link>
 
