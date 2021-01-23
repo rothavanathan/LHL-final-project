@@ -17,6 +17,11 @@ import ConfirmDelete from "./ConfirmDelete";
 
 
 const useStyles = makeStyles((theme) => ({
+  mainWindow: {
+    marginLeft: 10,
+    marginRight: 10,
+  },
+
   header: {
     marginTop: 20,
     display: "flex"
@@ -24,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
   backArrow: {
     fontSize: "large",
     padding: 10,
-    marginLeft: 10
   },
   titleBox: {
     display: "flex",
@@ -36,9 +40,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   projectForm: {
-    width: 'calc(100% - 20px)',
-    marginLeft: 10,
-    marginRight: 10,
+    width: 'calc(100%)',
+    // marginLeft: 10,
+    // marginRight: 10,
   },
   formBox: {
     display: "flex",
@@ -48,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   saveIcon: {
     margin: "auto",
     fontSize: 56,
-    color: "rgb(245, 103, 93)"
+    color: "var(--quad-color)"
   },
 }));
 
@@ -62,6 +66,7 @@ export default function Project(props) {
   const [isNotChanged, setIsNotChanged] = useState(true);
   const [open, setOpen] = useState(false);
   const [redirectOnDelete, setRedirectOnDelete] = useState(true);
+  const [hasLoaded, setHasLoaded] = useState(false);
   const { isLoggedIn } = props;
 
   //for scroll to bottom
@@ -154,13 +159,13 @@ export default function Project(props) {
         <Redirect to="/home" />
       ) : (
 
-      <div>
-        <div className="main-window" ref={ref}>
-          <header className={classes.header}>
-            <Link to="/home">
-              <ArrowBackIosIcon
-                className={classes.backArrow}
-              >Back to Home
+          <div>
+            <div className={classes.mainWindow} ref={ref}>
+              <header className={classes.header}>
+                <Link to="/home">
+                  <ArrowBackIosIcon
+                    className={classes.backArrow}
+                  >Back to Home
               </ArrowBackIosIcon>
                 </Link>
 
@@ -176,7 +181,7 @@ export default function Project(props) {
                 </Box>
               </header>
 
-              <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player"></Player>
+              <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player" setHasLoaded={setHasLoaded}></Player>
 
               <form
                 className={classes.projectForm}
@@ -216,7 +221,7 @@ export default function Project(props) {
               </form>
             </div>
 
-            <PlayerTransport tracks={stems} audioCtx={audioCtx} />
+            <PlayerTransport tracks={stems} audioCtx={audioCtx} hasLoaded={hasLoaded} />
             <ProjectNav height={height} />
 
             <Prompt

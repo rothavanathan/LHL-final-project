@@ -16,6 +16,7 @@ const useStyles = makeStyles({
     position: 'fixed',
     bottom: 0,
     background: "rgb(3, 3, 3)",
+    paddingTop: 10,
     zIndex: 10
   }
 });
