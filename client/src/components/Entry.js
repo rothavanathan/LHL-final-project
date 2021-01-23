@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, Box } from "@material-ui/core";
+import logo from '../public/LAYERS_crop.png';
 
 const useStyles = makeStyles((theme) => ({
   mainBox: {
     maxWidth: "20em",
     margin: "auto",
-  },
-  entryImage: {
-    backgroundImage: `url(${"https://unsplash.com/photos/MEL-jJnm7RQ"})`,
   },
   formDiv: {
     display: "flex",
@@ -41,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
   },
+  homeImg: {
+    marginTop: "4em",
+    width: "16em",
+    height: "16em",
+  }
 }));
 
 
@@ -50,12 +53,12 @@ export default function Entry(props) {
   return (
     <Box className={classes.mainBox}>
 
-    <div className={classes.entryImage}>
+      {/* <div className={classes.entryImage}> */}
+      <img src={logo} className={classes.homeImg} alt="Layers logo" />
+      {/* <Typography component="h1" variant="h2" className={classes.heading}>
+          Layers
 
-      <Typography component="h1" variant="h2" className={classes.heading}>
-        Layers
-
-      </Typography>
+      </Typography> */}
 
       <Typography component="h2" variant="subtitle2" className={classes.heading2} texttAlign="left">
 
@@ -64,21 +67,21 @@ export default function Entry(props) {
 
       </Typography>
       <Typography component="h2" variant="subtitle2" className={classes.heading2} fontStyle="oblique">
-      It's really up to you.
+        It's really up to you.
 
     </Typography>
 
 
       <div className={classes.formDiv}>
         <Button to="/register" component={Link} className={classes.logButton}>
-        Sign up
+          Sign up
         </Button>
 
         <Button to="/login" component={Link} className={classes.logButton}>
-        Login
+          Login
         </Button>
       </div>
-    </div >
+      {/* </div > */}
     </Box>
   );
 }
