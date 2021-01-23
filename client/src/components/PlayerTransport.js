@@ -24,15 +24,19 @@ const useStyles = makeStyles({
   }
 });
 
-export default function PlayerTransport({ tracks, audioCtx }) {
+export default function PlayerTransport({ hasLoaded }) {
   const classes = useStyles();
   const [playing, setPlay] = useState(false);
   const handlePlayPause = () => {
-    setPlay(!playing);
-    Emitter.emit('clickPlayPause', "");
+    if (hasLoaded) {
+      setPlay(!playing);
+      Emitter.emit('clickPlayPause', "");
+    }
   };
   const handleRewind = () => {
-    Emitter.emit('clickRewind', setPlay(playing));
+    if (hasLoaded) {
+      Emitter.emit('clickRewind', setPlay(playing));
+    }
   };
 
 

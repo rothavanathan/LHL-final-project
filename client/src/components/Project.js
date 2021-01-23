@@ -66,6 +66,7 @@ export default function Project(props) {
   const [isNotChanged, setIsNotChanged] = useState(true);
   const [open, setOpen] = useState(false);
   const [redirectOnDelete, setRedirectOnDelete] = useState(true);
+  const [hasLoaded, setHasLoaded] = useState(false);
   const { isLoggedIn } = props;
 
   //for scroll to bottom
@@ -180,7 +181,7 @@ export default function Project(props) {
                 </Box>
               </header>
 
-              <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player"></Player>
+              <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player" setHasLoaded={setHasLoaded}></Player>
 
               <form
                 className={classes.projectForm}
@@ -220,7 +221,7 @@ export default function Project(props) {
               </form>
             </div>
 
-            <PlayerTransport tracks={stems} audioCtx={audioCtx} />
+            <PlayerTransport tracks={stems} audioCtx={audioCtx} hasLoaded={hasLoaded} />
             <ProjectNav height={height} />
 
             <Prompt
