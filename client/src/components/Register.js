@@ -3,8 +3,8 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormControl, Button } from "@material-ui/core";
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import RegError from "./RegError"
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import RegError from "./RegError";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     color: "var(--white)",
     fontFamily: "Noto Sans",
     margin: "20px",
-
   },
 
   heading2: {
@@ -109,13 +108,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
   },
-  
+
   regLink: {
     color: "var(--white)",
     textDecoration: "none",
   },
 }));
-
 
 export default function Register(props) {
   const { setUser, isLoggedIn } = props;
@@ -123,11 +121,11 @@ export default function Register(props) {
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPasswordData] = useState("");
   const [open, setOpen] = useState(false);
-  const [passError, setPassError] = useState("")
-  const [emailError, setEmailError] = useState("")
+  const [passError, setPassError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const classes = useStyles();
-  
+
   const saveUser = () => {
     axios
       .post("/api/users", {
@@ -136,16 +134,18 @@ export default function Register(props) {
         password: passwordData,
       })
       .then((res) => {
-        console.log("FIND ERROR----------->", res.data)
+        console.log("FIND ERROR----------->", res.data);
         if (res.data.userId) {
           // console.log("TRUE USER------->", res.data.userId)
           setUser(res.data.userId);
         } else {
           // res.data === "that email doesn't exist" || "that password is incorrect"
           // console.log("FIND EMAIL----------->", res.data)
-          setEmailError(res.data) || setPassError(res.data)
-          setOpen(true)
-          setTimeout(function(){ setOpen(false); }, 2000);
+          setEmailError(res.data) || setPassError(res.data);
+          setOpen(true);
+          setTimeout(function () {
+            setOpen(false);
+          }, 2000);
         }
       })
       .catch((err) => console.log(err));
@@ -178,11 +178,9 @@ export default function Register(props) {
 
   return !isLoggedIn ? (
     <div>
-
       <div className={classes.main}>
         <Link to="/entry">
-          <ArrowBackIosIcon>
-          </ArrowBackIosIcon>
+          <ArrowBackIosIcon></ArrowBackIosIcon>
         </Link>
         <h1 className={classes.main}>Welcome!</h1>
       </div>
@@ -194,7 +192,6 @@ export default function Register(props) {
         handleErrorOpen={handleErrorClosed}
         emailError={emailError}
         passError={passError}
-
       />
 
       <h2 className={classes.heading2}>Let's get you signed up</h2>
@@ -252,6 +249,6 @@ export default function Register(props) {
       </div>
     </div>
   ) : (
-      <Redirect to="/home" />
-    );
+    <Redirect to="/home" />
+  );
 }
