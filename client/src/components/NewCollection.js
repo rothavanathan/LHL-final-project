@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardContent, CardMedia, Grid } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Grid, Input, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from "axios";
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -24,10 +24,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     color: "black",
     fontSize: ".6rem",
-    background: "rgb(244, 240, 234)"
+    background: "rgb(244, 240, 234)",
+    alignItems: "center"
   },
   cardText: {
     fontSize: ".75rem"
+  },
+  button: {
+
   }
 }));
 
@@ -69,17 +73,17 @@ export default function NewCollectionForm(props) {
         />
         <CardContent className={classes.cardContent}>
           <form onSubmit={handleSubmit}>
-            <input
+            <Input
               value={collectionName}
               onChange={handleCollection}
               type="text"
               name="project_name"
-              placeholder="Enter Collection Name"
-            ></input>
+              placeholder="Collection Name"
+            ></Input>
             <div>
-              <button type="submit">Save</button>
-              <CancelIcon onClick={() => closeForm(false)}></CancelIcon>
+              <Button color="primary" type="submit">Save</Button>
             </div>
+            <CancelIcon onClick={() => closeForm(false)}></CancelIcon>
           </form>
         </CardContent>
       </Card>

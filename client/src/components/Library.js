@@ -64,8 +64,8 @@ export default function Library(props) {
               <Fragment>
                 <NewCollectionCard
                   key={0}
-                  title={"Start a New Collection"}
-                  image={"https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80"}
+                  title={"Start a new collection"}
+                  image={"https://rykabrown.com/wp-content/uploads/2021/01/new-coll.png"}
                   isLoggedIn={isLoggedIn}
                   setCollections={setCollections}
                 />
@@ -94,8 +94,8 @@ export default function Library(props) {
             <Grid container spacing={4} >
               <ProjectCard
                 key={1000}
-                title={"Start a New Project"}
-                thumbnail={"https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80"}
+                title={"Start a new project"}
+                thumbnail={"https://rykabrown.com/wp-content/uploads/2021/01/new-proj.png"}
                 link={`/search`}
               />
               {projects.map((project, i) =>
