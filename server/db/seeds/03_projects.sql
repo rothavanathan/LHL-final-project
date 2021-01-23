@@ -8,7 +8,9 @@ insert into projects (song_id, user_id, collection_id, title, notes) values (5, 
 
 
 -- Marya's playlists
-insert into projects (song_id, user_id, collection_id, title, notes) values (2, 2, 3, 'Lizstomania for Lucas', 'Keep the second kick drum snappy. Tuck it in tight to the snare hit.');
+insert into projects (song_id, user_id, collection_id, title, notes) values (2, 2, 3, 'Off Beat kick pattern', 'Keep the second kick drum snappy. Tuck it in tight to the snare hit.');
+insert into projects (song_id, user_id, collection_id, title, notes) values (6, 2, 3, 'Patience in the Pocket', 'Take advantage of the really simple groove and focus on the consistency of your hits and drawing good tone out of each strike. That hi-hat is everything.');
+
 
 insert into projects (song_id, user_id, collection_id, title, notes) values (1, 2, 5, 'intangible', 'Prehensile-tailed porcupine');
 insert into projects (song_id, user_id, collection_id, title, notes) values (1, 3, 5, 'contextually-based', 'Cape fox');
