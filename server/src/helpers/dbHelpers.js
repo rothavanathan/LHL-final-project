@@ -34,7 +34,7 @@ const getProjectsByUser = (id, db) => {
         FROM projects
         JOIN songs ON projects.song_id = songs.id
         WHERE user_id = ${id}
-        ORDER BY user_id desc;
+        ORDER BY projects.id desc;
       `;
 
   return db.query(query);

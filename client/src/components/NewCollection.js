@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 2px 2px 0px rgb(244, 240, 234)",
     '&:hover': {
       boxShadow: "-1px 10px 29px 0px rgb(244, 240, 234)"
-   },
+    },
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
@@ -47,7 +47,7 @@ export default function NewCollectionForm(props) {
       })
       .then((res) => {
         setCollections(prev => {
-          return [...prev, res.data.data]
+          return [res.data.data, ...prev]
         })
         closeForm(false)
       })
@@ -86,6 +86,6 @@ export default function NewCollectionForm(props) {
           </form>
         </CardContent>
       </Card>
-  </Grid>
+    </Grid>
   )
 }

@@ -37,7 +37,7 @@ const theme = createMuiTheme({
 
 export default function App() {
   const [tracks, setTracks] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem("user") ? localStorage.getItem("user") : null);
 
   useEffect(() => {
     const localUser = localStorage.getItem("user")

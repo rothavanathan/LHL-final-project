@@ -179,7 +179,10 @@ export default function Project(props) {
 
               <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player"></Player>
 
-              <form className={classes.projectForm} onSubmit={handleSubmit}>
+              <form
+                className={classes.projectForm}
+                onSubmit={handleSubmit}
+              >
                 <Box className={classes.formBox}>
                   <AddProjectToCollection
                     collections={collections}
