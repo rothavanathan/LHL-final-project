@@ -68,6 +68,7 @@ export default function Waveform({
     // Use the PeakCache to improve rendering speed of large waveforms.
     partialRender: true,
     audioContext: context,
+    backend: 'WebAudio',
   });
 
   // create new WaveSurfer instance
@@ -83,6 +84,8 @@ export default function Waveform({
         wavesurfer.current.setVolume(volume);
         setVolume(volume);
       }
+
+      //tell player object that the waveform is loaded
       setLoadCounter(prev => prev + 1)
       Emitter.on("clickRewind", () => wavesurfer.current.seekTo(0));
       Emitter.on("clickPlayPause", () => wavesurfer.current.playPause());
@@ -109,6 +112,7 @@ export default function Waveform({
         wavesurfer.current.setMute(false);
       }
     });
+
 
     Emitter.on("soloOFF", () => {
       wavesurfer.current.solo = false;
