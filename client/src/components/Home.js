@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home(props) {
   //for media query
-  const theme = useTheme();
+  // const theme = useTheme();
   const matches = useMediaQuery('(min-width:960px)');
 
   const classes = useStyles();

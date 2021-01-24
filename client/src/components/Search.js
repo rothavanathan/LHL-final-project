@@ -5,7 +5,7 @@ import SideDrawer from "./SideDrawer";
 import Results from "./Results";
 import SongPreview from "./SongPreview";
 import { TextField, Grid, Container, Typography, useMediaQuery } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useDebounce from "../hooks/useDebounce";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,12 +49,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Search(props) {
+  // const theme = useTheme();
+  const matches = useMediaQuery('(min-width:960px)');
+
   const { isLoggedIn } = props;
   const [term, setTerm] = useState("");
   const [results, setResults] = useState([]);
   const [isSongSelected, setIsSongSelected] = useState({});
   const [isSearching, setIsSearching] = useState(false);
-  const matches = useMediaQuery('(min-width:960px)');
 
   const debouncedSearchTerm = useDebounce(term, 200);
 

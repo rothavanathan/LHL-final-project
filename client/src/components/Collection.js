@@ -1,18 +1,26 @@
 import { useState, useEffect, Fragment } from "react";
 import { Redirect, useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid, Button, Typography, Box } from "@material-ui/core";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Container, Grid, Button, Typography, Box, useMediaQuery } from "@material-ui/core";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import SideDrawer from "./SideDrawer";
 import Nav from "./Nav";
 import ProjectCard from "./ProjectCard";
 import ConfirmDelete from "./ConfirmDelete";
 
 const useStyles = makeStyles((theme) => ({
-  header: {
+  mainWindow: {
+    width: "100%",
+    margin: "auto"
+  },
+  mainHeader: {
+    display: "flex",
+    justifyContent: "flex-start",
+    // paddingLeft: 20,
+    // paddingRight: 40,
     marginTop: 40,
-    marginBottom: 20,
-    display: "flex"
+    // marginBottom: "1em",
   },
   titleBox: {
     display: "flex",
@@ -36,6 +44,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Collection(props) {
+  const theme = useTheme();
+  const matches = useMediaQuery('(min-width:960px)');
   const classes = useStyles();
   const { isLoggedIn, setRefresh } = props;
   const { id } = useParams();
@@ -95,35 +105,39 @@ export default function Collection(props) {
       {redirectOnDelete ? (
         <Redirect to="/home" />
       ) : (
-          <div>
+          <div style={{ display: "flex" }}>
+            {matches && <SideDrawer />}
             {projects.length > 0 ? (
-              <div>
-                <header className={classes.header}>
-                  <Link to="/home">
-                    <ArrowBackIosIcon
-                      className={classes.backArrow}
-                    >Back to Home
+              <div className={classes.mainWindow}>
+                <Container className={classes.cardGrid} maxWidth="md" id="mainHeader">
+
+                  <header className={classes.mainHeader}>
+                    <Link to="/home">
+                      <ArrowBackIosIcon
+                        className={classes.backArrow}
+                      >Back to Home
                      </ArrowBackIosIcon>
-                  </Link>
+                    </Link>
 
-                  <Box className={classes.titleBox}>
-                    <Typography
-                      component="h1"
-                      variant="h4"
-                      color="var(--white)">
-                      {projects[0].collection_name}
-                    </Typography>
+                    <Box className={classes.titleBox}>
+                      <Typography
+                        component="h1"
+                        variant="h4"
+                        color="var(--white)">
+                        {projects[0].collection_name}
+                      </Typography>
 
-                    <Button
-                      className={classes.deleteButton}
-                      variant="outlined"
-                      color="primary"
-                      onClick={handleAlertOpen}
-                    >
-                      Delete Collection
+                      <Button
+                        className={classes.deleteButton}
+                        variant="outlined"
+                        color="primary"
+                        onClick={handleAlertOpen}
+                      >
+                        Delete Collection
                      </Button>
-                  </Box>
-                </header>
+                    </Box>
+                  </header>
+                </Container>
 
                 <ConfirmDelete
                   open={open}
@@ -155,15 +169,39 @@ export default function Collection(props) {
                 </Container>
               </div>
             ) : (
+
                 <div>
-                  <h1>{emptyCollection[0].collection_name}</h1>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={handleAlertOpen}
-                  >
-                    Delete Collection
-              </Button>
+                  <Container className={classes.cardGrid} maxWidth="md" id="mainHeader">
+
+                    <header className={classes.mainHeader}>
+
+
+                      <Link to="/home">
+                        <ArrowBackIosIcon
+                          className={classes.backArrow}
+                        >Back to Home
+                     </ArrowBackIosIcon>
+                      </Link>
+                      <Box className={classes.titleBox}>
+                        <Typography
+                          component="h1"
+                          variant="h4"
+                          color="var(--white)">
+                          {emptyCollection[0].collection_name}
+                        </Typography>
+
+                        <Button
+                          className={classes.deleteButton}
+                          variant="outlined"
+                          color="primary"
+                          onClick={handleAlertOpen}
+                        >
+                          Delete Collection
+                     </Button>
+                      </Box>
+                    </header>
+                  </Container>
+
                   <ConfirmDelete
                     open={open}
                     setOpen={setOpen}
@@ -193,7 +231,7 @@ export default function Collection(props) {
                 </div>
               )}
 
-            <Nav />
+            {!matches && < Nav />}
           </div>
         )}
     </div>

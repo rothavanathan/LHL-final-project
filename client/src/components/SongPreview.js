@@ -12,12 +12,17 @@ const useStyles = makeStyles((theme) => ({
   main: {
     marginBottom: 100
   },
-  header: {
-    marginTop: 40,
-    marginBottom: 40,
+  mainHeader: {
     display: "flex",
-    color: "var(--white)",
-    alignItems: "center"
+    justifyContent: "flex-start",
+    // paddingLeft: 20,
+    // paddingRight: 40,
+    marginTop: 40,
+    // marginBottom: "1em",
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(5),
   },
   backArrow: {
     fontSize: "large",
@@ -85,7 +90,7 @@ export default function SongPreview(props) {
       <Box className={classes.main}>
         <Container className={classes.cardHeader} maxWidth="md" id="header">
 
-          <header className={classes.header}>
+          <header className={classes.mainHeader}>
 
             <ArrowBackIosIcon
               className={classes.backArrow}
