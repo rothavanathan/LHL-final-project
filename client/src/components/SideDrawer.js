@@ -8,6 +8,7 @@ import {
 import HomeIcon from '@material-ui/icons/Home';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 import SearchIcon from '@material-ui/icons/Search';
+import logo from "../public/LAYERS_crop.png";
 
 
 
@@ -15,24 +16,24 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     color: "var(--black)",
     backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
-    width: "240px",
-    borderRight: "1px solid rgba(244, 240, 234, 0.2)"
+    width: "15%",
+    borderRight: "1px solid rgba(244, 240, 234, 0.1)"
   },
   drawerPaper: {
-    marginTop: "5em",
+    marginTop: "2em",
+
     width: 'inherit',
     backgroundColor: "var(--black)",
     backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
-    borderRight: "1px solid rgba(244, 240, 234, 0.2)"
+    borderRight: "1px solid rgba(244, 240, 234, 0.1)"
 
   },
-  mainHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    paddingLeft: 20,
-    paddingRight: 40,
-    marginTop: 40,
-    marginBottom: 40
+  homeImg: {
+    width: "50%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: "4em",
+    paddingRight: 4,
   },
   links: {
     textDecoration: "none",
@@ -48,16 +49,16 @@ export default function SideDrawer() {
 
   return (
     <Drawer
-      // style={{ width: "240px" }}
       variant="persistent"
       anchor="left"
       open={true}
       classes={{ paper: classes.drawerPaper }}
       className={classes.drawer}
     >
+      <img src={logo} className={classes.homeImg} alt="Layers logo" />
       <List>
         <Link to="/home" className={classes.links}>
-          <ListItem>
+          <ListItem className={classes.listItem}>
             <ListItemIcon className={classes.linkIcon}>
               <HomeIcon />
             </ListItemIcon>

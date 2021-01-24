@@ -2,23 +2,22 @@ import { useState, useEffect, Fragment } from 'react';
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 import {
-  Container, Grid, Typography
+  Container, Grid, Typography, useMediaQuery
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Nav from "./Nav";
 import SideDrawer from "./SideDrawer";
 import ProjectCard from "./ProjectCard";
 import NewCollectionCard from './NewCollectionCard';
 
-const useStyles = makeStyles((theme) => ({
-  drawer: {
-    color: "var(--black)",
-    backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
-    width: "240px"
 
+
+const useStyles = makeStyles((theme) => ({
+
+  mainWindow: {
+    margin: "auto"
   },
-  drawerPaper: { width: 'inherit' },
   mainHeader: {
     display: "flex",
     justifyContent: "space-between",
@@ -42,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home(props) {
+  //for media query
+  const theme = useTheme();
+  const matches = useMediaQuery('(min-width:960px)');
+
   const classes = useStyles();
   const { isLoggedIn, refresh, setRefresh } = props;
   const [collections, setCollections] = useState([])
@@ -61,9 +64,9 @@ export default function Home(props) {
 
   return isLoggedIn ? (
     <div style={{ display: "flex" }}>
-      <SideDrawer />
+      {matches && <SideDrawer />}
 
-      <div>
+      <div className={classes.mainWindow}>
 
 
         <header className={classes.mainHeader}>
@@ -151,8 +154,8 @@ export default function Home(props) {
             </Grid>
           </Container>
         </section>
-        <Nav />
       </div>
+      {!matches && < Nav />}
     </div>
   ) : (
       <Redirect to="/" />
