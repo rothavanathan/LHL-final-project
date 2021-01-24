@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "flex-end"
   },
   typography: {
-    marginBottom: 20,
+    marginBottom: "3em",
   }
 }));
 
