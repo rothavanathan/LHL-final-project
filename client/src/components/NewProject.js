@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     color: "var(--black)",
     backgroundColor: "var(--white)",
     border: "none",
-    borderBottom: "2px solid var(--tertiary-color)",
+    // borderBottom: "2px solid var(--tertiary-color)",
     width: "100%",
     marginTop: "1em",
     fontSize: ".9em"
@@ -17,7 +17,12 @@ const useStyles = makeStyles((theme) => ({
   input: {
     color: "black",
     background: "none"
-  }
+  },
+  saveIcon: {
+    '&:hover': {
+      color: "var(--primary-color)"
+    }
+  },
 }));
 
 export default function NewProjectForm(props) {
@@ -69,7 +74,7 @@ export default function NewProjectForm(props) {
           name="project_name"
           placeholder="Ready? Name your new project!"
         ></TextField>
-        <Button type="submit" color="var(--tertiary-color)">Save</Button>
+        <Button type="submit" color="var(--tertiary-color)" className={classes.saveIcon}>Save</Button>
       </form>
       {projectId && <Redirect to={`/project/${projectId}`} />}
       {invalidSong && <Redirect to={`/project/0`} />}

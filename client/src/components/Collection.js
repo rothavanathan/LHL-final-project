@@ -1,22 +1,30 @@
 import { useState, useEffect, Fragment } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid, Button, Typography } from "@material-ui/core";
+import { Container, Grid, Button, Typography, Box } from "@material-ui/core";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Nav from "./Nav";
 import ProjectCard from "./ProjectCard";
 import ConfirmDelete from "./ConfirmDelete";
 
 const useStyles = makeStyles((theme) => ({
-  mainHeader: {
+  header: {
+    marginTop: 40,
+    marginBottom: 20,
+    display: "flex"
+  },
+  titleBox: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    paddingLeft: 20,
-    paddingRight: 40,
-    marginTop: 40,
-    marginBottom: 40
+    alignItems: "start"
+  },
+  backArrow: {
+    fontSize: "large",
+    paddingLeft: 10,
+    paddingRight: 5,
+    marginLeft: 10,
+    color: "var(--white)",
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
@@ -90,23 +98,33 @@ export default function Collection(props) {
           <div>
             {projects.length > 0 ? (
               <div>
-                <header className={classes.mainHeader}>
-                  <Typography
-                    component="h1"
-                    variant="h4"
-                    color="var(--white)">
-                    {projects[0].collection_name}
-                  </Typography>
+                <header className={classes.header}>
+                  <Link to="/home">
+                    <ArrowBackIosIcon
+                      className={classes.backArrow}
+                    >Back to Home
+                     </ArrowBackIosIcon>
+                  </Link>
 
-                  <Button
-                    className={classes.deleteButton}
-                    variant="outlined"
-                    color="primary"
-                    onClick={handleAlertOpen}
-                  >
-                    Delete Collection
-              </Button>
+                  <Box className={classes.titleBox}>
+                    <Typography
+                      component="h1"
+                      variant="h4"
+                      color="var(--white)">
+                      {projects[0].collection_name}
+                    </Typography>
+
+                    <Button
+                      className={classes.deleteButton}
+                      variant="outlined"
+                      color="primary"
+                      onClick={handleAlertOpen}
+                    >
+                      Delete Collection
+                     </Button>
+                  </Box>
                 </header>
+
                 <ConfirmDelete
                   open={open}
                   setOpen={setOpen}

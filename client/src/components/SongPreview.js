@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
   backArrow: {
     fontSize: "large",
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 5,
     marginLeft: 10,
   },
   card: {

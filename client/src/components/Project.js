@@ -24,15 +24,18 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
     display: "flex"
   },
-  backArrow: {
-    fontSize: "large",
-    padding: 10,
-  },
   titleBox: {
     display: "flex",
     flexDirection: "column",
     alignItems: "start"
   },
+  backArrow: {
+    fontSize: "large",
+    paddingLeft: 10,
+    paddingRight: 5,
+    color: "var(--white)",
+  },
+
   player: {
     width: "50%"
   },
@@ -160,7 +163,7 @@ export default function Project(props) {
                       <ArrowBackIosIcon
                         className={classes.backArrow}
                       >Back to Home
-              </ArrowBackIosIcon>
+                      </ArrowBackIosIcon>
                     </Link>
 
                     <Box className={classes.titleBox}>

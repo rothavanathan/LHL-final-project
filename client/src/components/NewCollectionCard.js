@@ -49,25 +49,25 @@ export default function NewCollectionCard(props) {
       { isCollectionFormOpen ? (
         <NewCollectionForm closeForm={closeCollectionForm} user={isLoggedIn} setCollections={setCollections} />
       ) : (
-      <Grid item key={props.key} xs={6} sm={6} md={4}>
-        <Card className={classes.card} onClick={openCollectionForm}>
-          <CardMedia
-            className={classes.cardMedia}
-            image={props.image}
-            title={props.title}
-            style={useStyles.media}
-          />
-          <CardContent className={classes.cardContent}>
-            <Typography gutterBottom variant="subtitle-1" component="h2">
-              {props.title}
-            </Typography>
-            <Typography className={classes.cardText}>
-              {props.subtitle}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-    )}
+          <Grid item key={props.key} xs={6} sm={6} md={4}>
+            <Card className={classes.card} onClick={openCollectionForm}>
+              <CardMedia
+                className={classes.cardMedia}
+                image={props.image}
+                title={props.title}
+                style={useStyles.media}
+              />
+              <CardContent className={classes.cardContent}>
+                <Typography gutterBottom variant="subtitle-1" component="h2">
+                  {props.title}
+                </Typography>
+                <Typography className={classes.cardText}>
+                  {props.subtitle}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        )}
     </Fragment>
   )
 }

@@ -13,10 +13,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 2px 2px 0px rgba(244, 240, 234, 0.4)",
     opacity: 0.9,
     '&:hover': {
-      boxShadow: "0px 3px 4px 1px rgba(244, 240, 234, 0.5)",
       boxShadow: "2px 3px 4px 1px rgba(244, 240, 234, 0.5)",
       opacity: 1.0,
-      // boxShadow: "3px 3px 10px 1px rgba(244, 240, 234, 0.5)",
+
     }
   },
   cardMedia: {
