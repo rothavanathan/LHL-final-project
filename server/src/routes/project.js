@@ -23,12 +23,12 @@ module.exports = (db) => {
       });
   });
 
-  // Update PROJECT with new note and ID
+  // Update PROJECT with new note and collection ID
   router.put("/:id", (req, res) => {
     const { notes, collection_id } = req.body;
-    const id = req.params.id;
+    const project_id = req.params.id;
 
-    addNoteAndCollectionToProject(notes, collection_id, id, db)
+    addNoteAndCollectionToProject(notes, collection_id, project_id, db)
       .then((data) => {
         res.json(data);
       })
@@ -38,7 +38,6 @@ module.exports = (db) => {
   });
 
   // ADD Project
-  // title, song_id, user_id
   router.put("/", (req, res) => {
     const { title, song_id, user_id } = req.body;
     addProject(title, song_id, user_id, db)

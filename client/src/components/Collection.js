@@ -102,10 +102,10 @@ export default function Collection(props) {
                   {projects.map((project, i) => (
                     <Fragment key={i}>
                       <ProjectCard
-                        key={project.id}
+                        key={project.project_id}
                         title={project.project_title}
                         thumbnail={project.url_album_artwork}
-                        link={`/project/${project.id}`}
+                        link={`/project/${project.project_id}`}
                         songTitle={project.title}
                         songArtist={project.artist}
                       />

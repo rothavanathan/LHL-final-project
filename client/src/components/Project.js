@@ -4,7 +4,7 @@ import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import { Box, Typography, IconButton } from '@material-ui/core';
+import { Box, Typography, IconButton, Button } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Player from "./Player";
 import PlayerTransport from "./PlayerTransport";
@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 56,
     color: "var(--quad-color)"
   },
+  link: {
+    textDecoration: "none"
+  }
 }));
 
 
@@ -101,6 +104,7 @@ export default function Project(props) {
     return { title, url, icon, peaks_array, name, project_title }
   })
 
+  //save note and collection id
   const saveNote = () => {
     axios
       .put(`http://localhost:8000/api/project/${id}`, {
@@ -146,6 +150,16 @@ export default function Project(props) {
       ) : (
 
           <div>
+
+            <div>
+              {!project ? (
+                <div>
+                <h1>Sorry, this title is not currently available</h1>
+                <Link to="/search" className={classes.link}><Button color="primary" variant="outlined">Back to Search</Button></Link>
+                </div>
+              ) : (
+
+            <div>
             <div className={classes.mainWindow} ref={ref}>
               <header className={classes.header}>
                 <Link to="/home">
@@ -213,9 +227,13 @@ export default function Project(props) {
               when={!isNotChanged}
               message={"Don't you want to saaaaaaave!?"}
             />
+
           </div>
-        )}
+          )}
+        </div>
     </div >
+    )}
+    </div>
   ) : (
       <Redirect to="/" />
     );
