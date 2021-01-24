@@ -63,6 +63,10 @@ const useStyles = makeStyles((theme) => ({
   },
   regLink: {
     textDecoration: "none",
+    "&:hover": {
+      color: "var(--primary-color)"
+
+    }
   },
   subtitle1: {
     fontStyle: "oblique",
