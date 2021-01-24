@@ -1,17 +1,38 @@
 import { useState, useEffect, Fragment } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid, Button } from "@material-ui/core";
+import { Container, Grid, Button, Typography, Box } from "@material-ui/core";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Nav from "./Nav";
 import ProjectCard from "./ProjectCard";
 import ConfirmDelete from "./ConfirmDelete";
 
 const useStyles = makeStyles((theme) => ({
+  header: {
+    marginTop: 40,
+    marginBottom: 20,
+    display: "flex"
+  },
+  titleBox: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start"
+  },
+  backArrow: {
+    fontSize: "large",
+    paddingLeft: 10,
+    paddingRight: 5,
+    marginLeft: 10,
+    color: "var(--white)",
+  },
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
+  deleteButton: {
+    marginTop: 10,
+  }
 }));
 
 export default function Collection(props) {
@@ -74,90 +95,109 @@ export default function Collection(props) {
       {redirectOnDelete ? (
         <Redirect to="/home" />
       ) : (
-        <div>
-          {projects.length > 0 ? (
-            <div>
-              <h1>{projects[0].collection_name}</h1>
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleAlertOpen}
-              >
-                Delete Collection
-              </Button>
-              <ConfirmDelete
-                open={open}
-                setOpen={setOpen}
-                handleAlertOpen={handleAlertOpen}
-                handleConfirmDelete={handleConfirmDelete}
-                handleCancelDelete={handleCancelDelete}
-                name={projects[0].collection_name}
-              />
-              <Container
-                className={classes.cardGrid}
-                maxWidth="md"
-                id="projects"
-              >
-                <Grid container spacing={4}>
-                  {projects.map((project, i) => (
-                    <Fragment key={i}>
-                      <ProjectCard
-                        key={project.project_id}
-                        title={project.project_title}
-                        thumbnail={project.url_album_artwork}
-                        link={`/project/${project.project_id}`}
-                        songTitle={project.title}
-                        songArtist={project.artist}
-                      />
-                    </Fragment>
-                  ))}
-                </Grid>
-              </Container>
-            </div>
-          ) : (
-            <div>
-              <h1>{emptyCollection[0].collection_name}</h1>
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleAlertOpen}
-              >
-                Delete Collection
-              </Button>
-              <ConfirmDelete
-                open={open}
-                setOpen={setOpen}
-                handleAlertOpen={handleAlertOpen}
-                handleConfirmDelete={handleConfirmDelete}
-                handleCancelDelete={handleCancelDelete}
-                name={emptyCollection[0].collection_name}
-              />
-              <Container
-                className={classes.cardGrid}
-                maxWidth="md"
-                id="projects"
-              >
-                <Grid container spacing={4}>
-                  {emptyCollection.map((project, i) => (
-                    <Fragment key={i}>
-                      <ProjectCard
-                        key={project.id}
-                        title={project.project_title}
-                        thumbnail={project.url_album_artwork}
-                        link={`/search`}
-                      />
-                    </Fragment>
-                  ))}
-                </Grid>
-              </Container>
-            </div>
-          )}
+          <div>
+            {projects.length > 0 ? (
+              <div>
+                <header className={classes.header}>
+                  <Link to="/home">
+                    <ArrowBackIosIcon
+                      className={classes.backArrow}
+                    >Back to Home
+                     </ArrowBackIosIcon>
+                  </Link>
 
-          <Nav />
-        </div>
-      )}
+                  <Box className={classes.titleBox}>
+                    <Typography
+                      component="h1"
+                      variant="h4"
+                      color="var(--white)">
+                      {projects[0].collection_name}
+                    </Typography>
+
+                    <Button
+                      className={classes.deleteButton}
+                      variant="outlined"
+                      color="primary"
+                      onClick={handleAlertOpen}
+                    >
+                      Delete Collection
+                     </Button>
+                  </Box>
+                </header>
+
+                <ConfirmDelete
+                  open={open}
+                  setOpen={setOpen}
+                  handleAlertOpen={handleAlertOpen}
+                  handleConfirmDelete={handleConfirmDelete}
+                  handleCancelDelete={handleCancelDelete}
+                  name={projects[0].collection_name}
+                />
+                <Container
+                  className={classes.cardGrid}
+                  maxWidth="md"
+                  id="projects"
+                >
+                  <Grid container spacing={4}>
+                    {projects.map((project, i) => (
+                      <Fragment key={i}>
+                        <ProjectCard
+                          key={project.project_id}
+                          title={project.project_title}
+                          thumbnail={project.url_album_artwork}
+                          link={`/project/${project.project_id}`}
+                          songTitle={project.title}
+                          songArtist={project.artist}
+                        />
+                      </Fragment>
+                    ))}
+                  </Grid>
+                </Container>
+              </div>
+            ) : (
+                <div>
+                  <h1>{emptyCollection[0].collection_name}</h1>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleAlertOpen}
+                  >
+                    Delete Collection
+              </Button>
+                  <ConfirmDelete
+                    open={open}
+                    setOpen={setOpen}
+                    handleAlertOpen={handleAlertOpen}
+                    handleConfirmDelete={handleConfirmDelete}
+                    handleCancelDelete={handleCancelDelete}
+                    name={emptyCollection[0].collection_name}
+                  />
+                  <Container
+                    className={classes.cardGrid}
+                    maxWidth="md"
+                    id="projects"
+                  >
+                    <Grid container spacing={4}>
+                      {emptyCollection.map((project, i) => (
+                        <Fragment key={i}>
+                          <ProjectCard
+                            key={project.id}
+                            title={project.project_title}
+                            thumbnail={project.url_album_artwork}
+                            link={`/search`}
+                          />
+                        </Fragment>
+                      ))}
+                    </Grid>
+                  </Container>
+                </div>
+              )}
+
+            <Nav />
+          </div>
+        )}
     </div>
   ) : (
-    <Redirect to="/" />
-  );
+      <Redirect to="/" />
+    );
 }

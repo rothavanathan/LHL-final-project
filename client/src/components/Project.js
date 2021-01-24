@@ -20,19 +20,22 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 160,
   },
   header: {
-    marginTop: 20,
+    marginTop: 40,
     marginBottom: 20,
     display: "flex"
-  },
-  backArrow: {
-    fontSize: "large",
-    padding: 10,
   },
   titleBox: {
     display: "flex",
     flexDirection: "column",
     alignItems: "start"
   },
+  backArrow: {
+    fontSize: "large",
+    paddingLeft: 10,
+    paddingRight: 5,
+    color: "var(--white)",
+  },
+
   player: {
     width: "50%"
   },
@@ -49,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
     color: "var(--quad-color)"
   },
   link: {
-    textDecoration: "none"
+    textDecoration: "none",
+    marginTop: 10,
   }
 }));
 
@@ -154,85 +158,100 @@ export default function Project(props) {
             <div>
               {!project ? (
                 <div>
-                <h1>Sorry, this title is not currently available</h1>
-                <Link to="/search" className={classes.link}><Button color="primary" variant="outlined">Back to Search</Button></Link>
+                  <header className={classes.header}>
+                    <Link to="/home">
+                      <ArrowBackIosIcon
+                        className={classes.backArrow}
+                      >Back to Home
+                      </ArrowBackIosIcon>
+                    </Link>
+
+                    <Box className={classes.titleBox}>
+                      <Typography component="h1" variant="h5">
+                        Sorry, this title is not currently available
+                      </Typography>
+                      <Link to="/search" className={classes.link}><Button color="primary" variant="outlined">Back to Search</Button></Link>
+                    </Box>
+
+                  </header>
+
                 </div>
               ) : (
 
-            <div>
-            <div className={classes.mainWindow} ref={ref}>
-              <header className={classes.header}>
-                <Link to="/home">
-                  <ArrowBackIosIcon
-                    className={classes.backArrow}
-                  >Back to Home
+                  <div>
+                    <div className={classes.mainWindow} ref={ref}>
+                      <header className={classes.header}>
+                        <Link to="/home">
+                          <ArrowBackIosIcon
+                            className={classes.backArrow}
+                          >Back to Home
               </ArrowBackIosIcon>
-                </Link>
+                        </Link>
 
-                <Box className={classes.titleBox}>
-                  <Typography component="h1" variant="h5">
-                    {project.project_title}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    {project.title} - {project.artist}
-                  </Typography>
-                </Box>
+                        <Box className={classes.titleBox}>
+                          <Typography component="h1" variant="h5">
+                            {project.project_title}
+                          </Typography>
+                          <Typography variant="subtitle1">
+                            {project.title} - {project.artist}
+                          </Typography>
+                        </Box>
 
-              </header>
+                      </header>
 
-              <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player" setHasLoaded={setHasLoaded}></Player>
+                      <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player" setHasLoaded={setHasLoaded}></Player>
 
-              <form
-                className={classes.projectForm}
-                onSubmit={handleSubmit}
-              >
-                <Box className={classes.formBox}>
-                  <AddProjectToCollection
-                    collections={collections}
-                    collectionId={collectionId}
-                    setCollectionId={setCollectionId} >
-                  </AddProjectToCollection>
+                      <form
+                        className={classes.projectForm}
+                        onSubmit={handleSubmit}
+                      >
+                        <Box className={classes.formBox}>
+                          <AddProjectToCollection
+                            collections={collections}
+                            collectionId={collectionId}
+                            setCollectionId={setCollectionId} >
+                          </AddProjectToCollection>
 
-                  <IconButton aria-label="save" type="submit">
-                    <SaveIcon
-                      className={classes.saveIcon}
-                    >
-                    </SaveIcon>
-                  </IconButton>
-                  <IconButton aria-label="delete" onClick={handleAlertOpen}>
-                    <DeleteForeverIcon
-                      className={classes.saveIcon}
-                    >
-                    </DeleteForeverIcon>
-                  </IconButton>
-                  <ConfirmDelete
-                    open={open}
-                    setOpen={setOpen}
-                    handleAlertOpen={handleAlertOpen}
-                    handleConfirmDelete={handleConfirmDelete}
-                    handleCancelDelete={handleCancelDelete}
-                    name={content[0].project_title}
-                  />
-                </Box>
+                          <IconButton aria-label="save" type="submit">
+                            <SaveIcon
+                              className={classes.saveIcon}
+                            >
+                            </SaveIcon>
+                          </IconButton>
+                          <IconButton aria-label="delete" onClick={handleAlertOpen}>
+                            <DeleteForeverIcon
+                              className={classes.saveIcon}
+                            >
+                            </DeleteForeverIcon>
+                          </IconButton>
+                          <ConfirmDelete
+                            open={open}
+                            setOpen={setOpen}
+                            handleAlertOpen={handleAlertOpen}
+                            handleConfirmDelete={handleConfirmDelete}
+                            handleCancelDelete={handleCancelDelete}
+                            name={content[0].project_title}
+                          />
+                        </Box>
 
-                {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged} />}
+                        {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged} />}
 
-              </form>
+                      </form>
+                    </div>
+
+                    <PlayerTransport tracks={stems} audioCtx={audioCtx} hasLoaded={hasLoaded} />
+                    <ProjectNav height={height} />
+
+                    <Prompt
+                      when={!isNotChanged}
+                      message={"Don't you want to saaaaaaave!?"}
+                    />
+
+                  </div>
+                )}
             </div>
-
-            <PlayerTransport tracks={stems} audioCtx={audioCtx} hasLoaded={hasLoaded} />
-            <ProjectNav height={height} />
-
-            <Prompt
-              when={!isNotChanged}
-              message={"Don't you want to saaaaaaave!?"}
-            />
-
-          </div>
-          )}
-        </div>
-    </div >
-    )}
+          </div >
+        )}
     </div>
   ) : (
       <Redirect to="/" />

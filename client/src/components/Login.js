@@ -37,17 +37,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "var(--black)",
     border: "none",
     borderBottom: "var(--tertiary-color) 2px solid",
-    margin: "30px",
+    marginTop: "30px",
     outline: "none",
     alignSelf: "center",
-    width: "100%",
+    width: "16em",
     fontSize: "15px",
   },
   logButton: {
     display: "flex",
     background: "var(--primary-color)",
     width: "60%",
-    marginTop: "20px",
+    marginTop: "40px",
     marginBottom: "40px",
     color: "var(--white)",
     "&:hover": {
@@ -63,6 +63,10 @@ const useStyles = makeStyles((theme) => ({
   },
   regLink: {
     textDecoration: "none",
+    "&:hover": {
+      color: "var(--primary-color)"
+
+    }
   },
   subtitle1: {
     fontStyle: "oblique",

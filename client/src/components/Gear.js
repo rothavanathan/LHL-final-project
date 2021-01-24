@@ -7,7 +7,7 @@ import { FormControl, Button, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    marginTop: 20,
+    marginTop: 40,
     marginBottom: 40,
     display: "flex",
     color: "var(--white)",
@@ -15,16 +15,21 @@ const useStyles = makeStyles((theme) => ({
   },
   backArrow: {
     fontSize: "large",
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 5,
     marginLeft: 10,
-    marginTop: 10,
+    // marginTop: 10,
   },
   logButton: {
     display: "flex",
     background: "var(--primary-color)",
-    width: "60%",
+    width: "10em",
     margin: "40px",
     color: "var(--white)",
+    "&:hover": {
+      backgroundColor: "var(--white)",
+      color: "var(--black)",
+    },
   },
 }));
 
@@ -55,7 +60,7 @@ export default function Gear(props) {
             Back to Home
           </ArrowBackIosIcon>
         </Link>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h4">
           Settings
         </Typography>
       </header>
@@ -71,6 +76,6 @@ export default function Gear(props) {
       <Nav />
     </div>
   ) : (
-    <Redirect to="/" />
-  );
+      <Redirect to="/" />
+    );
 }

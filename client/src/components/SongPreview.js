@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 100
   },
   header: {
-    marginTop: 20,
+    marginTop: 40,
     marginBottom: 40,
     display: "flex",
     color: "var(--white)",
@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
   backArrow: {
     fontSize: "large",
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 5,
     marginLeft: 10,
   },
   card: {
@@ -92,7 +93,7 @@ export default function SongPreview(props) {
 
           <Box className={classes.titleBox}>
 
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h4">
               Search
           </Typography>
 

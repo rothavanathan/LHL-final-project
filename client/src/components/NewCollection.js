@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardContent, CardMedia, Grid, Input, Button } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Grid, Input, Button, ButtonGroup } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from "axios";
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -12,10 +12,13 @@ const useStyles = makeStyles((theme) => ({
     transition: "all .25s linear",
     background: "var(--white)",
     backgroundColor: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
-    boxShadow: "0px 2px 2px 0px rgb(244, 240, 234)",
+    boxShadow: "0px 2px 2px 0px rgba(244, 240, 234, 0.4)",
+    opacity: 0.9,
     '&:hover': {
-      boxShadow: "-1px 10px 29px 0px rgb(244, 240, 234)"
-    },
+      boxShadow: "2px 3px 4px 2px rgba(244, 240, 234, 0.5)",
+      opacity: 1.0,
+
+    }
   },
   cardMedia: {
     paddingTop: '56.25%',
@@ -30,6 +33,17 @@ const useStyles = makeStyles((theme) => ({
   },
   cardText: {
     fontSize: ".75rem"
+  },
+  saveIcon: {
+    '&:hover': {
+      color: "var(--primary-color)"
+    }
+  },
+  cancelIcon: {
+    marginTop: 4,
+    '&:hover': {
+      color: "var(--primary-color)"
+    }
   }
 }));
 
@@ -78,10 +92,12 @@ export default function NewCollectionForm(props) {
               name="project_name"
               placeholder="Collection Name"
             ></Input>
-            <div>
-              <Button color="primary" type="submit">Save</Button>
-            </div>
-            <CancelIcon onClick={() => closeForm(false)}></CancelIcon>
+            <ButtonGroup>
+              <Button className={classes.saveIcon} variant="float" color="primary" type="submit">Save</Button>
+
+              <CancelIcon className={classes.cancelIcon} onClick={() => closeForm(false)}></CancelIcon>
+
+            </ButtonGroup>
           </form>
         </CardContent>
       </Card>
