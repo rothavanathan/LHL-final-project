@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
   mainHeader: {
     display: "flex",
     justifyContent: "space-between",
-    paddingLeft: 20,
-    paddingRight: 40,
+    // paddingLeft: 20,
+    // paddingRight: 40,
     marginTop: 40,
-    marginBottom: 40
+    // marginBottom: "1em",
   },
   cardGrid: {
     paddingTop: theme.spacing(3),
@@ -68,24 +68,26 @@ export default function Home(props) {
       {matches && <SideDrawer />}
 
       <div className={classes.mainWindow}>
+        <Container className={classes.cardGrid} maxWidth="md" id="mainHeader">
 
 
-        <header className={classes.mainHeader}>
-          <Typography
-            component="h1"
-            variant="h4"
-            color="var(--white)">
-            Home
-        </Typography>
-          <Link to="/gear">
-            <SettingsIcon
-              className={classes.gearIcon}
-            >Gear
-          </SettingsIcon>
-          </Link>
-        </header>
+          <header className={classes.mainHeader}>
+            <Typography
+              component="h1"
+              variant="h4"
+              color="var(--white)">
+              Home
+            </Typography>
+            <Link to="/gear">
+              <SettingsIcon
+                className={classes.gearIcon}
+              >Gear
+               </SettingsIcon>
+            </Link>
+          </header>
+        </Container>
         <section>
-          <Container className={classes.cardGrid} maxWidth="md" id="projects">
+          <Container className={classes.cardGrid} maxWidth="md" id="collections">
             <Typography className={classes.typography}
               component="header"
               variant="h5"
