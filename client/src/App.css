@@ -7,6 +7,7 @@
   --secondary-color: #ffff6f;
   --tertiary-color: rgb(80, 32, 28);
   --quad-color: rgb(92, 255, 198);
+
 }
 
 body {
@@ -14,6 +15,7 @@ body {
   background: var(--black);
   color: var(--white);
   margin-bottom: 10%;
+
 }
 
 .App {

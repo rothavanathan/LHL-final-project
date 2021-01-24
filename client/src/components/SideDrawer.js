@@ -17,12 +17,14 @@ const useStyles = makeStyles((theme) => ({
     color: "var(--black)",
     backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
     width: "15%",
+    minWidth: 240,
     borderRight: "1px solid rgba(244, 240, 234, 0.1)"
   },
   drawerPaper: {
     marginTop: "2em",
 
     width: 'inherit',
+    minWidth: 240,
     backgroundColor: "var(--black)",
     backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
     borderRight: "1px solid rgba(244, 240, 234, 0.1)"

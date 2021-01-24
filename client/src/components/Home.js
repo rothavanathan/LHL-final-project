@@ -16,6 +16,7 @@ import NewCollectionCard from './NewCollectionCard';
 const useStyles = makeStyles((theme) => ({
 
   mainWindow: {
+    width: "100%",
     margin: "auto"
   },
   mainHeader: {
