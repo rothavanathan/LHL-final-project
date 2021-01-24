@@ -122,7 +122,6 @@ export default function Project(props) {
     axios
       .delete(`http://localhost:8000/api/project/${id}`)
       .then(() => {
-        console.log("DELETED!")
       })
       .catch((err) => console.log(err));
   };
@@ -164,7 +163,7 @@ export default function Project(props) {
                     {project.title} - {project.artist}
                   </Typography>
                 </Box>
-                
+
               </header>
 
               <Player className={classes.player} tracks={stems} audioCtx={audioCtx} id="player" setHasLoaded={setHasLoaded}></Player>
