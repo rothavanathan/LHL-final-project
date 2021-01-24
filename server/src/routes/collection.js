@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { addCollection, getProjectsByCollection, deleteCollection } = require("../helpers/dbHelpers");
+const { addCollection, getProjectsByCollection, deleteCollection, getCollectionNameById } = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
 
@@ -9,11 +9,12 @@ module.exports = (db) => {
     const id = req.params.id;
 
     getProjectsByCollection(id, db)
-      .then((data) => {
-        console.log(`projects from collection id ${id} are`, data)
-        const projects = data
-        console.log("PROJECCCC------", projects)
-        res.json({ projects });
+      .then((projects) => {
+        getCollectionNameById(id, db)
+      .then((collectionName) => {
+        const collName = collectionName.rows[0].name
+        res.json({ projects, collName });
+      })
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -30,14 +31,11 @@ module.exports = (db) => {
 
     addCollection(name, thumbnail, user_id, db)
       .then((data) => {
-        console.log(`after collections put request`, data)
         const collectionId = data.id
         const thumbnail = data.thumbnail
-
         res.send({ data });
-      })
+      }).then((getCollectionNameById))
       .catch((err) => {
-        console.log(`ruh roh`, err);
         res.status(500).json({ error: err.message });
       });
   });
@@ -45,14 +43,11 @@ module.exports = (db) => {
   // delete collection
   router.delete("/:id", (req, res) => {
     const id = req.params.id;
-    console.log("ID---collection", id)
     deleteCollection(id, db)
       .then(() => {
-        console.log(id, " Was deleted!")
         res.send("DELETE");
       })
       .catch((err) => {
-        console.log(`ruh roh`, err);
         res.status(500).json({ error: err.message });
       });
   });

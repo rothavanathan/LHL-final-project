@@ -70,6 +70,15 @@ const getProjectsByCollection = (id, db) => {
     .catch((err) => err);
 };
 
+const getCollectionNameById = (id, db) => {
+  const query = `
+          SELECT name FROM collections
+          WHERE id = $1;
+        `;
+  const values = [id];
+  return db.query(query, values);
+};
+
 const getSongByProject = (id, db) => {
   const query = `SELECT projects.*, projects.title as project_title, songs.*, stems.*
       FROM projects
@@ -189,4 +198,5 @@ module.exports = {
   deleteProject,
   deleteCollection,
   updateProjectCollectionId,
+  getCollectionNameById
 };

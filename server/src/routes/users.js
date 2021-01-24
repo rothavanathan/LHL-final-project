@@ -11,7 +11,6 @@ module.exports = (db) => {
 
     getUserByEmail(email, db)
       .then((userInfo) => {
-        console.log("USER----->", userInfo.rows[0]);
         if (!email || !password || !first_name) {
           const valError = "you're missing a field";
           res.send(valError);

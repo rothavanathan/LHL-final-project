@@ -21,12 +21,14 @@ export default function Collection(props) {
   const [projects, setProjects] = useState([{ collection_name: "" }]);
   const [open, setOpen] = useState(false);
   const [redirectOnDelete, setRedirectOnDelete] = useState(false);
+  const [collectionName, setCollectionName] = useState("")
 
   useEffect(() => {
     axios
       .get(`/api/collection/${id}`)
       .then((data) => {
         setProjects(data.data.projects);
+        setCollectionName(data.data.collName);
       })
       .catch((err) => console.log(err));
   }, [id]);
@@ -53,7 +55,6 @@ export default function Collection(props) {
 
   const handleConfirmDelete = () => {
     deleteProject();
-    console.log("DELETE");
     setRefresh(true);
     setRedirectOnDelete(true);
   };
@@ -61,7 +62,7 @@ export default function Collection(props) {
   // card for empty collection
   const emptyCollection = [
     {
-      collection_name: "Wow, this looks lonely!",
+      collection_name: collectionName,
       project_title: "Add A Project!",
       url_album_artwork:
         "https://rykabrown.com/wp-content/uploads/2021/01/new-proj.png",
