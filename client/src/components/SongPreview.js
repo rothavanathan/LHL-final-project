@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import { CardContent, CardMedia, Typography, Grid, Box } from '@material-ui/core';
+import { CardContent, CardMedia, Typography, Grid, Box, Container } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import NewProject from "./NewProject"
 
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     width: 38,
   },
   audio: {
-    border: "2px solid var(--tertiary-color)",
+    border: "2px solid rgba(80, 32, 28, 0.1)",
     borderRadius: "10px",
     marginTop: ".75em"
   },
@@ -82,51 +82,55 @@ export default function SongPreview(props) {
   return (
     <div>
       <Box className={classes.main}>
+        <Container className={classes.cardHeader} maxWidth="md" id="header">
 
-        <header className={classes.header}>
+          <header className={classes.header}>
 
-          <ArrowBackIosIcon
-            className={classes.backArrow}
-            onClick={handleClick}
-          >Back to Home
+            <ArrowBackIosIcon
+              className={classes.backArrow}
+              onClick={handleClick}
+            >Back to Home
             </ArrowBackIosIcon>
 
-          <Box className={classes.titleBox}>
+            <Box className={classes.titleBox}>
 
-            <Typography component="h1" variant="h4">
-              Search
+              <Typography component="h1" variant="h4">
+                Search
           </Typography>
 
-          </Box>
-        </header>
+            </Box>
+          </header>
+        </Container>
+        <Container className={classes.cardHeader} maxWidth="md" id="header">
 
-        <Grid item key={props.id} xs={12}>
-          <Card className={classes.card}>
+          <Grid item key={props.id} xs={12}>
+            <Card className={classes.card}>
 
-            <CardContent className={classes.content}>
-              <CardMedia
-                component="img"
-                alt={`artwork for ${trackName}`}
-                className={classes.cover}
-                image={artworkUrl100}
-              />
-              <Typography className={classes.h2} component="h2" variant="h5">
-                {trackName}
-              </Typography>
-              <Typography component="h3" variant="subtitle1" color="textSecondary">
-                {artistName}
-              </Typography>
+              <CardContent className={classes.content}>
+                <CardMedia
+                  component="img"
+                  alt={`artwork for ${trackName}`}
+                  className={classes.cover}
+                  image={artworkUrl100}
+                />
+                <Typography className={classes.h2} component="h2" variant="h5">
+                  {trackName}
+                </Typography>
+                <Typography component="h3" variant="subtitle1" color="textSecondary">
+                  {artistName}
+                </Typography>
 
-              <CardMedia className={classes.audio}
-                component="audio"
-                image={previewUrl}
-                title='title'
-                controls
-              />
-              <NewProject songId={trackId} user={props.user} />
-            </CardContent>
-          </Card >
-        </Grid >
+                <CardMedia className={classes.audio}
+                  component="audio"
+                  image={previewUrl}
+                  title='title'
+                  controls
+                />
+                <NewProject songId={trackId} user={props.user} />
+              </CardContent>
+            </Card >
+          </Grid >
+        </Container>
       </Box>
 
     </div>

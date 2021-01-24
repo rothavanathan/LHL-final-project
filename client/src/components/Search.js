@@ -160,7 +160,9 @@ export default function Search(props) {
   ) : (
       <div style={{ display: "flex" }}>
         {matches && <SideDrawer />}
-        <SongPreview results={isSongSelected} setSong={setIsSongSelected} user={isLoggedIn} />
+        <div className={classes.mainWindow}>
+          <SongPreview results={isSongSelected} setSong={setIsSongSelected} user={isLoggedIn} />
+        </div>
         {!matches && <Nav />}
       </div>
     )
