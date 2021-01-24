@@ -1,14 +1,24 @@
 import { useState, useEffect, Fragment } from 'react';
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
-import { Container, Grid, Typography } from '@material-ui/core';
+import {
+  Container, Grid, Typography
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Nav from "./Nav";
+import SideDrawer from "./SideDrawer";
 import ProjectCard from "./ProjectCard";
 import NewCollectionCard from './NewCollectionCard';
 
 const useStyles = makeStyles((theme) => ({
+  drawer: {
+    color: "var(--black)",
+    backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
+    width: "240px"
+
+  },
+  drawerPaper: { width: 'inherit' },
   mainHeader: {
     display: "flex",
     justifyContent: "space-between",
@@ -50,94 +60,99 @@ export default function Home(props) {
   }, [refresh, isLoggedIn]);
 
   return isLoggedIn ? (
-    <div>
+    <div style={{ display: "flex" }}>
+      <SideDrawer />
 
-      <header className={classes.mainHeader}>
-        <Typography
-          component="h1"
-          variant="h4"
-          color="var(--white)">
-          Home
+      <div>
+
+
+        <header className={classes.mainHeader}>
+          <Typography
+            component="h1"
+            variant="h4"
+            color="var(--white)">
+            Home
         </Typography>
-        <Link to="/gear">
-          <SettingsIcon
-            className={classes.gearIcon}
-          >Gear
+          <Link to="/gear">
+            <SettingsIcon
+              className={classes.gearIcon}
+            >Gear
           </SettingsIcon>
-        </Link>
-      </header>
-      <section>
-        <Container className={classes.cardGrid} maxWidth="md" id="projects">
-          <Typography className={classes.typography}
-            component="header"
-            variant="h5"
-            align="left"
-          > Recent Collections
+          </Link>
+        </header>
+        <section>
+          <Container className={classes.cardGrid} maxWidth="md" id="projects">
+            <Typography className={classes.typography}
+              component="header"
+              variant="h5"
+              align="left"
+            > Recent Collections
           </Typography>
-          <Grid container spacing={4}>
-            {collections.length === 0 ? (
-              <NewCollectionCard
-                key={0}
-                title={"There's nothing here yet!"}
-                subtitle={"Start a new collection"}
-                image={"https://rykabrown.com/wp-content/uploads/2021/01/new-coll.png"}
-                isLoggedIn={isLoggedIn}
-                setCollections={setCollections}
-              />
-            ) : (
-                <Fragment>
-                  {collections.map((collection, i) =>
-                    <Fragment key={i}>
-                      <ProjectCard
-                        key={collection.id}
-                        title={collection.name}
-                        thumbnail={collection.thumbnail}
-                        link={`/collection/${collection.id}`}
-                      />
-                    </Fragment>
-                  )}
-                </Fragment>
-              )}
-          </Grid>
-        </Container>
-      </section>
-      <section>
-        <Container className={classes.cardGrid} maxWidth="md" id="projects" >
-          <Typography className={classes.typography}
-            component="header"
-            variant="h5"
-            align="left">
-            Recent Projects
+            <Grid container spacing={4}>
+              {collections.length === 0 ? (
+                <NewCollectionCard
+                  key={0}
+                  title={"There's nothing here yet!"}
+                  subtitle={"Start a new collection"}
+                  image={"https://rykabrown.com/wp-content/uploads/2021/01/new-coll.png"}
+                  isLoggedIn={isLoggedIn}
+                  setCollections={setCollections}
+                />
+              ) : (
+                  <Fragment>
+                    {collections.map((collection, i) =>
+                      <Fragment key={i}>
+                        <ProjectCard
+                          key={collection.id}
+                          title={collection.name}
+                          thumbnail={collection.thumbnail}
+                          link={`/collection/${collection.id}`}
+                        />
+                      </Fragment>
+                    )}
+                  </Fragment>
+                )}
+            </Grid>
+          </Container>
+        </section>
+        <section>
+          <Container className={classes.cardGrid} maxWidth="md" id="projects" >
+            <Typography className={classes.typography}
+              component="header"
+              variant="h5"
+              align="left">
+              Recent Projects
           </Typography>
-          <Grid container spacing={4} >
-            {collections.length === 0 ? (
-              <ProjectCard
-                key={1000}
-                title={"Ready to make some music?"}
-                songTitle={"Start a new project"}
-                thumbnail={"https://rykabrown.com/wp-content/uploads/2021/01/new-proj.png"}
-                link={`/search`}
-              />
-            ) : (
-                <Fragment>
-                  {projects.map((project, i) =>
-                    <Fragment key={i}>
-                      <ProjectCard
-                        key={project.id}
-                        title={project.title}
-                        thumbnail={project.url_album_artwork}
-                        link={`/project/${project.id}`}
-                        songTitle={project.song_title}
-                        songArtist={project.artist}
-                      />
-                    </Fragment>
-                  )}
-                </Fragment>
-              )}
-          </Grid>
-        </Container>
-      </section>
-      <Nav />
+            <Grid container spacing={4} >
+              {collections.length === 0 ? (
+                <ProjectCard
+                  key={1000}
+                  title={"Ready to make some music?"}
+                  songTitle={"Start a new project"}
+                  thumbnail={"https://rykabrown.com/wp-content/uploads/2021/01/new-proj.png"}
+                  link={`/search`}
+                />
+              ) : (
+                  <Fragment>
+                    {projects.map((project, i) =>
+                      <Fragment key={i}>
+                        <ProjectCard
+                          key={project.id}
+                          title={project.title}
+                          thumbnail={project.url_album_artwork}
+                          link={`/project/${project.id}`}
+                          songTitle={project.song_title}
+                          songArtist={project.artist}
+                        />
+                      </Fragment>
+                    )}
+                  </Fragment>
+                )}
+            </Grid>
+          </Container>
+        </section>
+        <Nav />
+      </div>
     </div>
   ) : (
       <Redirect to="/" />
