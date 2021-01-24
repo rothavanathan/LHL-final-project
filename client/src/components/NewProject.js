@@ -25,6 +25,7 @@ export default function NewProjectForm(props) {
   const { songId, user } = props;
   const [projectTitle, setProjectTitle] = useState("");
   const [projectId, setProjectId] = useState("");
+  const [invalidSong, setInvalidSong] = useState(false);
 
   const saveProject = () => {
     axios
@@ -42,7 +43,11 @@ export default function NewProjectForm(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    saveProject();
+    if (songId <= 6) {
+      saveProject();
+    } else {
+      setInvalidSong(true);
+    }
   };
 
   const handleProject = (event) => {
@@ -67,6 +72,7 @@ export default function NewProjectForm(props) {
         <Button type="submit" color="var(--tertiary-color)">Save</Button>
       </form>
       {projectId && <Redirect to={`/project/${projectId}`} />}
+      {invalidSong && <Redirect to={`/project/0`} />}
     </div>
   )
 }
