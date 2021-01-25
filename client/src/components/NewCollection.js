@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardContent, CardMedia, Grid, Input, Button, ButtonGroup } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Grid, Input, Button, ButtonGroup, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from "axios";
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -46,10 +46,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 4,
     '&:hover': {
       color: "var(--primary-color)"
-    },
+     },
     "&:active": {
       color: "var(--primary-color)",
-    },
+    }
+  },
+  error: {
+    color: "red"
   }
 }));
 
@@ -57,6 +60,7 @@ export default function NewCollectionForm(props) {
   const classes = useStyles();
   const { user, setCollections, closeForm } = props;
   const [collectionName, setCollectionName] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const saveCollection = () => {
     axios
@@ -74,7 +78,12 @@ export default function NewCollectionForm(props) {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    saveCollection();
+    if (collectionName.length > 0) {
+      setErrorMessage(false)
+      saveCollection();
+    } else {
+      setErrorMessage(true)
+    }
   };
 
   const handleCollection = (event) => {
@@ -97,6 +106,7 @@ export default function NewCollectionForm(props) {
               type="text"
               name="project_name"
               placeholder="Collection Name"
+              autoFocus
             ></Input>
             <ButtonGroup>
               <Button className={classes.saveIcon} variant="float" color="primary" type="submit">Save</Button>
@@ -105,6 +115,7 @@ export default function NewCollectionForm(props) {
 
             </ButtonGroup>
           </form>
+          {errorMessage && <Typography variant="subtitle2" className={classes.error}>Please enter a name</Typography>}
         </CardContent>
       </Card>
     </Grid>
