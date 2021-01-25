@@ -1,30 +1,41 @@
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Nav from "./Nav";
-import { FormControl, Button, Typography } from "@material-ui/core";
+import SideDrawer from "./SideDrawer";
+import { FormControl, Button, Typography, Container, useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  header: {
-    marginTop: 40,
-    marginBottom: 40,
+  mainWindow: {
+    width: "100%",
+    margin: "auto"
+  },
+  mainHeader: {
     display: "flex",
-    color: "var(--white)",
-    alignItems: "center",
+    justifyContent: "flex-start",
+    // paddingLeft: 20,
+    // paddingRight: 40,
+    marginTop: 40,
+    // marginBottom: "1em",
+  },
+  headerGrid: {
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(5),
   },
   backArrow: {
     fontSize: "large",
-    paddingLeft: 10,
+    paddingLeft: 5,
     paddingRight: 5,
     marginLeft: 10,
-    // marginTop: 10,
   },
   logButton: {
     display: "flex",
     background: "var(--primary-color)",
-    width: "10em",
-    margin: "40px",
+    width: "60%",
+    minWidth: "12em",
+    maxWidth: "14em",
+    margin: "auto",
     color: "var(--white)",
     "&:hover": {
       backgroundColor: "var(--white)",
@@ -34,8 +45,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Gear(props) {
-  const { isLoggedIn, setUser } = props;
+  const matches = useMediaQuery('(min-width:960px)');
   const classes = useStyles();
+
+  const { isLoggedIn, setUser } = props;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -53,27 +66,33 @@ export default function Gear(props) {
   };
 
   return isLoggedIn ? (
-    <div>
-      <header className={classes.header}>
-        <Link to="/home">
-          <ArrowBackIosIcon className={classes.backArrow}>
-            Back to Home
+    <div style={{ display: "flex" }}>
+      {matches && <SideDrawer />}
+      <div className={classes.mainWindow}>
+        <Container className={classes.headerGrid} maxWidth="md" id="mainHeader">
+
+          <header className={classes.mainHeader}>
+            <Link to="/home">
+              <ArrowBackIosIcon className={classes.backArrow}>
+                Back to Home
           </ArrowBackIosIcon>
-        </Link>
-        <Typography component="h1" variant="h4">
-          Settings
+            </Link>
+            <Typography component="h1" variant="h4">
+              Settings
         </Typography>
-      </header>
+          </header>
+        </Container>
 
-      <FormControl className={classes.passwordInput}>
-        <form onSubmit={handleSubmit}>
-          <Button className={classes.logButton} type="submit">
-            Logout
+        <FormControl className={classes.passwordInput}>
+          <form onSubmit={handleSubmit}>
+            <Button className={classes.logButton} type="submit">
+              Logout
           </Button>
-        </form>
-      </FormControl>
+          </form>
+        </FormControl>
 
-      <Nav />
+      </div>
+      {!matches && < Nav />}
     </div>
   ) : (
       <Redirect to="/" />

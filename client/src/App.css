@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
 
 :root {
-  --black: #1a1a1a;
+  --black: rgb(26, 26, 26);
   --white: rgb(244, 240, 234);
   --primary-color: rgb(245, 103, 93);
   --secondary-color: #ffff6f;

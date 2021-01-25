@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   backArrow: {
     fontSize: "large",
-    paddingLeft: 10,
+    paddingLeft: 5,
     paddingRight: 5,
     marginLeft: 10,
     color: "var(--white)",
@@ -116,7 +116,7 @@ export default function Collection(props) {
                 <Container className={classes.headerGrid} maxWidth="md" id="mainHeader">
 
                   <header className={classes.mainHeader}>
-                    <Link to="/home">
+                    <Link to="/library">
                       <ArrowBackIosIcon
                         className={classes.backArrow}
                       >Back to Home
@@ -175,7 +175,7 @@ export default function Collection(props) {
             ) : (
 
                 <div>
-                  <Container className={classes.cardGrid} maxWidth="md" id="mainHeader">
+                  <Container className={classes.headerGrid} maxWidth="md" id="mainHeader">
 
                     <header className={classes.mainHeader}>
 

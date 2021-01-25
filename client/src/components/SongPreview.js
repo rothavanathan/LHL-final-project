@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   backArrow: {
     fontSize: "large",
-    paddingLeft: 10,
+    paddingLeft: 5,
     paddingRight: 5,
     marginLeft: 10,
   },
@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     height: "auto",
-    width: "95%",
+    width: "90%",
+    border: "2px solid rgba(80, 32, 28, 0.1)",
   },
   controls: {
     selfAlign: "flex-end",
