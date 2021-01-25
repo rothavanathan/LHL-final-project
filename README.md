@@ -20,6 +20,9 @@ This project was created by Romesh Thavanathan, Laura Tannahill and Kagiso Mashi
 
 Deploy Link: https://layers-irl.netlify.app/
 
+### Demo
+!["Demo"](https://github.com/rothavanathan/LHL-final-project/blob/master/client/docs/layers.gif?raw=true)
+
 ## Final Product Screenshots
 ### Landing Page
 !["Landing Page"](https://github.com/rothavanathan/LHL-final-project/blob/readme/client/docs/Entry.png?raw=true)
