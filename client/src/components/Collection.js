@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment } from "react";
 import { Redirect, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Container, Grid, Button, Typography, Box, useMediaQuery, IconButton, ButtonGroup } from "@material-ui/core";
+import { Container, Grid, Typography, Box, useMediaQuery, IconButton, ButtonGroup } from "@material-ui/core";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import SideDrawer from "./SideDrawer";
 import { FacebookShareButton, WhatsappShareButton } from 'react-share';
@@ -149,15 +149,33 @@ export default function Collection(props) {
                         {projects[0].collection_name}
                       </Typography>
 
-                      <Button
-                        className={classes.deleteButton}
-                        variant="outlined"
-                        color="primary"
-                        onClick={handleAlertOpen}
-                      >
-                        Delete Collection
-                     </Button>
+                      <ButtonGroup className={classes.shareBtn}>
+                        <FacebookShareButton
+                          url={`https://layers-irl.netlify.app/`}
+                          quote={`Check out ${projects[0].collection_name} on Layers`}
+                          hashtag={"#LearnByLayers"}
+                        >
+                          <FacebookIcon />
+                        </FacebookShareButton>
+
+                        <WhatsappShareButton className={classes.shareBtn}
+                          url={`https://layers-irl.netlify.app/`}
+                          title={`Check out ${projects[0].collection_name} on Layers`}
+                        >
+                          <WhatsAppIcon />
+                        </WhatsappShareButton>
+                      </ButtonGroup>
                     </Box>
+
+                    <div className={classes.delete}>
+                      <IconButton onClick={handleAlertOpen}>
+                        <DeleteIcon
+                          color="primary"
+                          fontSize="large"
+                        >
+                        </DeleteIcon>
+                      </IconButton>
+                    </div>
                   </header>
                 </Container>
 
@@ -197,7 +215,6 @@ export default function Collection(props) {
 
                     <header className={classes.mainHeader}>
 
-
                       <Link
                         to="/home"
                         className={classes.backArrow}>
@@ -213,14 +230,13 @@ export default function Collection(props) {
                           {emptyCollection[0].collection_name}
                         </Typography>
 
-                        <Button
-                          className={classes.deleteButton}
-                          variant="outlined"
-                          color="primary"
-                          onClick={handleAlertOpen}
-                        >
-                          Delete Collection
-                     </Button>
+                        <IconButton onClick={handleAlertOpen}>
+                          <DeleteIcon
+                            color="primary"
+                            fontSize="large"
+                          >
+                          </DeleteIcon>
+                        </IconButton>
                       </Box>
                     </header>
                   </Container>
