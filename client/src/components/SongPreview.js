@@ -15,10 +15,15 @@ const useStyles = makeStyles((theme) => ({
   mainHeader: {
     display: "flex",
     justifyContent: "flex-start",
+    alignItems: "center",
     // paddingLeft: 20,
     // paddingRight: 40,
     marginTop: 40,
     // marginBottom: "1em",
+  },
+  headerGrid: {
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(5),
   },
   cardGrid: {
     paddingTop: theme.spacing(3),
@@ -48,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: "spacce-around",
+    justifyContent: "space-around",
     padding: 0
   },
   cover: {
@@ -88,7 +93,7 @@ export default function SongPreview(props) {
   return (
     <div>
       <Box className={classes.main}>
-        <Container className={classes.cardHeader} maxWidth="md" id="header">
+        <Container className={classes.headerGrid} maxWidth="md" id="header">
 
           <header className={classes.mainHeader}>
 

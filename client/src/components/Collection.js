@@ -27,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "start"
   },
+  headerGrid: {
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(5),
+  },
   backArrow: {
     fontSize: "large",
     paddingLeft: 10,
@@ -109,7 +113,7 @@ export default function Collection(props) {
             {matches && <SideDrawer />}
             {projects.length > 0 ? (
               <div className={classes.mainWindow}>
-                <Container className={classes.cardGrid} maxWidth="md" id="mainHeader">
+                <Container className={classes.headerGrid} maxWidth="md" id="mainHeader">
 
                   <header className={classes.mainHeader}>
                     <Link to="/home">
