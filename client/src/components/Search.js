@@ -133,6 +133,7 @@ export default function Search(props) {
               Search
                </Typography>
             {matches && <TextField
+              autoFocus
               variant="filled"
               value={term}
               onChange={handleChange}

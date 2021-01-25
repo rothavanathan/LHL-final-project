@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
   error: {
     color: "red"
-  }                               
+  }
 }));
 
 export default function NewCollectionForm(props) {
@@ -106,6 +106,7 @@ export default function NewCollectionForm(props) {
               type="text"
               name="project_name"
               placeholder="Collection Name"
+              autoFocus
             ></Input>
             <ButtonGroup>
               <Button className={classes.saveIcon} variant="float" color="primary" type="submit">Save</Button>
