@@ -44,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
   linkIcon: {
     color: "var(--white)",
   },
+  listItem: {
+    "&:hover": {
+      color: "var(--primary-color)"
+    }
+  }
 }));
 
 export default function SideDrawerProject(props) {
@@ -83,7 +88,7 @@ export default function SideDrawerProject(props) {
         </Link>
 
         <Link onClick={handlePlayerClick} className={classes.links}>
-          <ListItem>
+          <ListItem className={classes.listItem}>
             <ListItemIcon className={classes.linkIcon}>
               <TuneOutlinedIcon />
             </ListItemIcon>
@@ -97,7 +102,7 @@ export default function SideDrawerProject(props) {
         </Link>
 
         <Link onClick={handleNotesClick} className={classes.links}>
-          <ListItem>
+          <ListItem className={classes.listItem}>
             <ListItemIcon className={classes.linkIcon}>
               <BookIcon />
             </ListItemIcon>

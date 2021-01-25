@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "var(--primary-color)",
     },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
   cardGrid: {
     paddingTop: theme.spacing(8),

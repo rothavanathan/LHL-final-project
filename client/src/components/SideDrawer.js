@@ -40,10 +40,17 @@ const useStyles = makeStyles((theme) => ({
   links: {
     textDecoration: "none",
     color: "var(--white)",
+
   },
   linkIcon: {
     color: "var(--white)",
+
   },
+  listItem: {
+    "&:hover": {
+      color: "var(--primary-color)"
+    }
+  }
 }));
 
 export default function SideDrawer() {
@@ -62,7 +69,7 @@ export default function SideDrawer() {
         <Link to="/home" className={classes.links}>
           <ListItem className={classes.listItem}>
             <ListItemIcon className={classes.linkIcon}>
-              <HomeIcon />
+              <HomeIcon className={classes.icons} />
             </ListItemIcon>
             <ListItemText>
               <Typography component="h3" variant="h6">
@@ -73,9 +80,9 @@ export default function SideDrawer() {
         </Link>
 
         <Link to="/search" className={classes.links}>
-          <ListItem>
+          <ListItem className={classes.listItem}>
             <ListItemIcon className={classes.linkIcon}>
-              <SearchIcon />
+              <SearchIcon className={classes.icons} />
             </ListItemIcon>
             <ListItemText>
               <Typography component="h3" variant="h6">
@@ -87,9 +94,9 @@ export default function SideDrawer() {
         </Link>
 
         <Link to="/library" className={classes.links}>
-          <ListItem>
+          <ListItem className={classes.listItem}>
             <ListItemIcon className={classes.linkIcon}>
-              <LibraryMusicIcon />
+              <LibraryMusicIcon className={classes.icons} />
             </ListItemIcon>
             <ListItemText>
               <Typography component="h3" variant="h6">

@@ -37,17 +37,23 @@ const useStyles = makeStyles((theme) => ({
   saveIcon: {
     '&:hover': {
       color: "var(--primary-color)"
-    }
+    },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
   cancelIcon: {
     marginTop: 4,
     '&:hover': {
       color: "var(--primary-color)"
+     },
+    "&:active": {
+      color: "var(--primary-color)",
     }
   },
   error: {
     color: "red"
-  }
+  }                               
 }));
 
 export default function NewCollectionForm(props) {
