@@ -21,12 +21,18 @@ This project was created by Romesh Thavanathan, Laura Tannahill and Kagiso Mashi
 Deploy Link: https://layers-irl.netlify.app/
 
 ## Final Product Screenshots
-
-!["Screenshot of homepage"](https://github.com/KagisoMashigo/scheduler/blob/master/docs/Screenshot%20from%202020-12-16%2019-00-18.png?raw=true)
-
-!["Screenshot of new appointment"](https://github.com/KagisoMashigo/scheduler/blob/master/docs/Screenshot%20from%202020-12-16%2019-00-46.png?raw=true)
-
-!["Screenshot of deleting appointment"](https://github.com/KagisoMashigo/scheduler/blob/master/docs/Screenshot%20from%202020-12-16%2019-01-04.png?raw=true)
+### Landing Page
+!["Landing Page"](https://github.com/rothavanathan/LHL-final-project/blob/readme/client/docs/Entry.png?raw=true)
+### User Homepage
+!["User Homepage"](https://github.com/rothavanathan/LHL-final-project/blob/readme/client/docs/Home.png?raw=true)
+### Search
+!["Search"](https://github.com/rothavanathan/LHL-final-project/blob/readme/client/docs/Search.png?raw=true)
+### Song Preview
+!["Song Preview"](https://github.com/rothavanathan/LHL-final-project/blob/readme/client/docs/Song%20Preview.png?raw=true)
+### Player
+!["Project"](https://github.com/rothavanathan/LHL-final-project/blob/readme/client/docs/Player.png?raw=true)
+### Notes Section
+!["Notes Section"](https://github.com/rothavanathan/LHL-final-project/blob/readme/client/docs/Notes.png?raw=true)
 
 # Development:
 
