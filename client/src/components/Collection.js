@@ -54,19 +54,53 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   delete: {
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
+
+  },
+  deleteBtn: {
+    "&:hover": {
+      color: "var(--quad-color)",
+    },
+    "&:active": {
+      color: "var(--quad-color)",
+    },
+  },
+  shareGroup: {
+    color: "var(--white)",
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+      "&:hover": {
+        color: "var(--white)",
+      },
+      "&:active": {
+        color: "var(--white)",
+      },
+    },
+    marginRight: "auto",
+    marginTop: "none",
   },
   shareBtn: {
     color: "var(--white)",
     display: 'flex',
     '& > *': {
       margin: theme.spacing(1),
+      "&:hover": {
+        color: "var(--quad-color)",
+      },
+      "&:active": {
+        color: "var(--quad-color)",
+      },
     },
     marginRight: "auto",
+
+    marginTop: "none",
+
     justifyContent:"flex-start"
   },
   title: {
     display: "flex"
+
   }
 }));
 
@@ -144,7 +178,7 @@ export default function Collection(props) {
                       className={classes.backArrow}>
                       <ArrowBackIosIcon
 
-                      >Back to Home
+                      >Back to Library
                      </ArrowBackIosIcon>
                     </Link>
 
@@ -165,8 +199,8 @@ export default function Collection(props) {
                       </Typography>
                       </Box>
 
-                      <ButtonGroup className={classes.shareBtn}>
-                        <FacebookShareButton
+                      <ButtonGroup className={classes.shareGroup}>
+                        <FacebookShareButton className={classes.shareBtn}
                           url={`https://layers-irl.netlify.app/`}
                           quote={`Check out ${projects[0].collection_name} on Layers`}
                           hashtag={"#LearnByLayers"}
@@ -223,10 +257,10 @@ export default function Collection(props) {
                     <header className={classes.mainHeader}>
 
                       <Link
-                        to="/home"
+                        to="/library"
                         className={classes.backArrow}>
                         <ArrowBackIosIcon
-                        >Back to Home
+                        >Back to Library
                         </ArrowBackIosIcon>
                       </Link>
                       <Box className={classes.titleBox}>

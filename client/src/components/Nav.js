@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   tabs: {
     "&:active": {
       color: "var(--primary-color)"
-    }
+    },
   }
 });
 
@@ -34,9 +34,9 @@ export default function SimpleBottomNavigation() {
       showLabels
       className={classes.root}
     >
-      <Tab className={classes.tabs} label="Home" to="/home" icon={<HomeIcon />} component={Link} />
-      <Tab className={classes.tabs} label="Search" to="/search" icon={<SearchIcon />} component={Link} />
-      <Tab className={classes.tabs} label="Library" to="/library" icon={<LibraryMusicIcon />} component={Link} />
+      <Tab className={classes.tabs} label="Home" to="/home" icon={<HomeIcon style={{ opacity: 0.9 }} />} component={Link} />
+      <Tab className={classes.tabs} label="Search" to="/search" icon={<SearchIcon style={{ opacity: 0.9 }} />} component={Link} />
+      <Tab className={classes.tabs} label="Library" to="/library" icon={<LibraryMusicIcon style={{ opacity: 0.9 }} />} component={Link} />
     </BottomNavigation>
   );
 }
