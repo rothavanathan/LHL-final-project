@@ -217,46 +217,48 @@ export default function Project(props) {
 
                       </header>
                     </Container>
+                    <Container className={classes.headerGrid} maxWidth="md" id="mainHeader">
 
-                    <Player className={classes.playerBox} tracks={stems} audioCtx={audioCtx} id="player" setHasLoaded={setHasLoaded}></Player>
+                      <Player className={classes.playerBox} tracks={stems} audioCtx={audioCtx} id="player" setHasLoaded={setHasLoaded}></Player>
 
-                    <form
-                      className={classes.projectForm}
-                      onSubmit={handleSubmit}
-                    >
-                      <Box className={classes.formBox}>
-                        <AddProjectToCollection
-                          collections={collections}
-                          collectionId={collectionId}
-                          setCollectionId={setCollectionId} >
-                        </AddProjectToCollection>
+                      <form
+                        className={classes.projectForm}
+                        onSubmit={handleSubmit}
+                      >
+                        <Box className={classes.formBox}>
+                          <AddProjectToCollection
+                            collections={collections}
+                            collectionId={collectionId}
+                            setCollectionId={setCollectionId} >
+                          </AddProjectToCollection>
 
-                        <IconButton aria-label="save" type="submit">
-                          <SaveIcon
-                            className={classes.saveIcon}
-                          >
-                          </SaveIcon>
-                        </IconButton>
-                        <IconButton aria-label="delete" onClick={handleAlertOpen}>
-                          <DeleteForeverIcon
-                            className={classes.saveIcon}
-                          >
-                          </DeleteForeverIcon>
-                        </IconButton>
-                        <ConfirmDelete
-                          open={open}
-                          setOpen={setOpen}
-                          handleAlertOpen={handleAlertOpen}
-                          handleConfirmDelete={handleConfirmDelete}
-                          handleCancelDelete={handleCancelDelete}
-                          name={content[0].project_title}
-                        />
-                      </Box>
+                          <IconButton aria-label="save" type="submit">
+                            <SaveIcon
+                              className={classes.saveIcon}
+                            >
+                            </SaveIcon>
+                          </IconButton>
+                          <IconButton aria-label="delete" onClick={handleAlertOpen}>
+                            <DeleteForeverIcon
+                              className={classes.saveIcon}
+                            >
+                            </DeleteForeverIcon>
+                          </IconButton>
+                          <ConfirmDelete
+                            open={open}
+                            setOpen={setOpen}
+                            handleAlertOpen={handleAlertOpen}
+                            handleConfirmDelete={handleConfirmDelete}
+                            handleCancelDelete={handleCancelDelete}
+                            name={content[0].project_title}
+                          />
+                        </Box>
 
-                      {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged} />}
+                        {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged} />}
 
-                    </form>
+                      </form>
 
+                    </Container>
 
 
                     <PlayerTransport tracks={stems} audioCtx={audioCtx} hasLoaded={hasLoaded} />
