@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
   titleBox: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "start"
+    alignItems: "start",
+    alignContent: "flex-start"
   },
   headerGrid: {
     paddingTop: theme.spacing(3),
@@ -44,22 +45,62 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "var(--primary-color)",
     },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
   delete: {
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
+
+  },
+  deleteBtn: {
+    "&:hover": {
+      color: "var(--quad-color)",
+    },
+    "&:active": {
+      color: "var(--quad-color)",
+    },
+  },
+  shareGroup: {
+    color: "var(--white)",
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+      "&:hover": {
+        color: "var(--white)",
+      },
+      "&:active": {
+        color: "var(--white)",
+      },
+    },
+    marginRight: "auto",
+    marginTop: "none",
   },
   shareBtn: {
     color: "var(--white)",
     display: 'flex',
     '& > *': {
       margin: theme.spacing(1),
+      "&:hover": {
+        color: "var(--quad-color)",
+      },
+      "&:active": {
+        color: "var(--quad-color)",
+      },
     },
     marginRight: "auto",
-    marginTop: "none"
+
+    marginTop: "none",
+
+    justifyContent:"flex-start"
+  },
+  title: {
+    display: "flex"
+
   }
 }));
 
@@ -137,20 +178,29 @@ export default function Collection(props) {
                       className={classes.backArrow}>
                       <ArrowBackIosIcon
 
-                      >Back to Home
+                      >Back to Library
                      </ArrowBackIosIcon>
                     </Link>
 
                     <Box className={classes.titleBox}>
+                      <Box className={classes.title}>
                       <Typography
                         component="h1"
                         variant="h4"
                         color="var(--white)">
                         {projects[0].collection_name}
+                        <IconButton onClick={handleAlertOpen}>
+                          <DeleteIcon
+                            color="primary"
+                            fontSize="large"
+                          >
+                          </DeleteIcon>
+                        </IconButton>
                       </Typography>
+                      </Box>
 
-                      <ButtonGroup className={classes.shareBtn}>
-                        <FacebookShareButton
+                      <ButtonGroup className={classes.shareGroup}>
+                        <FacebookShareButton className={classes.shareBtn}
                           url={`https://layers-irl.netlify.app/`}
                           quote={`Check out ${projects[0].collection_name} on Layers`}
                           hashtag={"#LearnByLayers"}
@@ -158,7 +208,7 @@ export default function Collection(props) {
                           <FacebookIcon />
                         </FacebookShareButton>
 
-                        <WhatsappShareButton className={classes.shareBtn}
+                        <WhatsappShareButton
                           url={`https://layers-irl.netlify.app/`}
                           title={`Check out ${projects[0].collection_name} on Layers`}
                         >
@@ -167,15 +217,6 @@ export default function Collection(props) {
                       </ButtonGroup>
                     </Box>
 
-                    <div className={classes.delete}>
-                      <IconButton onClick={handleAlertOpen}>
-                        <DeleteIcon
-                          color="primary"
-                          fontSize="large"
-                        >
-                        </DeleteIcon>
-                      </IconButton>
-                    </div>
                   </header>
                 </Container>
 
@@ -216,10 +257,10 @@ export default function Collection(props) {
                     <header className={classes.mainHeader}>
 
                       <Link
-                        to="/home"
+                        to="/library"
                         className={classes.backArrow}>
                         <ArrowBackIosIcon
-                        >Back to Home
+                        >Back to Library
                         </ArrowBackIosIcon>
                       </Link>
                       <Box className={classes.titleBox}>

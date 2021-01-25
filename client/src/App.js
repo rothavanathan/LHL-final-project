@@ -27,7 +27,7 @@ let theme = createMuiTheme({
   },
   typography: {
     color: "var(--white)"
-  }
+  },
 });
 theme = responsiveFontSizes(theme);
 

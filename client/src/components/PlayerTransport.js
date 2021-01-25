@@ -42,7 +42,13 @@ const useStyles = makeStyles((theme) => ({
     // marginRight: 20,
     marginTop: 0,
     fontSize: 50,
-    color: "var(--white)"
+    color: "var(--white)",
+    "&:hover": {
+      color: "var(--quad-color)"
+    },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
   progressBar: {
     height: 6,

@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "var(--white)",
       color: "var(--black)",
     },
+    "&:active": {
+      backgroundColor: "var(--quad-color)",
+    },
   },
 
   back: {

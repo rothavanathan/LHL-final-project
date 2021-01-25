@@ -37,14 +37,20 @@ export default function Waveform({
       "&:hover": {
         color: "var(--white)",
         backgroundColor: "rgba(244, 240, 234, 0.1);"
-      }
+      },
+      "&:active": {
+        color: "var(--secondary-color)",
+      },
     },
     soloButton: {
       color: `${!soloed ? "var(--primary-color)" : "var(--secondary-color)"}`,
       "&:hover": {
         color: "var(--white)",
         backgroundColor: "rgba(244, 240, 234, 0.1);"
-      }
+      },
+      "&:active": {
+        color: "var(--quad-color)",
+      },
     },
     hr: {
       marginBottom: 20,

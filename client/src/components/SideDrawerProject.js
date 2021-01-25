@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     width: "15%",
     minWidth: 240,
     borderRight: "1px solid rgba(244, 240, 234, 0.1)"
+
   },
   drawerPaper: {
     marginTop: "2em",
@@ -44,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
   linkIcon: {
     color: "var(--white)",
   },
+  listItem: {
+    "&:hover": {
+      color: "var(--primary-color)"
+    }
+  }
 }));
 
 export default function SideDrawerProject(props) {
@@ -66,6 +72,7 @@ export default function SideDrawerProject(props) {
       open={true}
       classes={{ paper: classes.drawerPaper }}
       className={classes.drawer}
+      style={{ opacity: 0.9 }}
     >
       <img src={logo} className={classes.homeImg} alt="Layers logo" />
       <List>
@@ -83,7 +90,7 @@ export default function SideDrawerProject(props) {
         </Link>
 
         <Link onClick={handlePlayerClick} className={classes.links}>
-          <ListItem>
+          <ListItem className={classes.listItem}>
             <ListItemIcon className={classes.linkIcon}>
               <TuneOutlinedIcon />
             </ListItemIcon>
@@ -97,7 +104,7 @@ export default function SideDrawerProject(props) {
         </Link>
 
         <Link onClick={handleNotesClick} className={classes.links}>
-          <ListItem>
+          <ListItem className={classes.listItem}>
             <ListItemIcon className={classes.linkIcon}>
               <BookIcon />
             </ListItemIcon>

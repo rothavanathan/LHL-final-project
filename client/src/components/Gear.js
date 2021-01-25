@@ -33,6 +33,11 @@ const useStyles = makeStyles((theme) => ({
       color: "var(--primary-color)",
     },
   },
+  icon: {
+    "&:active": {
+      color: "var(--primary-color)",
+    },
+  },
   logButton: {
     display: "flex",
     background: "var(--primary-color)",
@@ -45,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "var(--white)",
       color: "var(--black)",
+    },
+    "&:active": {
+      backgroundColor: "var(--quad-color)",
     },
   },
 }));
@@ -78,7 +86,7 @@ export default function Gear(props) {
 
           <header className={classes.mainHeader}>
             <Link to="/home" className={classes.backArrow}>
-              <ArrowBackIosIcon >
+              <ArrowBackIosIcon className={classes.icon} >
                 Back to Home
               </ArrowBackIosIcon>
             </Link>
