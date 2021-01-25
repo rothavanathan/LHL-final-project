@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 5,
     paddingRight: 5,
     marginLeft: 10,
+    "&:hover": {
+      color: "var(--primary-color)",
+    },
   },
   card: {
     minHeight: "70vh",

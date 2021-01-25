@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
   backArrow: {
     fontSize: 20,
     paddingLeft: 10,
+    "&:hover": {
+      color: "var(--primary-color)",
+    },
   },
   heading: {
     marginTop: "2.5em",
