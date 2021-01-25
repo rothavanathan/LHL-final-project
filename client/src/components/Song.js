@@ -52,6 +52,7 @@ export default function Album(props) {
           image={props.artworkUrl100}
           title={props.trackName}
           style={useStyles.media}
+          alt={`album artwork for ${props.trackName}`}
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h7" component="h2">

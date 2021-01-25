@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
   titleBox: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "start"
+    alignItems: "start",
+    alignContent: "flex-start"
   },
   headerGrid: {
     paddingTop: theme.spacing(3),
@@ -62,7 +63,10 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
     marginRight: "auto",
-    marginTop: "none"
+    justifyContent:"flex-start"
+  },
+  title: {
+    display: "flex"
   }
 }));
 
@@ -145,12 +149,21 @@ export default function Collection(props) {
                     </Link>
 
                     <Box className={classes.titleBox}>
+                      <Box className={classes.title}>
                       <Typography
                         component="h1"
                         variant="h4"
                         color="var(--white)">
                         {projects[0].collection_name}
+                        <IconButton onClick={handleAlertOpen}>
+                          <DeleteIcon
+                            color="primary"
+                            fontSize="large"
+                          >
+                          </DeleteIcon>
+                        </IconButton>
                       </Typography>
+                      </Box>
 
                       <ButtonGroup className={classes.shareBtn}>
                         <FacebookShareButton
@@ -161,7 +174,7 @@ export default function Collection(props) {
                           <FacebookIcon />
                         </FacebookShareButton>
 
-                        <WhatsappShareButton className={classes.shareBtn}
+                        <WhatsappShareButton
                           url={`https://layers-irl.netlify.app/`}
                           title={`Check out ${projects[0].collection_name} on Layers`}
                         >
@@ -170,15 +183,6 @@ export default function Collection(props) {
                       </ButtonGroup>
                     </Box>
 
-                    <div className={classes.delete}>
-                      <IconButton onClick={handleAlertOpen}>
-                        <DeleteIcon
-                          color="primary"
-                          fontSize="large"
-                        >
-                        </DeleteIcon>
-                      </IconButton>
-                    </div>
                   </header>
                 </Container>
 
