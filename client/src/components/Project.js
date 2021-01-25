@@ -109,7 +109,7 @@ export default function Project(props) {
           })
           .catch(err => console.log(err))
       })
-  }, [])
+  }, [isLoggedIn])
 
   useEffect(() => {
     setHeight(ref.current.clientHeight)
