@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-import { ThemeProvider } from '@material-ui/core/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
+
+import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 import Project from "./components/Project";
 import Entry from "./components/Entry";
 import Login from "./components/Login";
@@ -13,7 +13,7 @@ import Library from "./components/Library";
 import Home from "./components/Home";
 import Collection from "./components/Collection";
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   palette: {
     primary: {
       main: "rgb(245, 103, 93)",
@@ -29,6 +29,7 @@ const theme = createMuiTheme({
     color: "var(--white)"
   }
 });
+theme = responsiveFontSizes(theme);
 
 
 export default function App() {
