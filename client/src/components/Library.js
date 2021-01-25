@@ -1,27 +1,32 @@
 import { useState, useEffect, Fragment } from 'react';
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import { Container, Grid, Typography } from '@material-ui/core';
+import { Container, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ProjectCard from "./ProjectCard";
 import NewCollectionCard from './NewCollectionCard'
+import SideDrawer from "./SideDrawer";
 import Nav from "./Nav";
 
 const useStyles = makeStyles((theme) => ({
+  mainWindow: {
+    width: "100%",
+    margin: "auto"
+  },
   mainHeader: {
     display: "flex",
     justifyContent: "space-between",
-    paddingLeft: 20,
-    paddingRight: 40,
+    // paddingLeft: 20,
+    // paddingRight: 40,
     marginTop: 40,
-    marginBottom: 40
+    // marginBottom: "1em",
   },
   cardGrid: {
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(5),
   },
   typography: {
-    marginBottom: 20
+    marginBottom: "3em"
   }
 }));
 
@@ -30,6 +35,7 @@ export default function Library(props) {
   const [collections, setCollections] = useState([])
   const [projects, setProjects] = useState([])
   const { isLoggedIn } = props;
+  const matches = useMediaQuery('(min-width:960px)');
 
   // get collections & projects by user id
   useEffect(() => {
@@ -42,23 +48,27 @@ export default function Library(props) {
   }, []);
 
   return isLoggedIn ? (
-    <div>
-      <div>
-        <header className={classes.mainHeader}>
-          <Typography
-            component="h1"
-            variant="h4"
-            color="var(--white)">
-            Library
+    <div style={{ display: "flex" }}>
+      {matches && <SideDrawer />}
+      <div className={classes.mainWindow}>
+        <Container className={classes.cardGrid} maxWidth="md" id="mainHeader">
+
+          <header className={classes.mainHeader}>
+            <Typography
+              component="h1"
+              variant="h4"
+              color="var(--white)">
+              Library
           </Typography>
-        </header>
+          </header>
+        </Container>
         <section>
           <Container className={classes.cardGrid} maxWidth="md" id="projects">
-          <Typography className={classes.typography}
-            component="header"
-            variant="h5"
-            align="left"
-          >All Collections
+            <Typography className={classes.typography}
+              component="header"
+              variant="h5"
+              align="left"
+            >All Collections
           </Typography>
             <Grid container spacing={4}>
               <Fragment>
@@ -85,11 +95,11 @@ export default function Library(props) {
         </section>
         <section>
           <Container className={classes.cardGrid} maxWidth="md" id="projects" >
-          <Typography className={classes.typography}
-            component="header"
-            variant="h5"
-            align="left"
-          >All Projects
+            <Typography className={classes.typography}
+              component="header"
+              variant="h5"
+              align="left"
+            >All Projects
           </Typography>
             <Grid container spacing={4} >
               <ProjectCard
@@ -113,10 +123,10 @@ export default function Library(props) {
             </Grid>
           </Container>
         </section>
-        <Nav />
+        {!matches && < Nav />}
       </div >
     </div>
   ) : (
-    <Redirect to="/" />
-  )
+      <Redirect to="/" />
+    )
 }
