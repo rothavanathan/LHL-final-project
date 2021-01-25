@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 10,
     paddingRight: 5,
     color: "var(--white)",
+    "&:hover": {
+      color: "var(--primary-color)",
+    },
   },
 
   playerBox: {
