@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "var(--primary-color)",
     },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
   card: {
     minHeight: "70vh",

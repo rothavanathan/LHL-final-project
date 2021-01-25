@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "var(--primary-color)",
     },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
   heading: {
     marginTop: "2.5em",
@@ -57,7 +60,10 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "var(--white)",
       color: "black"
 
-    }
+    },
+    "&:active": {
+      backgroundColor: "var(--quad-color)",
+    },
   },
 
   back: {
@@ -69,7 +75,10 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "var(--primary-color)"
 
-    }
+    },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
   subtitle1: {
     fontStyle: "oblique",

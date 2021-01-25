@@ -62,7 +62,10 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "var(--white)",
       color: "black"
-    }
+    },
+    "&:active": {
+      backgroundColor: "var(--quad-color)",
+    },
   },
   back: {
     flexGrow: 1,
@@ -71,8 +74,11 @@ const useStyles = makeStyles((theme) => ({
   regLink: {
     textDecoration: "none",
     "&:hover": {
-      color: "var(--primary-color)"
-    }
+      color: "var(--primary-color)",
+    },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
   subtitle1: {
     fontStyle: "oblique",

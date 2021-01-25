@@ -34,7 +34,13 @@ const useStyles = makeStyles((theme) => ({
   gearIcon: {
     color: "var(--white)",
     fontSize: 36,
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
+    "&:hover": {
+      color: "var(--primary-color)"
+    },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
   typography: {
     marginBottom: "3em",

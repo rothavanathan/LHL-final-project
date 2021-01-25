@@ -18,6 +18,11 @@ const useStyles = makeStyles({
     paddingTop: 10,
     zIndex: 10,
     borderTop: "1px solid rgba(244, 240, 234, 0.1)"
+  },
+  tabs: {
+    "&:active": {
+      color: "var(--primary-color)"
+    }
   }
 });
 
@@ -39,9 +44,9 @@ export default function ProjectNav(props) {
       showLabels
       className={classes.root}
     >
-      <Tab label="Home" to="/home" icon={<HomeIcon />} component={Link} />
-      <Tab label="Player" icon={<TuneOutlinedIcon />} onClick={handlePlayerClick} />
-      <Tab label="Notes" icon={<BookIcon />} onClick={handleNotesClick} />
+      <Tab className={classes.tabs} label="Home" to="/home" icon={<HomeIcon />} component={Link} />
+      <Tab className={classes.tabs} label="Player" icon={<TuneOutlinedIcon />} onClick={handlePlayerClick} />
+      <Tab className={classes.tabs} label="Notes" icon={<BookIcon />} onClick={handleNotesClick} />
     </BottomNavigation>
   );
 }
