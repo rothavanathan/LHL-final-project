@@ -2,8 +2,12 @@ import { useState, useEffect, Fragment } from "react";
 import { Redirect, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid, Button, Typography, Box } from "@material-ui/core";
+import { Container, Grid, Button, Typography, Box, ButtonGroup, IconButton } from "@material-ui/core";
+import { FacebookShareButton, WhatsappShareButton } from 'react-share';
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import DeleteIcon from '@material-ui/icons/Delete';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import Nav from "./Nav";
 import ProjectCard from "./ProjectCard";
 import ConfirmDelete from "./ConfirmDelete";
@@ -30,8 +34,17 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
-  deleteButton: {
-    marginTop: 10,
+  delete: {
+    alignSelf: "flex-end"
+  },
+  shareBtn: {
+    color: "var(--white)",
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+    marginRight: "auto",
+    marginTop: "none"
   }
 }));
 
@@ -107,6 +120,7 @@ export default function Collection(props) {
                   </Link>
 
                   <Box className={classes.titleBox}>
+
                     <Typography
                       component="h1"
                       variant="h4"
@@ -114,15 +128,38 @@ export default function Collection(props) {
                       {projects[0].collection_name}
                     </Typography>
 
-                    <Button
-                      className={classes.deleteButton}
-                      variant="outlined"
-                      color="primary"
-                      onClick={handleAlertOpen}
-                    >
-                      Delete Collection
-                     </Button>
+                    <ButtonGroup className={classes.shareBtn}>
+                      <FacebookShareButton
+                        url={`https://layers-irl.netlify.app/`}
+                        quote={`Check out ${projects[0].collection_name} on Layers`}
+                        hashtag={"#LearnByLayers"}
+                      >
+                        <FacebookIcon
+                        />
+                      </FacebookShareButton>
+
+                      <WhatsappShareButton className={classes.shareBtn}
+                        url={`https://layers-irl.netlify.app/collection/${id}`}
+                        title={`Check out ${projects[0].collection_name} on Layers`}
+                      >
+                        <WhatsAppIcon
+                        />
+                      </WhatsappShareButton>
+                    </ButtonGroup>
+
                   </Box>
+                  <div className={classes.delete}>
+                    <IconButton onClick={handleAlertOpen}>
+                      <DeleteIcon
+                        color="primary"
+                        fontSize="large"
+                      >
+                      </DeleteIcon>
+                    </IconButton>
+                  </div>
+
+
+
                 </header>
 
                 <ConfirmDelete
