@@ -119,9 +119,11 @@ export default function Collection(props) {
                 <Container className={classes.headerGrid} maxWidth="md" id="mainHeader">
 
                   <header className={classes.mainHeader}>
-                    <Link to="/library">
+                    <Link
+                      to="/library"
+                      className={classes.backArrow}>
                       <ArrowBackIosIcon
-                        className={classes.backArrow}
+
                       >Back to Home
                      </ArrowBackIosIcon>
                     </Link>
@@ -183,11 +185,12 @@ export default function Collection(props) {
                     <header className={classes.mainHeader}>
 
 
-                      <Link to="/home">
+                      <Link
+                        to="/home"
+                        className={classes.backArrow}>
                         <ArrowBackIosIcon
-                          className={classes.backArrow}
                         >Back to Home
-                     </ArrowBackIosIcon>
+                        </ArrowBackIosIcon>
                       </Link>
                       <Box className={classes.titleBox}>
                         <Typography
