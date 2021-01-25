@@ -2,9 +2,13 @@ import { useState, useEffect, Fragment } from "react";
 import { Redirect, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Container, Grid, Button, Typography, Box, useMediaQuery } from "@material-ui/core";
+import { Container, Grid, Button, Typography, Box, useMediaQuery, IconButton, ButtonGroup } from "@material-ui/core";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import SideDrawer from "./SideDrawer";
+import { FacebookShareButton, WhatsappShareButton } from 'react-share';
+import DeleteIcon from '@material-ui/icons/Delete';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import Nav from "./Nav";
 import ProjectCard from "./ProjectCard";
 import ConfirmDelete from "./ConfirmDelete";
@@ -42,8 +46,17 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
-  deleteButton: {
-    marginTop: 10,
+  delete: {
+    alignSelf: "flex-end"
+  },
+  shareBtn: {
+    color: "var(--white)",
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+    marginRight: "auto",
+    marginTop: "none"
   }
 }));
 

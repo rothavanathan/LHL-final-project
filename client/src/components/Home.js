@@ -94,6 +94,7 @@ export default function Home(props) {
               align="left"
             > Recent Collections
           </Typography>
+
             <Grid container spacing={4}>
               {collections.length === 0 ? (
                 <NewCollectionCard
@@ -130,7 +131,7 @@ export default function Home(props) {
               Recent Projects
           </Typography>
             <Grid container spacing={4} >
-              {collections.length === 0 ? (
+              {projects.length === 0 ? (
                 <ProjectCard
                   key={1000}
                   title={"Ready to make some music?"}
