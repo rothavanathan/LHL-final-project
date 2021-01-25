@@ -174,7 +174,7 @@ export default function Collection(props) {
               </div>
             ) : (
 
-                <div>
+                <div className={classes.mainWindow}>
                   <Container className={classes.headerGrid} maxWidth="md" id="mainHeader">
 
                     <header className={classes.mainHeader}>
@@ -227,6 +227,8 @@ export default function Collection(props) {
                             title={project.project_title}
                             thumbnail={project.url_album_artwork}
                             link={`/search`}
+                            songTitle=""
+                            songArtist=""
                           />
                         </Fragment>
                       ))}

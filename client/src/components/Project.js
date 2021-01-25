@@ -168,7 +168,7 @@ export default function Project(props) {
           <div>
 
             <div style={{ display: "flex" }}>
-              {matches && <SideDrawerProject />}
+              {matches && <SideDrawerProject height={height} />}
               {!project ? (
                 <div className={classes.mainWindow}>
                   <Container className={classes.headerGrid} maxWidth="md" id="mainHeader">
@@ -258,10 +258,10 @@ export default function Project(props) {
 
                       </form>
 
+                      <PlayerTransport tracks={stems} audioCtx={audioCtx} hasLoaded={hasLoaded} />
                     </Container>
 
 
-                    <PlayerTransport tracks={stems} audioCtx={audioCtx} hasLoaded={hasLoaded} />
                     {!matches && <ProjectNav height={height} />}
 
                     <Prompt

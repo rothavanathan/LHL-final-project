@@ -3,6 +3,11 @@
 :root {
   --black: rgb(26, 26, 26);
   --white: rgb(244, 240, 234);
+
+  /* testing lightmode */
+  /* --black: rgb(244, 240, 234);
+  --white: rgb(26, 26, 26); */
+
   --primary-color: rgb(245, 103, 93);
   --secondary-color: #ffff6f;
   --tertiary-color: rgb(80, 32, 28);

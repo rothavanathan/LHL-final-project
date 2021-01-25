@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import TextField from '@material-ui/core/TextField';
+import { TextField, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Notes(props) {
   const classes = useStyles();
+  const matches = useMediaQuery('(min-width:960px)');
   const { existingNote, note, setNote, setIsNotChanged } = props;
   const handleNote = (event) => {
     setNote(event.target.value);
@@ -34,6 +35,12 @@ export default function Notes(props) {
         rows={10}
         value={note}
         onChange={handleNote}
+        style={matches ? ({
+          marginBottom: "6em"
+
+        }) : ({
+          marginBottom: "6em"
+        })}
       />
     </div>
   )
