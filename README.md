@@ -123,4 +123,4 @@ npm run start
 npm run nodemon
 ```
 
-Don't forget have fun!
+Don't forget to have fun!
