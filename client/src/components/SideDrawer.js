@@ -63,6 +63,7 @@ export default function SideDrawer() {
       open={true}
       classes={{ paper: classes.drawerPaper }}
       className={classes.drawer}
+      style={{ opacity: 0.9 }}
     >
       <img src={logo} className={classes.homeImg} alt="Layers logo" />
       <List>

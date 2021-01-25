@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     width: "15%",
     minWidth: 240,
     borderRight: "1px solid rgba(244, 240, 234, 0.1)"
+
   },
   drawerPaper: {
     marginTop: "2em",
@@ -71,6 +72,7 @@ export default function SideDrawerProject(props) {
       open={true}
       classes={{ paper: classes.drawerPaper }}
       className={classes.drawer}
+      style={{ opacity: 0.9 }}
     >
       <img src={logo} className={classes.homeImg} alt="Layers logo" />
       <List>

@@ -44,9 +44,9 @@ export default function ProjectNav(props) {
       showLabels
       className={classes.root}
     >
-      <Tab className={classes.tabs} label="Home" to="/home" icon={<HomeIcon />} component={Link} />
-      <Tab className={classes.tabs} label="Player" icon={<TuneOutlinedIcon />} onClick={handlePlayerClick} />
-      <Tab className={classes.tabs} label="Notes" icon={<BookIcon />} onClick={handleNotesClick} />
+      <Tab className={classes.tabs} label="Home" to="/home" icon={<HomeIcon style={{ opacity: 0.9 }} />} component={Link} />
+      <Tab className={classes.tabs} label="Player" icon={<TuneOutlinedIcon style={{ opacity: 0.9 }} />} onClick={handlePlayerClick} />
+      <Tab className={classes.tabs} label="Notes" icon={<BookIcon style={{ opacity: 0.9 }} />} onClick={handleNotesClick} />
     </BottomNavigation>
   );
 }
