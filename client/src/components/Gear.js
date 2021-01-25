@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   mainHeader: {
     display: "flex",
     justifyContent: "flex-start",
+    alignItems: "center",
     // paddingLeft: 20,
     // paddingRight: 40,
     marginTop: 40,
@@ -28,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 5,
     paddingRight: 5,
     marginLeft: 10,
+    "&:hover": {
+      color: "var(--primary-color)",
+    },
   },
   logButton: {
     display: "flex",
@@ -73,14 +77,14 @@ export default function Gear(props) {
         <Container className={classes.headerGrid} maxWidth="md" id="mainHeader">
 
           <header className={classes.mainHeader}>
-            <Link to="/home">
-              <ArrowBackIosIcon className={classes.backArrow}>
+            <Link to="/home" className={classes.backArrow}>
+              <ArrowBackIosIcon >
                 Back to Home
-          </ArrowBackIosIcon>
+              </ArrowBackIosIcon>
             </Link>
             <Typography component="h1" variant="h4">
               Settings
-        </Typography>
+           </Typography>
           </header>
         </Container>
 

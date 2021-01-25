@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 5,
     marginLeft: 10,
     color: "var(--white)",
+    "&:hover": {
+      color: "var(--primary-color)",
+    },
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
@@ -129,9 +132,11 @@ export default function Collection(props) {
                 <Container className={classes.headerGrid} maxWidth="md" id="mainHeader">
 
                   <header className={classes.mainHeader}>
-                    <Link to="/library">
+                    <Link
+                      to="/library"
+                      className={classes.backArrow}>
                       <ArrowBackIosIcon
-                        className={classes.backArrow}
+
                       >Back to Home
                      </ArrowBackIosIcon>
                     </Link>
@@ -210,9 +215,10 @@ export default function Collection(props) {
 
                     <header className={classes.mainHeader}>
 
-                      <Link to="/home">
+                      <Link
+                        to="/home"
+                        className={classes.backArrow}>
                         <ArrowBackIosIcon
-                          className={classes.backArrow}
                         >Back to Home
                         </ArrowBackIosIcon>
                       </Link>
