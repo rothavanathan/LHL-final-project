@@ -32,9 +32,9 @@ Deploy Link: https://layers-irl.netlify.app/
 
 ## Getting Started
 
-- Install all dependencies (using the `npm install` command from within both client and server).
+Install all dependencies (using the `npm install` command from within both client and server).
 
-## Directory Structure
+## Directory Structure:
 
 ### Client
 
@@ -115,4 +115,4 @@ npm run start
 npm run nodemon
 ```
 
-Have fun!
+Don't forget have fun!
