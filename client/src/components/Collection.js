@@ -194,13 +194,13 @@ export default function Collection(props) {
             ) : (
                 <div>
                   <h1>{emptyCollection[0].collection_name}</h1>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={handleAlertOpen}
-                  >
-                    Delete Collection
-              </Button>
+                    <IconButton onClick={handleAlertOpen}>
+                      <DeleteIcon
+                        color="primary"
+                        fontSize="large"
+                      >
+                      </DeleteIcon>
+                    </IconButton>
                   <ConfirmDelete
                     open={open}
                     setOpen={setOpen}
