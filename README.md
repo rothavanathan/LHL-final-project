@@ -20,6 +20,12 @@ This project was created by Romesh Thavanathan, Laura Tannahill and Kagiso Mashi
 
 Deploy Link: https://layers-irl.netlify.app/
 
+You can use these details to check out the apps features:
+```sh
+Email: mail@gmail.com
+Password: password
+```
+
 ### Demo
 !["Demo"](https://github.com/rothavanathan/LHL-final-project/blob/master/client/docs/layers.gif?raw=true)
 
