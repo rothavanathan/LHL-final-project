@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "var(--primary-color)",
     },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
 
   playerBox: {
@@ -61,11 +64,15 @@ const useStyles = makeStyles((theme) => ({
   saveIcon: {
     margin: "auto",
     fontSize: 56,
-    color: "var(--quad-color)"
+    color: "var(--quad-color)",
+    "&:active": {
+      color: "var(--primary-color)"
+    }
   },
   link: {
     textDecoration: "none",
     marginTop: 10,
+
   },
 
 }));
@@ -180,6 +187,11 @@ export default function Project(props) {
                       <Link to="/home">
                         <ArrowBackIosIcon
                           className={classes.backArrow}
+                          style={{
+                            "&:active": {
+                              color: "var(--primary-color)"
+                            }
+                          }}
                         >Back to Home
                       </ArrowBackIosIcon>
                       </Link>
@@ -224,43 +236,43 @@ export default function Project(props) {
 
                       <Player className={classes.playerBox} tracks={stems} audioCtx={audioCtx} id="player" setHasLoaded={setHasLoaded}></Player>
 
-                    <fieldset disabled={!hasLoaded}>
-                      <form
-                        className={classes.projectForm}
-                        onSubmit={handleSubmit}
-                      >
-                        <Box className={classes.formBox}>
-                          <AddProjectToCollection
-                            collections={collections}
-                            collectionId={collectionId}
-                            setCollectionId={setCollectionId} >
-                          </AddProjectToCollection>
+                      <fieldset disabled={!hasLoaded}>
+                        <form
+                          className={classes.projectForm}
+                          onSubmit={handleSubmit}
+                        >
+                          <Box className={classes.formBox}>
+                            <AddProjectToCollection
+                              collections={collections}
+                              collectionId={collectionId}
+                              setCollectionId={setCollectionId} >
+                            </AddProjectToCollection>
 
-                          <IconButton aria-label="save" type="submit">
-                            <SaveIcon
-                              className={classes.saveIcon}
-                            >
-                            </SaveIcon>
-                          </IconButton>
-                          <IconButton aria-label="delete" onClick={handleAlertOpen}>
-                            <DeleteForeverIcon
-                              className={classes.saveIcon}
-                            >
-                            </DeleteForeverIcon>
-                          </IconButton>
-                          <ConfirmDelete
-                            open={open}
-                            setOpen={setOpen}
-                            handleAlertOpen={handleAlertOpen}
-                            handleConfirmDelete={handleConfirmDelete}
-                            handleCancelDelete={handleCancelDelete}
-                            name={content[0].project_title}
-                          />
-                        </Box>
+                            <IconButton aria-label="save" type="submit">
+                              <SaveIcon
+                                className={classes.saveIcon}
+                              >
+                              </SaveIcon>
+                            </IconButton>
+                            <IconButton aria-label="delete" onClick={handleAlertOpen}>
+                              <DeleteForeverIcon
+                                className={classes.saveIcon}
+                              >
+                              </DeleteForeverIcon>
+                            </IconButton>
+                            <ConfirmDelete
+                              open={open}
+                              setOpen={setOpen}
+                              handleAlertOpen={handleAlertOpen}
+                              handleConfirmDelete={handleConfirmDelete}
+                              handleCancelDelete={handleCancelDelete}
+                              name={content[0].project_title}
+                            />
+                          </Box>
 
-                        {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged} />}
+                          {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged} />}
 
-                      </form>
+                        </form>
                       </fieldset>
                       <PlayerTransport tracks={stems} audioCtx={audioCtx} hasLoaded={hasLoaded} />
                     </Container>

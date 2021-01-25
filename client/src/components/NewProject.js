@@ -21,7 +21,10 @@ const useStyles = makeStyles((theme) => ({
   saveIcon: {
     '&:hover': {
       color: "var(--primary-color)"
-    }
+    },
+    "&:active": {
+      color: "var(--primary-color)",
+    },
   },
 }));
 
