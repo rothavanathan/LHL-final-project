@@ -118,7 +118,7 @@ export default function SongPreview(props) {
         </Container>
         <Container className={classes.cardHeader} maxWidth="md" id="header">
 
-          <Grid item key={props.id} xs={12}>
+          <Grid item key={props.id} xs={12} sm={9} lg={9}>
             <Card className={classes.card}>
 
               <CardContent className={classes.content}>
