@@ -224,6 +224,7 @@ export default function Project(props) {
 
                       <Player className={classes.playerBox} tracks={stems} audioCtx={audioCtx} id="player" setHasLoaded={setHasLoaded}></Player>
 
+                    <fieldset disabled={!hasLoaded}>
                       <form
                         className={classes.projectForm}
                         onSubmit={handleSubmit}
@@ -260,7 +261,7 @@ export default function Project(props) {
                         {project && <Notes id="notes" projectId={id} existingNote={project.notes} note={note} setNote={setNote} setIsNotChanged={setIsNotChanged} />}
 
                       </form>
-
+                      </fieldset>
                       <PlayerTransport tracks={stems} audioCtx={audioCtx} hasLoaded={hasLoaded} />
                     </Container>
 

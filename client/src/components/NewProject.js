@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NewProjectForm(props) {
   const classes = useStyles();
-  const { songId, user } = props;
-  const [projectTitle, setProjectTitle] = useState("");
+  const { songId, user, defaultTitle } = props;
+  const [projectTitle, setProjectTitle] = useState(defaultTitle);
   const [projectId, setProjectId] = useState("");
   const [invalidSong, setInvalidSong] = useState(false);
 
@@ -63,6 +63,7 @@ export default function NewProjectForm(props) {
     <div>
       <form onSubmit={handleSubmit}>
         <TextField
+          autoFocus
           variant="filled"
           InputProps={{
             className: classes.input

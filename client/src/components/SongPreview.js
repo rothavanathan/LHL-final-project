@@ -141,7 +141,7 @@ export default function SongPreview(props) {
                   title='title'
                   controls
                 />
-                <NewProject songId={trackId} user={props.user} />
+                <NewProject songId={trackId} defaultTitle={trackName} user={props.user} />
               </CardContent>
             </Card >
           </Grid >
