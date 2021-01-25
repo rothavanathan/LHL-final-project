@@ -2,7 +2,7 @@
 
 Layers a music application that allows a user to isolate stems of a song for teaching or recreational purposes. It is a sleek and responsive app that uses a React JS frontend with an Express JS and Node JS backend. 
 
-The main functionality of the app is the isolation of stems in a song to use within a project i.e. Billy Learning Bass from Another One Bites the Dust. Projects can be located in isolation or within collections that help users organise workflow. Account management is included and users can store and persist their work. All data is stored and retrieved from a database API using PostgresSQL.
+The main functionality of the app is the isolation of stems in a song to use within a project i.e. Billy Learning Bass from Another One Bites the Dust. Projects can be located in isolation or within collections that help users organise workflow. You can also make notes on projects to further optimise organisation. Account management is included and users can store and persist their work. All data is stored and retrieved from a database API using PostgresSQL.
 
 Technologies used include React, Material UI, WebPack, Babel, Axios client-side, Node.js, Express.js, Postgres server-side, and WebPack Dev Server.
 
