@@ -63,6 +63,7 @@ export default function NewProjectForm(props) {
     <div>
       <form onSubmit={handleSubmit}>
         <TextField
+          autoFocus
           variant="filled"
           InputProps={{
             className: classes.input
