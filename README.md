@@ -93,7 +93,6 @@ Layers requires Node.js and PostgresSQL and the following dependencies:
 - axios                       0.21.1
 - classnames                  2.2.6
 - eventemitter                0.3.3
-- node-sass                   5.0.0
 - react                       17.0.1
 - react-dom                   17.0.1
 - react-router-dom            5.2.0
