@@ -36,7 +36,7 @@ Install all dependencies (using the `npm install` command from within both clien
 
 ## Directory Structure:
 
-### Client
+### Client:
 
 ```sh
 ./                 Root folder
@@ -50,7 +50,7 @@ Install all dependencies (using the `npm install` command from within both clien
 ./src/public       Logo files
 ```
 
-### Server
+### Server:
 
 ```sh
 ./                 Root folder
@@ -67,7 +67,8 @@ Install all dependencies (using the `npm install` command from within both clien
 
 Layers requires Node.js and PostgresSQL and the following dependencies:
 
-Client:
+### Client:
+
 ```sh
 - material-ui/core            4.11.2
 - material-ui/icons           4.11.2
@@ -87,7 +88,8 @@ Client:
 - web-vitals                  0.2.4
 ```
 
-Server:
+### Server:
+
 ```sh
 - express                     4.16.1
 - bcrypt                      5.0.0
