@@ -95,42 +95,45 @@ export default function Waveform({
       setLoadCounter(prev => prev + 1)
       Emitter.on("clickRewind", () => wavesurfer.current.seekTo(0));
       Emitter.on("clickPlayPause", () => wavesurfer.current.playPause());
+
+      //one for all - when one wavefrom performs a seekTo emit event with currentTime as argument
+      wavesurfer.current.on("seek", function (progress) {
+        //emit seekAll event
+        Emitter.emit("seekAll", wavesurfer.current.getCurrentTime());
+      });
+
+      //update other waveforms with progress from clicked
+      Emitter.on("seekAll", (progress) => {
+        if (progress !== wavesurfer.current.getCurrentTime()) {
+          wavesurfer.current.setCurrentTime(progress);
+        }
+      });
+
+      Emitter.on("soloON", () => {
+        if (!wavesurfer.current.solo && !wavesurfer.current.getMute()) {
+          wavesurfer.current.setMute(true);
+        } else if (!wavesurfer.current.solo && wavesurfer.current.getMute()) {
+        } else if (wavesurfer.current.solo) {
+          wavesurfer.current.setMute(false);
+        }
+      });
+
+
+      Emitter.on("soloOFF", () => {
+        wavesurfer.current.solo = false;
+        setSolo(false);
+        if (!wavesurfer.current.wasMuted) {
+          wavesurfer.current.setMute(false);
+          setIsMuted(false);
+        } else {
+          wavesurfer.current.setMute(true);
+          setIsMuted(true);
+        }
+      });
+
+
     });
 
-    //one for all - when one wavefrom performs a seekTo emit event with currentTime as argument
-    wavesurfer.current.on("seek", function (progress) {
-      //emit seekAll event
-      Emitter.emit("seekAll", wavesurfer.current.getCurrentTime());
-    });
-
-    //update other waveforms with progress from clicked
-    Emitter.on("seekAll", (progress) => {
-      if (progress !== wavesurfer.current.getCurrentTime()) {
-        wavesurfer.current.setCurrentTime(progress);
-      }
-    });
-
-    Emitter.on("soloON", () => {
-      if (!wavesurfer.current.solo && !wavesurfer.current.getMute()) {
-        wavesurfer.current.setMute(true);
-      } else if (!wavesurfer.current.solo && wavesurfer.current.getMute()) {
-      } else if (wavesurfer.current.solo) {
-        wavesurfer.current.setMute(false);
-      }
-    });
-
-
-    Emitter.on("soloOFF", () => {
-      wavesurfer.current.solo = false;
-      setSolo(false);
-      if (!wavesurfer.current.wasMuted) {
-        wavesurfer.current.setMute(false);
-        setIsMuted(false);
-      } else {
-        wavesurfer.current.setMute(true);
-        setIsMuted(true);
-      }
-    });
     return () => {
       wavesurfer.current.unAll();
       wavesurfer.current.destroy();

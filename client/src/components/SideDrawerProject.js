@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url("https://www.transparenttextures.com/patterns/otis-redding.png")`,
     width: "15%",
     minWidth: 240,
-    borderRight: "1px solid rgba(244, 240, 234, 0.1)"
+    borderRight: "1px solid rgba(244, 240, 234, 0.1)",
+    zIndex: 15
 
   },
   drawerPaper: {
